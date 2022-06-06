@@ -1,1 +1,1 @@
-https://github.com/kolambes/rsschool-cv.git
+https://kolambes.github.io/rsschool-cv/
