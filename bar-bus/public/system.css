@@ -1,0 +1,2049 @@
+/* ============================================================
+   system.css — АВТОРИТЕТНЫЙ слой компонентов дизайн-системы.
+   Подключается ПОСЛЕДНИМ. Единственное место, где живёт вид
+   переиспользуемых компонентов — чтобы один компонент выглядел
+   ОДИНАКОВО на всех экранах (не «наложение поверх наложений»).
+   Всё построено на токенах из tokens.css. Цвета типов транспорта
+   и маршрутов сохранены (мнемоника владельца).
+
+   ВАЖНО о специфичности: легаси-слои (modern-ui, visual-polish,
+   responsive-system, redesign-theme) стилизуют плитки типов
+   транспорта РАЗНЫМИ, конфликтующими правилами вплоть до (0,9,2)
+   !important — на «Главной» это центрированная плитка, а в
+   «Расписании» — двухколоночная строка с ::before-подсветкой.
+   Именно это делало кнопки разными на разных экранах. Здесь мы
+   перекрываем ОБА варианта одной общей декларацией на селекторах
+   не ниже (0,9,2)/(0,7,2), поэтому и «Главная», и «Расписание»
+   получают идентичную плитку из одного источника.
+   ============================================================ */
+
+/* ================= Токены типа транспорта (мнемоника) =================
+   --tt-tint — фон иконки-колодца, --tt-ink — цвет глифа. */
+html body [data-transport-type="city"] {
+  --tt-tint: #eaf1fd;
+  --tt-ink: #2563eb;
+}
+html body [data-transport-type="suburban"] {
+  --tt-tint: #e7f4ee;
+  --tt-ink: #0f8f73;
+}
+html body [data-transport-type="intercity"] {
+  --tt-tint: #fdefe4;
+  --tt-ink: #c2410c;
+}
+
+/* ================= ЕДИНАЯ плитка типа транспорта =================
+   Один вид для .home-category-card (Главная) и .routes-mode-button
+   (Расписание). Компактная центрированная карточка: колодец-иконка
+   сверху, подпись снизу, выбранный — акцентная рамка (без заливки). */
+
+/* --- Карточка --- */
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type],
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type],
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type],
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] {
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: var(--space-2) !important;
+  min-width: 0 !important;
+  min-height: 84px !important;
+  padding: var(--space-3) 6px !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--color-surface) !important;
+  box-shadow: var(--elev-1) !important;
+  color: var(--color-text) !important;
+  text-align: center !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  transition: transform var(--dur-fast) var(--ease),
+    border-color var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease) !important;
+}
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type]:active,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type]:active,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type]:active,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type]:active {
+  transform: scale(0.97) !important;
+}
+
+/* --- Гасим декоративный ::before-градиент варианта «Расписание» --- */
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type]::before,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type]::before {
+  content: none !important;
+  display: none !important;
+}
+
+/* --- Иконка-«колодец» --- */
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] .transport-choice-icon,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] .transport-choice-icon,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-icon,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-icon {
+  width: 44px !important;
+  height: 44px !important;
+  min-width: 44px !important;
+  min-height: 44px !important;
+  max-height: 44px !important;
+  flex: 0 0 auto !important;
+  display: inline-grid !important;
+  place-items: center !important;
+  border: none !important;
+  border-radius: var(--r-sm) !important;
+  background: var(--tt-tint, var(--color-accent-soft)) !important;
+  background-image: none !important;
+  color: var(--tt-ink, var(--color-accent)) !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] .transport-choice-icon svg,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] .transport-choice-icon svg,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-icon svg,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-icon svg {
+  width: 24px !important;
+  height: 24px !important;
+  stroke: var(--tt-ink, var(--color-accent)) !important;
+  color: var(--tt-ink, var(--color-accent)) !important;
+  fill: none !important;
+  stroke-width: 1.9 !important;
+}
+
+/* --- Контейнер подписи (в «Расписании» это .routes-mode-copy) --- */
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy {
+  display: block !important;
+  min-width: 0 !important;
+  gap: 0 !important;
+  justify-items: center !important;
+  text-align: center !important;
+}
+
+/* --- Подпись: одна строка, без сжатия и обрезки --- */
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong {
+  display: block !important;
+  width: 100% !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  color: var(--color-text) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.12 !important;
+  /* Решение владельца: подпись НЕ переносится — аккуратно сжимается.
+     Одна строка всегда; на узких экранах кегль ступенчато меньше
+     (медиа-ступени ниже), чтобы «Междугородний» влезал без обрезки. */
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  text-align: center !important;
+}
+@media (max-width: 414px) {
+  html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+  html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+  html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong,
+  html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong {
+    font-size: 11.5px !important;
+  }
+}
+@media (max-width: 354px) {
+  html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+  html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] strong,
+  html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong,
+  html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy strong {
+    font-size: 10px !important;
+  }
+}
+
+/* --- Прячем пустой субтайтл-«пилюлю» варианта «Расписание» --- */
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy small,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type] .routes-mode-copy small {
+  display: none !important;
+}
+
+/* --- Выбранная плитка: акцентная рамка, БЕЗ заливки, колодец сохраняет тинт --- */
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type].is-active,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type].is-active {
+  border-color: var(--color-accent) !important;
+  background: var(--color-surface) !important;
+  box-shadow: inset 0 0 0 1px var(--color-accent), var(--elev-1) !important;
+}
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active .transport-choice-icon,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active .transport-choice-icon,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type].is-active .routes-mode-icon,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type].is-active .routes-mode-icon {
+  background: var(--tt-tint, var(--color-accent-soft)) !important;
+  color: var(--tt-ink, var(--color-accent)) !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active strong,
+html body .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active strong,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch .routes-mode-button[data-transport-type].is-active .routes-mode-copy strong,
+html body .view[data-view="routes"] .routes-mode-switch .routes-mode-button[data-transport-type].is-active .routes-mode-copy strong {
+  color: var(--color-accent) !important;
+}
+
+/* --- Контейнер плиток: ровная сетка 3×, без рамок/фона-«сегмента» --- */
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories,
+html body .transport-choice.home-route-categories,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-switch,
+html body .view[data-view="routes"] .routes-mode-switch {
+  display: grid !important;
+  /* Плитки заполняют колонку контента вровень с лаунчером/поиском (а не
+     капнуты 200px по центру с большими зазорами на десктопе). */
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  justify-content: stretch !important;
+  gap: var(--space-2) !important;
+  margin: 0 0 var(--space-3) !important;
+  padding: 0 !important;
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+
+/* ================= Сетка номеров маршрутов =================
+   Монотонная прогрессия колонок: 2 → 3 → 4 → 5. Никогда «6 потом 3».
+   Плитки не растут при расширении экрана. */
+/* Auto-fill вместо ступеней брейкпоинтов: плотность постоянная — широкий
+   экран показывает БОЛЬШЕ ячеек того же размера, а не растянутые
+   (модель Google Maps / Telegram Web). Ячейка ≥148px ⇒ 2 колонки на
+   телефоне сами собой, 4 в колонке шелла 760px.
+   НИКАКОГО max-width на списке: родитель .view — grid с auto-треком, и
+   ЛЮБОЙ max-width > ширины трека раздувает трек до этого значения — сетка
+   вылезала за 760px-колонку на десктопе (баг 2026-07-11, потолок 960px
+   остался от старого шелла 1200px). Ширину колонки держит --rs-app-max. */
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .route-list,
+html body .route-list {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(148px, 1fr)) !important;
+  gap: var(--space-3) !important;
+  min-width: 0 !important;
+  max-width: none !important;
+}
+
+/* ================= Hero: контраст надзаголовка на бирюзе ================= */
+html body .next-trip-card .next-trip-kicker,
+html body .home-route-launcher .next-trip-kicker {
+  color: rgba(255, 255, 255, 0.82) !important;
+}
+
+/* ---- Живой рейс «Расчётное положение»: текст был почти НЕВИДИМ ----
+   Фон ЭТОЙ карточки — тёмный бирюзовый градиент (#12897e→#0a5f56), но
+   надзаголовок и маршрут наследовали муteд-цвет #6f6a5e (через правило
+   базы с ID `#nextPanel`, спец (1,4,1)) — контраст ~1.8:1, нечитаемо.
+   Возвращаем белый. ВАЖНО: скоуп только на .is-live-trip (обычная карточка
+   светлая — там муted правильный) и обязателен #nextPanel, иначе ID-правило
+   базы не перебить никаким классовым селектором. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-kicker {
+  color: rgba(255, 255, 255, 0.94) !important;
+  opacity: 1 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-route-path {
+  color: #ffffff !important;
+  font-weight: 650 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-boarding,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-hint,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-left,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-dot,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-arrow {
+  color: rgba(255, 255, 255, 0.86) !important;
+}
+
+/* ---- Live-палитра: оранжевый → teal (решение владельца) ----
+   Вся «живая» маркировка схемы (бейдж «автобус на линии», чипы «в пути»/
+   «сейчас», узел автобуса, подсветка строк) течёт через переменные
+   --schedule-live*. Меняем их в одном месте — перекрашивается всё. */
+html body .view[data-view="schedule"] {
+  --schedule-live: #0f766e;
+  --schedule-live-ink: #0b5d57;
+  --schedule-live-contrast: #ffffff;
+  --schedule-live-soft: rgba(15, 118, 110, 0.13);
+  --schedule-live-ring: rgba(15, 118, 110, 0.28);
+}
+
+/* ---- Гармония live-hero: убираем чужие цвета с бирюзовой карточки ----
+   Колодец иконки был сплошным оранжевым #f97316, пилюля статуса — кремовой
+   с буро-красным текстом. На бирюзовом градиенте это разнобой. Приводим к
+   слоям карточки: колодец = полупрозрачный белый, пилюля = белая с
+   тёмно-бирюзовым текстом (контраст AA). Скоуп только .is-live-trip. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-icon {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: #ffffff !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-icon path {
+  stroke: #ffffff !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-live-position {
+  background: #ffffff !important;
+  border: none !important;
+  color: #0a4a44 !important;
+  font-weight: 650 !important;
+  box-shadow: none !important;
+}
+
+/* ---- Колокольчик в topbar: убран по решению владельца ----
+   «Избранное» и так есть в нижней навигации; одинокий колокольчик в пустом
+   topbar выглядел чужеродно. ID в селекторе — гарантированный выигрыш. */
+html body #topbarBell {
+  display: none !important;
+}
+
+/* ---- СВЕТЛАЯ карточка «Следующий рейс»: чиним нечитаемость ----
+   Легаси красило время в белый (под старый всегда-бирюзовый hero) — на
+   светлой карточке 11:52 исчезало полностью; колодец иконки был белым на
+   белом. Скоуп :not(.is-live-trip) — бирюзовый live-вариант не трогаем. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card:not(.is-live-trip) .next-trip-time {
+  color: var(--color-text) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card:not(.is-live-trip) .next-trip-icon {
+  background: var(--color-accent-soft) !important;
+  color: var(--color-accent) !important;
+  border: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card:not(.is-live-trip) .next-trip-icon path {
+  stroke: var(--color-accent) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card:not(.is-live-trip) .next-trip-dot {
+  display: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card:not(.is-live-trip) .next-trip-route-path {
+  color: var(--color-text) !important;
+  font-weight: 650 !important;
+}
+
+/* ================= Лаунчер «Ближайшие рейсы» — редизайн по макету =========
+   Белая карточка + бирюзовая «волна» слева с автобусом; пилюли «Ближайшие
+   рейсы»/«с пересадкой», крупные номера, строка времени с часами (для
+   пересадки — время ОБОИХ рейсов), справа блок «Отправление через N» +
+   круглая стрелка, точечный декор. Легаси-стили лаунчера перекрываем. */
+html body[data-active-view="home"] .home-route-launcher,
+html body .home-route-launcher {
+  position: relative !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  width: 100% !important;
+  min-height: 0 !important;
+  padding: 18px 20px !important;
+  background: var(--color-surface) !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: 22px !important;
+  box-shadow: var(--elev-2) !important;
+  color: var(--color-text) !important;
+  text-align: left !important;
+  transition: transform var(--dur-fast) var(--ease), box-shadow var(--dur) var(--ease) !important;
+}
+html body .home-route-launcher:active { transform: scale(0.99) !important; }
+/* Точечный декор в правом верхнем углу */
+html body .home-route-launcher::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 14px !important;
+  right: 14px !important;
+  width: 92px !important;
+  height: 60px !important;
+  background-image: radial-gradient(currentColor 1.4px, transparent 1.4px) !important;
+  background-size: 12px 12px !important;
+  color: color-mix(in srgb, var(--color-accent) 22%, transparent) !important;
+  opacity: 0.55 !important;
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+html body .home-route-launcher::before { display: none !important; content: none !important; }
+
+/* Иконка автобуса убрана по просьбе владельца */
+html body .home-route-launcher .home-route-launcher-icon { display: none !important; }
+
+/* Средняя колонка */
+html body .home-route-launcher .home-route-launcher-copy {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 8px !important;
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  padding: 0 !important;
+}
+html body .home-route-launcher .home-route-launcher-copy > strong {
+  display: inline-flex !important;
+  align-items: center !important;
+  background: var(--color-accent-soft) !important;
+  color: var(--color-accent) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  padding: 6px 13px !important;
+  border-radius: var(--r-pill) !important;
+  letter-spacing: -0.01em !important;
+}
+html body .home-route-launcher #homeRouteSearchLauncherSummary {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 6px !important;
+  width: 100% !important;
+  color: var(--color-text) !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  white-space: normal !important;
+}
+html body .home-route-launcher .launcher-route {
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
+}
+html body .home-route-launcher .launcher-numbers {
+  font-size: clamp(21px, 4.4vw, 30px) !important;
+  font-weight: 800 !important;
+  color: var(--color-text) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.04 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+html body .home-route-launcher .launcher-transfer-note {
+  display: inline-flex !important;
+  align-items: center !important;
+  margin: 0 !important;
+  background: var(--color-accent) !important;
+  border: none !important;
+  color: var(--color-on-accent) !important;
+  font-size: 12.5px !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  padding: 6px 13px !important;
+  border-radius: var(--r-pill) !important;
+  vertical-align: baseline !important;
+  white-space: nowrap !important;
+}
+/* Строка «пересадка на «Остановка»» — раньше остановки пересадки не было видно */
+html body .home-route-launcher .launcher-transfer-stop {
+  display: block !important;
+  max-width: 100% !important;
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+  color: var(--color-text-muted) !important;
+  white-space: normal !important;
+}
+html body .home-route-launcher .launcher-transfer-stop::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 5px !important;
+  vertical-align: -2px !important;
+  background: var(--color-accent) !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4 3 8l4 4'/%3E%3Cpath d='M3 8h13'/%3E%3Cpath d='M17 20l4-4-4-4'/%3E%3Cpath d='M21 16H8'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 4 3 8l4 4'/%3E%3Cpath d='M3 8h13'/%3E%3Cpath d='M17 20l4-4-4-4'/%3E%3Cpath d='M21 16H8'/%3E%3C/svg%3E") center/contain no-repeat !important;
+}
+html body .home-route-launcher .launcher-time {
+  display: block !important;   /* обычный поток: пробелы между «в» и временем сохраняются, строка переносится сама */
+  max-width: 100% !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  color: var(--color-text-muted) !important;
+  white-space: normal !important;
+}
+html body .home-route-launcher .launcher-time::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 14px !important;
+  height: 14px !important;
+  margin-right: 5px !important;
+  vertical-align: -2px !important;
+  background: currentColor !important;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v4l3 2'/%3E%3C/svg%3E") center/contain no-repeat !important;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='9'/%3E%3Cpath d='M12 8v4l3 2'/%3E%3C/svg%3E") center/contain no-repeat !important;
+}
+html body .home-route-launcher .launcher-depart {
+  color: var(--color-accent) !important;
+  font-weight: 700 !important;
+  font-variant-numeric: tabular-nums !important;
+  white-space: nowrap !important;
+}
+html body .home-route-launcher .launcher-wait {
+  color: var(--color-accent) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  white-space: nowrap !important;
+}
+
+/* Правый блок «Отправление через N» + круглая стрелка */
+html body .home-route-launcher .home-route-launcher-eta {
+  position: relative !important;
+  z-index: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 4px !important;
+  flex: 0 0 auto !important;
+  text-align: center !important;
+}
+html body .home-route-launcher .launcher-eta-label {
+  font-size: 12.5px !important;
+  font-weight: 500 !important;
+  color: var(--color-text-muted) !important;
+}
+html body .home-route-launcher .launcher-eta-value {
+  font-size: clamp(20px, 3.2vw, 30px) !important;
+  font-weight: 800 !important;
+  color: var(--color-accent) !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.05 !important;
+  font-variant-numeric: tabular-nums !important;
+}
+html body .home-route-launcher:not(.has-eta) .launcher-eta-label,
+html body .home-route-launcher:not(.has-eta) .launcher-eta-value {
+  display: none !important;
+}
+html body .home-route-launcher .launcher-eta-arrow {
+  width: 54px !important;
+  height: 54px !important;
+  margin-top: 4px !important;
+  border-radius: 50% !important;
+  background: var(--color-accent) !important;
+  display: grid !important;
+  place-items: center !important;
+  box-shadow: 0 10px 20px -8px color-mix(in srgb, var(--color-accent) 60%, transparent) !important;
+}
+html body .home-route-launcher .launcher-eta-arrow svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke: var(--color-on-accent) !important;
+  fill: none !important;
+  stroke-width: 2 !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* Мобильный: компактнее — справа только стрелка (время уже в строке) */
+@media (max-width: 560px) {
+  html body .home-route-launcher {
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+  html body .home-route-launcher .launcher-numbers { font-size: 22px !important; }
+  html body .home-route-launcher .launcher-eta-label,
+  html body .home-route-launcher .launcher-eta-value { display: none !important; }
+  html body .home-route-launcher::after { display: none !important; }
+}
+
+/* ---- Автобус и «следы» на схеме: ЯНТАРНЫЙ против бирюзового ----
+   Требование владельца: автобус — другим цветом, пройденный путь —
+   выделен как следы. Семантика: янтарь = движение/прошлое, бирюза =
+   бренд/впереди. Автобус — сплошной янтарный узел с пульсом; пройденные
+   остановки — янтарные точки и рейка (след), имена приглушены. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-stop .stop-dot::before,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-segment .stop-dot::before {
+  background: #d97706 !important;
+  border-color: #d97706 !important;
+  box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.28) !important;
+  animation: bb-node-pulse 1.8s ease-out infinite !important;
+}
+@keyframes bb-node-pulse {
+  0%   { box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.34); }
+  70%  { box-shadow: 0 0 0 9px rgba(217, 119, 6, 0); }
+  100% { box-shadow: 0 0 0 3px rgba(217, 119, 6, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-stop .stop-dot::before,
+  html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-segment .stop-dot::before {
+    animation: none !important;
+  }
+}
+/* Сам маркер-автобус (квадрат с глифом на рейке) — тоже янтарный */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .route-bus-marker,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .route-bus-icon,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-stop .stop-dot,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-live-segment .stop-dot {
+  background: #d97706 !important;
+  border-color: #d97706 !important;
+  color: #ffffff !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .route-bus-icon path,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .route-bus-icon svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+
+/* Пройденный путь: янтарная рейка и точки-следы */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-passed::before {
+  background: #d97706 !important;
+  opacity: 0.5 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-passed .stop-dot::before {
+  background: #d97706 !important;
+  border-color: #d97706 !important;
+  opacity: 0.65 !important;
+  box-shadow: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-item.is-passed .stop-name strong {
+  color: var(--color-text-muted) !important;
+  font-weight: 500 !important;
+}
+/* Чипы «сейчас»/«в пути» рядом с автобусом — в его же янтаре.
+   9px из базы нечитаемы (ревью 2026-07-12) — минимум 10.5px. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .route-timeline .stop-inline-live {
+  background: rgba(217, 119, 6, 0.14) !important;
+  color: #92400e !important;
+  border: none !important;
+  font-size: 10.5px !important;
+}
+
+/* ---- Цифры и акценты на бирюзовых карточках (ревизия владельца) ----
+   Жёлтый на зелёном отклонён: важное выделяем БЕЛЫМ и весом, не вторым
+   цветом. Моно-шрифт для времени отклонён: цифры — Geist с tabular-nums
+   (ровные разряды без «печатной машинки»). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card .next-trip-time {
+  font-family: var(--font-sans) !important;
+  font-variant-numeric: tabular-nums !important;
+  font-feature-settings: "tnum" 1 !important;
+  font-size: 27px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-time {
+  color: #ffffff !important;
+}
+/* Разгрузка live-hero: пилюля «между»/«у остановки» дублирует белую
+   пилюлю позиции ниже — прячем её (на светлой карточке «через N мин»
+   остаётся: там это отсчёт, а не дубль). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-left {
+  display: none !important;
+}
+
+/* ---- Live-индикатор: пульсирующая точка перед «Расчётное положение» ----
+   Паттерн Transit: живой рейс = цвет + пульс, расписание = без пульса.
+   Точка стоит перед надзаголовком, пульсирует расходящимся кольцом.
+   Скоуп строго на .is-live-trip; при prefers-reduced-motion — статична. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-kicker::before {
+  content: "" !important;
+  display: inline-block !important;
+  width: 7px !important;
+  height: 7px !important;
+  margin: 0 7px 1px 0 !important;
+  border-radius: 50% !important;
+  background: #ffffff !important;
+  vertical-align: middle !important;
+  box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55) !important;
+  animation: bb-live-pulse 1.8s ease-out infinite !important;
+}
+@keyframes bb-live-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.55); }
+  70%  { box-shadow: 0 0 0 7px rgba(255, 255, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-kicker::before {
+    animation: none !important;
+  }
+}
+
+/* ================= Быстрые действия «Напомнить / Избранное / Карта» =======
+   Было: голые 24px-иконки, radius 0, кривые несимметричные рамки, подписи
+   11px, активная кнопка — резкий цветовой флип (зелёная среди серых —
+   несбалансированно). Стало: единый флэт-бар в языке приложения —
+   колодец-иконка + подпись, активное = тинт-карточка + залитый колодец
+   (спокойно и понятно «включено»). #nextPanel в селекторе — перебиваем
+   ID-правила базы, спец (1,5,2). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: var(--space-2) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-height: 68px !important;
+  padding: 9px 6px !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--color-surface) !important;
+  box-shadow: var(--elev-1) !important;
+  color: var(--color-text) !important;
+  text-align: center !important;
+  transition: transform var(--dur-fast) var(--ease),
+    border-color var(--dur) var(--ease),
+    background var(--dur) var(--ease) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card:active {
+  transform: scale(0.97) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-icon {
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  display: grid !important;
+  place-items: center !important;
+  border: none !important;
+  border-radius: var(--r-sm) !important;
+  background: var(--color-surface-soft) !important;
+  color: var(--ink-700, #3a4744) !important;
+  font-size: 0 !important;
+  box-shadow: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-icon svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: currentColor !important;
+  color: currentColor !important;
+  fill: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card strong {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: var(--color-text) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.006em !important;
+  white-space: normal !important;
+  text-wrap: balance !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card small {
+  display: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card.is-active {
+  border-color: var(--color-accent) !important;
+  background: var(--color-accent-soft) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card.is-active .quick-action-icon {
+  background: color-mix(in srgb, var(--color-accent) 16%, var(--color-surface)) !important;
+  color: var(--color-accent) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card.is-active strong {
+  color: var(--color-accent-hover) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card:disabled {
+  opacity: 0.5 !important;
+}
+
+/* «Карта маршрута» — навигация, а не переключатель: помечаем шевроном.
+   Кнопка всегда третья (renderQuickActions задаёт порядок). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card:last-child strong::after {
+  content: " ›";
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+/* ================= Дедупликация live-статуса на экране расписания =======
+   При живом рейсе экран повторял одно и то же 4 раза: hero («Расчётное
+   положение…» + «не GPS»), бейдж «автобус на линии», оранжевая карточка
+   .route-live-summary (тот же текст + тот же дисклеймер) и узел «в пути»
+   на таймлайне. Карточку прячем ТОЛЬКО когда живой hero реально виден
+   (:has с проверкой [hidden]) — если hero нет, карточка остаётся и
+   дисклеймер «не GPS» не теряется. */
+html body[data-active-view="schedule"] .view[data-view="schedule"]:has(#nextPanel:not([hidden]) .next-trip-card.is-live-trip) .stops-panel .route-live-summary {
+  display: none !important;
+}
+
+/* ============ Карточки «Ближайшие рейсы»: контекст не обрезаем ============
+   «С пересадкой» резалось в «С п…» (nowrap+ellipsis), мета-строка
+   «сегодня · 1 ч 23 мин в пути · через 1 мин» теряла хвост. Заголовок
+   сжимаем (правило владельца), мета-строке разрешаем перенос по « · » —
+   это подпись, две строки мягче для глаза, чем нечитаемые 9px. */
+html body .home-route-results .home-route-result-title,
+html body .home-route-result-title {
+  display: flex !important;
+  flex-wrap: wrap !important; /* бейдж уходит на свою строку, имя целое */
+  align-items: center !important;
+  gap: 4px 6px !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+html body .home-route-results .home-route-result-title > span,
+html body .home-route-result-title > span {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  font-size: 14px !important;
+  letter-spacing: -0.01em !important;
+  flex: 0 0 auto !important;
+  max-width: none !important;
+}
+html body .home-route-results .home-route-result-title > em,
+html body .home-route-result-title > em {
+  flex: 0 0 auto !important;
+  font-size: 10px !important;
+  white-space: nowrap !important;
+}
+@media (max-width: 374px) {
+  html body .home-route-results .home-route-result-title > span,
+  html body .home-route-result-title > span { font-size: 12.5px !important; }
+}
+html body .home-route-result-meta > small {
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  line-height: 1.35 !important;
+}
+
+/* ============ Пилюля статуса на live-hero («между»/«у остановки») ========
+   Была полупрозрачно-серой — текст тонул в бирюзе. Делаем читаемый
+   белый слой: мягко, но видно (паттерн white-alpha из референсов). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-left {
+  background: rgba(255, 255, 255, 0.22) !important;
+  border: 1px solid rgba(255, 255, 255, 0.32) !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border-radius: var(--r-pill) !important;
+  padding: 3px 10px !important;
+  letter-spacing: 0.02em !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .next-trip-card.is-live-trip .next-trip-dot {
+  display: none !important; /* точка-разделитель лишняя рядом с пилюлей */
+}
+
+/* ================= Скелетоны: shimmer в форме контента =================
+   Правило Google/Transit: плейсхолдер повторяет силуэт будущего контента,
+   бежит мягкий блик 1.4s. При prefers-reduced-motion блик выключен. */
+html body .skeleton-card {
+  display: grid !important;
+  gap: 12px !important;
+  padding: var(--space-4) !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--color-surface) !important;
+  box-shadow: var(--elev-1) !important;
+  min-height: 0 !important;
+}
+html body .skeleton-card::before,
+html body .skeleton-card::after {
+  content: none !important; /* гасим старый плейсхолдер styles.css */
+}
+html body .skeleton-card.sk-hero {
+  grid-template-columns: 44px minmax(0, 1fr) !important;
+  align-items: center !important;
+}
+html body .sk {
+  display: block !important;
+  border: none !important;
+  border-radius: 7px !important;
+  background: linear-gradient(90deg, var(--sand-100) 25%, var(--sand-300) 42%, var(--sand-100) 60%) !important;
+  background-size: 320% 100% !important;
+  animation: bb-shimmer 1.4s ease-in-out infinite !important;
+}
+@keyframes bb-shimmer {
+  from { background-position: 120% 0; }
+  to   { background-position: -120% 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body .sk { animation: none !important; background: var(--sand-100) !important; }
+}
+html body .sk-well { width: 44px; height: 44px; border-radius: var(--r-sm) !important; }
+html body .sk-num { width: 40px; height: 34px; border-radius: var(--r-sm) !important; flex: 0 0 auto; }
+html body .sk-dot { width: 12px; height: 12px; border-radius: 50% !important; flex: 0 0 auto; }
+html body .sk-chip { width: 52px; height: 22px; border-radius: 8px !important; flex: 0 0 auto; }
+html body .sk-lines { display: grid; gap: 8px; min-width: 0; }
+html body .sk-line { height: 11px; }
+html body .sk-line.sk-strong { height: 15px; }
+html body .sk-w40 { width: 40%; } html body .sk-w55 { width: 55%; } html body .sk-w70 { width: 70%; }
+html body .sk-row {
+  display: flex !important;
+  align-items: center !important;
+  gap: 12px !important;
+}
+html body .sk-row .sk-lines { flex: 1 1 auto; }
+html body .home-route-results-skeleton {
+  display: grid !important;
+  gap: 8px !important;
+}
+html body .home-route-results-skeleton .sk-result-row {
+  padding: 12px 14px !important;
+  border: 1px solid var(--color-line) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--color-surface) !important;
+}
+
+/* ================= Пустые состояния: один язык =================
+   Три разных случая — «пусто», «ошибка+Повторить», «не найдено» — одна
+   форма: жирная строка, тихое пояснение, действие. Центр, без плача. */
+html body .empty-state {
+  display: grid !important;
+  justify-items: center !important;
+  gap: 6px !important;
+  padding: var(--space-6) var(--space-4) !important;
+  border: 1px dashed var(--color-line-strong) !important;
+  border-radius: var(--r-md) !important;
+  background: var(--color-surface-soft) !important;
+  color: var(--color-text-muted) !important;
+  font-size: 13px !important;
+  line-height: 1.45 !important;
+  text-align: center !important;
+  box-shadow: none !important;
+}
+html body .empty-state strong,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .empty-state strong,
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .empty-state span {
+  color: var(--color-text) !important;
+  font-size: 15px !important;
+  font-weight: 650 !important;
+  letter-spacing: normal !important;
+  line-height: 1.3 !important;
+  font-family: var(--font-sans) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .empty-state span {
+  color: var(--color-text-muted) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+html body .empty-state .mini-button,
+html body .empty-state button {
+  margin-top: 6px !important;
+  min-height: 40px !important;
+  padding: 0 18px !important;
+  border: none !important;
+  border-radius: var(--r-pill) !important;
+  background: var(--color-accent) !important;
+  color: var(--color-on-accent) !important;
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  cursor: pointer !important;
+}
+html body .empty-state button:active { transform: scale(0.97); }
+
+/* ================= Topbar: слоган прячем на всех ширинах =================
+   redesign-theme возвращает его правилом (0,4,3) — повторяем тот же
+   селектор здесь: system.css грузится последним и выигрывает по порядку. */
+html body[data-active-view] .app-shell .topbar .brand-title-lines small,
+html body .brand-title-lines small {
+  display: none !important;
+}
+
+/* ================= Десктоп: ничего не растягиваем в ленты ================= */
+/* ================= Десктоп: ЕДИНАЯ колонка контента =================
+   Правило дизайна: mobile-first Mini App на десктопе — не растянутый лист,
+   а одна центрированная читаемая колонка (Telegram Web ~420px, Google Maps
+   ~400px панель). Легаси давало --rs-app-max=1200px → контент 1178px с
+   разрозненными «островами» 640/760 внутри. Капаем ВЕСЬ shell в 760px по
+   центру — топбар, секции, плитки, сетка, nav получают одну ширину, а по
+   бокам виден собственный песочный фон = аккуратная колонка, не пустыня. */
+@media (min-width: 760px) {
+  /* Легаси-лестница --rs-app-max: 860→1080→1200 (responsive-system + adaptive)
+     растягивала весь app до 1200px. Правило дизайна для mobile-first Mini App:
+     одна читаемая колонка, не лист. Переопределяем ЕДИНЫЙ рычаг ширины —
+     переменную --rs-app-max: её читают все правила ширины (shell/topbar/nav
+     через :has()-селекторы (0,4,1)), поэтому фиксить specificity каждого не
+     нужно. :root в system.css грузится после adaptive.css → выигрывает по
+     порядку при равной специфичности. */
+  :root {
+    --rs-app-max: 760px !important;
+  }
+  /* Длинную прозу (о нас/контакты) держим ещё уже для читаемости (~68ch) */
+  html body .about-official-card,
+  html body .about-directory,
+  html body .about-leadership {
+    max-width: 620px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* ================= Тап-цели: добираем до ~44px без сдвига макета =================
+   Аудит 2026-07-11: три интерактивных элемента заметно меньше 40px по высоте.
+   Приём везде один — расширяем зону нажатия, не трогая видимую геометрию. */
+
+/* «Все маршруты ›» на главной: видимый текст 22px. Паддинг растит hit-box,
+   отрицательный маргин возвращает внешний размер — flex-строка заголовка
+   не сдвигается. min-height:0!important уже стоит в modern-ui — не трогаем. */
+html body .home-quick-heading .home-see-all {
+  /* Справа меньше: кнопка прижата к краю карточки, 12px вылезали за вьюпорт. */
+  padding: 12px 8px 12px 12px !important;
+  margin: -12px -8px -12px -12px !important;
+}
+
+/* Пилюли телефонов в «О нас»: видимая пилюля 23px — по ним звонят, это
+   главное действие справочника. ::before не годится: overflow:hidden пилюли
+   (нужен для ellipsis) его клипает. Прозрачный border не клипается и входит
+   в hit-область; отрицательный маргин съедает прирост габарита (у базы
+   margin-top: 2px — итоговый top: 2−9 = −7px). background-clip обязателен,
+   иначе тонированный фон зальёт рамку. Селектор зеркалит базовый из
+   responsive-system (0,4,1) c запасом — system.css грузится последним. */
+html body .view[data-view="about"] .about-person a.about-phone {
+  border: solid transparent !important;
+  border-width: 9px 6px !important;
+  background-clip: padding-box !important;
+  margin: -7px -6px -9px !important;
+}
+
+/* Инлайновые tel:/mailto: в карточке приёмной: строка 18px. */
+html body .about-reception a {
+  position: relative !important;
+}
+html body .about-reception a::before {
+  content: "";
+  position: absolute;
+  inset: -12px -4px;
+}
+
+/* ================= Карточка «Сегодня рейсов нет»: возвращаем аффорданс =================
+   app.js рендерит её кнопкой с подсказкой «Показать расписание будней» и
+   стрелкой ›, но легаси (styles.css + responsive-system, до (1,5,1)!important)
+   прячет .next-trip-empty-text/.next-trip-arrow у ВСЕХ next-trip-карточек.
+   Кнопка выглядела статичной карточкой, и тап «внезапно» переключал день —
+   жалоба владельца 2026-07-11. Показываем подсказку и стрелку ТОЛЬКО у
+   empty-day варианта (в обычных карточках стрелка остаётся скрытой). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card.schedule-empty-day .next-trip-empty-text {
+  display: block !important;
+}
+/* Грид карточки уронил бы статичную стрелку в левую колонку под иконку —
+   вешаем её чевроном по правому центру. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card.schedule-empty-day .next-trip-arrow {
+  display: block !important;
+  position: absolute !important;
+  right: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card.schedule-empty-day {
+  position: relative !important;
+  /* запас под чеврон, чтобы длинный заголовок не подлезал под него */
+  padding-right: 30px !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > button.next-trip-card.schedule-empty-day {
+  cursor: pointer !important;
+}
+
+/* ============================================================================
+   ЭКРАН РАСПИСАНИЯ — редизайн по макету владельца (2026-07-11, «точь в точь»).
+   Макет: шапка маршрута с изумрудным бейджем и кнопкой «⇄ Сменить маршрут»,
+   две карточки направлений (активная — изумрудная рамка), табы дней с иконками,
+   ВСЕГДА изумрудная hero-карта «Ближайший рейс» с крупным временем, поиск
+   с лупой и слайдерами, плоские карточки действий, нейтральные чипы времени.
+   Фреймы селекторов зеркалят самые тяжёлые легаси-правила (см. recon 2026-07-11):
+   hero-каркас (1,3,1) rs:10691 → наш (1,3,2)+; next-trip (1,4,1)/(1,5,2) →
+   (1,5,2)+ позже в файле; таймлайн (1,5,1) rs:10101 → #stopsPanel (1,5,2).
+   ========================================================================== */
+
+/* --- Топбар скрыт на расписании: экран начинается с шапки маршрута (макет).
+   styles.css уже прятал его, но responsive-system возвращает лестницей re-show
+   правил вплоть до `body .app-shell:has(...) .topbar` (0,5,1) и
+   `html body[data-active-view] ... header.topbar.has-install-button` (0,4,3) —
+   зеркалим ступени с запасом; system.css последний → при равенстве побеждает. */
+html body[data-active-view="schedule"] .topbar,
+html body[data-active-view="schedule"] .app-shell header.topbar,
+html body[data-active-view="schedule"] .app-shell header.topbar.has-install-button,
+html body[data-active-view="schedule"] .app-shell:has(.view[data-view="schedule"]) header.topbar,
+html body[data-active-view="schedule"] .app-shell:has(.view[data-view="schedule"]) header.topbar.has-install-button {
+  display: none !important;
+}
+
+/* --- Бейдж номера маршрута: изумрудный квадрат (макет), не цвет маршрута.
+   Осознанное отступление от правила «цвета маршрутов святы»: оно про плитки
+   и СПИСКИ (узнавание «тройка красная»), здесь маршрут уже открыт. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #scheduleHero::before,
+html body .view[data-view="schedule"].is-active > #scheduleHero::before {
+  background: var(--color-accent, #0f766e) !important;
+  color: #ffffff !important;
+  box-shadow: 0 6px 14px rgba(15, 118, 110, 0.25) !important;
+}
+
+/* --- Кнопка «Сменить маршрут»: свап-иконка + двухстрочная подпись. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #changeRouteButton,
+html body .view[data-view="schedule"].is-active #changeRouteButton {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 7px !important;
+  font-weight: 700 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #changeRouteButton .change-route-icon {
+  width: 14px;
+  height: 14px;
+  flex: none;
+  color: var(--color-text, #1f2621);
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #changeRouteButton span {
+  text-align: left;
+  line-height: 1.15;
+}
+
+/* --- Направления: панель-обёртка растворяется, две белые карточки на холсте. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-panel {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-panel > .hero-label {
+  display: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #directionChips,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chips {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  justify-content: stretch !important;
+  width: 100% !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 2px !important;
+  min-height: 58px !important;
+  padding: 9px 10px !important;
+  background: var(--color-surface, #ffffff) !important;
+  border: 1px solid var(--color-line, #e7e2d9) !important;
+  border-radius: 14px !important;
+  box-shadow: var(--elev-1) !important;
+  color: var(--color-text, #1f2621) !important;
+  text-align: center !important;
+  white-space: normal !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip .direction-from {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text, #1f2621);
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip .direction-to {
+  font-size: 12.5px;
+  font-weight: 650;
+  color: var(--color-text-muted, #5c6660);
+}
+/* Легаси вешает nowrap+ellipsis на содержимое чипа — в карточке текст переносится. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip .direction-from,
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip .direction-to {
+  display: block !important;
+  max-width: 100% !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  line-height: 1.25 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip.is-active {
+  border: 1.6px solid var(--color-accent, #0f766e) !important;
+  background: var(--color-surface, #ffffff) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] .direction-chip.is-active .direction-to {
+  color: var(--color-accent, #0f766e);
+}
+
+/* --- Табы дней: иконки перед подписью (макет). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button .day-mode-icon {
+  width: 15px;
+  height: 15px;
+  flex: none;
+  opacity: 0.7;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button.is-active .day-mode-icon {
+  opacity: 1;
+}
+
+/* --- Hero-карта «Ближайший рейс» (2c): светлая, выровнена влево, teal только
+   на времени и мягкой плашке live-статуса. Одинаково для live/расписания —
+   различаются лишь текст кикера и наличие плашки. Пустодневная карточка-кнопка
+   исключена через :not(.next-trip-card-empty). Селекторы с #nextPanel побеждают
+   легаси-правила live-hero выше по файлу (равная спец. → позже в исходнике). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 12px !important;
+  min-height: 0 !important;
+  padding: 16px 18px 14px !important;
+  border: 1px solid var(--color-line, #e7e1d3) !important;
+  border-radius: 16px !important;
+  background: var(--color-surface, #fffdf8) !important;
+  color: var(--color-text, #262d28) !important;
+  box-shadow: var(--elev-1, 0 1px 2px rgba(60, 50, 30, 0.05)) !important;
+}
+/* Кикер + время + маршрут — тесная колонка (gap 2px). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-body {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 2px !important;
+  width: 100% !important;
+  min-width: 0 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-kicker {
+  margin: 0 !important;
+  color: var(--color-text-muted, #5b655f) !important;
+  font-family: var(--font-sans) !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  line-height: 1.3 !important;
+  text-transform: uppercase !important;
+}
+/* Пульс-точку у кикера убираем: в 2c индикатор — точка в плашке ниже. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-kicker::before {
+  display: none !important;
+  content: none !important;
+}
+/* Время + остановка посадки — одна baseline-строка. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-time-row {
+  display: flex !important;
+  align-items: baseline !important;
+  flex-wrap: wrap !important;
+  gap: 10px !important;
+  margin-top: 2px !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-time {
+  font-family: var(--font-mono, "Geist Mono", monospace) !important;
+  font-size: 40px !important;
+  font-weight: 600 !important;
+  line-height: 1.15 !important;
+  letter-spacing: -0.015em !important;
+  color: var(--color-accent, #0f766e) !important;
+}
+/* Прошедший / выбранный (не ближайший) — время нейтральным тёмным. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty).is-muted-time .next-trip-time {
+  color: var(--color-text, #262d28) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-boarding {
+  display: inline !important;
+  margin: 0 !important;
+  color: var(--ink-700, #414b44) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-route-path {
+  margin: 0 !important;
+  color: var(--color-text-muted, #5b655f) !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+}
+/* Легаси-элементы (иконка, стрелка, точка, чип статуса, хинт, старая пилюля) — прочь. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-icon,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-arrow,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-dot,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-left,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-hint,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-live-position {
+  display: none !important;
+}
+/* Мягкая teal-плашка live-статуса (точка + текст). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-live {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 9px 12px !important;
+  border-radius: var(--r-sm, 10px) !important;
+  background: var(--color-accent-soft, #e7f3f1) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-live-dot {
+  width: 7px !important;
+  height: 7px !important;
+  flex: none !important;
+  border-radius: 999px !important;
+  background: var(--color-accent, #0f766e) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card:not(.next-trip-card-empty) .next-trip-live-text {
+  min-width: 0 !important;
+  color: var(--teal-700, #0b5d57) !important;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.3 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+/* Пульс на точке — только для реально живого рейса (teal-кольцо на светлом). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card.is-live-trip:not(.next-trip-card-empty) .next-trip-live-dot {
+  animation: bb-live-pulse-teal 1.8s ease-out infinite !important;
+}
+@keyframes bb-live-pulse-teal {
+  0%   { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0.4); }
+  70%  { box-shadow: 0 0 0 7px rgba(15, 118, 110, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(15, 118, 110, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html body[data-active-view="schedule"] .view[data-view="schedule"] > #nextPanel > .next-trip-card.is-live-trip:not(.next-trip-card-empty) .next-trip-live-dot {
+    animation: none !important;
+  }
+}
+
+/* --- Поиск остановки: лупа + плейсхолдер + слайдеры (макет), чип-лейбл скрыт. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .search-box,
+html body .view[data-view="schedule"].is-active > .search-box {
+  display: grid !important;
+  /* Только лупа + поле: фейковый ползунок-«фильтр» справа убран (владелец). */
+  grid-template-columns: auto minmax(0, 1fr) !important;
+  align-items: center !important;
+  gap: 10px !important;
+  min-height: 48px !important;
+  padding: 8px 14px !important;
+  border-radius: 14px !important;
+  background: var(--color-surface, #ffffff) !important;
+  border: 1px solid var(--color-line, #e7e2d9) !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .search-box > span,
+html body .view[data-view="schedule"].is-active > .search-box > span {
+  display: none !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .search-box .stop-search-glass {
+  width: 18px;
+  height: 18px;
+  flex: none;
+  color: var(--color-text-muted, #5c6660);
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .search-box input,
+html body .view[data-view="schedule"].is-active > .search-box input {
+  height: 32px !important;
+  font-size: 14px !important;
+}
+
+/* Поиск «О нас»: убираем декоративный глиф-«фильтр» справа (modern-ui рисует
+   его ::after с pointer-events:none — ложный элемент, реальный фильтр это
+   отдельный select «Отдел» ниже). Лупу слева (span::before) оставляем.
+   Зеркалим is-comfort-селектор (0,4,2) с html-префиксом → (0,4,3). */
+html body.is-comfort .view[data-view="about"] .about-search::after,
+html body .view[data-view="about"] .about-search::after {
+  content: none !important;
+  display: none !important;
+}
+/* Поле сливалось с фоном: юзало --rs-card-soft (#f7f3ea) ≈ осветлённый холст
+   #f5f1e9 (разница 2 пункта). Делаем белым, как остальные поля поиска, +
+   волосяная рамка и мягкая тень — читается как отдельный контрол. Победитель
+   фона был `.view[data-view="about"] .about-search` (0,2,1) — зеркалим. */
+html body .view[data-view="about"] .about-search {
+  background: var(--color-surface, #ffffff) !important;
+  border: 1px solid var(--color-line, #e4dccc) !important;
+  box-shadow: 0 4px 12px rgba(60, 50, 30, 0.05) !important;
+}
+
+/* --- Быстрые действия: плоская иконка без колодца, карточки выше (макет). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card {
+  min-height: 82px !important;
+  gap: 8px !important;
+  padding: 12px 8px !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-icon {
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+html body[data-active-view="schedule"] .view[data-view="schedule"] #nextPanel .quick-actions .quick-action-card.is-active .quick-action-icon {
+  background: transparent !important;
+}
+
+/* --- Чипы времени на схеме: нейтральная плашка (макет), не тинт акцента. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #stopsPanel .route-timeline .stop-time {
+  min-width: 52px !important;
+  height: 24px !important;
+  padding: 0 8px !important;
+  border: none !important;
+  border-radius: 8px !important;
+  background: var(--color-surface-soft, #f1efe9) !important;
+  color: var(--color-text, #1f2621) !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  line-height: 24px !important;
+}
+
+/* ============ Карточки «Ближайшие рейсы»: честная геометрия (2026-07-11) ====
+   БАГ (скрин владельца, телефон с крупным шрифтом): текст наезжал на таймлайн
+   пересадки. Причина — плоский грид modern-ui: номер и «Открыть» со span'ами
+   поверх текстовых рядов ломают track-sizing Chromium (ряд считается 0/по
+   первой строке, контент вытекает на соседей). Возвращаем ВЛОЖЕННУЮ сетку:
+   card = один ряд [номер | main | открыть], main — свой одноколоночный grid
+   без span'еров (ряды считаются честно), таймлайн получает полную ширину
+   отрицательным левым маргином (bleed под колонку номера), а не 1/-1.
+   app.js попутно уплощил мету: b.-time и small.-note — прямые дети main. */
+html body .home-route-results .home-route-result {
+  grid-template-columns: 46px minmax(0, 1fr) auto !important;
+  grid-template-rows: none !important;
+  grid-auto-rows: auto !important;
+  align-items: center !important;
+  row-gap: 0 !important;
+}
+html body .home-route-results .home-route-result > .home-route-result-number {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+  align-self: center !important;
+}
+html body .home-route-results .home-route-result > .home-route-result-main {
+  display: grid !important;
+  grid-column: 2 !important;
+  grid-row: auto !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 3px !important;
+  min-width: 0 !important;
+}
+html body .home-route-results .home-route-result > .home-route-result-go {
+  grid-column: 3 !important;
+  grid-row: auto !important;
+  align-self: center !important;
+}
+/* Сбрасываем явные ряды флаттен-раскладки у детей main — обычный поток. */
+html body .home-route-results .home-route-result .home-route-result-title,
+html body .home-route-results .home-route-result .home-route-result-main > small,
+html body .home-route-results .home-route-result .home-route-result-main > b.home-route-result-time,
+html body .home-route-results .home-route-result .home-route-result-transfer {
+  grid-column: 1 !important;
+  grid-row: auto !important;
+}
+html body .home-route-results .home-route-result .home-route-result-main > b.home-route-result-time {
+  display: block !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  white-space: nowrap !important;
+  color: var(--rs-accent-strong, #0b5d57) !important;
+  font-size: 15px !important;
+  font-weight: 900 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0 !important;
+}
+html body .home-route-results .home-route-result .home-route-result-main > small.home-route-result-note {
+  display: block !important;
+  min-width: 0 !important;
+  overflow: visible !important;
+  white-space: normal !important;
+  color: var(--rs-muted, #5c6660) !important;
+  font-size: 12px !important;
+  line-height: 1.35 !important;
+}
+/* Таймлайн: полная ширина карточки через bleed под колонку номера (46+10px). */
+html body .home-route-results .home-route-result .home-route-result-transfer {
+  width: auto !important;
+  max-width: none !important;
+  margin-left: -56px !important;
+  margin-right: 0 !important;
+}
+/* Контейнер списка — обычный поток: грид-контейнер пересчитывал вклад
+   карточки тем же битым track-sizing и зажимал её высоту (286px при
+   контенте 375px) — карточки наезжали друг на друга. */
+html body .home-route-results {
+  display: block !important;
+}
+html body .home-route-results > * + * {
+  margin-top: 10px !important;
+}
+/* В карточке с таймлайном центр карточки — середина таймлайна: номер и
+   «Открыть» прижимаем к верхнему текстовому блоку, иначе бейдж повисает
+   на таймлайне (последний оверлап из скрина владельца). */
+html body .home-route-results .home-route-result:has(.home-route-result-transfer) > .home-route-result-number,
+html body .home-route-results .home-route-result:has(.home-route-result-transfer) > .home-route-result-go {
+  align-self: start !important;
+  margin-top: 2px !important;
+}
+
+/* Ранее здесь был override примитивов --sand-50/--sand-200 (белые карточки +
+   светлее холст, 2026-07-12). Снят 2026-07-13: тема «Комфорт для глаз» задаёт
+   палитру в tokens.css (--sand-50 #fffdf8 тёплый off-white вместо слепящего
+   белого, --sand-200 #f3f0e8), и tokens.css должен быть единственным рычагом.
+   Override здесь перекрывал бы новые значения по порядку каскада. */
+
+/* «Сервисы и информация» на Главной была прозрачным контейнером — сливалась с
+   холстом (жалоба владельца). Делаем белой карточкой с волосяной рамкой и
+   мягкой тенью. Перебиваем background:transparent!important из modern-ui (0,1,0)
+   более специфичным html body …-селектором в последнем слое. */
+html body[data-active-view="home"] .home-services-card,
+html body .home-services-card {
+  background: var(--color-surface, #ffffff) !important;
+  border: 1px solid var(--color-line, #e4dccc) !important;
+  box-shadow: 0 6px 16px rgba(60, 50, 30, 0.06) !important;
+}
+
+/* ============ Правки по UX-ревью 2026-07-12 ============ */
+
+/* 1. Подписи нижней навигации: в базе ВОЙНА из ~40 font-size-правил; побеждало
+   `body[data-active-view] .bottom-nav:not(.has-settings) button span:last-child`
+   (0,4,3) с clamp(8px,2.18dvw,9px) → 8.2px на 375 — нечитаемо. Зеркалим его
+   с html-префиксом (0,4,4) и кроем оба варианта has-settings. Фикс 10.5px;
+   на узких экранах базовая media подписи прячет — не мешаем. */
+html body .bottom-nav button span:last-child,
+html body[data-active-view] .bottom-nav button span:last-child,
+html body[data-active-view] .bottom-nav:not(.has-settings) button span:last-child,
+html body[data-active-view] .bottom-nav.has-settings button span:last-child {
+  font-size: 10.5px !important;
+  letter-spacing: 0 !important;
+}
+
+/* 2. Бейдж «автобус на линии»: 10px uppercase на пределе — 11px. */
+html body .view[data-view="schedule"] .route-live-badge {
+  font-size: 11px !important;
+}
+
+/* 3. Неактивные табы дней: muted #5c6660 на сером треке = 3.5:1 (ниже AA).
+   Тёмный ink-700 даёт ~6.5:1; активный таб не трогаем. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button:not(.is-active) {
+  color: var(--ink-700, #3c463f) !important;
+}
+
+/* 4. «Услуги»: сегмент-контрол схлопывался в вертикальный стек на ≤430px
+   (styles.css) и читался как список. Подписи короткие — две колонки
+   помещаются даже на 320px. */
+html body .view[data-view="service"] .service-tabs {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* 5. Десктоп: топбар на расписании скрыт, контент прилипал к верху окна. */
+@media (min-width: 760px) {
+  html body[data-active-view="schedule"] .view[data-view="schedule"] {
+    padding-top: 22px !important;
+  }
+}
+
+/* 6. view-enter БЕЗ transform (2026-07-12): translateY(4px) в кадре анимации
+   делал .view.is-active containing block'ом для fixed-потомков — меню
+   «Ближайшие рейсы» привязывалось низом к НИЗУ СЕКЦИИ (за экраном), а в
+   троттлящем webview (Telegram Desktop в фоне) анимация замирает на
+   промежуточном кадре и transform живёт вечно → панель обрезалась.
+   Одноимённые keyframes: побеждает последнее определение — это оно. */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes view-enter {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+}
+
+/* ============ Меню «Ближайшие рейсы»: анимируем только компонуемое ============
+   База вешала transition: all — при вводе/приходе результатов анимировалась
+   ВЫСОТА меню (layout-анимация, дёргается на телефонах: «как будто лагает»).
+   Оставляем opacity/transform: изменение размеров — мгновенное. */
+html body .home-route-search-menu,
+html body[data-active-view] .home-route-search-menu {
+  transition: opacity 0.12s ease, transform 0.12s ease !important;
+}
+
+/* ============ Стабильный жёлоб скроллбара (владелец: «надписи прыгают») ====
+   Высота вкладок разная (Главная 812px, Маршруты 2188px) — на десктопе
+   скроллбар появлялся/исчезал при переключении и сдвигал всю колонку по
+   горизонтали. stable резервирует место под скроллбар всегда; на телефонах
+   скроллбары оверлейные (жёлоб нулевой) — ничего не меняется. */
+html {
+  scrollbar-gutter: stable;
+}
+
+/* ============ Герб в топбаре вместо SVG-автобусика (владелец, 2026-07-12) ====
+   bus-park-logo-light-clean.webp ПЕРЕЗАПИСАН: 226×256, 23.7KB, прозрачный
+   фон (перегнан из 804×903 PNG через canvas, q0.92); имя файла залочено
+   smoke-test.js:159 (подстрока "/bus-park-logo-light-clean."). Скрытие герба
+   держали responsive-system (0,2,1) и redesign-theme (0,3,4) — зеркалим. */
+html body .topbar .brand-mark,
+html body .app-shell .topbar .brand-mark,
+html body[data-active-view] .app-shell .topbar .brand-mark {
+  display: none !important;
+}
+html body .topbar .logo-pair,
+html body[data-active-view] .topbar .logo-pair,
+html body .app-shell .topbar .logo-pair,
+html body[data-active-view] .app-shell .topbar .logo-pair {
+  display: inline-flex !important;
+  align-items: center !important;
+  width: auto !important;
+  height: auto !important;
+  min-width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+html body .topbar .logo-pair::before,
+html body .topbar .logo-pair::after {
+  display: none !important;
+  content: none !important;
+}
+html body .topbar .logo-pair .park-logo,
+html body .topbar .logo-pair .park-logo-light,
+html body[data-active-view] .topbar .logo-pair .park-logo-light,
+html body[data-active-view] .app-shell .topbar .logo-pair .park-logo-light {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  width: 38px !important;
+  height: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+  max-height: none !important;
+  position: static !important;
+  transform: none !important;
+  filter: drop-shadow(0 1px 2px rgba(11, 106, 94, 0.18)) !important;
+}
+
+/* ============ Поля поиска: снять зелёное свечение-фокус (владелец, 2026-07-12)
+   «убери выделения в поисках». Кольцо box-shadow + акцентная рамка на
+   :focus-within кричали при каждом тапе; в текстовом поле фокус и так виден
+   по каретке. Кроем schedule-вариант rs (0,4,1)!important зеркалом, а также
+   generic .search-box, .about-search и инпуты home-поиска. Рамку держим
+   нейтральной (не зелёной). */
+html body .search-box:focus-within,
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .search-box:focus-within,
+html body .view[data-view="schedule"].is-active > .search-box:focus-within,
+html body .view[data-view="routes"] .search-box:focus-within,
+html body .about-search:focus-within {
+  box-shadow: none !important;
+  border-color: var(--color-line, #e4dccc) !important;
+}
+html body .search-box input:focus,
+html body .about-search input:focus,
+html body .view[data-view="about"] .about-search input:focus,
+html body #stopSearch:focus,
+html body #routeSearch:focus,
+html body #aboutSearch:focus,
+html body #homeFromInput:focus,
+html body #homeToInput:focus,
+html body .home-route-field input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+  border-color: var(--color-line, #e4dccc) !important;
+}
+
+/* ============ Номер маршрута: 3-4 знака не должны тереться о край квадрата ===
+   «508» = 46px текста в 50px-коробке (зазор 2px, радиус 10px съедал углы —
+   «немного режется», жалоба владельца). Кегль по data-len (ставит app.js).
+   Специфичность (0,7,2)+!important бьёт rs-правило размера (0,5,2). */
+html body[data-active-view="routes"] .view[data-view="routes"] .route-card.route-tile .route-number[data-len="3"] {
+  font-size: 20px !important;
+  letter-spacing: -0.02em !important;
+}
+html body[data-active-view="routes"] .view[data-view="routes"] .route-card.route-tile .route-number[data-len="4"],
+html body[data-active-view="routes"] .view[data-view="routes"] .route-card.route-tile .route-number[data-len="5"] {
+  font-size: 16px !important;
+  letter-spacing: -0.03em !important;
+}
+/* Тот же приём для бейджа в карточке «Ближайшие рейсы» (44px-квадрат). */
+html body .home-route-results .home-route-result-number[data-len="3"] {
+  font-size: 15px !important;
+  letter-spacing: -0.02em !important;
+}
+html body .home-route-results .home-route-result-number[data-len="4"],
+html body .home-route-results .home-route-result-number[data-len="5"] {
+  font-size: 13px !important;
+  letter-spacing: -0.03em !important;
+}
+
+/* ============================================================================
+   УСЛУГИ — редизайн по макету «Услуги - 1a.dc.html» (Claude Design, 2026-07-12).
+   Сгруппированный список-справочник + bottom-sheet с деталями «Что входит».
+   Токены макета смаплены на дизайн-систему приложения. Данные (категория-тег,
+   пункты «Что входит») приходят из БД/админки; фолбэк по иконке в app.js.
+   ========================================================================== */
+
+/* Сегмент СТО / Другие — подгоняем существующий .service-tabs под макет. */
+html body .view[data-view="service"] .service-tabs {
+  grid-template-columns: 1fr 1fr !important;
+  gap: 4px !important;
+  padding: 4px !important;
+  border-radius: 14px !important;
+  background: var(--color-surface-soft, #f7f3ea) !important;
+  border: 1px solid var(--color-line, #e4dccc) !important;
+  margin-bottom: 16px !important;
+}
+html body .view[data-view="service"] .service-tabs button {
+  height: 38px !important;
+  border-radius: 10px !important;
+  font: 600 13.5px var(--font-sans) !important;
+  color: var(--color-text-muted, #5c6660) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+html body .view[data-view="service"] .service-tabs button.is-active {
+  background: var(--color-surface, #ffffff) !important;
+  color: var(--color-accent, #0f766e) !important;
+  box-shadow: 0 1px 2px rgba(60, 50, 30, 0.06) !important;
+}
+
+/* Сгруппированный список услуг: одна белая карточка, строки через волоски. */
+html body .view[data-view="service"] .service-list {
+  display: block;
+  background: var(--color-surface, #ffffff);
+  border: 1px solid var(--color-line, #e4dccc);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(60, 50, 30, 0.05);
+}
+html body .view[data-view="service"] .service-row {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  width: 100%;
+  padding: 13px 15px;
+  border: 0;
+  border-bottom: 1px solid var(--color-line, #e4dccc);
+  background: transparent;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.14s ease;
+}
+html body .view[data-view="service"] .service-row:last-child { border-bottom: 0; }
+html body .view[data-view="service"] .service-row:active { background: var(--color-surface-soft, #f7f3ea); }
+html body .view[data-view="service"] .service-row-ic {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border-radius: 13px;
+  background: var(--color-accent-soft, #e7f3f1);
+  display: grid;
+  place-items: center;
+  color: var(--color-accent, #0f766e);
+  overflow: hidden;
+}
+html body .view[data-view="service"] .service-row-ic svg { width: 23px; height: 23px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+html body .view[data-view="service"] .service-row-ic.is-image img { width: 100%; height: 100%; object-fit: cover; }
+html body .view[data-view="service"] .service-row-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+html body .view[data-view="service"] .service-row-top { display: flex; align-items: center; gap: 7px; min-width: 0; flex-wrap: wrap; }
+html body .view[data-view="service"] .service-row-top b { font: 600 14.5px/1.2 var(--font-sans); letter-spacing: -0.01em; color: var(--color-text, #1f2621); }
+html body .view[data-view="service"] .service-row-tag {
+  flex: none;
+  font: 600 10.5px var(--font-sans);
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: var(--color-accent-soft, #e7f3f1);
+  color: var(--color-accent, #0f766e);
+}
+html body .view[data-view="service"] .service-row-tag.is-neutral {
+  background: var(--color-surface-soft, #f7f3ea);
+  color: var(--color-text-muted, #5c6660);
+}
+html body .view[data-view="service"] .service-row-desc {
+  font: 500 12px/1.3 var(--font-sans);
+  color: var(--color-text-muted, #5c6660);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+html body .view[data-view="service"] .service-row-chev { flex: none; width: 18px; height: 18px; color: color-mix(in srgb, var(--color-text-muted, #5c6660) 60%, transparent); }
+html body .view[data-view="service"] .service-row-chev svg { width: 18px; height: 18px; }
+html body .view[data-view="service"] .service-choice-note {
+  margin: 14px 2px 0;
+  font: 500 11.5px/1.4 var(--font-sans);
+  color: var(--color-text-muted, #5c6660);
+  text-align: center;
+}
+
+/* ---- Bottom-sheet деталей услуги ---- */
+.service-sheet-overlay { position: fixed; inset: 0; z-index: 90; }
+.service-sheet-dim {
+  position: absolute; inset: 0;
+  background: rgba(20, 17, 12, 0.34);
+  opacity: 0;
+  transition: opacity 0.22s ease;
+}
+.service-sheet-overlay.is-open .service-sheet-dim { opacity: 1; }
+.service-sheet {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  width: min(100%, var(--rs-app-max, 760px));
+  margin: 0 auto;
+  background: var(--color-surface, #ffffff);
+  border-radius: 26px 26px 0 0;
+  box-shadow: 0 -12px 40px rgba(30, 25, 15, 0.22);
+  padding: 8px 20px calc(26px + env(safe-area-inset-bottom, 0px));
+  max-height: 86%;
+  overflow-y: auto;
+  transform: translateY(102%);
+  transition: transform 0.28s cubic-bezier(0.2, 0.7, 0.3, 1);
+  scrollbar-width: none;
+}
+.service-sheet::-webkit-scrollbar { display: none; }
+.service-sheet-overlay.is-open .service-sheet { transform: translateY(0); }
+.service-sheet-grab { width: 38px; height: 5px; border-radius: 999px; background: var(--color-line-strong, #ded6c4); margin: 2px auto 14px; }
+.service-sheet-x {
+  position: absolute; top: 16px; right: 16px;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--color-line, #e4dccc);
+  background: var(--color-surface, #ffffff);
+  display: grid; place-items: center;
+  color: var(--color-text-muted, #5c6660);
+  font-size: 19px; line-height: 1; cursor: pointer; z-index: 2;
+}
+.service-sheet-head { display: flex; align-items: center; gap: 14px; padding-right: 40px; }
+.service-sheet-ic {
+  flex: none; width: 58px; height: 58px; border-radius: 17px;
+  background: var(--color-accent-soft, #e7f3f1);
+  display: grid; place-items: center; color: var(--color-accent, #0f766e); overflow: hidden;
+}
+.service-sheet-ic svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.service-sheet-ic.is-image img { width: 100%; height: 100%; object-fit: cover; }
+.service-sheet-kicker {
+  display: inline-block;
+  font: 600 10.5px var(--font-sans); letter-spacing: 0.05em; text-transform: uppercase;
+  color: var(--color-accent, #0f766e); background: var(--color-accent-soft, #e7f3f1);
+  padding: 4px 10px; border-radius: 999px;
+}
+.service-sheet-headtext h3 { margin: 9px 0 0; font: 600 23px/1.12 var(--font-sans); letter-spacing: -0.02em; color: var(--color-text, #1f2621); }
+.service-sheet-desc { margin: 12px 0 0; font: 500 14px/1.5 var(--font-sans); color: var(--color-text-muted, #5c6660); }
+.service-sheet-price {
+  margin: 12px 0 0; display: inline-block;
+  font: 600 12.5px var(--font-sans);
+  padding: 6px 12px; border-radius: 999px;
+  background: var(--color-surface-soft, #f7f3ea); color: var(--color-text, #1f2621);
+}
+.service-sheet-label { margin: 16px 2px 10px; font: 600 11px var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted, #5c6660); }
+.service-sheet-bullets { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; }
+.service-sheet-bullets li { display: flex; align-items: center; gap: 10px; font: 500 13.5px var(--font-sans); color: var(--color-text, #1f2621); }
+.service-sheet-bullets svg { flex: none; width: 18px; height: 18px; fill: none; stroke: var(--color-accent, #0f766e); }
+.service-sheet-note {
+  margin: 16px 0 0; padding: 13px 15px; border-radius: 14px;
+  background: var(--color-accent-soft, #e7f3f1);
+  border: 1px solid color-mix(in srgb, var(--color-accent, #0f766e) 22%, transparent);
+}
+.service-sheet-note b { display: block; font: 600 12.5px var(--font-sans); color: var(--color-accent-hover, #0b5d57); margin-bottom: 3px; }
+.service-sheet-note span { font: 500 12px/1.45 var(--font-sans); color: color-mix(in srgb, var(--color-accent-hover, #0b5d57) 78%, var(--color-text, #1f2621)); }
+body.is-service-detail-open { overflow: hidden; }
+
+/* ============================================================================
+   СХЕМА МАРШРУТА — компактный timeline (хендофф «Схема маршрута» 2a, 2026-07-13).
+   Номерные точки, приглушённый пройденный путь, акцент впереди, отдельная
+   bus-строка «в пути ≈ETA», gap-чипы «ещё N остановок». Новые классы rs-*
+   имеют чистый слой; легаси .stop-item/.stop-dot переопределяем/нейтрализуем.
+   Токены — из tokens.css; спец-оттенки пройденного заданы локально.
+   Префикс: html body[data-active-view="schedule"] #stopsPanel  (id → бьёт (1,5,1)).
+   ========================================================================== */
+
+/* Карточка панели + шапка */
+html body[data-active-view="schedule"] .view[data-view="schedule"] #stopsPanel {
+  border-radius: 20px !important;
+  padding: 18px 16px 14px !important;
+}
+html body[data-active-view="schedule"] #stopsPanel > h3 {
+  font-size: 17px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.014em !important;
+  color: var(--color-text) !important;
+  padding: 0 6px 2px !important;
+  margin: 0 !important;
+}
+html body[data-active-view="schedule"] #stopsPanel > .route-help {
+  font-size: 12.5px !important;
+  color: var(--color-text-muted) !important;
+  margin: 2px 6px 12px !important;
+}
+/* Live-бейдж «На линии» + пульс-точка */
+html body[data-active-view="schedule"] #stopsPanel > h3 .route-live-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  background: var(--color-accent-soft) !important;
+  color: var(--color-accent-hover) !important;
+  font-size: 11.5px !important;
+  font-weight: 600 !important;
+  text-transform: none !important;
+  letter-spacing: 0 !important;
+  padding: 5px 11px !important;
+  border-radius: 999px !important;
+}
+html body[data-active-view="schedule"] #stopsPanel .route-live-dot {
+  width: 7px; height: 7px; border-radius: 999px;
+  background: var(--color-accent);
+  animation: rs-live-pulse 1.6s ease-in-out infinite;
+}
+@keyframes rs-live-pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.45; transform: scale(0.8); } }
+@media (prefers-reduced-motion: reduce) {
+  html body[data-active-view="schedule"] #stopsPanel .route-live-dot { animation: none; }
+}
+
+/* Список */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline {
+  display: grid !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none !important;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  --rsx-passed-line: #c3d2ce;
+  --rsx-passed-dot: #a9bdb8;
+  --rsx-passed-text: #6e7872;
+  --rsx-passed-mut: #98a19b;
+  --rsx-bus: #e8620a; /* маркер автобуса — контрастный янтарь на бирюзе */
+}
+/* Нейтрализуем легаси-псевдоэлементы .stop-item (старая линия/гэп) */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row::before,
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Строка остановки */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row {
+  display: grid !important;
+  grid-template-columns: 36px 1fr auto !important;
+  align-items: center !important;
+  column-gap: 10px !important;
+  min-height: 42px !important;
+  padding: 1px 6px 1px 0 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 12px !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  position: relative !important;
+  cursor: pointer;
+  transition: background 0.16s ease;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-next-stop {
+  background: color-mix(in srgb, var(--color-accent) 7%, transparent) !important;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row:not(.is-timeline-only):active {
+  background: color-mix(in srgb, var(--color-accent) 6%, transparent) !important;
+}
+
+/* Колонка-маркер: полусегменты + точка */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-marker { position: relative; align-self: stretch; display: block; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-seg { position: absolute; left: 16.5px; width: 3px; border-radius: 2px; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-seg-top { top: -1px; height: calc(50% + 1px); background: var(--rs-top, transparent); }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-seg-bot { top: 50%; bottom: -1px; background: var(--rs-bot, transparent); }
+
+/* Точка — базовая (впереди/промежуточная): белая с акцентной рамкой + номер */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot {
+  position: absolute; left: 18px; top: 50%; transform: translate(-50%, -50%);
+  z-index: 1; border-radius: 999px; display: grid; place-items: center; box-sizing: border-box;
+  width: 18px; height: 18px;
+  font-family: var(--font-sans); font-size: 9.5px; font-weight: 700; line-height: 1;
+  background: var(--color-surface); color: var(--color-accent-hover);
+  border: 2.5px solid var(--color-accent);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-passed:not(.is-terminal) .rs-dot {
+  width: 18px; height: 18px; background: var(--rsx-passed-dot); color: #fff; border: none;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-next-stop .rs-dot {
+  width: 22px; height: 22px; background: var(--color-accent); color: #fff; border: none;
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-accent) 14%, transparent);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-terminal:not(.is-passed) .rs-dot {
+  width: 20px; height: 20px; background: var(--color-accent); color: #fff; border: none;
+  box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 4.5px color-mix(in srgb, var(--color-accent) 35%, transparent);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-terminal.is-passed .rs-dot {
+  width: 20px; height: 20px; background: var(--rsx-passed-dot); color: #fff; border: none;
+  box-shadow: 0 0 0 3px var(--color-surface), 0 0 0 4.5px var(--rsx-passed-line);
+}
+/* Точка-автобус (остановка «сейчас») */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-dot-bus {
+  width: 24px; height: 24px; background: var(--rsx-bus); border: none; color: #fff;
+  box-shadow: 0 0 0 3px var(--color-surface), 0 2px 10px color-mix(in srgb, var(--rsx-bus) 45%, transparent);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-dot-bus svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; }
+
+/* Текстовая колонка */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-text { display: grid; gap: 1px; min-width: 0; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-name-row { display: flex; align-items: center; gap: 6px; min-width: 0; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-name-row strong {
+  font-size: 14px; font-weight: 600; color: var(--color-text);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; letter-spacing: -0.006em;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-passed .rs-name-row strong { font-weight: 500; color: var(--rsx-passed-text); }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-next-stop .rs-name-row strong { color: var(--color-accent-hover); }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-skipped .rs-name-row strong { color: var(--color-text-muted); }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-note {
+  font-size: 11.5px; font-weight: 500; color: var(--color-text-muted);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-passed .rs-note { color: var(--rsx-passed-mut); }
+/* Компактно: у промежуточных остановок подпись скрыта */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline.rs-compact .rs-row:not(.is-terminal):not(.is-next-stop):not(.is-current):not(.is-timeline-only):not(.is-skipped) .rs-note {
+  display: none;
+}
+
+/* Колонка времени */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-time {
+  font-family: var(--font-mono); font-size: 12.5px; font-weight: 600; justify-self: end; white-space: nowrap;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row:not(.is-passed):not(.is-next-stop) .rs-time:not(.is-note) {
+  color: var(--color-text); background: var(--color-surface-soft); border: 1px solid var(--color-line);
+  padding: 3px 8px; border-radius: 999px;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-passed .rs-time { color: var(--rsx-passed-mut); background: none; border: none; padding: 0; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-row.is-next-stop .rs-time { color: #fff; background: var(--color-accent); border: none; padding: 4px 9px; border-radius: 999px; }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-time.is-note {
+  font-family: var(--font-sans); font-weight: 600; font-size: 11.5px; color: var(--color-text-muted);
+  background: none !important; border: none !important; padding: 0 !important;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-time.is-missed { color: var(--color-warning); }
+
+/* Bus-строка «в пути ≈ ETA» */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-bus-row {
+  display: grid !important; grid-template-columns: 36px 1fr auto !important; align-items: center !important;
+  column-gap: 10px !important; min-height: 42px !important; padding: 0 6px 0 0 !important; margin: 0 !important;
+  border: 0 !important; background: transparent !important; box-shadow: none !important; position: relative !important; cursor: default;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-bus-line {
+  position: absolute; left: 16.5px; top: -1px; bottom: -1px; width: 3px; border-radius: 2px;
+  background-image: repeating-linear-gradient(to bottom, var(--color-accent) 0 5px, transparent 5px 9px);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-bus-dot {
+  position: absolute; left: 18px; top: 50%; transform: translate(-50%, -50%);
+  width: 26px; height: 26px; border-radius: 999px; background: var(--rsx-bus); border: 0;
+  display: grid; place-items: center; z-index: 2;
+  box-shadow: 0 0 0 3px var(--color-surface), 0 2px 10px color-mix(in srgb, var(--rsx-bus) 45%, transparent);
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-bus-dot svg { width: 13px; height: 13px; stroke: #fff; fill: none; stroke-width: 2; }
+/* Иконка автобуса приходит из scheduleLineIcon в обёртке .schedule-line-icon
+   /.route-bus-icon — у неё легаси-АМБЕР-фон #d97706!important (старый маркер).
+   Растворяем обёртку (display:contents) и жёстко задаём svg — круг остаётся
+   бирюзовым (var(--color-accent)), внутри белая иконка. */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot .schedule-line-icon {
+  display: contents !important;
+  background: none !important;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-bus-dot svg,
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-dot.rs-dot-bus svg {
+  width: 13px !important;
+  height: 13px !important;
+  stroke: #ffffff !important;
+  fill: none !important;
+  background: none !important;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-bus-label { font-size: 12.5px; font-weight: 600; color: var(--color-accent-hover); }
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-bus-eta {
+  font-family: var(--font-mono); font-size: 12px; font-weight: 600; color: var(--color-accent-hover);
+  background: var(--color-accent-soft); padding: 3px 8px; border-radius: 999px; justify-self: end; white-space: nowrap;
+}
+
+/* Gap-чип «ещё N остановок» */
+/* Разрыв: только пунктир-линия, без чипа «ещё N остановок» (владелец). */
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-gap-row {
+  display: grid !important; grid-template-columns: 36px 1fr !important; align-items: center !important;
+  column-gap: 10px !important; min-height: 16px !important; padding: 0 !important; margin: 0 !important;
+  border: 0 !important; background: transparent !important; box-shadow: none !important; position: relative !important; cursor: default;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-timeline .rs-gap-line {
+  position: absolute; left: 16.5px; top: -1px; bottom: -1px; width: 3px; border-radius: 2px;
+  background-image: repeating-linear-gradient(to bottom, var(--rs-gap, var(--color-accent)) 0 5px, transparent 5px 10px);
+}
+
+/* Кнопка-переключатель */
+html body[data-active-view="schedule"] #stopsPanel .rs-toggle {
+  display: block !important; width: 100% !important; margin-top: 12px !important;
+  background: var(--color-surface-soft) !important; border: 1px solid var(--color-line) !important;
+  border-radius: 12px !important; padding: 11px 14px !important;
+  font-size: 13.5px !important; font-weight: 600 !important; color: var(--ink-700, #414b44) !important;
+  text-align: center; cursor: pointer;
+}
+html body[data-active-view="schedule"] #stopsPanel .rs-toggle:active { background: var(--color-bg) !important; }

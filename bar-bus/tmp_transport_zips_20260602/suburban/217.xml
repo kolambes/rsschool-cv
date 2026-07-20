@@ -1,0 +1,6125 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="37">
+		<name>Маршрут №217 "Барановичи - Ляховичи"</name>
+		<num>217</num>
+		<dateExp>2026-04-26T13:41:58.585</dateExp>
+		<dateStart>2026-04-23</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="5">
+			<name>Автовокзал "Барановичи"</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32647">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>5:35:00</departureTime>
+							<arrivalTime>5:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32415">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:05:00</departureTime>
+							<arrivalTime>7:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32431">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32447">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:20:00</departureTime>
+							<arrivalTime>10:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32463">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:20:00</departureTime>
+							<arrivalTime>11:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32479">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:40:00</departureTime>
+							<arrivalTime>12:40:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32495">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32511">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:00:00</departureTime>
+							<arrivalTime>15:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32631">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:25:00</departureTime>
+							<arrivalTime>16:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32551">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:05:00</departureTime>
+							<arrivalTime>18:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32583">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32599">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:35:00</departureTime>
+							<arrivalTime>20:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32615">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:50:00</departureTime>
+							<arrivalTime>21:50:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32415">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:05:00</departureTime>
+							<arrivalTime>7:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32431">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32447">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:20:00</departureTime>
+							<arrivalTime>10:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32463">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:20:00</departureTime>
+							<arrivalTime>11:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32479">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:40:00</departureTime>
+							<arrivalTime>12:40:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32495">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32511">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:00:00</departureTime>
+							<arrivalTime>15:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32631">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:25:00</departureTime>
+							<arrivalTime>16:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32551">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:05:00</departureTime>
+							<arrivalTime>18:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32583">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32599">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:35:00</departureTime>
+							<arrivalTime>20:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32615">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:50:00</departureTime>
+							<arrivalTime>21:50:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32415">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:05:00</departureTime>
+							<arrivalTime>7:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32431">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32447">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:20:00</departureTime>
+							<arrivalTime>10:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32463">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:20:00</departureTime>
+							<arrivalTime>11:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32479">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:40:00</departureTime>
+							<arrivalTime>12:40:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32495">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32511">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:00:00</departureTime>
+							<arrivalTime>15:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101632">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:25:00</departureTime>
+							<arrivalTime>17:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32551">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:05:00</departureTime>
+							<arrivalTime>18:05:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32583">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32599">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:35:00</departureTime>
+							<arrivalTime>20:35:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32615">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:50:00</departureTime>
+							<arrivalTime>21:50:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="502">
+			<name>9-ый км.</name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32648">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>5:47:00</departureTime>
+							<arrivalTime>5:47:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32416">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32432">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:35:00</departureTime>
+							<arrivalTime>9:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32448">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:35:00</departureTime>
+							<arrivalTime>10:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32464">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32480">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:55:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32496">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:45:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32512">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:15:00</departureTime>
+							<arrivalTime>15:15:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32632">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:41:00</departureTime>
+							<arrivalTime>16:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32552">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:20:00</departureTime>
+							<arrivalTime>18:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32584">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:50:00</departureTime>
+							<arrivalTime>19:50:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32600">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:48:00</departureTime>
+							<arrivalTime>20:47:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32616">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:02:00</departureTime>
+							<arrivalTime>22:02:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32416">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32432">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:35:00</departureTime>
+							<arrivalTime>9:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32448">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:35:00</departureTime>
+							<arrivalTime>10:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32464">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32480">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:55:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32496">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:45:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32512">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:15:00</departureTime>
+							<arrivalTime>15:15:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32632">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:41:00</departureTime>
+							<arrivalTime>16:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32552">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:20:00</departureTime>
+							<arrivalTime>18:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32584">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:50:00</departureTime>
+							<arrivalTime>19:50:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32600">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:48:00</departureTime>
+							<arrivalTime>20:47:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32616">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:02:00</departureTime>
+							<arrivalTime>22:02:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32416">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32432">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:35:00</departureTime>
+							<arrivalTime>9:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32448">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:35:00</departureTime>
+							<arrivalTime>10:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32464">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32480">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:55:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32496">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:45:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32512">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:15:00</departureTime>
+							<arrivalTime>15:15:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101633">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:40:00</departureTime>
+							<arrivalTime>17:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32552">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:20:00</departureTime>
+							<arrivalTime>18:20:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32584">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:50:00</departureTime>
+							<arrivalTime>19:50:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32600">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:48:00</departureTime>
+							<arrivalTime>20:47:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32616">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:02:00</departureTime>
+							<arrivalTime>22:02:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="500">
+			<name>Литва</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32649">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>5:51:00</departureTime>
+							<arrivalTime>5:50:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32417">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:24:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32433">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32449">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:40:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32465">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:40:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32481">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:00:00</departureTime>
+							<arrivalTime>12:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32497">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32513">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:20:00</departureTime>
+							<arrivalTime>15:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32633">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:45:00</departureTime>
+							<arrivalTime>16:44:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32553">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:25:00</departureTime>
+							<arrivalTime>18:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32585">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:55:00</departureTime>
+							<arrivalTime>19:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32601">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:51:00</departureTime>
+							<arrivalTime>20:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32617">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:06:00</departureTime>
+							<arrivalTime>22:05:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32417">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:24:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32433">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32449">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:40:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32465">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:40:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32481">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:00:00</departureTime>
+							<arrivalTime>12:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32497">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32513">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:20:00</departureTime>
+							<arrivalTime>15:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32633">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:45:00</departureTime>
+							<arrivalTime>16:44:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32553">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:25:00</departureTime>
+							<arrivalTime>18:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32585">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:55:00</departureTime>
+							<arrivalTime>19:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32601">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:51:00</departureTime>
+							<arrivalTime>20:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32617">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:06:00</departureTime>
+							<arrivalTime>22:05:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32417">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:24:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32433">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32449">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:40:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32465">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:40:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32481">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:00:00</departureTime>
+							<arrivalTime>12:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32497">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32513">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:20:00</departureTime>
+							<arrivalTime>15:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101634">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:45:00</departureTime>
+							<arrivalTime>17:44:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32553">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:25:00</departureTime>
+							<arrivalTime>18:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32585">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:55:00</departureTime>
+							<arrivalTime>19:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32601">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:51:00</departureTime>
+							<arrivalTime>20:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32617">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:06:00</departureTime>
+							<arrivalTime>22:05:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="497">
+			<name>Дарево</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32650">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>5:53:00</departureTime>
+							<arrivalTime>5:53:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32418">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:25:00</departureTime>
+							<arrivalTime>7:25:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32434">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:42:00</departureTime>
+							<arrivalTime>9:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32450">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:42:00</departureTime>
+							<arrivalTime>10:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32466">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:42:00</departureTime>
+							<arrivalTime>11:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32482">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:02:00</departureTime>
+							<arrivalTime>13:02:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32498">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32514">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:22:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32634">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:47:00</departureTime>
+							<arrivalTime>16:47:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32554">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:27:00</departureTime>
+							<arrivalTime>18:27:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32586">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:57:00</departureTime>
+							<arrivalTime>19:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32602">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:53:00</departureTime>
+							<arrivalTime>20:53:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32618">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:08:00</departureTime>
+							<arrivalTime>22:08:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32418">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:25:00</departureTime>
+							<arrivalTime>7:25:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32434">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:42:00</departureTime>
+							<arrivalTime>9:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32450">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:42:00</departureTime>
+							<arrivalTime>10:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32466">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:42:00</departureTime>
+							<arrivalTime>11:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32482">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:02:00</departureTime>
+							<arrivalTime>13:02:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32498">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32514">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:22:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32634">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:47:00</departureTime>
+							<arrivalTime>16:47:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32554">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:27:00</departureTime>
+							<arrivalTime>18:27:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32586">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:57:00</departureTime>
+							<arrivalTime>19:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32602">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:53:00</departureTime>
+							<arrivalTime>20:53:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32618">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:08:00</departureTime>
+							<arrivalTime>22:08:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32418">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:25:00</departureTime>
+							<arrivalTime>7:25:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32434">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:42:00</departureTime>
+							<arrivalTime>9:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32450">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:42:00</departureTime>
+							<arrivalTime>10:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32466">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:42:00</departureTime>
+							<arrivalTime>11:42:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32482">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:02:00</departureTime>
+							<arrivalTime>13:02:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32498">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32514">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:22:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101635">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:48:00</departureTime>
+							<arrivalTime>17:46:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32554">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:27:00</departureTime>
+							<arrivalTime>18:27:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32586">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:57:00</departureTime>
+							<arrivalTime>19:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32602">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:53:00</departureTime>
+							<arrivalTime>20:53:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32618">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:08:00</departureTime>
+							<arrivalTime>22:08:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="495">
+			<name>Дарево-Чиж</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32651">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>5:56:00</departureTime>
+							<arrivalTime>5:55:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32419">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:30:00</departureTime>
+							<arrivalTime>7:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32435">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:45:00</departureTime>
+							<arrivalTime>9:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32451">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:45:00</departureTime>
+							<arrivalTime>10:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32467">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:45:00</departureTime>
+							<arrivalTime>11:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32483">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:05:00</departureTime>
+							<arrivalTime>13:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32499">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32515">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:25:00</departureTime>
+							<arrivalTime>15:24:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32635">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:49:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32555">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:30:00</departureTime>
+							<arrivalTime>18:29:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32587">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:59:00</departureTime>
+							<arrivalTime>19:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32603">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:56:00</departureTime>
+							<arrivalTime>20:55:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32619">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:11:00</departureTime>
+							<arrivalTime>22:10:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32419">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:30:00</departureTime>
+							<arrivalTime>7:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32435">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:45:00</departureTime>
+							<arrivalTime>9:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32451">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:45:00</departureTime>
+							<arrivalTime>10:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32467">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:45:00</departureTime>
+							<arrivalTime>11:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32483">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:05:00</departureTime>
+							<arrivalTime>13:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32499">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32515">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:25:00</departureTime>
+							<arrivalTime>15:24:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32635">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:49:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32555">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:30:00</departureTime>
+							<arrivalTime>18:29:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32587">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:59:00</departureTime>
+							<arrivalTime>19:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32603">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:56:00</departureTime>
+							<arrivalTime>20:55:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32619">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:11:00</departureTime>
+							<arrivalTime>22:10:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32419">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:30:00</departureTime>
+							<arrivalTime>7:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32435">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:45:00</departureTime>
+							<arrivalTime>9:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32451">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:45:00</departureTime>
+							<arrivalTime>10:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32467">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:45:00</departureTime>
+							<arrivalTime>11:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32483">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:05:00</departureTime>
+							<arrivalTime>13:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32499">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32515">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:25:00</departureTime>
+							<arrivalTime>15:24:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101636">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:50:00</departureTime>
+							<arrivalTime>17:49:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32555">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:30:00</departureTime>
+							<arrivalTime>18:29:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32587">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:59:00</departureTime>
+							<arrivalTime>19:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32603">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:56:00</departureTime>
+							<arrivalTime>20:55:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32619">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:11:00</departureTime>
+							<arrivalTime>22:10:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="493">
+			<name>Корени пов.</name>
+			<num>6</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32652">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:01:00</departureTime>
+							<arrivalTime>6:00:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32420">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:35:00</departureTime>
+							<arrivalTime>7:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32436">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:50:00</departureTime>
+							<arrivalTime>9:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32452">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32468">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32484">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:09:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32500">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:00:00</departureTime>
+							<arrivalTime>13:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32516">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32636">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:55:00</departureTime>
+							<arrivalTime>16:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32556">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:35:00</departureTime>
+							<arrivalTime>18:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32588">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:04:00</departureTime>
+							<arrivalTime>20:04:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32604">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:01:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32620">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:16:00</departureTime>
+							<arrivalTime>22:15:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32420">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:35:00</departureTime>
+							<arrivalTime>7:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32436">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:50:00</departureTime>
+							<arrivalTime>9:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32452">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32468">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32484">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:09:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32500">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:00:00</departureTime>
+							<arrivalTime>13:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32516">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32636">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:55:00</departureTime>
+							<arrivalTime>16:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32556">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:35:00</departureTime>
+							<arrivalTime>18:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32588">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:04:00</departureTime>
+							<arrivalTime>20:04:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32604">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:01:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32620">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:16:00</departureTime>
+							<arrivalTime>22:15:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32420">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:35:00</departureTime>
+							<arrivalTime>7:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32436">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:50:00</departureTime>
+							<arrivalTime>9:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32452">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32468">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:49:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32484">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:09:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32500">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:00:00</departureTime>
+							<arrivalTime>13:59:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32516">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:29:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101637">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:55:00</departureTime>
+							<arrivalTime>17:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32556">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:35:00</departureTime>
+							<arrivalTime>18:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32588">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:04:00</departureTime>
+							<arrivalTime>20:04:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32604">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:01:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32620">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:16:00</departureTime>
+							<arrivalTime>22:15:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="491">
+			<name>Турки пов.</name>
+			<num>7</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32653">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:04:00</departureTime>
+							<arrivalTime>6:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32421">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:39:00</departureTime>
+							<arrivalTime>7:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32437">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:54:00</departureTime>
+							<arrivalTime>9:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32453">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:54:00</departureTime>
+							<arrivalTime>10:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32469">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:54:00</departureTime>
+							<arrivalTime>11:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32485">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:14:00</departureTime>
+							<arrivalTime>13:13:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32501">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:04:00</departureTime>
+							<arrivalTime>14:03:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32517">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:34:00</departureTime>
+							<arrivalTime>15:33:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32637">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:59:00</departureTime>
+							<arrivalTime>16:58:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32557">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:39:00</departureTime>
+							<arrivalTime>18:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32589">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:08:00</departureTime>
+							<arrivalTime>20:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32605">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:04:00</departureTime>
+							<arrivalTime>21:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32621">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:19:00</departureTime>
+							<arrivalTime>22:19:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32421">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:39:00</departureTime>
+							<arrivalTime>7:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32437">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:54:00</departureTime>
+							<arrivalTime>9:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32453">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:54:00</departureTime>
+							<arrivalTime>10:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32469">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:54:00</departureTime>
+							<arrivalTime>11:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32485">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:14:00</departureTime>
+							<arrivalTime>13:13:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32501">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:04:00</departureTime>
+							<arrivalTime>14:03:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32517">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:34:00</departureTime>
+							<arrivalTime>15:33:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32637">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>16:59:00</departureTime>
+							<arrivalTime>16:58:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32557">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:39:00</departureTime>
+							<arrivalTime>18:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32589">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:08:00</departureTime>
+							<arrivalTime>20:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32605">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:04:00</departureTime>
+							<arrivalTime>21:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32621">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:19:00</departureTime>
+							<arrivalTime>22:19:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32421">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:39:00</departureTime>
+							<arrivalTime>7:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32437">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:54:00</departureTime>
+							<arrivalTime>9:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32453">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:54:00</departureTime>
+							<arrivalTime>10:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32469">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:54:00</departureTime>
+							<arrivalTime>11:53:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32485">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:14:00</departureTime>
+							<arrivalTime>13:13:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32501">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:04:00</departureTime>
+							<arrivalTime>14:03:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32517">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:34:00</departureTime>
+							<arrivalTime>15:33:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101638">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>17:59:00</departureTime>
+							<arrivalTime>17:58:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32557">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:39:00</departureTime>
+							<arrivalTime>18:38:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32589">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:08:00</departureTime>
+							<arrivalTime>20:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32605">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:04:00</departureTime>
+							<arrivalTime>21:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32621">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:19:00</departureTime>
+							<arrivalTime>22:19:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="477">
+			<name>Автостанция Ляховичи</name>
+			<num>8</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32654">
+							<kodElem>3043</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:10:00</departureTime>
+							<arrivalTime>6:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32422">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:45:00</departureTime>
+							<arrivalTime>7:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32438">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:00:00</departureTime>
+							<arrivalTime>10:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32454">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:00:00</departureTime>
+							<arrivalTime>11:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32470">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:00:00</departureTime>
+							<arrivalTime>12:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32486">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:20:00</departureTime>
+							<arrivalTime>13:20:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32502">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32518">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:40:00</departureTime>
+							<arrivalTime>15:40:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32638">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:05:00</departureTime>
+							<arrivalTime>17:05:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32558">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:45:00</departureTime>
+							<arrivalTime>18:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32590">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:15:00</departureTime>
+							<arrivalTime>20:15:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32606">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:10:00</departureTime>
+							<arrivalTime>21:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32622">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:25:00</departureTime>
+							<arrivalTime>22:25:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32422">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:45:00</departureTime>
+							<arrivalTime>7:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32438">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:00:00</departureTime>
+							<arrivalTime>10:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32454">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:00:00</departureTime>
+							<arrivalTime>11:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32470">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:00:00</departureTime>
+							<arrivalTime>12:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32486">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:20:00</departureTime>
+							<arrivalTime>13:20:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32502">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32518">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:40:00</departureTime>
+							<arrivalTime>15:40:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32638">
+							<kodElem>3041</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:05:00</departureTime>
+							<arrivalTime>17:05:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32558">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:45:00</departureTime>
+							<arrivalTime>18:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32590">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:15:00</departureTime>
+							<arrivalTime>20:15:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32606">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:10:00</departureTime>
+							<arrivalTime>21:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32622">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:25:00</departureTime>
+							<arrivalTime>22:25:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32422">
+							<kodElem>3014</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:45:00</departureTime>
+							<arrivalTime>7:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32438">
+							<kodElem>3016</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:00:00</departureTime>
+							<arrivalTime>10:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32454">
+							<kodElem>3018</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:00:00</departureTime>
+							<arrivalTime>11:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32470">
+							<kodElem>3020</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:00:00</departureTime>
+							<arrivalTime>12:00:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32486">
+							<kodElem>3022</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:20:00</departureTime>
+							<arrivalTime>13:20:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32502">
+							<kodElem>3024</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32518">
+							<kodElem>3026</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:40:00</departureTime>
+							<arrivalTime>15:40:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101639">
+							<kodElem>9012</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:05:00</departureTime>
+							<arrivalTime>18:05:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32558">
+							<kodElem>3031</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:45:00</departureTime>
+							<arrivalTime>18:45:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32590">
+							<kodElem>3035</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:15:00</departureTime>
+							<arrivalTime>20:15:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32606">
+							<kodElem>3037</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:10:00</departureTime>
+							<arrivalTime>21:10:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32622">
+							<kodElem>3039</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:25:00</departureTime>
+							<arrivalTime>22:25:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="476">
+			<name>Автостанция Ляховичи</name>
+			<num>9</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32536">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:25:00</departureTime>
+							<arrivalTime>5:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32656">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:20:00</departureTime>
+							<arrivalTime>6:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32544">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32424">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:00:00</departureTime>
+							<arrivalTime>9:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32440">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:30:00</departureTime>
+							<arrivalTime>10:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32456">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:30:00</departureTime>
+							<arrivalTime>11:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32472">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:30:00</departureTime>
+							<arrivalTime>12:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32488">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32504">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101625">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:30:00</departureTime>
+							<arrivalTime>16:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32640">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:30:00</departureTime>
+							<arrivalTime>17:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32560">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:55:00</departureTime>
+							<arrivalTime>18:55:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32592">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:20:00</departureTime>
+							<arrivalTime>20:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32608">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:20:00</departureTime>
+							<arrivalTime>21:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32624">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:30:00</departureTime>
+							<arrivalTime>22:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32536">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:25:00</departureTime>
+							<arrivalTime>5:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32544">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32424">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:00:00</departureTime>
+							<arrivalTime>9:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32440">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:30:00</departureTime>
+							<arrivalTime>10:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32456">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:30:00</departureTime>
+							<arrivalTime>11:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32472">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:30:00</departureTime>
+							<arrivalTime>12:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32488">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32504">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101625">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:30:00</departureTime>
+							<arrivalTime>16:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32640">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:30:00</departureTime>
+							<arrivalTime>17:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32560">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:55:00</departureTime>
+							<arrivalTime>18:55:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32592">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:20:00</departureTime>
+							<arrivalTime>20:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32608">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:20:00</departureTime>
+							<arrivalTime>21:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32624">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:30:00</departureTime>
+							<arrivalTime>22:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32536">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:25:00</departureTime>
+							<arrivalTime>5:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32544">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32424">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:00:00</departureTime>
+							<arrivalTime>9:00:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32440">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:30:00</departureTime>
+							<arrivalTime>10:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32456">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:30:00</departureTime>
+							<arrivalTime>11:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32472">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:30:00</departureTime>
+							<arrivalTime>12:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32488">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32504">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101625">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:30:00</departureTime>
+							<arrivalTime>16:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101641">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:10:00</departureTime>
+							<arrivalTime>18:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32560">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>18:55:00</departureTime>
+							<arrivalTime>18:55:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32592">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:20:00</departureTime>
+							<arrivalTime>20:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32608">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:20:00</departureTime>
+							<arrivalTime>21:20:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32624">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:30:00</departureTime>
+							<arrivalTime>22:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="492">
+			<name>Турки пов.</name>
+			<num>10</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32535">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:31:00</departureTime>
+							<arrivalTime>5:31:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32655">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:26:00</departureTime>
+							<arrivalTime>6:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32543">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:51:00</departureTime>
+							<arrivalTime>6:51:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32423">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:06:00</departureTime>
+							<arrivalTime>9:06:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32439">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:36:00</departureTime>
+							<arrivalTime>10:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32455">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32471">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:36:00</departureTime>
+							<arrivalTime>12:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32487">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:36:00</departureTime>
+							<arrivalTime>13:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32503">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:36:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101624">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:36:00</departureTime>
+							<arrivalTime>16:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32639">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:36:00</departureTime>
+							<arrivalTime>17:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32559">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:01:00</departureTime>
+							<arrivalTime>19:01:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32591">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:26:00</departureTime>
+							<arrivalTime>20:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32607">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:26:00</departureTime>
+							<arrivalTime>21:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32623">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:36:00</departureTime>
+							<arrivalTime>22:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32535">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:31:00</departureTime>
+							<arrivalTime>5:31:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32543">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:51:00</departureTime>
+							<arrivalTime>6:51:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32423">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:06:00</departureTime>
+							<arrivalTime>9:06:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32439">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:36:00</departureTime>
+							<arrivalTime>10:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32455">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32471">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:36:00</departureTime>
+							<arrivalTime>12:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32487">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:36:00</departureTime>
+							<arrivalTime>13:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32503">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:36:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101624">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:36:00</departureTime>
+							<arrivalTime>16:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32639">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:36:00</departureTime>
+							<arrivalTime>17:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32559">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:01:00</departureTime>
+							<arrivalTime>19:01:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32591">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:26:00</departureTime>
+							<arrivalTime>20:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32607">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:26:00</departureTime>
+							<arrivalTime>21:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32623">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:36:00</departureTime>
+							<arrivalTime>22:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32535">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:31:00</departureTime>
+							<arrivalTime>5:31:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32543">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:51:00</departureTime>
+							<arrivalTime>6:51:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32423">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:06:00</departureTime>
+							<arrivalTime>9:06:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32439">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:36:00</departureTime>
+							<arrivalTime>10:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32455">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:36:00</departureTime>
+							<arrivalTime>11:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32471">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:36:00</departureTime>
+							<arrivalTime>12:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32487">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:36:00</departureTime>
+							<arrivalTime>13:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32503">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:36:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101624">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:36:00</departureTime>
+							<arrivalTime>16:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101640">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:16:00</departureTime>
+							<arrivalTime>18:16:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32559">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:01:00</departureTime>
+							<arrivalTime>19:01:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32591">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:26:00</departureTime>
+							<arrivalTime>20:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32607">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:26:00</departureTime>
+							<arrivalTime>21:26:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32623">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:36:00</departureTime>
+							<arrivalTime>22:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="494">
+			<name>Корени пов.</name>
+			<num>11</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32537">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:34:00</departureTime>
+							<arrivalTime>5:34:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32657">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:29:00</departureTime>
+							<arrivalTime>6:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32545">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:54:00</departureTime>
+							<arrivalTime>6:54:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32425">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:09:00</departureTime>
+							<arrivalTime>9:09:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32441">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:39:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32457">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:39:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32473">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:39:00</departureTime>
+							<arrivalTime>12:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32489">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:39:00</departureTime>
+							<arrivalTime>13:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32505">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:39:00</departureTime>
+							<arrivalTime>14:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101626">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:39:00</departureTime>
+							<arrivalTime>16:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32641">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:39:00</departureTime>
+							<arrivalTime>17:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32561">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:04:00</departureTime>
+							<arrivalTime>19:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32593">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:29:00</departureTime>
+							<arrivalTime>20:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32609">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:29:00</departureTime>
+							<arrivalTime>21:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32625">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:39:00</departureTime>
+							<arrivalTime>22:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32537">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:34:00</departureTime>
+							<arrivalTime>5:34:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32545">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:54:00</departureTime>
+							<arrivalTime>6:54:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32425">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:09:00</departureTime>
+							<arrivalTime>9:09:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32441">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:39:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32457">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:39:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32473">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:39:00</departureTime>
+							<arrivalTime>12:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32489">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:39:00</departureTime>
+							<arrivalTime>13:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32505">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:39:00</departureTime>
+							<arrivalTime>14:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101626">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:39:00</departureTime>
+							<arrivalTime>16:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32641">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:39:00</departureTime>
+							<arrivalTime>17:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32561">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:04:00</departureTime>
+							<arrivalTime>19:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32593">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:29:00</departureTime>
+							<arrivalTime>20:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32609">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:29:00</departureTime>
+							<arrivalTime>21:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32625">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:39:00</departureTime>
+							<arrivalTime>22:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32537">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:34:00</departureTime>
+							<arrivalTime>5:34:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32545">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:54:00</departureTime>
+							<arrivalTime>6:54:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32425">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:09:00</departureTime>
+							<arrivalTime>9:09:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32441">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:39:00</departureTime>
+							<arrivalTime>10:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32457">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:39:00</departureTime>
+							<arrivalTime>11:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32473">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:39:00</departureTime>
+							<arrivalTime>12:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32489">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:39:00</departureTime>
+							<arrivalTime>13:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32505">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:39:00</departureTime>
+							<arrivalTime>14:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101626">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:39:00</departureTime>
+							<arrivalTime>16:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101642">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:19:00</departureTime>
+							<arrivalTime>18:19:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32561">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:04:00</departureTime>
+							<arrivalTime>19:04:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32593">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:29:00</departureTime>
+							<arrivalTime>20:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32609">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:29:00</departureTime>
+							<arrivalTime>21:29:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32625">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:39:00</departureTime>
+							<arrivalTime>22:39:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="496">
+			<name>Дарево-Чиж</name>
+			<num>12</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32538">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:39:00</departureTime>
+							<arrivalTime>5:38:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32658">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:34:00</departureTime>
+							<arrivalTime>6:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32546">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:58:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32426">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:14:00</departureTime>
+							<arrivalTime>9:13:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32442">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:44:00</departureTime>
+							<arrivalTime>10:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32458">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:44:00</departureTime>
+							<arrivalTime>11:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32474">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:44:00</departureTime>
+							<arrivalTime>12:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32490">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:44:00</departureTime>
+							<arrivalTime>13:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32506">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:44:00</departureTime>
+							<arrivalTime>14:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101627">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:44:00</departureTime>
+							<arrivalTime>16:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32642">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:44:00</departureTime>
+							<arrivalTime>17:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32562">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:09:00</departureTime>
+							<arrivalTime>19:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32594">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:34:00</departureTime>
+							<arrivalTime>20:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32610">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:34:00</departureTime>
+							<arrivalTime>21:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32626">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:43:00</departureTime>
+							<arrivalTime>22:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32538">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:39:00</departureTime>
+							<arrivalTime>5:38:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32546">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:58:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32426">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:14:00</departureTime>
+							<arrivalTime>9:13:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32442">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:44:00</departureTime>
+							<arrivalTime>10:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32458">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:44:00</departureTime>
+							<arrivalTime>11:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32474">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:44:00</departureTime>
+							<arrivalTime>12:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32490">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:44:00</departureTime>
+							<arrivalTime>13:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32506">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:44:00</departureTime>
+							<arrivalTime>14:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101627">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:44:00</departureTime>
+							<arrivalTime>16:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32642">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:44:00</departureTime>
+							<arrivalTime>17:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32562">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:09:00</departureTime>
+							<arrivalTime>19:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32594">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:34:00</departureTime>
+							<arrivalTime>20:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32610">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:34:00</departureTime>
+							<arrivalTime>21:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32626">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:43:00</departureTime>
+							<arrivalTime>22:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32538">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:39:00</departureTime>
+							<arrivalTime>5:38:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32546">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:58:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32426">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:14:00</departureTime>
+							<arrivalTime>9:13:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32442">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:44:00</departureTime>
+							<arrivalTime>10:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32458">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:44:00</departureTime>
+							<arrivalTime>11:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32474">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:44:00</departureTime>
+							<arrivalTime>12:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32490">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:44:00</departureTime>
+							<arrivalTime>13:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32506">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:44:00</departureTime>
+							<arrivalTime>14:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101627">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:44:00</departureTime>
+							<arrivalTime>16:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101643">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:24:00</departureTime>
+							<arrivalTime>18:23:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32562">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:09:00</departureTime>
+							<arrivalTime>19:08:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32594">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:34:00</departureTime>
+							<arrivalTime>20:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32610">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:34:00</departureTime>
+							<arrivalTime>21:33:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32626">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:43:00</departureTime>
+							<arrivalTime>22:43:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="498">
+			<name>Дарево</name>
+			<num>13</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32539">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:41:00</departureTime>
+							<arrivalTime>5:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32659">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:36:00</departureTime>
+							<arrivalTime>6:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32547">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:02:00</departureTime>
+							<arrivalTime>7:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32427">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:16:00</departureTime>
+							<arrivalTime>9:16:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32443">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:46:00</departureTime>
+							<arrivalTime>10:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32459">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:46:00</departureTime>
+							<arrivalTime>11:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32475">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:46:00</departureTime>
+							<arrivalTime>12:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32491">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:46:00</departureTime>
+							<arrivalTime>13:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32507">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:46:00</departureTime>
+							<arrivalTime>14:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101628">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:46:00</departureTime>
+							<arrivalTime>16:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32643">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:46:00</departureTime>
+							<arrivalTime>17:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32563">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:11:00</departureTime>
+							<arrivalTime>19:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32595">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:36:00</departureTime>
+							<arrivalTime>20:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32611">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:36:00</departureTime>
+							<arrivalTime>21:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32627">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:45:00</departureTime>
+							<arrivalTime>22:45:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32539">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:41:00</departureTime>
+							<arrivalTime>5:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32547">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:02:00</departureTime>
+							<arrivalTime>7:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32427">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:16:00</departureTime>
+							<arrivalTime>9:16:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32443">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:46:00</departureTime>
+							<arrivalTime>10:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32459">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:46:00</departureTime>
+							<arrivalTime>11:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32475">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:46:00</departureTime>
+							<arrivalTime>12:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32491">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:46:00</departureTime>
+							<arrivalTime>13:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32507">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:46:00</departureTime>
+							<arrivalTime>14:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101628">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:46:00</departureTime>
+							<arrivalTime>16:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32643">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:46:00</departureTime>
+							<arrivalTime>17:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32563">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:11:00</departureTime>
+							<arrivalTime>19:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32595">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:36:00</departureTime>
+							<arrivalTime>20:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32611">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:36:00</departureTime>
+							<arrivalTime>21:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32627">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:45:00</departureTime>
+							<arrivalTime>22:45:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32539">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:41:00</departureTime>
+							<arrivalTime>5:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32547">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:02:00</departureTime>
+							<arrivalTime>7:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32427">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:16:00</departureTime>
+							<arrivalTime>9:16:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32443">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:46:00</departureTime>
+							<arrivalTime>10:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32459">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:46:00</departureTime>
+							<arrivalTime>11:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32475">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:46:00</departureTime>
+							<arrivalTime>12:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32491">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:46:00</departureTime>
+							<arrivalTime>13:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32507">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:46:00</departureTime>
+							<arrivalTime>14:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101628">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:46:00</departureTime>
+							<arrivalTime>16:46:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101644">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:26:00</departureTime>
+							<arrivalTime>18:26:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32563">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:11:00</departureTime>
+							<arrivalTime>19:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32595">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:36:00</departureTime>
+							<arrivalTime>20:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32611">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:36:00</departureTime>
+							<arrivalTime>21:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32627">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:45:00</departureTime>
+							<arrivalTime>22:45:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="499">
+			<name>Литва</name>
+			<num>14</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32540">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:44:00</departureTime>
+							<arrivalTime>5:43:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32660">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:39:00</departureTime>
+							<arrivalTime>6:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32548">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:04:00</departureTime>
+							<arrivalTime>7:03:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32428">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:18:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32444">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32460">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32476">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:50:00</departureTime>
+							<arrivalTime>12:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32492">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32508">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:50:00</departureTime>
+							<arrivalTime>14:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101629">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32644">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:50:00</departureTime>
+							<arrivalTime>17:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32564">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:15:00</departureTime>
+							<arrivalTime>19:13:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32596">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:38:00</departureTime>
+							<arrivalTime>20:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32612">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:38:00</departureTime>
+							<arrivalTime>21:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32628">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:47:00</departureTime>
+							<arrivalTime>22:47:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32540">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:44:00</departureTime>
+							<arrivalTime>5:43:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32548">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:04:00</departureTime>
+							<arrivalTime>7:03:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32428">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:18:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32444">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32460">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32476">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:50:00</departureTime>
+							<arrivalTime>12:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32492">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32508">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:50:00</departureTime>
+							<arrivalTime>14:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101629">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32644">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:50:00</departureTime>
+							<arrivalTime>17:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32564">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:15:00</departureTime>
+							<arrivalTime>19:13:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32596">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:38:00</departureTime>
+							<arrivalTime>20:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32612">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:38:00</departureTime>
+							<arrivalTime>21:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32628">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:47:00</departureTime>
+							<arrivalTime>22:47:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32540">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:44:00</departureTime>
+							<arrivalTime>5:43:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32548">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:04:00</departureTime>
+							<arrivalTime>7:03:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32428">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:20:00</departureTime>
+							<arrivalTime>9:18:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32444">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:50:00</departureTime>
+							<arrivalTime>10:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32460">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32476">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:50:00</departureTime>
+							<arrivalTime>12:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32492">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32508">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:50:00</departureTime>
+							<arrivalTime>14:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101629">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:48:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101645">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:30:00</departureTime>
+							<arrivalTime>18:28:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32564">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:15:00</departureTime>
+							<arrivalTime>19:13:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32596">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:38:00</departureTime>
+							<arrivalTime>20:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32612">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:38:00</departureTime>
+							<arrivalTime>21:38:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32628">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:47:00</departureTime>
+							<arrivalTime>22:47:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="501">
+			<name>9-ый км.</name>
+			<num>15</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32541">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:48:00</departureTime>
+							<arrivalTime>5:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32661">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:43:00</departureTime>
+							<arrivalTime>6:42:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32549">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:08:00</departureTime>
+							<arrivalTime>7:07:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32429">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:25:00</departureTime>
+							<arrivalTime>9:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32445">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:55:00</departureTime>
+							<arrivalTime>10:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32461">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:55:00</departureTime>
+							<arrivalTime>11:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32477">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32493">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32509">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:55:00</departureTime>
+							<arrivalTime>14:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101630">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:55:00</departureTime>
+							<arrivalTime>16:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32645">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:55:00</departureTime>
+							<arrivalTime>17:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32565">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:20:00</departureTime>
+							<arrivalTime>19:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32597">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:45:00</departureTime>
+							<arrivalTime>20:44:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32613">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:43:00</departureTime>
+							<arrivalTime>21:42:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32629">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:50:00</departureTime>
+							<arrivalTime>22:50:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32541">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:48:00</departureTime>
+							<arrivalTime>5:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32549">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:08:00</departureTime>
+							<arrivalTime>7:07:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32429">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:25:00</departureTime>
+							<arrivalTime>9:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32445">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:55:00</departureTime>
+							<arrivalTime>10:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32461">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:55:00</departureTime>
+							<arrivalTime>11:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32477">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32493">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32509">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:55:00</departureTime>
+							<arrivalTime>14:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101630">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:55:00</departureTime>
+							<arrivalTime>16:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32645">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>17:55:00</departureTime>
+							<arrivalTime>17:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32565">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:20:00</departureTime>
+							<arrivalTime>19:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32597">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:45:00</departureTime>
+							<arrivalTime>20:44:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32613">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:43:00</departureTime>
+							<arrivalTime>21:42:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32629">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:50:00</departureTime>
+							<arrivalTime>22:50:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32541">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>5:48:00</departureTime>
+							<arrivalTime>5:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32549">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:08:00</departureTime>
+							<arrivalTime>7:07:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32429">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:25:00</departureTime>
+							<arrivalTime>9:24:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32445">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>10:55:00</departureTime>
+							<arrivalTime>10:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32461">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:55:00</departureTime>
+							<arrivalTime>11:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32477">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:55:00</departureTime>
+							<arrivalTime>12:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32493">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32509">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:55:00</departureTime>
+							<arrivalTime>14:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101630">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>16:55:00</departureTime>
+							<arrivalTime>16:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101646">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:35:00</departureTime>
+							<arrivalTime>18:34:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32565">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:20:00</departureTime>
+							<arrivalTime>19:19:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32597">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>20:45:00</departureTime>
+							<arrivalTime>20:44:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32613">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:43:00</departureTime>
+							<arrivalTime>21:42:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32629">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>22:50:00</departureTime>
+							<arrivalTime>22:50:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="4">
+			<name>Автовокзал "Барановичи"</name>
+			<num>16</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1111100">
+					<name>Рабочие дни</name>
+					<DepartureTime>
+						<Time id="32542">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:00:00</departureTime>
+							<arrivalTime>6:00:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32662">
+							<kodElem>3044</kodElem>
+							<kodVariant>118</kodVariant>
+							<departureTime>6:55:00</departureTime>
+							<arrivalTime>6:55:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32550">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32430">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32446">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:10:00</departureTime>
+							<arrivalTime>11:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32462">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:10:00</departureTime>
+							<arrivalTime>12:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32478">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32494">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32510">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101631">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>17:10:00</departureTime>
+							<arrivalTime>17:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32646">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>18:10:00</departureTime>
+							<arrivalTime>18:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32566">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32598">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:00:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32614">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:55:00</departureTime>
+							<arrivalTime>21:55:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32630">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>23:00:00</departureTime>
+							<arrivalTime>23:00:00</arrivalTime>
+							<interval>10</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="32542">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:00:00</departureTime>
+							<arrivalTime>6:00:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32550">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32430">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32446">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:10:00</departureTime>
+							<arrivalTime>11:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32462">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:10:00</departureTime>
+							<arrivalTime>12:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32478">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32494">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32510">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101631">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>17:10:00</departureTime>
+							<arrivalTime>17:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32646">
+							<kodElem>3042</kodElem>
+							<kodVariant>117</kodVariant>
+							<departureTime>18:10:00</departureTime>
+							<arrivalTime>18:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32566">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32598">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:00:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32614">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:55:00</departureTime>
+							<arrivalTime>21:55:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32630">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>23:00:00</departureTime>
+							<arrivalTime>23:00:00</arrivalTime>
+							<interval>10</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="32542">
+							<kodElem>3029</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>6:00:00</departureTime>
+							<arrivalTime>6:00:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32550">
+							<kodElem>3030</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>7:20:00</departureTime>
+							<arrivalTime>7:20:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32430">
+							<kodElem>3015</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>9:40:00</departureTime>
+							<arrivalTime>9:40:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32446">
+							<kodElem>3017</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>11:10:00</departureTime>
+							<arrivalTime>11:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32462">
+							<kodElem>3019</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>12:10:00</departureTime>
+							<arrivalTime>12:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32478">
+							<kodElem>3021</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>13:10:00</departureTime>
+							<arrivalTime>13:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32494">
+							<kodElem>3023</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>14:10:00</departureTime>
+							<arrivalTime>14:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32510">
+							<kodElem>3025</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101631">
+							<kodElem>9011</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>17:10:00</departureTime>
+							<arrivalTime>17:10:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="101647">
+							<kodElem>9013</kodElem>
+							<kodVariant>479</kodVariant>
+							<departureTime>18:50:00</departureTime>
+							<arrivalTime>18:50:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32566">
+							<kodElem>3032</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>19:35:00</departureTime>
+							<arrivalTime>19:35:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32598">
+							<kodElem>3036</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:00:00</departureTime>
+							<arrivalTime>21:00:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32614">
+							<kodElem>3038</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>21:55:00</departureTime>
+							<arrivalTime>21:55:00</arrivalTime>
+							<interval>12</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="32630">
+							<kodElem>3040</kodElem>
+							<kodVariant>105</kodVariant>
+							<departureTime>23:00:00</departureTime>
+							<arrivalTime>23:00:00</arrivalTime>
+							<interval>10</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

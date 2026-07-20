@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f6f8fb" />
+    <title>Настройки транспорта</title>
+    <link rel="icon" href="/bus-park-logo-light-clean.png?v=20260511-lightfx2" />
+    <script src="/admin-theme-init.js?v=20260622-light-only"></script>
+    <link rel="stylesheet" href="/styles.css?v=20260617-admin-action-feedback" />
+    <link rel="stylesheet" href="/visual-polish.css?v=20260617-admin-action-feedback" />
+    <link rel="stylesheet" href="/admin.css?v=20260622-light-only" />
+  </head>
+  <body class="is-comfort">
+    <div class="admin-shell">
+      <header class="admin-header">
+        <div class="brand-block" aria-label="Настройки автобусного парка ОАО Барановичи">
+          <span class="logo-pair" aria-hidden="true">
+            <img class="park-logo park-logo-light" data-theme-logo="light" data-src="/bus-park-logo-light-clean.png?v=20260511-lightfx2" src="/bus-park-logo-light-clean.png?v=20260511-lightfx2" loading="eager" decoding="async" alt="" />
+          </span>
+          <div class="admin-hero-title">
+            <p class="admin-hero-kicker">НАСТРОЙКИ</p>
+          </div>
+        </div>
+        <div class="admin-header-actions">
+          <a class="admin-link" href="/">Приложение</a>
+        </div>
+      </header>
+
+      <section class="admin-login" id="loginPanel">
+        <label class="field">
+          <span>Роль</span>
+          <select id="adminRole">
+            <option value="admin">Администратор</option>
+            <option value="dispatcher">Диспетчер</option>
+            <option value="moderator">Модератор</option>
+            <option value="ads_manager">Реклама</option>
+            <option value="sto_manager">Услуги / СТО</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Ключ администратора</span>
+          <input id="adminKey" type="password" placeholder="ADMIN_KEY" />
+        </label>
+        <button class="primary-button" id="saveKey" type="button">Принять</button>
+      </section>
+
+      <section class="admin-summary" id="summaryPanel" hidden>
+        <div class="summary-card"><strong id="routesCount">0</strong><span>Маршруты</span></div>
+        <div class="summary-card"><strong id="departuresCount">0</strong><span>Отправления</span></div>
+        <div class="summary-card">
+          <div class="summary-row">
+            <strong id="subscribersCount">0</strong>
+            <span class="summary-delta" id="subscribersDelta" hidden>+0</span>
+          </div>
+          <span>Подписчики</span>
+        </div>
+      </section>
+
+      <section class="admin-actions" id="actionsPanel" hidden>
+        <button class="primary-button" id="refreshAll" type="button">Обновить</button>
+        <button class="ghost-button" id="resetKey" type="button">Сменить доступ</button>
+      </section>
+
+      <nav class="admin-tabs" id="adminTabs" hidden>
+        <button class="is-active" data-admin-tab="appeals" type="button">Обращения</button>
+        <button data-admin-tab="schedule" type="button">Расписание</button>
+        <button data-admin-tab="roster" type="button">Разнарядка</button>
+        <button data-admin-tab="ads" type="button">Реклама</button>
+        <button data-admin-tab="services" type="button">Услуги</button>
+        <button data-admin-tab="notifications" type="button">Уведомления</button>
+        <button data-admin-tab="visits" type="button">Посещения</button>
+        <button data-admin-tab="admins" type="button">Работники</button>
+        <button data-admin-tab="about" type="button">О нас</button>
+      </nav>
+
+      <main class="admin-panels" id="adminPanels" hidden>
+        <section class="admin-panel" data-admin-panel="appeals">
+          <div class="panel-intro">
+            <div>
+              <h2>Обращения пассажиров</h2>
+              <p>Быстро меняйте статус и отслеживайте, что уже взято в работу.</p>
+            </div>
+            <div class="panel-tools">
+              <label class="field compact-field">
+                <span>Фильтр</span>
+                <select id="appealFilter">
+                  <option value="all">Все</option>
+                  <option value="open">Открытые</option>
+                  <option value="closed">Закрытые</option>
+                </select>
+              </label>
+              <button class="ghost-button danger-button" id="clearAppeals" type="button">Очистить обращения</button>
+            </div>
+          </div>
+          <div class="appeals-list" id="appealsList"></div>
+          <section class="admin-chat" id="adminChat" hidden>
+            <div class="chat-head">
+              <div>
+                <h3 id="adminChatTitle">Чат</h3>
+                <p id="adminChatMeta">Диалог с клиентом по выбранному обращению.</p>
+              </div>
+              <button class="ghost-button" id="closeChatButton" type="button">Закрыть чат</button>
+            </div>
+            <div class="chat-thread" id="adminChatThread"></div>
+            <form class="chat-form" id="adminChatForm">
+              <input name="text" type="text" placeholder="Ответ клиенту" autocomplete="off" required />
+              <button class="primary-button" type="submit">Отправить</button>
+            </form>
+          </section>
+        </section>
+
+        <section class="admin-panel is-active" data-admin-panel="schedule">
+          <div class="panel-intro">
+            <div>
+              <h2>Редактор расписания</h2>
+              <p>Выберите маршрут, направление и остановку. Ниже можно исправить время или добавить новое.</p>
+            </div>
+          </div>
+
+          <form class="admin-form schedule-import-form" id="scheduleImportForm">
+            <div class="form-note">Обновление расписания из XML</div>
+            <p class="muted">Загрузите актуальные XML-файлы маршрутов. Можно обновить только выбранные маршруты или полностью пересобрать расписание в базе.</p>
+            <label class="field"><span>Режим загрузки</span><select name="mode"><option value="upsert">Обновить только загруженные маршруты</option><option value="replace_all">Полностью заменить расписание</option></select></label>
+            <label class="field">
+              <span>Тип расписания</span>
+              <select name="transportType">
+                <option value="">Определить по XML</option>
+                <option value="city">Городское</option>
+                <option value="suburban">Пригородное</option>
+                <option value="intercity">Междугородное</option>
+                <option value="international">Международное</option>
+              </select>
+            </label>
+            <div class="form-grid">
+              <label class="field"><span>Какой маршрут меняем</span><select id="scheduleImportRoute" name="routeId"><option value="">Определить по XML</option></select></label>
+              <label class="field"><span>Дата старта нового расписания</span><input name="effectiveAt" type="datetime-local" /></label>
+              <div class="field schedule-import-hint"><span>Отложенная замена</span><p>Если дата в будущем, старое расписание останется активным до этого времени, а новый XML применится автоматически.</p></div>
+            </div>
+            <label class="field">
+              <span>XML-файлы расписания</span>
+              <input name="xmlFiles" type="file" accept=".xml,text/xml,application/xml" multiple />
+            </label>
+            <label class="check-row"><input name="confirmReplace" type="checkbox" /> Подтверждаю замену текущего расписания загруженными XML-файлами</label>
+            <div class="status-actions">
+              <button class="primary-button" type="submit">Загрузить и обновить расписание</button>
+              <button class="ghost-button" id="importScheduleFromTelegram" type="button">Взять XML из Telegram</button>
+              <button class="ghost-button" id="clearScheduleImport" type="button">Очистить выбор</button>
+            </div>
+            <div class="schedule-import-result" id="scheduleImportResult"></div>
+            <div class="schedule-backup-panel schedule-planned-panel">
+              <div class="schedule-backup-top">
+                <div>
+                  <strong>Запланированные замены</strong>
+                  <span>Маршрут можно отменить до даты запуска. После применения остается резервная копия для отката.</span>
+                </div>
+                <button class="ghost-button" id="refreshScheduledImports" type="button">Обновить</button>
+              </div>
+              <div class="schedule-backup-list" id="scheduledImportList"></div>
+            </div>
+            <div class="schedule-backup-panel">
+              <div class="schedule-backup-top">
+                <div>
+                  <strong>Откат расписания</strong>
+                  <span>Перед каждой XML-загрузкой сохраняется копия.</span>
+                </div>
+                <button class="ghost-button" id="refreshScheduleBackups" type="button">Обновить копии</button>
+              </div>
+              <div class="schedule-backup-list" id="scheduleBackupList"></div>
+            </div>
+          </form>
+
+          <section class="admin-form schedule-editor">
+            <div class="form-grid">
+              <label class="field">
+                <span>Тип расписания</span>
+                <select id="scheduleEditorTransportType">
+                  <option value="city">Городской</option>
+                  <option value="suburban">Пригородный</option>
+                  <option value="intercity">Междугородний</option>
+                  <option value="international">Международный</option>
+                </select>
+              </label>
+              <label class="field"><span>Маршрут</span><select id="scheduleRouteSelect"></select></label>
+              <label class="field"><span>Направление</span><select id="scheduleDirectionSelect"></select></label>
+              <label class="field"><span>Остановка</span><select id="scheduleStopSelect"></select></label>
+            </div>
+
+            <div class="form-grid">
+              <label class="field"><span>Название маршрута</span><input id="scheduleRouteName" /></label>
+              <label class="field"><span>Откуда</span><input id="scheduleOrigin" /></label>
+              <label class="field"><span>Куда</span><input id="scheduleDestination" /></label>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span>Название остановки</span><input id="scheduleStopName" /></label>
+              <label class="field"><span>Цвет маршрута</span><input id="scheduleColor" type="color" /></label>
+              <button class="primary-button align-end" id="saveScheduleMeta" type="button">Сохранить названия</button>
+            </div>
+          </section>
+
+          <form class="admin-form schedule-time-form" id="scheduleTimeForm">
+            <input name="id" type="hidden" />
+            <div class="form-note" id="scheduleTimeMode">Добавление нового времени</div>
+            <div class="form-grid">
+              <label class="field"><span>Дни движения</span><select name="dayMask"><option value="1111100">Будни</option><option value="0000011">Выходные</option></select></label>
+              <label class="field"><span>Время</span><input name="time" type="time" required /></label>
+              <label class="field"><span>Примечание</span><input name="notes" placeholder="Например: до Базы ОПС" /></label>
+            </div>
+            <label class="check-row"><input name="applyToTrip" type="checkbox" checked /> Если это существующий рейс, сдвигать время по всем остановкам</label>
+            <div class="status-actions">
+              <button class="primary-button" id="saveScheduleTimeButton" type="submit">Добавить время</button>
+              <button class="ghost-button" id="clearScheduleTime" type="button">Очистить форму</button>
+            </div>
+          </form>
+
+          <div class="schedule-time-list" id="scheduleTimeList"></div>
+
+          <section class="schedule-audit">
+            <div class="panel-intro">
+              <div>
+                <h2>Журнал изменений</h2>
+                <p>Последние правки расписания, названий маршрутов и остановок.</p>
+              </div>
+              <div class="status-actions">
+                <button class="ghost-button" id="refreshScheduleAudit" type="button">Обновить журнал</button>
+                <button class="ghost-button danger-button" id="clearScheduleAudit" type="button">Очистить журнал</button>
+              </div>
+            </div>
+            <div class="schedule-audit-list" id="scheduleAuditList"></div>
+          </section>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="roster">
+          <div class="panel-intro">
+            <div>
+              <h2>Разнарядка водителей</h2>
+              <p>Загрузите CSV-файл. Система сама сопоставит табельные номера с Telegram ID и отправит водителям личные уведомления.</p>
+            </div>
+          </div>
+
+          <section class="admin-form roster-driver-source">
+            <div class="form-note">Водители берутся из вкладки «Работники»</div>
+            <p class="muted">Добавьте сотрудника с ролью «Водитель», укажите табельный номер и отряд. После этого он автоматически появится здесь и будет участвовать в CSV-рассылке.</p>
+          </section>
+          <div class="admin-list roster-driver-list" id="rosterDriversList"></div>
+
+          <form class="admin-form roster-upload-form" id="rosterUploadForm">
+            <div class="form-note">CSV разнарядки</div>
+            <p class="muted">После загрузки CSV рассылка запускается автоматически. Служебные строки, номера выездов и технические поля водителям не отправляются.</p>
+            <label class="field">
+              <span>Кому отправить</span>
+              <select name="driverSquad" required>
+                <option value="city">1-й отряд — город</option>
+                <option value="regional">2-й отряд — пригород / межгород / международный</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Файл разнарядки</span>
+              <input name="csvFile" type="file" accept=".csv,text/csv,text/plain" />
+            </label>
+            <div class="status-actions">
+              <button class="primary-button" type="submit">Загрузить и отправить</button>
+              <button class="ghost-button" id="uploadRosterFromTelegram" type="button">Взять CSV из Telegram</button>
+            </div>
+          </form>
+
+          <section class="roster-preview" id="rosterPreview" hidden></section>
+
+          <div class="panel-intro compact-panel-intro">
+            <div>
+              <h2>Журнал разнарядок</h2>
+              <p>Последние загрузки, отчеты отправки и водители без регистрации.</p>
+            </div>
+            <div class="status-actions">
+              <button class="ghost-button" id="refreshRosterUploads" type="button">Обновить журнал</button>
+              <button class="ghost-button danger-button" id="clearRosterUploads" type="button">Очистить журнал</button>
+            </div>
+          </div>
+          <div class="admin-list roster-list" id="rosterUploadsList"></div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="ads">
+          <div class="panel-intro">
+            <div>
+              <h2>Реклама</h2>
+              <p>Управление баннерами, статусами и сроками показа в Mini App.</p>
+            </div>
+          </div>
+          <form class="admin-form" id="adForm">
+            <input name="id" type="hidden" />
+            <input name="imageUrl" type="hidden" />
+            <label class="field"><span>Название</span><input name="title" required /></label>
+            <label class="field"><span>Текст</span><textarea name="text" rows="3" required></textarea></label>
+            <label class="field"><span>Метка</span><input name="label" value="Реклама" /></label>
+            <label class="field"><span>Ссылка</span><input name="url" type="url" /></label>
+            <label class="field">
+              <span>Где показывать</span>
+              <select name="placement">
+                <option value="home">Главный инфоблок</option>
+                <option value="top">Обычная реклама</option>
+              </select>
+            </label>
+            <label class="field">
+              <span>Картинка</span>
+              <input name="imageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" />
+            </label>
+            <label class="check-row"><input name="removeImage" type="checkbox" /> Удалить текущую картинку</label>
+            <div class="form-grid">
+              <label class="field"><span>Статус</span><select name="status"><option value="active">Активна</option><option value="paused">Пауза</option><option value="draft">Черновик</option><option value="archived">Архив</option></select></label>
+              <label class="field"><span>Показ, сек.</span><input name="displaySeconds" type="number" min="3" max="30" step="1" value="7" /></label>
+              <label class="field"><span>Начало</span><input name="startsAt" type="date" /></label>
+              <label class="field"><span>Конец</span><input name="endsAt" type="date" /></label>
+            </div>
+            <button class="primary-button" type="submit">Сохранить рекламу</button>
+          </form>
+          <div class="admin-list" id="adsList"></div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="services">
+          <div class="panel-intro">
+            <div>
+              <h2>Услуги</h2>
+              <p>Карточки СТО и дополнительных услуг: описание, стоимость, подробности и порядок показа.</p>
+            </div>
+          </div>
+          <form class="admin-form" id="serviceForm">
+            <input name="id" type="hidden" />
+            <input name="imageUrl" type="hidden" />
+            <div class="form-grid">
+              <label class="field">
+                <span>Раздел</span>
+                <select name="section">
+                  <option value="sto">Услуги СТО</option>
+                  <option value="other">Другие услуги</option>
+                </select>
+              </label>
+              <label class="field"><span>Порядок</span><input name="sortOrder" type="number" min="0" step="1" placeholder="10" /></label>
+              <label class="field">
+                <span>Статус</span>
+                <select name="status">
+                  <option value="active">Активна</option>
+                  <option value="paused">Пауза</option>
+                  <option value="draft">Черновик</option>
+                </select>
+              </label>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span>Название услуги</span><input name="name" required placeholder="Например: Ремонт двигателя" /></label>
+              <label class="field"><span>Иконка</span><input name="icon" placeholder="engine, brake, bus, building..." /></label>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span>Категория (тег)</span><input name="category" placeholder="Например: Двигатель, Тормоза, Аренда" /></label>
+              <label class="field"><span>Картинка услуги</span><input name="imageFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" /></label>
+            </div>
+            <label class="check-row"><input name="removeImage" type="checkbox" /> Удалить текущую картинку</label>
+            <label class="field"><span>Краткое описание</span><textarea name="description" rows="3" placeholder="Что входит в услугу и когда она нужна"></textarea></label>
+            <label class="field"><span>Что входит (по пункту на строку)</span><textarea name="bullets" rows="4" placeholder="Диагностика и дефектовка&#10;Замена узлов&#10;Сборка и обкатка"></textarea></label>
+            <label class="field"><span>Стоимость / условия</span><input name="price" placeholder="Например: цена после диагностики" /></label>
+            <label class="field"><span>Как уточнить услугу (заметка в карточке)</span><textarea name="details" rows="3" placeholder="Что указать в обращении, какие документы или фото приложить"></textarea></label>
+            <div class="status-actions">
+              <button class="primary-button" type="submit">Сохранить услугу</button>
+              <button class="ghost-button" id="clearServiceForm" type="button">Очистить форму</button>
+            </div>
+          </form>
+          <div class="admin-list" id="servicesList"></div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="notifications">
+          <div class="panel-intro">
+            <div>
+              <h2>Пуш-уведомления</h2>
+              <p>Сообщения можно отправить пассажирам/подписчикам или всем сотрудникам.</p>
+            </div>
+            <button class="ghost-button danger-button" id="clearNotifications" type="button">Удалить все</button>
+          </div>
+          <form class="admin-form" id="notificationForm">
+            <label class="field"><span>Заголовок</span><input name="title" required /></label>
+            <label class="field"><span>Кому отправить</span><select name="target"><option value="all">Пассажирам / подписчикам</option><option value="staff">Всем сотрудникам</option></select></label>
+            <label class="field"><span>Сообщение</span><textarea name="text" rows="4" required></textarea></label>
+            <label class="check-row is-hidden"><input name="sendNow" type="checkbox" checked /> Отправить сразу</label>
+            <div class="status-actions">
+              <button class="primary-button" type="submit">Создать уведомление</button>
+              <button class="ghost-button" id="clearNotificationForm" type="button">Очистить форму</button>
+            </div>
+          </form>
+          <div class="admin-list" id="notificationsList"></div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="visits">
+          <div class="panel-intro">
+            <div>
+              <h2>Статистика посещений</h2>
+              <p>Сводка визитов в приложение для администратора.</p>
+            </div>
+          </div>
+          <div class="admin-summary visit-stats-grid">
+            <div class="summary-card"><strong id="visitsTodayCount">0</strong><span>Сегодня</span></div>
+            <div class="summary-card"><strong id="visitsWeekCount">0</strong><span>За 7 дней</span></div>
+            <div class="summary-card"><strong id="visitsMonthCount">0</strong><span>За 30 дней</span></div>
+          </div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="admins">
+          <div class="panel-intro">
+            <div>
+              <h2>Работники</h2>
+              <p>Добавьте Telegram ID работника и выберите роль. Роль “Работник” нужна только для служебных пуш-уведомлений.</p>
+            </div>
+            <div class="panel-tools worker-search-tools">
+              <label class="field compact-field worker-search-field"><span>Поиск</span><input id="adminSearch" type="search" placeholder="Табельный № или ФИО" autocomplete="off" /></label>
+            </div>
+          </div>
+          <form class="admin-form" id="adminForm">
+            <input name="id" type="hidden" />
+            <div class="form-note">Работник должен хотя бы один раз открыть бота, чтобы Telegram ID принимал сообщения.</div>
+            <label class="field"><span>Telegram ID</span><input name="telegramId" placeholder="Например: 123456789" /></label>
+            <label class="field"><span>Имя</span><input name="name" placeholder="ФИО или понятное имя" required /></label>
+            <label class="field"><span>Роль</span><select name="role"><option value="worker">Работник</option><option value="driver">Водитель</option><option value="admin">Администратор</option><option value="dispatcher">Диспетчер</option><option value="moderator">Модератор</option><option value="ads_manager">Реклама</option><option value="sto_manager">Услуги / СТО</option></select></label>
+            <div class="form-grid">
+              <label class="field"><span>Табельный номер</span><input name="tabNumber" inputmode="numeric" placeholder="Для всех работников, если есть" /></label>
+              <label class="field" data-driver-squad-field><span>Отряд водителя</span><select name="driverSquad" disabled><option value="" disabled hidden></option><option value="city">1-й отряд — город</option><option value="regional">2-й отряд — пригород / межгород / международный</option></select></label>
+            </div>
+            <label class="check-row"><input name="active" type="checkbox" checked /> Активен</label>
+            <button class="primary-button" type="submit">Сохранить работника</button>
+          </form>
+          <div class="admin-list" id="adminsList"></div>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="about">
+          <div class="panel-intro">
+            <div>
+              <h2>О нас и руководство</h2>
+              <p>Редактируйте контакты, отделы и порядок карточек во вкладке “О нас”.</p>
+            </div>
+          </div>
+          <form class="admin-form" id="leadershipForm">
+            <input name="id" type="hidden" />
+            <div class="form-grid">
+              <label class="field"><span>ФИО или название контакта</span><input name="name" required placeholder="Например: Шестак Игорь Михайлович" /></label>
+              <label class="field"><span>Должность</span><input name="position" required placeholder="Например: Директор" /></label>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span>Отдел</span><input name="department" value="Руководство предприятия" placeholder="Например: Автовокзал" /></label>
+              <label class="field"><span>Порядок</span><input name="sortOrder" type="number" min="1" step="1" placeholder="1" /></label>
+            </div>
+            <div class="form-grid">
+              <label class="field"><span>Телефон</span><input name="phone" placeholder="(0163) 68 19 91" /></label>
+              <label class="field"><span>Подпись телефона</span><input name="phoneLabel" placeholder="(0163) 68 19 91 (приемная)" /></label>
+              <label class="field"><span>E-mail</span><input name="email" type="email" placeholder="name@brest.by" /></label>
+            </div>
+            <label class="field"><span>Короткая заметка</span><input name="note" placeholder="Например: приемная, диспетчерская, справочная" /></label>
+            <div class="form-grid">
+              <label class="field"><span>Загрузить фото</span><input name="photoFile" type="file" accept="image/png,image/jpeg,image/webp,image/gif" /></label>
+              <label class="field"><span>Фото или ссылка на изображение</span><input name="photoUrl" type="url" placeholder="/uploads/photo.jpg или https://..." /></label>
+            </div>
+            <div class="form-grid compact-checks">
+              <label class="check-row"><input name="featured" type="checkbox" /> Показать в основных контактах</label>
+              <label class="check-row"><input name="active" type="checkbox" checked /> Активен</label>
+            </div>
+            <div class="status-actions">
+              <button class="primary-button" type="submit">Сохранить контакт</button>
+              <button class="ghost-button" id="clearLeadershipForm" type="button">Очистить форму</button>
+            </div>
+          </form>
+          <div class="admin-list leadership-admin-list" id="leadershipList"></div>
+        </section>
+      </main>
+
+      <p class="form-status" id="adminStatus" role="status"></p>
+    </div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <script src="/admin.js?v=20260623-status-toast"></script>
+  </body>
+</html>

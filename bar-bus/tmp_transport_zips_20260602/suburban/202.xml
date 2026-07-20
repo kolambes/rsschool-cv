@@ -1,0 +1,1819 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="12">
+		<name>Маршрут №202 "Барановичи - Бартники"</name>
+		<num>202</num>
+		<dateExp>2026-03-13T08:16:59.654</dateExp>
+		<dateStart>2025-12-16</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88493">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:30:00</departureTime>
+							<arrivalTime>6:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88493">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:30:00</departureTime>
+							<arrivalTime>6:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88493">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:30:00</departureTime>
+							<arrivalTime>6:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88472">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:30:00</departureTime>
+							<arrivalTime>6:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88430">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88430">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="53">
+			<name>пр-т Советский </name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88494">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88494">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88494">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88473">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:45:00</departureTime>
+							<arrivalTime>6:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88431">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:45:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88431">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:45:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>15</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="637">
+			<name>Бол. Колпеница</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88495">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:50:00</departureTime>
+							<arrivalTime>6:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88495">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:50:00</departureTime>
+							<arrivalTime>6:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88495">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:50:00</departureTime>
+							<arrivalTime>6:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88474">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:50:00</departureTime>
+							<arrivalTime>6:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88432">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88432">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:50:00</departureTime>
+							<arrivalTime>13:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="639">
+			<name>Новый Свет</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88496">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:52:00</departureTime>
+							<arrivalTime>6:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88496">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:52:00</departureTime>
+							<arrivalTime>6:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88496">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:52:00</departureTime>
+							<arrivalTime>6:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88475">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:52:00</departureTime>
+							<arrivalTime>6:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88433">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88433">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:52:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="641">
+			<name>Скарчево</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88497">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:55:00</departureTime>
+							<arrivalTime>6:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88497">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:55:00</departureTime>
+							<arrivalTime>6:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88497">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:55:00</departureTime>
+							<arrivalTime>6:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88476">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:55:00</departureTime>
+							<arrivalTime>6:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88434">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88434">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:55:00</departureTime>
+							<arrivalTime>13:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="643">
+			<name>Дубровно</name>
+			<num>6</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88498">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:57:00</departureTime>
+							<arrivalTime>6:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88498">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:57:00</departureTime>
+							<arrivalTime>6:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88498">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:57:00</departureTime>
+							<arrivalTime>6:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88477">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:57:00</departureTime>
+							<arrivalTime>6:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88435">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:57:00</departureTime>
+							<arrivalTime>13:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88435">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:57:00</departureTime>
+							<arrivalTime>13:57:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="647">
+			<name>Крошин пов.</name>
+			<num>7</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88499">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88499">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88499">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88478">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>6:59:00</departureTime>
+							<arrivalTime>6:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88436">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:59:00</departureTime>
+							<arrivalTime>13:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88436">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>13:59:00</departureTime>
+							<arrivalTime>13:59:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="786">
+			<name>Стайки</name>
+			<num>8</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88500">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:07:00</departureTime>
+							<arrivalTime>7:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88500">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:07:00</departureTime>
+							<arrivalTime>7:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88500">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:07:00</departureTime>
+							<arrivalTime>7:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88479">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:07:00</departureTime>
+							<arrivalTime>7:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88437">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:07:00</departureTime>
+							<arrivalTime>14:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88437">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:07:00</departureTime>
+							<arrivalTime>14:06:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="711">
+			<name>Залесье</name>
+			<num>9</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88501">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:13:00</departureTime>
+							<arrivalTime>7:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88501">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:13:00</departureTime>
+							<arrivalTime>7:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88501">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:13:00</departureTime>
+							<arrivalTime>7:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88480">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:13:00</departureTime>
+							<arrivalTime>7:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88438">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:13:00</departureTime>
+							<arrivalTime>14:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88438">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:13:00</departureTime>
+							<arrivalTime>14:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="712">
+			<name>Вольно</name>
+			<num>10</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88502">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:18:00</departureTime>
+							<arrivalTime>7:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88502">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:18:00</departureTime>
+							<arrivalTime>7:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88502">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:18:00</departureTime>
+							<arrivalTime>7:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88481">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:18:00</departureTime>
+							<arrivalTime>7:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88439">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:18:00</departureTime>
+							<arrivalTime>14:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88439">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:18:00</departureTime>
+							<arrivalTime>14:18:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="947">
+			<name>Бартники</name>
+			<num>11</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88503">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:23:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88503">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:23:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88503">
+							<kodElem>7854</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>7:23:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88482">
+							<kodElem>7852</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:23:00</departureTime>
+							<arrivalTime>7:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88440">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:23:00</departureTime>
+							<arrivalTime>14:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88440">
+							<kodElem>7848</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:23:00</departureTime>
+							<arrivalTime>14:23:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="947">
+			<name>Бартники</name>
+			<num>12</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88504">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88504">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88504">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:10:00</departureTime>
+							<arrivalTime>15:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88483">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:30:00</departureTime>
+							<arrivalTime>7:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88441">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88441">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="713">
+			<name>Вольно</name>
+			<num>13</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88505">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:17:00</departureTime>
+							<arrivalTime>15:16:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88505">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:17:00</departureTime>
+							<arrivalTime>15:16:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88505">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:17:00</departureTime>
+							<arrivalTime>15:16:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88484">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:37:00</departureTime>
+							<arrivalTime>7:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88442">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:37:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88442">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:37:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="710">
+			<name>Залесье</name>
+			<num>14</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88506">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:23:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88506">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:23:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88506">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:23:00</departureTime>
+							<arrivalTime>15:22:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88485">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:42:00</departureTime>
+							<arrivalTime>7:42:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88443">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:42:00</departureTime>
+							<arrivalTime>14:42:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88443">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:42:00</departureTime>
+							<arrivalTime>14:42:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="787">
+			<name>Стайки</name>
+			<num>15</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88507">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:28:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88507">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:28:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88507">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:28:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88486">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:50:00</departureTime>
+							<arrivalTime>7:48:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88444">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:50:00</departureTime>
+							<arrivalTime>14:48:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88444">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:50:00</departureTime>
+							<arrivalTime>14:48:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="646">
+			<name>Крошин пов.</name>
+			<num>16</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88508">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:39:00</departureTime>
+							<arrivalTime>15:39:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88508">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:39:00</departureTime>
+							<arrivalTime>15:39:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88508">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:39:00</departureTime>
+							<arrivalTime>15:39:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88487">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>7:59:00</departureTime>
+							<arrivalTime>7:59:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88445">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:59:00</departureTime>
+							<arrivalTime>14:59:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88445">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>14:59:00</departureTime>
+							<arrivalTime>14:59:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="642">
+			<name>Дубровно</name>
+			<num>17</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88509">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:42:00</departureTime>
+							<arrivalTime>15:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88509">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:42:00</departureTime>
+							<arrivalTime>15:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88509">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:42:00</departureTime>
+							<arrivalTime>15:41:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88488">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>8:02:00</departureTime>
+							<arrivalTime>8:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88446">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:02:00</departureTime>
+							<arrivalTime>15:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88446">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:02:00</departureTime>
+							<arrivalTime>15:01:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="640">
+			<name>Скарчево</name>
+			<num>18</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88510">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:45:00</departureTime>
+							<arrivalTime>15:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88510">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:45:00</departureTime>
+							<arrivalTime>15:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88510">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:45:00</departureTime>
+							<arrivalTime>15:44:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88489">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>8:04:00</departureTime>
+							<arrivalTime>8:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88447">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:04:00</departureTime>
+							<arrivalTime>15:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88447">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:04:00</departureTime>
+							<arrivalTime>15:04:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="638">
+			<name>Новый Свет</name>
+			<num>19</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88511">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:48:00</departureTime>
+							<arrivalTime>15:48:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88511">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:48:00</departureTime>
+							<arrivalTime>15:48:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88511">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:48:00</departureTime>
+							<arrivalTime>15:48:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88490">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>8:09:00</departureTime>
+							<arrivalTime>8:09:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88448">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:09:00</departureTime>
+							<arrivalTime>15:09:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88448">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:09:00</departureTime>
+							<arrivalTime>15:09:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="636">
+			<name>Бол. Колпеница</name>
+			<num>20</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88512">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:51:00</departureTime>
+							<arrivalTime>15:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88512">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:51:00</departureTime>
+							<arrivalTime>15:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88512">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>15:51:00</departureTime>
+							<arrivalTime>15:50:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88491">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>8:11:00</departureTime>
+							<arrivalTime>8:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88449">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:11:00</departureTime>
+							<arrivalTime>15:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88449">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:11:00</departureTime>
+							<arrivalTime>15:11:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>21</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="1000000">
+					<name>Пн</name>
+					<DepartureTime>
+						<Time id="88513">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>16:10:00</departureTime>
+							<arrivalTime>16:10:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="88513">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>16:10:00</departureTime>
+							<arrivalTime>16:10:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000100">
+					<name>Пт</name>
+					<DepartureTime>
+						<Time id="88513">
+							<kodElem>7855</kodElem>
+							<kodVariant>298</kodVariant>
+							<departureTime>16:10:00</departureTime>
+							<arrivalTime>16:10:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000010">
+					<name>Сб</name>
+					<DepartureTime>
+						<Time id="88492">
+							<kodElem>7853</kodElem>
+							<kodVariant>297</kodVariant>
+							<departureTime>8:30:00</departureTime>
+							<arrivalTime>8:30:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+						<Time id="88450">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:30:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="88450">
+							<kodElem>7849</kodElem>
+							<kodVariant>295</kodVariant>
+							<departureTime>15:30:00</departureTime>
+							<arrivalTime>15:30:00</arrivalTime>
+							<interval>19</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

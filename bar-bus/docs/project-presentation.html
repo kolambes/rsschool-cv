@@ -1,0 +1,607 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <title>Telegram Mini App автобусного парка г. Барановичи</title>
+  <style>
+    @page {
+      size: A4;
+      margin: 14mm;
+    }
+
+    :root {
+      --green: #0f766e;
+      --green-dark: #07584f;
+      --red: #b91c1c;
+      --gold: #c9932f;
+      --ink: #17212b;
+      --muted: #637083;
+      --line: #e6dccb;
+      --paper: #fffdf7;
+      --soft: #f4efe5;
+      --blue: #2563eb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 13px;
+      line-height: 1.48;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+      color: var(--red);
+      font-size: 34px;
+      line-height: 1.05;
+      letter-spacing: .02em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 12px;
+      color: var(--green-dark);
+      font-size: 22px;
+      line-height: 1.16;
+    }
+
+    h3 {
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    p {
+      margin-bottom: 9px;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    li {
+      margin-bottom: 5px;
+    }
+
+    .page {
+      min-height: 268mm;
+      padding: 8mm;
+      page-break-after: always;
+      border: 1px solid rgba(201, 147, 47, .28);
+      border-radius: 18px;
+      background:
+        radial-gradient(circle at 50% -20px, rgba(201, 147, 47, .16), transparent 190px),
+        linear-gradient(180deg, #fffdf8 0%, #fbf6ed 100%);
+      overflow: hidden;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .cover {
+      display: grid;
+      align-content: center;
+      min-height: 268mm;
+      text-align: center;
+    }
+
+    .cover-logo {
+      width: 190px;
+      margin: 0 auto 22px;
+    }
+
+    .cover-subtitle {
+      max-width: 620px;
+      margin: 0 auto 24px;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .section-kicker {
+      margin-bottom: 5px;
+      color: var(--gold);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .card {
+      min-height: 104px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .72);
+      box-shadow: 0 12px 28px rgba(84, 56, 25, .07);
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--green-dark);
+      font-size: 15px;
+    }
+
+    .icon {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      place-items: center;
+      margin-bottom: 8px;
+      border-radius: 11px;
+      background: rgba(15, 118, 110, .12);
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .metric {
+      padding: 15px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, var(--green), #128a5b);
+      color: #fff;
+      box-shadow: 0 16px 32px rgba(15, 118, 110, .18);
+    }
+
+    .metric span {
+      display: block;
+      margin-bottom: 5px;
+      opacity: .82;
+      font-size: 12px;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 26px;
+      line-height: 1;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 9px;
+      margin-top: 12px;
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 38px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: rgba(255, 255, 255, .68);
+    }
+
+    .step {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--red);
+      color: #fff;
+      font-weight: 900;
+    }
+
+    .role-table {
+      width: 100%;
+      margin-top: 12px;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .72);
+    }
+
+    .role-table th,
+    .role-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .role-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .role-table th {
+      background: rgba(15, 118, 110, .08);
+      color: var(--green-dark);
+      font-size: 12px;
+      text-transform: uppercase;
+    }
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .pill {
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, .09);
+      color: #1d4ed8;
+      font-weight: 700;
+    }
+
+    .note {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--gold);
+      border-radius: 12px;
+      background: rgba(201, 147, 47, .1);
+      color: #4b5563;
+    }
+
+    .footer {
+      margin-top: 18px;
+      padding-top: 10px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+    }
+  </style>
+</head>
+<body>
+  <section class="page cover">
+    <img class="cover-logo" src="../public/bus-park-logo-light-clean.png" alt="Логотип автобусного парка" />
+    <h1>Telegram Mini App автобусного парка г. Барановичи</h1>
+    <p class="cover-subtitle">
+      Цифровой транспортный помощник для пассажиров, администрации и служб автобусного парка:
+      расписание, маршруты, обращения, новости, услуги, реклама и уведомления в одном приложении внутри Telegram.
+    </p>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Суть проекта</p>
+    <h2>Что создается</h2>
+    <p class="lead">
+      Проект представляет собой полноценную цифровую систему для городского автобусного парка Барановичей.
+      Пользователь открывает приложение прямо из Telegram и за несколько секунд получает нужную информацию:
+      какой маршрут выбрать, когда будет ближайший автобус, куда обратиться и какие новости появились.
+    </p>
+
+    <div class="grid">
+      <div class="card">
+        <span class="icon">01</span>
+        <strong>Для пассажиров</strong>
+        Быстрое расписание, поиск маршрута и остановки, избранное, напоминания, новости и обращения в администрацию.
+      </div>
+      <div class="card">
+        <span class="icon">02</span>
+        <strong>Для администрации</strong>
+        Панель управления обращениями, расписанием, рекламой, новостями, уведомлениями и сотрудниками.
+      </div>
+      <div class="card">
+        <span class="icon">03</span>
+        <strong>Для служб парка</strong>
+        Разделение ролей: диспетчер, модератор, менеджер рекламы, специалист по обращениям и СТО.
+      </div>
+      <div class="card">
+        <span class="icon">04</span>
+        <strong>Для развития сервиса</strong>
+        База данных, Telegram-интеграция, загрузка файлов, история изменений и возможность размещения на сервере.
+      </div>
+    </div>
+
+    <div class="grid-3">
+      <div class="metric"><span>Маршруты</span><strong>147</strong></div>
+      <div class="metric"><span>Остановки по направлениям</span><strong>4006</strong></div>
+      <div class="metric"><span>Времена отправлений</span><strong>50 951</strong></div>
+    </div>
+
+    <p class="note">
+      Главная идея: не заставлять человека искать информацию по разным сайтам и чатам, а дать все основные действия
+      в одном понятном интерфейсе внутри Telegram.
+    </p>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Пользовательский сценарий</p>
+    <h2>Что может пассажир</h2>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Главный экран</strong>
+        Приветствие, быстрые действия, переход к расписанию, обращениям, новостям, услугам и информации об автобусном парке.
+      </div>
+      <div class="card">
+        <strong>Расписание</strong>
+        Выбор маршрута, направления, остановки и типа дня. Пользователь видит ближайшее время и список отправлений.
+      </div>
+      <div class="card">
+        <strong>Маршруты</strong>
+        Отдельный список всех городских маршрутов от 1 до 33 с поиском по номеру, конечной или остановке.
+      </div>
+      <div class="card">
+        <strong>Остановки и поиск</strong>
+        Поиск остановки внутри маршрута помогает быстро перейти к нужному месту без ручного пролистывания.
+      </div>
+      <div class="card">
+        <strong>Избранное</strong>
+        Можно сохранить любимый маршрут, остановку и удобное время, например ежедневную поездку на работу.
+      </div>
+      <div class="card">
+        <strong>Будильник</strong>
+        Напоминание за 5, 10, 15, 20 или 30 минут до автобуса через сообщение от Telegram-бота.
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item">
+        <span class="step">1</span>
+        <div><strong>Открыть приложение</strong><br />Пользователь нажимает кнопку в Telegram-боте и попадает в Mini App.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="step">2</span>
+        <div><strong>Выбрать расписание</strong><br />Находит маршрут, направление и остановку через понятные поля и быстрый поиск.</div>
+      </div>
+      <div class="timeline-item">
+        <span class="step">3</span>
+        <div><strong>Получить время</strong><br />Система показывает ближайшие отправления, а пользователь может сохранить или поставить напоминание.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Обращения и коммуникация</p>
+    <h2>Связь пассажира с автобусным парком</h2>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Типы обращений</strong>
+        Вопрос, жалоба, предложение, благодарность, реклама и услуги. Пользователь выбирает тему и описывает ситуацию.
+      </div>
+      <div class="card">
+        <strong>Файлы и голос</strong>
+        К обращению можно прикрепить изображение, файл или записать голосовое сообщение прямо в Mini App.
+      </div>
+      <div class="card">
+        <strong>Онлайн-чат</strong>
+        Чат появляется тогда, когда обращение создано. Администратор отвечает пользователю, после решения диалог закрывается.
+      </div>
+      <div class="card">
+        <strong>Фильтр сообщений</strong>
+        В проект добавлена защита от нецензурных выражений в обращениях, чтобы снижать нагрузку на модерацию.
+      </div>
+    </div>
+
+    <p class="note">
+      Такой формат уменьшает количество потерянных обращений: все сообщения попадают в единую панель,
+      где их можно распределять по ролям и закрывать после обработки.
+    </p>
+
+    <h2>Новости и информирование</h2>
+    <div class="grid">
+      <div class="card">
+        <strong>Новости</strong>
+        Публикация важных объявлений, изменений расписания, служебной информации и материалов для пассажиров.
+      </div>
+      <div class="card">
+        <strong>Изображения</strong>
+        В новости можно добавлять картинки, а пользователь может открыть изображение в просмотре.
+      </div>
+      <div class="card">
+        <strong>Просмотры и лайки</strong>
+        Есть счетчики просмотров и реакций, чтобы понимать интерес к публикациям.
+      </div>
+      <div class="card">
+        <strong>Новые материалы</strong>
+        Если пользователь не видел свежую новость, в нижнем меню появляется индикатор.
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Услуги предприятия</p>
+    <h2>Дополнительные разделы приложения</h2>
+    <p class="lead">
+      Помимо расписания приложение показывает услуги автобусного парка и дает возможность быстро отправить заявку
+      ответственному специалисту.
+    </p>
+
+    <div class="grid">
+      <div class="card"><strong>Услуги СТО</strong>Ремонт двигателя, тормозной системы, ходовой части, КПП, электрооборудования, кондиционеров, сварочные работы и плановое обслуживание.</div>
+      <div class="card"><strong>Сервисный центр МАЗ</strong>Отдельное направление для консультаций, записи и обработки заявок по сервисному обслуживанию.</div>
+      <div class="card"><strong>Другие услуги</strong>Аренда автобусов и помещений, столовая, медицинское и техническое освидетельствование, реклама на бортах автобуса.</div>
+      <div class="card"><strong>О нас</strong>Контакты, приемная, адрес, режим работы, руководство, сайт и быстрый переход к карте.</div>
+    </div>
+
+    <h2>Карта и навигация</h2>
+    <p>
+      Для маршрутов и адресов используется мягкая интеграция с Яндекс.Картами: приложение открывает поиск по нужному маршруту
+      или адресу. Например, для маршрута формируется понятный запрос вида «автобус 2 Барановичи».
+    </p>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Админ-панель</p>
+    <h2>Что может администрация</h2>
+
+    <table class="role-table">
+      <thead>
+        <tr>
+          <th>Раздел</th>
+          <th>Возможности</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Обращения</strong></td>
+          <td>Просмотр заявок, фильтрация, ответы в чате, закрытие диалогов, очистка обращений.</td>
+        </tr>
+        <tr>
+          <td><strong>Расписание</strong></td>
+          <td>Редактирование маршрута, направления, остановки, цвета, добавление и удаление времени, журнал изменений.</td>
+        </tr>
+        <tr>
+          <td><strong>Реклама</strong></td>
+          <td>Создание рекламных материалов, сроки размещения, управление показом, удаление и редактирование.</td>
+        </tr>
+        <tr>
+          <td><strong>Новости</strong></td>
+          <td>Мини-редактор текста, изображения, публикация новостей, просмотры и реакции пользователей.</td>
+        </tr>
+        <tr>
+          <td><strong>Уведомления</strong></td>
+          <td>Отправка Telegram-пушей подписчикам без лишних ссылок, очистка формы и история уведомлений.</td>
+        </tr>
+        <tr>
+          <td><strong>Сотрудники</strong></td>
+          <td>Добавление Telegram ID, имени и роли. У сотрудника появляется доступ к нужной панели.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Роли доступа</h2>
+    <div class="grid">
+      <div class="card"><strong>Администратор</strong>Полный доступ ко всем разделам и настройкам.</div>
+      <div class="card"><strong>Специалист по обращениям</strong>Видит вопросы, жалобы, предложения и благодарности.</div>
+      <div class="card"><strong>Менеджер рекламы</strong>Работает только с рекламой и рекламными обращениями.</div>
+      <div class="card"><strong>Диспетчер</strong>Работает с обращениями, уведомлениями и расписанием.</div>
+      <div class="card"><strong>Модератор</strong>Работает с обращениями и новостями.</div>
+      <div class="card"><strong>Специалист СТО</strong>Может обрабатывать заявки по услугам и сервису.</div>
+    </div>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Telegram-бот</p>
+    <h2>Роль бота в проекте</h2>
+
+    <div class="grid">
+      <div class="card">
+        <strong>Точка входа</strong>
+        Бот приветствует пользователя и предлагает открыть приложение автобусного парка города Барановичи.
+      </div>
+      <div class="card">
+        <strong>Mini App внутри Telegram</strong>
+        Пользователь не устанавливает отдельное приложение: все открывается в Telegram.
+      </div>
+      <div class="card">
+        <strong>Напоминания</strong>
+        Бот отправляет сообщение, когда до автобуса осталось выбранное количество минут.
+      </div>
+      <div class="card">
+        <strong>Админ-доступ</strong>
+        Для сотрудников с ролью может появляться кнопка управления или доступ к админ-панели.
+      </div>
+    </div>
+
+    <p class="note">
+      Telegram-бот работает как удобный канал связи: открывает Mini App, принимает пользователей, отправляет напоминания,
+      уведомления и помогает не терять контакт с пассажиром.
+    </p>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Техническая часть</p>
+    <h2>Как устроен проект</h2>
+
+    <div class="stack">
+      <span class="pill">Node.js 24+</span>
+      <span class="pill">SQLite</span>
+      <span class="pill">Telegram Bot API</span>
+      <span class="pill">Telegram WebApp</span>
+      <span class="pill">HTML/CSS/JavaScript</span>
+      <span class="pill">Nginx + HTTPS</span>
+      <span class="pill">PM2</span>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <strong>База данных вместо JSON</strong>
+        Расписание, обращения, чаты, реклама, новости, сотрудники, подписчики и уведомления хранятся в SQLite.
+      </div>
+      <div class="card">
+        <strong>API для приложения</strong>
+        Mini App и админ-панель получают данные через серверные API, что позволяет развивать систему без ручных файлов.
+      </div>
+      <div class="card">
+        <strong>Импорт расписаний</strong>
+        Реальные маршруты импортируются из XML-файлов: маршруты, направления, остановки и времена отправления.
+      </div>
+      <div class="card">
+        <strong>Безопасность</strong>
+        Есть проверка Telegram WebApp, роли сотрудников, ключ администратора и разделение прав доступа.
+      </div>
+      <div class="card">
+        <strong>Файлы и медиа</strong>
+        Поддерживаются загрузки изображений, вложений и голосовых сообщений для обращений и новостей.
+      </div>
+      <div class="card">
+        <strong>Проверки проекта</strong>
+        Есть smoke-test, UX-check, verify и нагрузочный sanity-тест для контроля стабильности.
+      </div>
+    </div>
+  </section>
+
+  <section class="page">
+    <p class="section-kicker">Польза</p>
+    <h2>Что дает проект автобусному парку</h2>
+
+    <div class="grid">
+      <div class="card"><strong>Меньше хаоса</strong>Расписание, новости, обращения, услуги и реклама собраны в одной системе.</div>
+      <div class="card"><strong>Быстрее для пассажиров</strong>Человек может понять маршрут и время отправления без звонков и поиска по разным сайтам.</div>
+      <div class="card"><strong>Контроль обращений</strong>Администрация видит сообщения, вложения, историю диалога и может закрыть обращение после решения.</div>
+      <div class="card"><strong>Гибкое расписание</strong>Расписание можно редактировать через админ-панель, а не вручную менять файлы.</div>
+      <div class="card"><strong>Роли сотрудников</strong>Каждый сотрудник видит только нужные ему задачи: обращения, рекламу, новости, расписание или услуги.</div>
+      <div class="card"><strong>Готовность к серверу</strong>Проект можно разместить на VPS с доменом, HTTPS, PM2 и резервным копированием базы.</div>
+    </div>
+
+    <h2>Что можно развивать дальше</h2>
+    <ul>
+      <li>онлайн-координаты автобусов, если появится источник GPS-данных;</li>
+      <li>личный кабинет сотрудника прямо внутри Telegram;</li>
+      <li>расширенная аналитика по обращениям, новостям, рекламе и популярным маршрутам;</li>
+      <li>экспорт расписаний и отчетов для внутренней работы;</li>
+      <li>интеграция с внешними картами и официальными информационными системами.</li>
+    </ul>
+
+    <div class="footer">
+      Документ подготовлен для презентации проекта Telegram Mini App автобусного парка г. Барановичи.
+      В документ не включены секретные ключи, токены и внутренние пароли.
+    </div>
+  </section>
+</body>
+</html>

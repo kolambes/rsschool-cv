@@ -1,0 +1,650 @@
+
+:root.is-comfort,
+body.is-comfort{
+  /* === МОСТ: старые токены проекта → семантика из tokens.css ===
+     Значения больше НЕ хардкодятся здесь — единый источник правды
+     это tokens.css (primitive → semantic). Этот блок лишь кормит
+     семантикой оба старых namespace и выигрывает каскад (последний файл). */
+
+  /* --rs-* (главный контроллер UI) */
+  --rs-bg: var(--color-bg);
+  --rs-bg-solid: var(--color-surface);
+  --rs-card: var(--color-surface);
+  --rs-card-soft: var(--color-surface-soft);
+  --rs-text: var(--color-text);
+  --rs-muted: var(--color-text-muted);
+  --rs-line: var(--color-line);
+  --rs-line-strong: var(--color-line-strong);
+  --rs-accent: var(--color-accent);
+  --rs-accent-strong: var(--color-accent-hover);
+  --rs-accent-text: var(--color-on-accent);
+
+  --rs-card-radius: var(--r-lg);
+  --rs-control-radius: var(--r-sm);
+  --rs-shadow: var(--elev-2);
+  --rs-shadow-soft: var(--elev-1);
+
+  --rs-font-family: var(--font-sans);
+  /* база читает var(--app-font) для плиток маршрутов, но нигде его не объявляет */
+  --app-font: var(--font-sans);
+
+  /* legacy --* (styles.css/modern-ui.css) */
+  --bg: var(--color-bg);
+  --surface: var(--color-surface);
+  --surface-strong: var(--color-surface-soft);
+  --text: var(--color-text);
+  --muted: var(--color-text-muted);
+  --line: var(--color-line);
+  --border: var(--color-line);
+  --accent: var(--color-accent);
+  --accent-strong: var(--color-accent-hover);
+  --accent-2: var(--color-accent-hover);
+  --success: var(--color-success);
+  --warning: var(--color-warning);
+  --danger: var(--color-danger);
+
+  --radius: var(--r-md);
+  --radius-sm: var(--r-sm);
+  --radius-lg: var(--r-lg);
+  --shadow: var(--elev-2);
+
+  --font-ui: var(--font-sans);
+  --font-heading: var(--font-sans);
+  /* --font-mono уже задан в tokens.css :root (уникальное имя) */
+}
+
+/* ---- 2. Типографика -------------------------------------------
+   База принудительно ставит letter-spacing: 0 !important на
+   html/body/button/input/textarea/select — возвращаем трекинг
+   тем же селектором (равная специфичность, мы позже).
+   ---------------------------------------------------------------- */
+html,
+body,
+button,
+input,
+textarea,
+select {
+  font-family: var(--rs-font-family) !important;
+  letter-spacing: -0.006em !important;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-feature-settings: "ss01" 1, "cv01" 1;
+}
+
+/* Заголовки — тоньше и «дороже», без сверхжирных 800+ */
+h1 {
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+h2 {
+  font-weight: 600 !important;
+  letter-spacing: -0.018em !important;
+}
+
+h3 {
+  font-weight: 600 !important;
+  letter-spacing: -0.014em !important;
+}
+
+/* ---- 2a. Шапка по макету ----------------------------------------
+   В макете бренд — плоский зелёный значок автобуса (.brand-mark)
+   + две текстовые строки. Тяжёлого PNG-герба (.logo-pair, 754 KB)
+   в дизайне нет. В проекте всё наоборот: modern-ui.css:162 прячет
+   значок, а герб рисуется фоном на .logo-pair (responsive-system
+   :5438 и :5566). Переворачиваем — это же убирает «двойной логотип»
+   и снимает отрисовку 754 KB растра.
+   Специфичности подобраны так, чтобы перебить (0,2,2) и (0,4,1).
+   ---------------------------------------------------------------- */
+html body .app-shell .topbar .brand-mark {
+  display: block !important;
+  box-sizing: border-box !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 7px !important;
+  border-radius: 13px !important;
+  background: color-mix(in srgb, var(--rs-accent) 14%, var(--rs-card)) !important;
+  color: var(--rs-accent) !important;
+  flex: 0 0 40px !important;
+}
+
+/* Прячем PNG-герб: в макете его нет */
+html body[data-active-view] .app-shell .topbar .logo-pair {
+  display: none !important;
+}
+
+html body[data-active-view] .app-shell .topbar .brand-block {
+  grid-template-columns: 40px minmax(0, 1fr) !important;
+  align-items: center !important;
+  justify-self: start !important;
+  justify-items: start !important;
+  justify-content: start !important;
+  gap: 12px !important;
+  width: min(100%, 420px) !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  text-align: left !important;
+}
+
+/* Блочный контейнер (не grid), чтобы «г. Барановичи · Ваш транспортный
+   партнёр» шли одной строкой, как в макете: в grid любой ребёнок
+   блокифицируется и уезжает на свою строку. */
+html body[data-active-view] .app-shell .topbar .brand-title-lines {
+  display: block !important;
+  min-width: 0 !important;
+  text-align: left !important;
+}
+
+/* clamp вместо фиксированных px: база ужимает бренд на ≤430/≤359px,
+   а жёсткий 15px это ломал и давал многоточие. */
+html body[data-active-view] .app-shell .topbar .brand-title-lines strong {
+  display: block !important;
+  overflow: visible !important;
+  color: var(--rs-text) !important;
+  font-size: clamp(12.6px, 3.6vw, 15px) !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  text-overflow: clip !important;
+}
+
+/* modern-ui.css:729 прячет <small> через display:none — возвращаем. */
+html body[data-active-view] .app-shell .topbar .brand-title-lines span,
+html body[data-active-view] .app-shell .topbar .brand-title-lines small {
+  display: inline !important;
+  overflow: visible !important;
+  color: var(--rs-muted) !important;
+  font-size: clamp(10.5px, 3vw, 12px) !important;
+  font-weight: 500 !important;
+  line-height: 1.3 !important;
+  white-space: normal !important;
+  text-overflow: clip !important;
+}
+
+html body[data-active-view] .app-shell .topbar .brand-title-lines small::before {
+  content: "·";
+  margin: 0 5px !important;
+  opacity: 0.7;
+}
+
+/* ---- 2c. Заголовки экранов по макету -----------------------------
+   Сейчас: мелкий центрированный заголовок в шапке (modern-ui:275),
+   а внутристраничные section-heading у «Избранного» и «О нас»
+   спрятаны как дубли (modern-ui:284-287).
+   По макету: заголовка в шапке нет, а в контенте — крупный слева
+   + подпись. Возвращаем именно так.
+   ---------------------------------------------------------------- */
+html body[data-active-view] .app-shell .topbar .topbar-screen-title {
+  display: none !important;
+}
+
+/* На НЕ-home видах бренд уже скрыт (modern-ui:268), заголовок мы убрали,
+   колокольчик по умолчанию hidden — иначе осталась бы пустая полоса
+   66-76px (visual-polish:64 и :3330). Схлопываем её, колокольчик,
+   если появится, остаётся кликабельным. */
+html body[data-active-view]:not([data-active-view="home"]) .app-shell .topbar {
+  min-height: 0 !important;
+  height: auto !important;
+  margin-bottom: 4px !important;
+  padding: 2px 0 !important;
+}
+
+/* Возвращаем внутристраничные заголовки (спец. 0,4,2 > 0,4,1) */
+html body.is-comfort .view[data-view="favorites"] > .section-heading,
+html body.is-comfort .view[data-view="about"] > .section-heading {
+  display: block !important;
+}
+
+html body[data-active-view] .view .section-heading,
+html body[data-active-view] .view .favorites-view-heading {
+  padding: 2px 2px 14px !important;
+  text-align: left !important;
+}
+
+html body[data-active-view] .view .section-heading h2,
+html body[data-active-view] .view .favorites-view-heading h2 {
+  max-width: 100% !important;
+  color: var(--rs-text) !important;
+  font-size: clamp(26px, 6.2vw, 34px) !important;
+  font-weight: 600 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.022em !important;
+  text-align: left !important;
+}
+
+html body[data-active-view] .view .section-heading p,
+html body[data-active-view] .view .favorites-view-heading p {
+  margin-top: 6px !important;
+  color: var(--rs-muted) !important;
+  font-size: 13.5px !important;
+  font-weight: 500 !important;
+  line-height: 1.35 !important;
+  text-align: left !important;
+}
+
+/* ---- 2d. «О нас»: пастельные плитки действий ---------------------
+   modern-ui.css:977-1001 делает круги 50% с насыщенными градиентами
+   (спец. 0,5,1). По макету — мягкая подложка с цветным глифом.
+   --about-color задаётся на карточке в about-final.css и наследуется.
+   ---------------------------------------------------------------- */
+html body.is-comfort .view[data-view="about"] .about-actions .about-action-icon {
+  border: 1px solid color-mix(in srgb, var(--about-color, var(--rs-accent)) 22%, var(--rs-line)) !important;
+  border-radius: 14px !important;
+  background: color-mix(in srgb, var(--about-color, var(--rs-accent)) 14%, var(--rs-card)) !important;
+  background-image: none !important;
+  box-shadow: none !important;
+  color: var(--about-color, var(--rs-accent)) !important;
+}
+
+html body.is-comfort .view[data-view="about"] .about-actions .about-action-svg {
+  color: var(--about-color, var(--rs-accent)) !important;
+  stroke: var(--about-color, var(--rs-accent)) !important;
+  fill: none !important;
+}
+
+/* ---- 2b. Единый шрифт там, где база жёстко прибила Inter/Arial/serif.
+   Селекторы скопированы из базы 1-в-1 (равная специфичность), а наш
+   файл подключается позже — поэтому побеждаем без хаков.
+   ---------------------------------------------------------------- */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card strong,
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card strong,
+html body .view[data-view="routes"] .routes-mode-copy strong,
+html body .view[data-view="routes"] .routes-mode-button.is-active .routes-mode-copy strong,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-copy strong,
+html body[data-active-view="routes"] .view[data-view="routes"].is-active .routes-mode-button.is-active .routes-mode-copy strong {
+  font-family: var(--rs-font-family) !important;
+  font-weight: 600 !important;
+}
+
+.app-hero-kicker,
+.home-route-result-number {
+  font-family: var(--rs-font-family) !important;
+}
+
+/* ---- 3. Моноширинные цифры для времени (табло-эффект) ---------- */
+.time-chip,
+.next-panel strong,
+.next-panel time,
+.home-route-results time,
+.route-list time,
+.schedule-hero time,
+.stops-panel .stop-time {
+  font-family: var(--font-mono) !important;
+  font-feature-settings: "tnum" 1 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ---- 4. Поля ввода: мягкий фокус ------------------------------- */
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none !important;
+  border-color: color-mix(in srgb, var(--rs-accent) 55%, var(--rs-line)) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rs-accent) 16%, transparent) !important;
+}
+
+/* ---- 5. Первичные кнопки --------------------------------------- */
+.primary-button,
+.home-route-submit,
+.mini-button {
+  background: var(--rs-accent) !important;
+  box-shadow: 0 14px 26px -12px rgba(15, 118, 110, 0.55) !important;
+  transition: background 0.16s ease, transform 0.16s ease;
+}
+
+.primary-button:hover,
+.home-route-submit:hover,
+.mini-button:hover {
+  background: var(--rs-accent-strong) !important;
+}
+
+.primary-button:active,
+.home-route-submit:active {
+  transform: scale(0.98);
+}
+
+/* ---- 6. Нижнее меню: активный пункт заметнее -------------------
+   Позицию/размеры НЕ трогаем (иначе ломается адаптив) — только цвет.
+   ---------------------------------------------------------------- */
+.bottom-nav button {
+  /* #a6a196 из макета даёт ~2.5:1 — ниже AA. Затемняем до ~4.6:1. */
+  color: #7c776b !important;
+  transition: color 0.16s ease;
+}
+
+.bottom-nav button.is-active {
+  color: var(--rs-accent) !important;
+  background: color-mix(in srgb, var(--rs-accent) 12%, var(--rs-card)) !important;
+}
+
+/* ---- 7. Главная: герой «Ближайшие рейсы» ----------------------- */
+.home-route-launcher {
+  border: none !important;
+  border-radius: 24px !important;
+  background: linear-gradient(155deg, #0f766e 0%, #0a4e48 100%) !important;
+  box-shadow: 0 30px 52px -28px rgba(12, 62, 57, 0.75) !important;
+  padding: 18px !important;
+}
+
+.home-route-launcher-icon {
+  background: rgba(255, 255, 255, 0.16) !important;
+  border-radius: 15px !important;
+  color: #fff !important;
+}
+
+.home-route-launcher-icon path {
+  stroke: #fff !important;
+}
+
+.home-route-launcher-copy strong {
+  color: #fff !important;
+}
+
+.home-route-launcher-copy small {
+  color: #b8ded8 !important;
+}
+
+.home-route-launcher-action {
+  background: #fff !important;
+  color: #0f766e !important;
+  border-radius: 999px !important;
+  padding: 6px 12px !important;
+  font-weight: 600 !important;
+}
+
+/* ---- 8. Главная: заголовки секций ------------------------------
+   modern-ui.css:736 превращает их в серый капс 12px. По макету —
+   крупный тёмный заголовок обычным регистром. Специфичность (0,1,0)
+   равна, наш файл позже → выигрываем.
+   ---------------------------------------------------------------- */
+.home-quick-heading,
+.home-services-heading {
+  color: var(--rs-text) !important;
+  font-size: clamp(18px, 4.4vw, 22px) !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.018em !important;
+  text-transform: none !important;
+}
+
+/* ---- 9. Главная: карточки категорий ----------------------------
+   modern-ui.css намеренно делает карточку прозрачной (448-462,
+   спец. 0,9,2) и вешает цвет на круглую иконку (494-499).
+   По макету наоборот: светлая карточка + пастельная плитка иконки.
+   Копируем их селекторы 1-в-1 — равная специфичность, мы позже.
+   ---------------------------------------------------------------- */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type],
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type] {
+  border: 1px solid var(--rs-line) !important;
+  border-radius: 20px !important;
+  background: var(--rs-card) !important;
+  box-shadow: none !important;
+  transition: border-color 0.16s ease, transform 0.16s ease;
+}
+
+/* Активная карточка — бирюзовое кольцо 1.5px + мягкая тень */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active,
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type].is-active {
+  border: 1.5px solid var(--rs-accent) !important;
+  background: var(--rs-card) !important;
+  box-shadow: 0 16px 30px -26px rgba(15, 118, 110, 0.5) !important;
+}
+
+/* Иконка: пастельная плитка вместо белого круга с тенью.
+   --transport-stable-accent даёт цвет по типу перевозки. */
+html body.is-comfort .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card .transport-choice-icon,
+html body.is-comfort[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card .transport-choice-icon,
+body.is-comfort .transport-choice.home-route-categories .home-category-card .transport-choice-icon {
+  border-radius: 16px !important;
+  background: color-mix(in srgb, var(--transport-stable-accent, var(--rs-accent)) 14%, var(--rs-card)) !important;
+  box-shadow: none !important;
+}
+
+/* Кольцо теперь на карточке, а не на иконке */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card.is-active .transport-choice-icon {
+  box-shadow: none !important;
+}
+
+.home-category-card:active,
+.transport-choice-item:active {
+  transform: scale(0.98);
+}
+
+/* «Живой» рейс должен отличаться цветом: мой градиент затирал циановый
+   фон .is-live-trip (styles.css:19391). Возвращаем отличие, спец (0,6,2). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .next-panel > .next-trip-card.is-live-trip {
+  background: linear-gradient(150deg, #12897e 0%, #0a5f56 100%) !important;
+}
+
+/* БАГ: visual-polish.css:1821 в «живом» состоянии растягивает иконку до
+   52px, тогда как колонка грида карточки — 48px. Иконка вылезала и
+   налезала на подпись «Расчётное положение». Возвращаем 44px. */
+html body[data-active-view="schedule"] .view[data-view="schedule"] .next-trip-icon.schedule-line-icon {
+  width: 44px !important;
+  min-width: 44px !important;
+  height: 44px !important;
+}
+
+html body[data-active-view="schedule"] .view[data-view="schedule"] .next-trip-icon.schedule-line-icon svg {
+  width: 22px !important;
+  height: 22px !important;
+}
+
+/* БАГ: min-width:max-content у времени распирал колонку и выталкивал
+   пилюлю за правый край карточки. */
+html body[data-active-view="schedule"] .next-trip-time-row,
+html body[data-active-view="schedule"] .next-trip-body {
+  min-width: 0 !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-icon {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 14px !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-icon path {
+  stroke: #fff !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-kicker {
+  color: #b8ded8 !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-time {
+  min-width: 0 !important;
+  color: #fff !important;
+  font-family: var(--font-mono) !important;
+  font-feature-settings: "tnum" 1 !important;
+  font-size: 26px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em !important;
+}
+
+/* Светлая пилюля «Автобус между …» — держим внутри карточки */
+html body[data-active-view="schedule"] .next-trip-boarding {
+  max-width: 100% !important;
+  overflow-wrap: anywhere !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-left,
+html body[data-active-view="schedule"] .next-trip-dot,
+html body[data-active-view="schedule"] .next-trip-boarding,
+html body[data-active-view="schedule"] .next-trip-hint,
+html body[data-active-view="schedule"] .next-trip-arrow {
+  color: #c7e4df !important;
+}
+
+html body[data-active-view="schedule"] .next-trip-route-path {
+  color: #fff !important;
+  font-weight: 600 !important;
+}
+
+/* ---- 10. Расписание: схема маршрута (остановки) ---------------- */
+.stops-panel .stop-item {
+  border-radius: 14px !important;
+  transition: background 0.16s ease;
+}
+
+.stops-panel .stop-dot::before {
+  background: #c2b9a4 !important;
+}
+
+.stops-panel .stop-item.is-current {
+  background: color-mix(in srgb, var(--rs-accent) 12%, var(--rs-card)) !important;
+}
+
+.stops-panel .stop-item.is-current .stop-dot::before,
+.stops-panel .stop-terminal .stop-dot::before {
+  background: var(--rs-accent) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--rs-accent) 26%, transparent) !important;
+}
+
+.stops-panel .stop-item.is-current .stop-name strong {
+  color: var(--rs-accent) !important;
+}
+
+/* ---- 11. Сегменты дня и чипы времени ---------------------------
+   По макету «Сегодня/Будни/Выходные» — светлая дорожка (track), а
+   активный сегмент = белая «пилюля» с мягкой тенью и тёмным текстом
+   (в базе он сплошной зелёный). Перебиваем base (0,4,1) селектором
+   (0,6,2). */
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented {
+  gap: 4px !important;
+  padding: 4px !important;
+  border-radius: 14px !important;
+  background: color-mix(in srgb, var(--rs-text) 6%, var(--rs-card)) !important;
+  border: 1px solid var(--rs-line) !important;
+}
+
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button {
+  height: 38px !important;
+  min-height: 38px !important;
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: transparent !important;
+  color: var(--rs-muted) !important;
+  font-weight: 600 !important;
+  transition: background 0.16s ease, color 0.16s ease, box-shadow 0.16s ease !important;
+}
+
+html body[data-active-view="schedule"] .view[data-view="schedule"] > .segmented button.is-active {
+  border: 0 !important;
+  border-radius: 10px !important;
+  background: var(--rs-card) !important;
+  color: var(--rs-text) !important;
+  box-shadow: 0 1px 2px rgba(40, 30, 15, 0.06), 0 6px 14px -10px rgba(40, 30, 15, 0.28) !important;
+}
+
+/* Чипы времени. У выбранного чипа реальный класс .is-selected
+   (класса .is-active у него не бывает), и база красит его через
+   .view[data-view="schedule"] .time-chip.is-selected — копируем
+   селектор с html body, чтобы выиграть. */
+html body .view[data-view="schedule"] .time-chip {
+  border-radius: 11px !important;
+}
+
+html body .view[data-view="schedule"] .time-chip.is-selected,
+html body .view[data-view="schedule"] .time-chip.is-next {
+  background: var(--rs-accent) !important;
+  color: #fff !important;
+}
+
+/* ================================================================
+   13. СОВРЕМЕННЫЙ ПОЛИШ (ui-ux-pro-max)
+   Глубина, микровзаимодействия, ритм — под референс.
+   Держим акцент умеренным: основа — типографика, отступы, мягкая тень.
+   ================================================================ */
+
+/* --- 13.1 Единая мягкая тень на ключевых карточках --- */
+html body .about-official-card,
+html body .favorites-panel,
+html body .favorites-view-panel,
+html body .service-section,
+html body .home-services-card,
+html body .times-panel,
+html body .stops-panel {
+  box-shadow: var(--rs-shadow) !important;
+}
+
+/* --- 13.2 Номер маршрута моноширинным (база задаёт размер/цвет сама,
+   в т.ч. фирменный per-route цвет — его НЕ трогаем). --- */
+html body .route-badge,
+html body .ride-route-badge {
+  font-family: var(--font-mono) !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* --- 13.3 Строки избранных рейсов → отдельные карточки (по референсу).
+   База (responsive-system:10370, спец 0,3,0) рендерит их как строки
+   с разделителем; поднимаем до (0,3,2) и делаем карточки. Grid базы
+   (колонки) НЕ трогаем. --- */
+html body .view[data-view="home"] .favorite-ride-row {
+  border: 1px solid var(--rs-line) !important;
+  border-bottom: 1px solid var(--rs-line) !important;
+  border-radius: 16px !important;
+  background: var(--rs-card) !important;
+  box-shadow: var(--rs-shadow-soft) !important;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease !important;
+}
+
+/* --- 13.4 Чипы времени: скругление (база уже задаёт фон/размер). --- */
+html body .time-chip-next,
+html body .time-chip-live {
+  border-radius: 999px !important;
+  font-weight: 600 !important;
+}
+
+/* --- 13.5 Схема маршрута: мягкий ховер строки (stop-time база уже
+   рисует пилюлей — не дублируем). --- */
+html body .stops-panel .stop-item {
+  border-radius: 14px !important;
+  transition: background 0.16s ease !important;
+}
+
+/* --- 13.6 Микровзаимодействия для устройств с курсором --- */
+@media (hover: hover) {
+  html body .home-actions button:hover,
+  html body .home-services-card button:hover,
+  html body .service-card:hover,
+  html body .about-action-card:hover,
+  html body .route-card:hover,
+  html body .favorite-ride-row:hover {
+    transform: translateY(-2px) !important;
+    box-shadow: var(--rs-shadow) !important;
+    border-color: color-mix(in srgb, var(--rs-accent) 30%, var(--rs-line)) !important;
+  }
+}
+
+html body .service-card:active,
+html body .route-card:active,
+html body .favorite-ride-row:active,
+html body .home-actions button:active,
+html body .home-category-card:active {
+  transform: scale(0.985) !important;
+}
+
+/* --- 13.7 Доступный фокус на всех интерактивных элементах --- */
+html body button:focus-visible,
+html body a:focus-visible,
+html body input:focus-visible,
+html body select:focus-visible,
+html body [role="button"]:focus-visible {
+  outline: 2px solid var(--rs-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* --- 13.8 Уважать «уменьшить движение» --- */
+@media (prefers-reduced-motion: reduce) {
+  html body *,
+  html body *::before,
+  html body *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Аудит BarBus Mini App от 06.06.2026</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 32px;
+      font-family: Arial, sans-serif;
+      color: #17212f;
+      background: #f7f4ec;
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      background: #fffdf8;
+      border: 1px solid #e3d9c5;
+      border-radius: 20px;
+      padding: 32px;
+      box-shadow: 0 18px 45px rgba(37, 31, 20, 0.08);
+    }
+    h1, h2, h3 { line-height: 1.2; }
+    h1 { margin-top: 0; font-size: 32px; }
+    h2 { margin-top: 30px; color: #087f72; }
+    h3 { margin-top: 22px; }
+    li { margin: 6px 0; }
+    code {
+      padding: 2px 6px;
+      border-radius: 8px;
+      background: #eef6f3;
+    }
+    .note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: #fff3e8;
+      border: 1px solid #f0cfb0;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Аудит BarBus Mini App от 06.06.2026</h1>
+  <p>Проверены публичное Mini App, админ-панель, серверные API, импорт XML, обращения, новости, избранное, услуги, роли сотрудников, базовая нагрузка и smoke-сценарии.</p>
+
+  <h2>Исправлено</h2>
+  <h3>Безопасность</h3>
+  <ul>
+    <li>Убран слабый <code>ADMIN_KEY</code> по умолчанию и добавлена защита от слабого ключа.</li>
+    <li>Подмена роли через <code>x-admin-role</code> отключена без явного <code>ALLOW_ADMIN_ROLE_OVERRIDE=true</code>.</li>
+    <li>Опасные очистки ограничены полным администратором.</li>
+    <li>Вложения в чат обращений сохраняются только после проверки доступа.</li>
+    <li>Токен клиентского чата больше не передаётся через URL.</li>
+    <li>Добавлены лимиты на лайки, просмотры новостей и XML-импорт.</li>
+  </ul>
+
+  <h3>Расписание и XML</h3>
+  <ul>
+    <li>Публичный кэш очищается после импорта XML, ручных правок и отката.</li>
+    <li>Полная замена XML требует тип расписания и не удаляет другие типы транспорта.</li>
+    <li>CLI-импорт рекурсивно читает XML и требует тип расписания.</li>
+    <li>Время и маски дней в XML валидируются строже.</li>
+    <li>Зависшие отложенные XML-замены возвращаются в очередь.</li>
+  </ul>
+
+  <h3>UX и админка</h3>
+  <ul>
+    <li>Тема Telegram больше не перетирается при первом запуске.</li>
+    <li>Новости не помечаются все просмотренными при открытии вкладки.</li>
+    <li>Избранное сохраняет раскрытый будильник после обновления.</li>
+    <li>Удаление времени больше не удаляет весь рейс случайно.</li>
+    <li>Форма сотрудников очищена от лишней роли, Telegram ID валидируется.</li>
+  </ul>
+
+  <h2>Проверки</h2>
+  <ul>
+    <li><code>node --check</code> для ключевых JS-файлов.</li>
+    <li><code>npm run verify</code></li>
+    <li><code>npm run test:ux</code></li>
+    <li><code>npm run test:smoke</code></li>
+    <li><code>npm run test:load</code>: 240 запросов, 24 параллельных клиента, 0 ошибок.</li>
+  </ul>
+
+  <div class="note">
+    <strong>Ручной пункт:</strong> если Telegram <code>BOT_TOKEN</code> уже был раскрыт, его нужно перевыпустить через BotFather. Кодом это безопасно сделать нельзя.
+  </div>
+</main>
+</body>
+</html>
