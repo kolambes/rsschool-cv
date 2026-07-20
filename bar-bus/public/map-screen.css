@@ -1,0 +1,415 @@
+/* ============================================================
+   map-screen.css — экран «Карта» и блок карты в расписании.
+   Использует токены дизайн-системы (tokens.css): песочные
+   поверхности, teal-акцент, тихие тени.
+   ============================================================ */
+
+/* ── Экран карты ── */
+.map-view { max-width: 100%; min-width: 0; }
+/* .view — grid: без min-width:0 дорожка растягивается до min-content
+   самого широкого ребёнка (длинные названия маршрутов с nowrap) */
+.map-view > * { min-width: 0; max-width: 100%; }
+.map-view .map-heading { margin-bottom: 10px; }
+
+.map-status-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0 0 10px;
+}
+
+.map-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-line-strong);
+}
+
+.map-badge--demo {
+  color: #6d28d9;
+  border-color: #c4b5fd;
+  background: #f5f3ff;
+}
+
+/* Изменения движения */
+.map-alerts {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 6px;
+  margin-bottom: 10px;
+  scrollbar-width: none;
+}
+.map-alerts::-webkit-scrollbar { display: none; }
+
+.map-alert-chip {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+  max-width: 260px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid #f2d8a8;
+  background: #fdf6e7;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.map-alert-chip strong { font-size: 12.5px; color: var(--color-warning); }
+.map-alert-chip span {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 230px;
+}
+
+/* Полотно карты */
+.map-shell {
+  position: relative;
+  height: min(58vh, 520px);
+  min-height: 320px;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface-soft);
+  box-shadow: var(--elev-1);
+}
+
+/* id-селектор: класс .maplibregl-map из maplibre-gl.css (грузится позже)
+   ставит position:relative и схлопывает высоту контейнера */
+#mapCanvas { position: absolute !important; inset: 0; }
+#mapCanvas .maplibregl-canvas { outline: none; }
+
+.map-loading,
+.map-empty {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  padding: 24px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  background: var(--color-surface-soft);
+  z-index: 5;
+}
+.map-empty strong { color: var(--color-text); font-size: 15px; }
+.map-empty p { margin: 0; max-width: 320px; }
+
+.map-spinner {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid var(--color-line-strong);
+  border-top-color: var(--color-accent);
+  animation: map-spin 0.9s linear infinite;
+}
+@keyframes map-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .map-spinner { animation-duration: 2s; }
+}
+
+/* Управление картой */
+.map-controls {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  z-index: 6;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.map-controls button {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-size: 17px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: var(--elev-1);
+}
+.map-controls button:active { transform: scale(0.94); }
+
+/* Карточка выбранного объекта */
+.map-object-card {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  z-index: 7;
+  padding: 12px;
+  border-radius: 14px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  box-shadow: 0 6px 24px rgba(60, 50, 30, 0.16);
+}
+
+.map-card-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.map-card-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.map-card-title strong { font-size: 14.5px; }
+.map-card-title small { color: var(--color-text-muted); font-size: 12px; }
+
+.map-card-close {
+  border: none;
+  background: none;
+  color: var(--color-text-muted);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 8px;
+}
+.map-card-close:active { background: var(--color-surface-soft); }
+
+.map-route-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 8px;
+  border-radius: 10px;
+  font-weight: 800;
+  font-size: 15px;
+  color: #fff;
+  background: var(--route-color, var(--color-accent));
+  flex-shrink: 0;
+}
+
+.map-stop-dot {
+  width: 14px;
+  height: 14px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  border: 3px solid var(--color-text);
+  flex-shrink: 0;
+}
+
+.map-direction-chips,
+.map-card-stop-routes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.map-direction-chips button {
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface-soft);
+  color: var(--color-text-muted);
+  font-size: 12px;
+  cursor: pointer;
+}
+.map-direction-chips button.is-active {
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  font-weight: 600;
+}
+
+.map-route-chip {
+  padding: 5px 11px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  font-size: 13px;
+  color: #fff;
+  background: var(--route-color, var(--color-accent));
+  cursor: pointer;
+}
+
+.map-card-alerts { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
+.map-card-alert {
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: #fdf6e7;
+  border: 1px solid #f2d8a8;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.map-card-alert strong { font-size: 12px; color: var(--color-warning); }
+.map-card-alert span { font-size: 12.5px; color: var(--color-text); }
+
+.map-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.map-card-primary,
+.map-card-secondary {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.map-card-primary {
+  border: none;
+  color: var(--color-on-accent);
+  background: var(--color-accent);
+}
+.map-card-primary:active { background: var(--color-accent-hover); }
+
+.map-card-secondary {
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface-soft);
+  color: var(--color-text);
+}
+.map-card-secondary.is-on {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+
+/* Поиск по карте */
+.map-search-row { position: relative; margin-top: 12px; }
+
+.map-search-row input {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  font-size: 14px;
+}
+.map-search-row input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-soft);
+}
+
+.map-search-results {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 30;
+  border-radius: 12px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px rgba(60, 50, 30, 0.18);
+  overflow: hidden;
+}
+
+.map-search-results button {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background: none;
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.map-search-results button + button { border-top: 1px solid var(--color-line); }
+.map-search-results button:active { background: var(--color-surface-soft); }
+.map-search-results small { color: var(--color-text-muted); font-size: 12px; }
+
+/* Список маршрутов под картой */
+.map-route-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.map-route-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  min-height: 48px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--color-line);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.map-route-item:active { background: var(--color-surface-soft); }
+.map-route-item.is-active {
+  border-color: var(--color-accent);
+  background: var(--color-accent-soft);
+}
+.map-route-item .map-route-badge { min-width: 32px; height: 32px; font-size: 13.5px; }
+.map-route-name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.map-route-warn { font-size: 14px; }
+
+/* ── Блок карты в расписании ── */
+.schedule-map-block {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line-strong);
+  background: var(--color-surface);
+  box-shadow: var(--elev-1);
+}
+
+.schedule-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.schedule-map-head strong { display: block; font-size: 13.5px; }
+
+.schedule-map-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: var(--color-surface-soft);
+  border: 1px solid var(--color-line);
+}
+
+/* Тёмная тема (задел на будущее — сейчас проект в «комфорт»-теме) */
+[data-theme="dark"] .map-badge--demo { background: #2e1065; color: #ddd6fe; border-color: #6d28d9; }
+[data-theme="dark"] .map-alert-chip,
+[data-theme="dark"] .map-card-alert { background: #3b2f13; border-color: #7c5e18; }

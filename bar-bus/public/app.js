@@ -358,6 +358,7 @@
       state.data = await response.json();
       setInitialSelection();
       loadStaffAccess();
+      pullFavoritesFromServer();
       // News UI was removed from the Mini App; syncing stale pending likes from old
       // localStorage would post to an invisible feature. Intentionally not called.
       renderAll();
@@ -1227,6 +1228,17 @@
   }
 
   function initialView() {
+    // Deep-link карты из бота: #map, #map_route_<id>, #map_stop_<key>.
+    // Точная цель сохраняется до того, как replaceViewHash перезапишет hash.
+    const startParam = tg?.initDataUnsafe?.start_param || "";
+    if (/^map(_|$)/.test(startParam)) {
+      window.__mapDeepTarget = startParam;
+      return "map";
+    }
+    if (location.hash === "#map" || location.hash.startsWith("#map_")) {
+      window.__mapDeepTarget = location.hash.slice(1);
+      return "map";
+    }
     if (location.hash === "#routes") return "routes";
     if (location.hash === "#schedule") return "schedule";
     if (location.hash === "#favorites") return "favorites";
@@ -1272,7 +1284,8 @@
       schedule: "#schedule",
       favorites: "#favorites",
       service: "#service",
-      about: "#about"
+      about: "#about",
+      map: "#map"
     };
     const nextHash = hashByView[view] || "";
     const nextUrl = `${location.pathname}${location.search}${nextHash}`;
@@ -6661,6 +6674,7 @@
     state.favorites = [nextFavorite]
       .concat(state.favorites.filter((item) => item.id !== favorite.id));
     safeStorage.setItem("routeFavorites", JSON.stringify(state.favorites));
+    queueFavoritesSync();
     return { favorite: nextFavorite, added: !existing };
   }
 
@@ -6701,8 +6715,50 @@
     });
     writeAlarmStates();
     safeStorage.setItem("routeFavorites", JSON.stringify(state.favorites));
+    queueFavoritesSync();
     renderFavorites();
     if (!options.silent) showToast("Избранное обновлено.");
+  }
+
+  // ── Серверная синхронизация избранного по Telegram ID ──────────────────────
+  // Избранное остаётся в localStorage (моментальный отклик), а в Telegram
+  // дополнительно сохраняется на сервере: смена устройства не теряет список.
+  let favoritesSyncTimer = null;
+
+  function queueFavoritesSync() {
+    if (!tg?.initData) return;
+    window.clearTimeout(favoritesSyncTimer);
+    favoritesSyncTimer = window.setTimeout(() => {
+      fetch("/api/user/favorites", {
+        method: "POST",
+        headers: { "content-type": "application/json", ...telegramHeaders() },
+        body: JSON.stringify({ favorites: state.favorites })
+      }).catch((error) => console.warn("Favorites sync failed", error));
+    }, 2500);
+  }
+
+  async function pullFavoritesFromServer() {
+    if (!tg?.initData) return;
+    try {
+      const response = await fetch("/api/user/favorites", { headers: telegramHeaders() });
+      if (!response.ok) return;
+      const data = await response.json();
+      const serverFavorites = Array.isArray(data.favorites) ? data.favorites : [];
+      if (!serverFavorites.length) {
+        // На сервере пусто, локально есть — первичная загрузка снапшота.
+        if (state.favorites.length) queueFavoritesSync();
+        return;
+      }
+      if (!state.favorites.length) {
+        // Новое устройство: восстанавливаем избранное из Telegram-профиля.
+        state.favorites = serverFavorites.filter((item) => item && typeof item === "object" && typeof item.id === "string");
+        safeStorage.setItem("routeFavorites", JSON.stringify(state.favorites));
+        renderFavorites();
+        renderHomeFavoriteRoutes({ loadSchedules: state.activeView === "home" });
+      }
+    } catch (error) {
+      console.warn("Favorites pull failed", error);
+    }
   }
 
   function directionLabel(route, direction) {
@@ -8292,6 +8348,38 @@
   function normalize(value) {
     return String(value || "").toLocaleLowerCase("ru-RU").replace(/ё/g, "е").trim();
   }
+
+  // ── Мост для экрана карты (map-screen.js) ──────────────────────────────────
+  // Карта живёт в отдельном модуле и общается с приложением через этот
+  // минимальный интерфейс: навигация, контекст расписания, тосты и заголовки
+  // Telegram-авторизации. Отдельного входа нет — используется initData.
+  window.BarBusApp = {
+    setView(view, options) {
+      setView(view, options);
+    },
+    openRouteById(routeId) {
+      const route = (state.data?.routes || []).find((item) => item.id === routeId);
+      if (route) openRoute(route);
+      return Boolean(route);
+    },
+    getScheduleContext() {
+      const route = activeRoute();
+      const direction = activeDirection();
+      const stop = activeStop();
+      return {
+        routeId: route?.id || "",
+        routeNumber: route?.number || "",
+        routeName: route?.name || "",
+        directionCode: direction?.code || "",
+        stopUid: stop?.id || "",
+        stopName: stop?.name || "",
+        transportType: state.transportType
+      };
+    },
+    telegramHeaders,
+    hasTelegram: () => Boolean(tg?.initData),
+    showToast
+  };
 })();
 
 

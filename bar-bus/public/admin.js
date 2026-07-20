@@ -51,6 +51,7 @@
   const tabPermissions = {
     appeals: "appeals",
     schedule: "schedule",
+    map: "schedule",
     roster: "roster",
     ads: "ads",
     services: "services",
@@ -2889,4 +2890,13 @@
       }
     });
   }
+
+  // Мост для вкладки «Карта» (admin-map.js): авторизованный API-запрос,
+  // проверка прав и строка статуса — без дублирования логики admin.js.
+  window.BarBusAdmin = {
+    api,
+    can,
+    setStatus,
+    confirmAction: (message) => (typeof confirmDialog === "function" ? confirmDialog(message) : Promise.resolve(window.confirm(message)))
+  };
 })();

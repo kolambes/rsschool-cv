@@ -65,6 +65,7 @@
       <nav class="admin-tabs" id="adminTabs" hidden>
         <button class="is-active" data-admin-tab="appeals" type="button">Обращения</button>
         <button data-admin-tab="schedule" type="button">Расписание</button>
+        <button data-admin-tab="map" type="button">Карта</button>
         <button data-admin-tab="roster" type="button">Разнарядка</button>
         <button data-admin-tab="ads" type="button">Реклама</button>
         <button data-admin-tab="services" type="button">Услуги</button>
@@ -227,6 +228,112 @@
               </div>
             </div>
             <div class="schedule-audit-list" id="scheduleAuditList"></div>
+          </section>
+        </section>
+
+        <section class="admin-panel" data-admin-panel="map">
+          <div class="panel-intro">
+            <div>
+              <h2>Карта</h2>
+              <p>Геоданные для карты Mini App: координаты остановок, линии маршрутов, изменения движения и демо-режим транспорта.</p>
+            </div>
+            <div class="status-actions">
+              <button class="ghost-button" id="mapAdminRefresh" type="button">Обновить</button>
+            </div>
+          </div>
+
+          <section class="admin-form map-admin-overview" id="mapAdminOverview" aria-label="Покрытие геоданными"></section>
+
+          <section class="admin-form map-admin-demo">
+            <h3>Демо-данные</h3>
+            <p class="map-admin-hint">Схематичные геоданные для проверки карты, пока не заполнены реальные координаты. Все демо-записи помечены и удаляются одной кнопкой; на карте пользователи видят бейдж «Схема (демо-геоданные)».</p>
+            <div class="status-actions">
+              <button class="ghost-button" id="mapAdminSeedDemo" type="button">Заполнить демо-геоданные</button>
+              <button class="ghost-button danger-button" id="mapAdminClearDemo" type="button">Удалить демо-геоданные</button>
+              <label class="map-admin-toggle">
+                <input type="checkbox" id="mapAdminDemoVehicles">
+                <span>Демо-транспорт на карте</span>
+              </label>
+            </div>
+          </section>
+
+          <section class="admin-form map-admin-editor">
+            <h3>Редактор геоданных</h3>
+            <div class="map-admin-grid">
+              <div class="map-admin-side">
+                <label class="map-admin-field">
+                  <span>Поиск остановки</span>
+                  <input type="search" id="mapAdminStopSearch" placeholder="Название остановки…" autocomplete="off">
+                </label>
+                <div class="map-admin-stop-list" id="mapAdminStopList" aria-label="Остановки"></div>
+              </div>
+              <div class="map-admin-main">
+                <div class="map-admin-canvas" id="mapAdminCanvas" aria-label="Карта для расстановки координат"></div>
+                <p class="map-admin-hint" id="mapAdminCanvasHint">Выберите остановку слева, затем кликните по карте, чтобы задать её координаты.</p>
+              </div>
+            </div>
+          </section>
+
+          <section class="admin-form map-admin-geometry">
+            <h3>Геометрия маршрута</h3>
+            <div class="map-admin-row">
+              <label class="map-admin-field">
+                <span>Маршрут</span>
+                <select id="mapAdminRouteSelect"></select>
+              </label>
+              <label class="map-admin-field">
+                <span>Направление</span>
+                <select id="mapAdminDirectionSelect"></select>
+              </label>
+            </div>
+            <div class="status-actions">
+              <button class="ghost-button" id="mapAdminBuildFromStops" type="button">Построить по остановкам</button>
+              <button class="ghost-button" id="mapAdminSaveGeometry" type="button">Сохранить геометрию</button>
+              <button class="ghost-button danger-button" id="mapAdminDeleteGeometry" type="button">Удалить</button>
+            </div>
+            <label class="map-admin-field">
+              <span>Координаты линии (JSON: [[lng, lat], …])</span>
+              <textarea id="mapAdminGeometryText" rows="4" spellcheck="false"></textarea>
+            </label>
+          </section>
+
+          <section class="admin-form map-admin-alerts">
+            <h3>Изменения движения</h3>
+            <div class="map-admin-row">
+              <label class="map-admin-field">
+                <span>Маршрут</span>
+                <select id="mapAdminAlertRoute"></select>
+              </label>
+              <label class="map-admin-field">
+                <span>Тип</span>
+                <select id="mapAdminAlertType">
+                  <option value="delay">Задержка</option>
+                  <option value="detour">Временное изменение</option>
+                  <option value="roadwork">Ремонт</option>
+                  <option value="closure">Перекрытие</option>
+                  <option value="info">Информация</option>
+                </select>
+              </label>
+            </div>
+            <label class="map-admin-field">
+              <span>Заголовок</span>
+              <input type="text" id="mapAdminAlertTitle" maxlength="160" placeholder="Например: Задержка движения до 7 минут">
+            </label>
+            <label class="map-admin-field">
+              <span>Описание (необязательно)</span>
+              <textarea id="mapAdminAlertBody" rows="2" maxlength="800"></textarea>
+            </label>
+            <div class="map-admin-row">
+              <label class="map-admin-field">
+                <span>Срок действия (текстом)</span>
+                <input type="text" id="mapAdminAlertUntil" maxlength="80" placeholder="до 18:00">
+              </label>
+              <div class="status-actions map-admin-alert-actions">
+                <button class="primary-button" id="mapAdminAlertSave" type="button">Опубликовать и уведомить</button>
+              </div>
+            </div>
+            <p class="map-admin-hint">Публикация отправит уведомление всем подписчикам маршрута в Telegram и покажет изменение на карте.</p>
+            <div class="map-admin-alert-list" id="mapAdminAlertList"></div>
           </section>
         </section>
 
@@ -471,5 +578,6 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <script src="/admin.js?v=20260623-status-toast"></script>
+    <script src="/admin-map.js?v=20260720-map1" defer></script>
   </body>
 </html>

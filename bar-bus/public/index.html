@@ -30,6 +30,7 @@
   <link rel="stylesheet" href="/adaptive.css?v=20260708-responsive-safe2" />
   <link rel="stylesheet" href="/redesign-theme.css?v=20260709-nodark" />
   <link rel="stylesheet" href="/system.css?v=20260713-hero2c" />
+  <link rel="stylesheet" href="/map-screen.css?v=20260720-map1" />
   </head>
   <body>
     <div class="app-loader" id="appLoader" role="status" aria-live="polite">
@@ -258,6 +259,17 @@
               <svg class="change-route-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5" /><path d="M21 3 13.5 10.5" /><path d="M8 21H3v-5" /><path d="m3 21 7.5-7.5" /></svg>
               <span>Сменить маршрут</span>
             </button>
+          </section>
+
+          <section class="schedule-map-block" id="scheduleMapBlock" hidden aria-label="Маршрут на карте">
+            <div class="schedule-map-head">
+              <div>
+                <span class="hero-label">На карте</span>
+                <strong id="scheduleMapTitle">Маршрут на карте города</strong>
+              </div>
+              <button class="mini-button" id="scheduleMapOpen" type="button">Открыть карту</button>
+            </div>
+            <canvas class="schedule-map-preview" id="scheduleMapPreview" width="640" height="220" aria-hidden="true"></canvas>
           </section>
 
           <section class="next-panel" id="nextPanel"></section>
@@ -689,6 +701,46 @@
           </section>
 
         </section>
+
+        <section class="view map-view" data-view="map">
+          <div class="section-heading compact-heading map-heading">
+            <h2>Карта</h2>
+            <p id="mapMeta">Маршруты, остановки и транспорт на карте города.</p>
+          </div>
+
+          <div class="map-status-row" id="mapStatusRow" hidden>
+            <span class="map-badge map-badge--demo" id="mapDemoBadge" hidden title="Геоданные схематичны и заполняются администратором">Схема (демо-геоданные)</span>
+            <span class="map-badge" id="mapLiveBadge" hidden></span>
+          </div>
+
+          <div class="map-alerts" id="mapAlerts" hidden aria-label="Изменения движения"></div>
+
+          <div class="map-shell" id="mapShell">
+            <div class="map-canvas" id="mapCanvas" aria-label="Интерактивная карта маршрутов"></div>
+            <div class="map-loading" id="mapLoading">
+              <span class="map-spinner" aria-hidden="true"></span>
+              <span>Загрузка карты…</span>
+            </div>
+            <div class="map-empty" id="mapEmpty" hidden>
+              <strong>Геоданные ещё не заполнены</strong>
+              <p>Координаты остановок и линии маршрутов появятся после настройки в админ-панели.</p>
+            </div>
+            <div class="map-controls" role="group" aria-label="Управление картой">
+              <button type="button" id="mapZoomIn" aria-label="Приблизить">+</button>
+              <button type="button" id="mapZoomOut" aria-label="Отдалить">−</button>
+              <button type="button" id="mapLocate" aria-label="Моё местоположение">◎</button>
+              <button type="button" id="mapFitAll" aria-label="Показать все маршруты">⛶</button>
+            </div>
+            <div class="map-object-card" id="mapObjectCard" hidden></div>
+          </div>
+
+          <div class="map-search-row">
+            <input type="search" id="mapSearch" placeholder="Маршрут или остановка на карте…" autocomplete="off" aria-label="Поиск по карте">
+            <div class="map-search-results" id="mapSearchResults" hidden></div>
+          </div>
+
+          <div class="map-route-list" id="mapRouteList" aria-label="Маршруты на карте"></div>
+        </section>
       </main>
 
       <nav class="bottom-nav" id="bottomNav" aria-label="Главное меню">
@@ -707,6 +759,13 @@
             <path d="M8.2 12.7h2.1M13.7 12.7h2.1M8.2 16.2h2.1M13.7 16.2h2.1"></path>
           </svg>
           <span>Расписание</span>
+        </button>
+        <button type="button" data-nav="map">
+          <svg class="nav-icon nav-map" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.8 6.6 9 4.5l6 2.1 5.2-2.1v12.9L15 19.5l-6-2.1-5.2 2.1V6.6Z"></path>
+            <path d="M9 4.5v12.9M15 6.6v12.9"></path>
+          </svg>
+          <span>Карта</span>
         </button>
         <button type="button" data-nav="favorites">
           <svg class="nav-icon nav-favorites" viewBox="0 0 24 24" aria-hidden="true">
@@ -753,5 +812,6 @@
 
     <script src="https://telegram.org/js/telegram-web-app.js?62"></script>
   <script src="/app.js?v=20260713-hero2c"></script>
+  <script src="/map-screen.js?v=20260720-map1" defer></script>
   </body>
 </html>

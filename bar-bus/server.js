@@ -116,6 +116,7 @@ const {
   tabNumberKey
 } = require("./duty-roster");
 const { assertCleanText } = require("./content-filter");
+const mapModule = require("./map-module");
 
 const ROOT_DIR = __dirname;
 const PUBLIC_DIR = path.join(ROOT_DIR, "public");
@@ -242,7 +243,11 @@ const PUBLIC_READ_API_PATHS = new Set([
   "/api/stops/board",
   "/api/ads",
   "/api/services",
-  "/api/news"
+  "/api/news",
+  "/api/map/data",
+  "/api/map/vehicles",
+  "/api/map/alerts",
+  "/api/map/health"
 ]);
 
 const pendingAdminAccess = new Map();
@@ -262,6 +267,7 @@ const TELEGRAM_PANEL = {
   appeal: "💬 Написать обращение",
   myAppeals: "📨 Мои обращения",
   schedule: "📋 Расписание",
+  map: "🗺 Карта",
   clear: "🧹 Очистить чат",
   help: "ℹ️ О боте",
   admin: "⚙ Настройки"
@@ -280,6 +286,7 @@ Object.assign(TELEGRAM_PANEL, {
   appeal: "Написать обращение",
   myAppeals: "Мои обращения",
   schedule: "Расписание",
+  map: "Карта",
   clear: "Очистить чат",
   help: "О боте",
   admin: "Настройки"
@@ -296,6 +303,21 @@ APPEAL_BOT_CATEGORIES.splice(
 );
 
 seedAdminsFromEnv(ADMIN_IDS);
+
+// Модуль карты получает зависимости сервера (функции объявлены ниже,
+// но доступны здесь благодаря hoisting function declarations).
+mapModule.init({
+  sendJson,
+  httpError,
+  parseBody,
+  requireAdmin,
+  getTelegramUser,
+  requireVerifiedTelegramUser,
+  enforceRateLimit,
+  sendTelegramMessage,
+  getPublicUrl,
+  RATE_LIMITS
+});
 
 const MIME_TYPES = {
   ".html": "text/html; charset=utf-8",
@@ -321,7 +343,9 @@ const COMPRESSIBLE_STATIC_EXTS = new Set([".html", ".css", ".js", ".json", ".svg
 
 const CONTENT_SECURITY_POLICY = [
   "default-src 'self'",
-  "script-src 'self' https://telegram.org",
+  // blob: — MapLibre GL создаёт из blob свой render-worker (экран «Карта»)
+  "script-src 'self' https://telegram.org blob:",
+  "worker-src 'self' blob:",
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "media-src 'self' data: blob: https:",
@@ -1754,6 +1778,10 @@ async function handleApi(req, res, url) {
     return sendJson(res, 200, cancelReminder(decodeURIComponent(reminderMatch[1]), user));
   }
 
+  if (pathname.startsWith("/api/map/") || pathname === "/api/user/favorites") {
+    if (await mapModule.handlePublicApi(req, res, url)) return;
+  }
+
   if (pathname.startsWith("/api/admin/")) {
     const user = getTelegramUser(req);
     enforceRateLimit(req, user, "admin-api", RATE_LIMITS.adminApi);
@@ -1768,6 +1796,8 @@ async function handleApi(req, res, url) {
 
 async function handleAdminApi(req, res, url) {
   const pathname = url.pathname;
+
+  if (await mapModule.handleAdminApi(req, res, url)) return;
 
   if (req.method === "GET" && pathname === "/api/admin/bootstrap") {
     const admin = requireAdmin(req, url);
@@ -2707,6 +2737,10 @@ function telegramMainKeyboard(admin = null) {
   const appealsButton = hasPermission(admin?.role, "appeals") ? "Рабочие обращения" : TELEGRAM_PANEL.myAppeals;
   const keyboard = [
     [
+      { text: TELEGRAM_PANEL.map },
+      { text: TELEGRAM_PANEL.schedule }
+    ],
+    [
       { text: TELEGRAM_PANEL.appeal },
       { text: appealsButton }
     ],
@@ -2755,6 +2789,7 @@ async function configureBotCommands() {
   return callTelegram("setMyCommands", {
     commands: [
       { command: "start", description: "О боте и запуск приложения" },
+      { command: "map", description: "Карта маршрутов и остановок" },
       { command: "appeal", description: "Написать обращение" },
       { command: "appeals", description: "Мои обращения" },
       { command: "work", description: "Рабочие обращения" },
@@ -2963,14 +2998,36 @@ async function sendWelcome(chatId, fromId = "") {
       "",
       "Что умеет:",
       "🕘 Расписание автобусов",
+      "🗺 Карта маршрутов, остановок и изменений движения",
       "📍 Маршруты, направления и остановки",
       "⭐ Избранные остановки и рейсы",
+      "🔔 Подписки на изменения маршрутов",
       "💬 Обращения и ответы по ним",
       "📞 Контакты и полезная информация",
       "",
       "Откройте приложение через кнопку меню Telegram."
     ].join("\n"),
     reply_markup: telegramMainKeyboard(admin)
+  });
+}
+
+// Экран карты в Mini App: сообщение с web_app-кнопкой, открывающей нужный
+// раздел через hash (#map, #map_route_<id>, #map_stop_<key>).
+async function sendMapScreen(chatId, fromId = "", target = "map") {
+  const safeTarget = /^map(_[a-z]+_[\w:%-]+)?$/i.test(target) ? target : "map";
+  return sendTelegramMessage({
+    chat_id: chatId,
+    text: [
+      "🗺 Карта маршрутов и остановок",
+      "",
+      "На карте: линии маршрутов, остановки, изменения движения и транспорт (если подключён GPS).",
+      "Откройте карту кнопкой ниже — вход не нужен, Telegram узнаёт вас автоматически."
+    ].join("\n"),
+    reply_markup: {
+      inline_keyboard: [[
+        { text: "Открыть карту", web_app: { url: getPublicUrl(`/#${safeTarget}`) } }
+      ]]
+    }
   });
 }
 
@@ -3014,8 +3071,10 @@ async function sendBotHelp(chatId, fromId = "") {
       "Помогает быстро пользоваться сервисами автобусного парка:",
       "",
       "🕘 Смотреть расписание",
+      "🗺 Открыть карту маршрутов (/map)",
       "📍 Найти маршрут и остановку",
       "⭐ Сохранить избранное",
+      "🔔 Подписаться на изменения маршрута",
       "💬 Написать обращение",
       "📨 Посмотреть свои обращения",
       "📞 Узнать контакты"
@@ -3551,6 +3610,7 @@ async function handleTelegramMessage(message) {
 
   const startPayload = text.match(/^\/start(?:@\w+)?\s+(.+)$/i)?.[1]?.trim() || "";
   if (startPayload === "appeal") return sendAppealCategoryPicker(chatId, fromId);
+  if (startPayload === "map" || startPayload.startsWith("map_")) return sendMapScreen(chatId, fromId, startPayload);
   if (isTelegramCommand(text, "start") || text === TELEGRAM_PANEL.app) return sendWelcome(chatId, fromId);
   if (text === TELEGRAM_PANEL.clear || text === "🧹 Очистить" || isTelegramCommand(text, "clear")) {
     if (fromId) pendingTelegramAppeals.delete(fromId);
@@ -3570,6 +3630,7 @@ async function handleTelegramMessage(message) {
   if (isTelegramCommand(text, "admin")) return sendAdminPanelForUser(chatId, fromId);
   if (isAdminAccessRequest(text)) return sendAdminPanelForUser(chatId, fromId);
   if (text === TELEGRAM_PANEL.schedule || isTelegramCommand(text, "routes")) return sendRoutes(chatId, fromId);
+  if (text === TELEGRAM_PANEL.map || text === "🗺 Карта" || isTelegramCommand(text, "map")) return sendMapScreen(chatId, fromId);
   if (fromId && (await handlePendingAdminAccess(message, text, fromId))) return;
   if (fromId && (await handleActiveAdminAppealMessage(message, text, fromId, attachmentCandidate))) return;
   if (fromId && (await handlePendingTelegramAppeal(message, text, fromId, attachmentCandidate))) return;
