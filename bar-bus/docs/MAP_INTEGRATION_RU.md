@@ -7,6 +7,35 @@
 > транспорта, плавная анимация автобусов, провайдеры Яндекс-геокодера и
 > OSRM road-snap. Детали — в разделах ниже.
 
+## Конфигурация через переменные окружения
+
+Полный список — в `.env.example` (раздел «КАРТА»). Ключевое:
+
+| Переменная | Назначение |
+|---|---|
+| `MAP_PROVIDER` | движок карты (`maplibre`) |
+| `MAP_TILE_URL` / `MAP_STYLE_URL` / `MAP_SCHEME_STYLE_URL` | своя подложка «Схемы»: растровые тайлы или style-URL MapLibre (хосты автоматически попадают в CSP) |
+| `MAP_SATELLITE_TILE_URL` / `MAP_HYBRID_STYLE_URL` | переопределение «Спутника»/«Гибрида» |
+| `MAP_DEFAULT_LAT/LNG/ZOOM` | центр и зум по умолчанию |
+| `GPS_ALLOWED_BOUNDS` | границы валидных GPS-позиций (`minLat,minLng,maxLat,maxLng`) |
+| `YANDEX_MAPS_API_KEY` / `YANDEX_GEOCODER_API_KEY` | геокодинг остановок |
+| `YANDEX_ROUTING_API_KEY` | привязка линий к дорогам через Яндекс Роутинг |
+| `YANDEX_GPS_API_ENDPOINT/KEY`, `TRANSPORT_API_ENDPOINT/KEY` | живые позиции транспорта (приоритет у API автопарка) |
+| `ENABLE_MAP_FEATURES` | `false` — карта выключена целиком: экран скрыт, API отвечает 503, бот сообщает о недоступности |
+| `ENABLE_DEMO_MAP_DATA` | `false` — демо-геоданные скрыты и сид заблокирован |
+| `ENABLE_MOCK_GPS` | пусто — тумблер в админке; `true/false` — жёстко, тумблер блокируется |
+| `GPS_POLLING_INTERVAL_SECONDS` | частота опроса GPS (и клиентом, и кэшем сервера) |
+| `GPS_STALE_AFTER_SECONDS` | позиции старше — не показываются (статус `stale`) |
+| `GPS_MAX_SPEED_KMH` | позиции с аномальной скоростью отбрасываются |
+| `REDIS_URL` | общий кэш для нескольких инстансов (redis-lite, без npm-зависимостей); при недоступности — прозрачный fallback на память |
+| `MAP_CACHE_TTL_SECONDS`, `LIVE_VEHICLE_CACHE_TTL_SECONDS` | TTL кэшей статических геоданных и live-позиций |
+
+Формат живого GPS-API: JSON-массив (или `{vehicles:[...]}`) с полями
+`id/board`, `route|routeId`, `lat/lng` (`latitude/longitude`), `speed|speedKmh`,
+`bearing|course|heading`, `timestamp` (сек/мс/ISO). Ключ передаётся в
+`Authorization: Bearer`, `X-Api-Key` и `?apikey`. Позиции проходят валидацию
+(границы, скорость, свежесть) — битые и устаревшие отбрасываются.
+
 ## Режимы карты и подложки
 
 | Режим | Источник | Особенности |

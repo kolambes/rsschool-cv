@@ -14,19 +14,101 @@
 const crypto = require("node:crypto");
 const { getDb, listRoutes } = require("./db.js");
 const geoNetwork = require("./map-geo-network.js");
+const { RedisLite } = require("./redis-lite.js");
+
+// ── Конфигурация через переменные окружения ─────────────────────────────────
+
+function envBool(name, fallback) {
+  const raw = process.env[name];
+  if (raw === undefined || raw === "") return fallback;
+  return !["false", "0", "no", "off"].includes(String(raw).toLowerCase());
+}
+
+function envNum(name, fallback, min, max) {
+  const value = Number(process.env[name]);
+  if (!Number.isFinite(value)) return fallback;
+  return Math.min(max ?? Infinity, Math.max(min ?? -Infinity, value));
+}
+
+// GPS_ALLOWED_BOUNDS: "minLat,minLng,maxLat,maxLng"
+function parseBounds(raw, fallback) {
+  const parts = String(raw || "").split(",").map(Number);
+  if (parts.length === 4 && parts.every(Number.isFinite)) {
+    return { minLat: parts[0], minLng: parts[1], maxLat: parts[2], maxLng: parts[3] };
+  }
+  return fallback;
+}
+
+const MAP_ENV = {
+  provider: process.env.MAP_PROVIDER || "maplibre",
+  tileUrl: process.env.MAP_TILE_URL || "",
+  styleUrl: process.env.MAP_STYLE_URL || "",
+  schemeStyleUrl: process.env.MAP_SCHEME_STYLE_URL || "",
+  satelliteTileUrl: process.env.MAP_SATELLITE_TILE_URL || "",
+  hybridStyleUrl: process.env.MAP_HYBRID_STYLE_URL || "",
+  defaultLat: envNum("MAP_DEFAULT_LAT", 53.1327, -90, 90),
+  defaultLng: envNum("MAP_DEFAULT_LNG", 26.0139, -180, 180),
+  defaultZoom: envNum("MAP_DEFAULT_ZOOM", 12, 3, 18),
+  // Фиче-флаги. ENABLE_MOCK_GPS: пусто → управляется тумблером в админке,
+  // явное true/false → жёстко включён/выключен независимо от админки.
+  mapFeaturesEnabled: envBool("ENABLE_MAP_FEATURES", true),
+  demoMapDataEnabled: envBool("ENABLE_DEMO_MAP_DATA", true),
+  mockGpsEnv: process.env.ENABLE_MOCK_GPS ?? "",
+  gpsPollSeconds: envNum("GPS_POLLING_INTERVAL_SECONDS", 15, 3, 300),
+  gpsStaleSeconds: envNum("GPS_STALE_AFTER_SECONDS", 60, 10, 3600),
+  gpsMaxSpeedKmh: envNum("GPS_MAX_SPEED_KMH", 100, 20, 300),
+  mapCacheTtlMs: envNum("MAP_CACHE_TTL_SECONDS", 300, 5, 86400) * 1000,
+  vehicleCacheTtlMs: envNum("LIVE_VEHICLE_CACHE_TTL_SECONDS", 30, 1, 600) * 1000,
+};
 
 // Центр Барановичей — отправная точка схематичной раскладки демо-геоданных.
-const CITY_CENTER = { lat: 53.1327, lng: 26.0139 };
-const CITY_BOUNDS = { minLat: 52.95, maxLat: 53.32, minLng: 25.75, maxLng: 26.30 };
+const CITY_CENTER = { lat: MAP_ENV.defaultLat, lng: MAP_ENV.defaultLng };
+const CITY_BOUNDS = parseBounds(process.env.GPS_ALLOWED_BOUNDS, {
+  minLat: 52.95, maxLat: 53.32, minLng: 25.75, maxLng: 26.30,
+});
 
-const MAP_DATA_CACHE_TTL_MS = 60 * 1000;
-const VEHICLES_MIN_INTERVAL_MS = 2000; // сервер не пересчитывает демо-транспорт чаще
 const DEMO_VEHICLES_PER_DIRECTION = 1;
+// Транспорт пересчитывается не чаще интервала опроса GPS (и не чаще 2 с)
+const VEHICLES_MIN_INTERVAL_MS = Math.max(2000, Math.min(MAP_ENV.gpsPollSeconds * 1000, MAP_ENV.vehicleCacheTtlMs));
 
 let deps = null;
 let tablesReady = false;
-let mapDataCache = { data: null, expiresAt: 0 };
-let vehiclesCache = { data: null, expiresAt: 0 };
+
+// ── Кэш: память + опциональный Redis (REDIS_URL) ────────────────────────────
+// Redis нужен для нескольких инстансов; при недоступности прозрачно
+// работает только память — карта не деградирует.
+
+const redis = process.env.REDIS_URL ? new RedisLite(process.env.REDIS_URL) : null;
+const memoryCache = new Map(); // key → { value, expiresAt }
+
+const mapCache = {
+  async get(key) {
+    const hit = memoryCache.get(key);
+    if (hit && hit.expiresAt > Date.now()) return hit.value;
+    memoryCache.delete(key);
+    if (redis) {
+      const raw = await redis.get(key).catch(() => null);
+      if (raw) {
+        try {
+          const value = JSON.parse(raw);
+          memoryCache.set(key, { value, expiresAt: Date.now() + 3000 }); // короткий L1
+          return value;
+        } catch { /* повреждённое значение игнорируем */ }
+      }
+    }
+    return null;
+  },
+  async set(key, value, ttlMs) {
+    memoryCache.set(key, { value, expiresAt: Date.now() + ttlMs });
+    if (redis) await redis.set(key, JSON.stringify(value), ttlMs).catch(() => false);
+  },
+  async del(...keys) {
+    for (const key of keys) memoryCache.delete(key);
+    if (redis) await redis.del(...keys).catch(() => 0);
+  },
+};
+
+const CACHE_KEYS = { data: "map:data:v2", vehicles: "map:vehicles:v2" };
 
 // ── Инициализация ────────────────────────────────────────────────────────────
 
@@ -98,8 +180,10 @@ function nowIso() {
 }
 
 function invalidateMapCaches() {
-  mapDataCache = { data: null, expiresAt: 0 };
-  vehiclesCache = { data: null, expiresAt: 0 };
+  // синхронно чистим память, Redis — в фоне
+  memoryCache.delete(CACHE_KEYS.data);
+  memoryCache.delete(CACHE_KEYS.vehicles);
+  mapCache.del(CACHE_KEYS.data, CACHE_KEYS.vehicles).catch(() => {});
 }
 
 // Зеркало normalizeName из db.js: ключ физической остановки — её
@@ -125,8 +209,12 @@ function setMapSetting(key, value) {
 }
 
 function demoVehiclesEnabled() {
-  const envForced = String(process.env.MAP_DEMO_VEHICLES || "").toLowerCase();
-  if (["1", "true", "yes"].includes(envForced)) return true;
+  // ENABLE_MOCK_GPS: явное значение главнее тумблера в админке
+  const envValue = String(MAP_ENV.mockGpsEnv).toLowerCase();
+  if (["true", "1", "yes", "on"].includes(envValue)) return true;
+  if (["false", "0", "no", "off"].includes(envValue)) return false;
+  // обратная совместимость со старой переменной
+  if (["1", "true", "yes"].includes(String(process.env.MAP_DEMO_VEHICLES || "").toLowerCase())) return true;
   return getMapSetting("demo_vehicles", "0") === "1";
 }
 
@@ -222,12 +310,14 @@ function removeRouteGeometry(routeId, directionCode) {
 function buildMapData() {
   const db = getDb();
   const routes = listRoutes();
+  // ENABLE_DEMO_MAP_DATA=false: демо-геоданные не отдаются наружу вовсе
+  const demoFilter = MAP_ENV.demoMapDataEnabled ? "" : " WHERE source <> 'demo'";
   const geometryRows = db
-    .prepare("SELECT route_id AS routeId, direction_code AS directionCode, geometry, source FROM map_route_geometry")
+    .prepare(`SELECT route_id AS routeId, direction_code AS directionCode, geometry, source FROM map_route_geometry${demoFilter}`)
     .all();
   const geometryByKey = new Map(geometryRows.map((row) => [`${row.routeId}:${row.directionCode}`, row]));
 
-  const stopGeoRows = db.prepare("SELECT stop_key AS key, name, lat, lng, source FROM map_stop_geo").all();
+  const stopGeoRows = db.prepare(`SELECT stop_key AS key, name, lat, lng, source FROM map_stop_geo${demoFilter}`).all();
   const stopGeoByKey = new Map(stopGeoRows.map((row) => [row.key, row]));
 
   const stopRows = db
@@ -302,11 +392,11 @@ function buildMapData() {
   };
 }
 
-function getMapData() {
-  const now = Date.now();
-  if (mapDataCache.data && mapDataCache.expiresAt > now) return mapDataCache.data;
+async function getMapData() {
+  const cached = await mapCache.get(CACHE_KEYS.data);
+  if (cached) return cached;
   const data = buildMapData();
-  mapDataCache = { data, expiresAt: now + MAP_DATA_CACHE_TTL_MS };
+  await mapCache.set(CACHE_KEYS.data, data, MAP_ENV.mapCacheTtlMs);
   return data;
 }
 
@@ -330,7 +420,7 @@ const demoGpsProvider = {
   // Детерминированная симуляция: борт «едет» по сохранённой геометрии
   // направления туда-обратно. Позиция — функция времени, состояния нет.
   async fetchVehiclePositions() {
-    const data = getMapData();
+    const data = await getMapData();
     const nowSec = Date.now() / 1000;
     const raw = [];
     for (const route of data.routes) {
@@ -386,17 +476,114 @@ const demoGpsProvider = {
   },
 
   validatePosition(position) {
-    const errors = [];
-    if (!isValidCoordinate(position.lat, position.lng)) errors.push("Позиция вне зоны обслуживания");
-    if (!position.routeId) errors.push("Не указан маршрут");
-    return { ok: errors.length === 0, errors };
+    return validateGpsPosition(position);
   }
 };
 
+// Единая валидация позиций: границы GPS_ALLOWED_BOUNDS, скорость GPS_MAX_SPEED_KMH
+function validateGpsPosition(position) {
+  const errors = [];
+  if (!isValidCoordinate(position.lat, position.lng)) errors.push("Позиция вне зоны обслуживания");
+  if (!position.routeId) errors.push("Не указан маршрут");
+  if (Number.isFinite(position.speedKmh) && position.speedKmh > MAP_ENV.gpsMaxSpeedKmh) {
+    errors.push(`Скорость ${Math.round(position.speedKmh)} км/ч выше предела ${MAP_ENV.gpsMaxSpeedKmh}`);
+  }
+  return { ok: errors.length === 0, errors };
+}
+
+// ── Живой GPS: универсальный HTTP-провайдер ─────────────────────────────────
+// Подключается к API автопарка (TRANSPORT_API_*) или Яндекс-совместимому
+// endpoint'у (YANDEX_GPS_API_*). Ожидается JSON-массив позиций (или объект
+// с полем vehicles/positions/data); поля распознаются по распространённым
+// именам. Позиции никогда не выдумываются: нет данных — нет транспорта.
+function createHttpGpsProvider(name, endpoint, apiKey) {
+  return {
+    name,
+    isDemo: false,
+
+    async fetchVehiclePositions() {
+      const url = new URL(endpoint);
+      if (apiKey && !url.searchParams.has("apikey")) url.searchParams.set("apikey", apiKey);
+      const response = await fetch(url, {
+        headers: {
+          accept: "application/json",
+          ...(apiKey ? { authorization: `Bearer ${apiKey}`, "x-api-key": apiKey } : {}),
+        },
+        signal: AbortSignal.timeout(MAP_ENV.gpsPollSeconds * 1000),
+      });
+      if (!response.ok) throw new Error(`GPS API HTTP ${response.status}`);
+      const payload = await response.json();
+      const list = Array.isArray(payload)
+        ? payload
+        : payload.vehicles || payload.positions || payload.data || [];
+      if (!Array.isArray(list)) throw new Error("GPS API вернул неожиданный формат");
+      return list;
+    },
+
+    normalizePosition(raw) {
+      const lat = Number(raw.lat ?? raw.latitude ?? raw.Lat);
+      const lng = Number(raw.lng ?? raw.lon ?? raw.longitude ?? raw.Lon);
+      const routeNumber = String(raw.routeNumber ?? raw.route ?? raw.route_no ?? "").trim();
+      const routeId = String(raw.routeId ?? raw.route_id ?? "").trim() || routeIdByNumber(routeNumber);
+      const tsRaw = raw.timestamp ?? raw.ts ?? raw.time ?? raw.updated_at;
+      let timestamp = Date.now();
+      if (Number.isFinite(Number(tsRaw))) {
+        const num = Number(tsRaw);
+        timestamp = num > 1e12 ? num : num * 1000; // сек → мс
+      } else if (tsRaw) {
+        const parsed = Date.parse(tsRaw);
+        if (Number.isFinite(parsed)) timestamp = parsed;
+      }
+      if (!Number.isFinite(lat) || !Number.isFinite(lng) || !routeId) return null;
+      return {
+        id: String(raw.id ?? raw.board ?? raw.vehicleId ?? `${routeId}-${lat.toFixed(4)}`),
+        routeId,
+        routeNumber: routeNumber || routeNumberById(routeId),
+        directionCode: String(raw.directionCode ?? raw.direction ?? ""),
+        directionName: String(raw.directionName ?? ""),
+        board: String(raw.board ?? raw.plate ?? raw.id ?? ""),
+        lat,
+        lng,
+        bearing: Number(raw.bearing ?? raw.course ?? raw.heading ?? 0) || 0,
+        speedKmh: Number(raw.speedKmh ?? raw.speed ?? 0) || 0,
+        timestamp,
+      };
+    },
+
+    validatePosition(position) {
+      return validateGpsPosition(position);
+    },
+  };
+}
+
+let routeLookupCache = null;
+function routeLookup() {
+  if (!routeLookupCache) {
+    const routes = listRoutes();
+    routeLookupCache = {
+      byNumber: new Map(routes.map((route) => [String(route.number), route.id])),
+      byId: new Map(routes.map((route) => [route.id, String(route.number)])),
+    };
+  }
+  return routeLookupCache;
+}
+const routeIdByNumber = (number) => routeLookup().byNumber.get(String(number)) || "";
+const routeNumberById = (id) => routeLookup().byId.get(id) || "";
+
 let activeGpsProvider = null;
 
+// Приоритет источников GPS: явно зарегистрированный → API автопарка →
+// Яндекс-совместимый endpoint → mock (если разрешён). Не выдумываем данные.
 function resolveGpsProvider() {
   if (activeGpsProvider) return activeGpsProvider;
+  if (process.env.TRANSPORT_API_ENDPOINT) {
+    activeGpsProvider = createHttpGpsProvider("transport-api", process.env.TRANSPORT_API_ENDPOINT, process.env.TRANSPORT_API_KEY || "");
+    return activeGpsProvider;
+  }
+  if (process.env.YANDEX_GPS_API_ENDPOINT) {
+    activeGpsProvider = createHttpGpsProvider("yandex-gps", process.env.YANDEX_GPS_API_ENDPOINT, process.env.YANDEX_GPS_API_KEY || "");
+    return activeGpsProvider;
+  }
   if (demoVehiclesEnabled()) return demoGpsProvider;
   return null;
 }
@@ -410,8 +597,7 @@ function registerGpsProvider(provider) {
 const VEHICLES_MAX_UNFILTERED = 120;
 
 async function getVehicles(routeFilter = null) {
-  const now = Date.now();
-  let base = vehiclesCache.data && vehiclesCache.expiresAt > now ? vehiclesCache.data : null;
+  let base = await mapCache.get(CACHE_KEYS.vehicles);
 
   if (!base) {
     const provider = resolveGpsProvider();
@@ -422,12 +608,19 @@ async function getVehicles(routeFilter = null) {
       let status = provider.isDemo ? "demo" : "live";
       try {
         const raw = await provider.fetchVehiclePositions();
+        let staleCount = 0;
         for (const item of raw) {
           const position = provider.normalizePosition(item);
           if (!position) continue;
+          // GPS_STALE_AFTER_SECONDS: устаревшие позиции не показываем
+          if (Date.now() - (position.timestamp || 0) > MAP_ENV.gpsStaleSeconds * 1000) {
+            staleCount += 1;
+            continue;
+          }
           const check = provider.validatePosition(position);
           if (check.ok) vehicles.push(position);
         }
+        if (!vehicles.length && staleCount > 0) status = "stale";
       } catch (error) {
         console.warn(`Map GPS provider "${provider.name}" failed: ${error.message || error}`);
         status = "error";
@@ -435,7 +628,7 @@ async function getVehicles(routeFilter = null) {
       }
       base = { ok: true, status, provider: provider.name, vehicles, generatedAt: nowIso() };
     }
-    vehiclesCache = { data: base, expiresAt: now + VEHICLES_MIN_INTERVAL_MS };
+    await mapCache.set(CACHE_KEYS.vehicles, base, VEHICLES_MIN_INTERVAL_MS);
   }
 
   // Reduced payload: клиент запрашивает борта только видимых маршрутов;
@@ -773,11 +966,11 @@ async function fetchJsonWithTimeout(url) {
 const yandexProvider = {
   name: "yandex-geocoder",
   available() {
-    return Boolean(process.env.YANDEX_GEOCODER_API_KEY);
+    return Boolean(process.env.YANDEX_GEOCODER_API_KEY || process.env.YANDEX_MAPS_API_KEY);
   },
   // Геокодинг остановки/адреса в агломерации Барановичей
   async geocode(query) {
-    const key = process.env.YANDEX_GEOCODER_API_KEY;
+    const key = process.env.YANDEX_GEOCODER_API_KEY || process.env.YANDEX_MAPS_API_KEY;
     if (!key) throw new Error("Ключ Яндекс Геокодера не настроен (YANDEX_GEOCODER_API_KEY).");
     const url = `https://geocode-maps.yandex.ru/1.x/?apikey=${encodeURIComponent(key)}&format=json&results=3&ll=26.014,53.132&spn=0.6,0.4&geocode=${encodeURIComponent(`Барановичи, ${query}`)}`;
     const data = await fetchJsonWithTimeout(url);
@@ -793,6 +986,35 @@ const yandexProvider = {
         precision: object.metaDataProperty?.GeocoderMetaData?.precision || "",
       };
     }).filter((item) => isValidCoordinate(item.lat, item.lng));
+  },
+};
+
+// Привязка к дорогам через Яндекс Router API (нужен тариф с роутингом).
+const yandexRoutingProvider = {
+  name: "yandex-routing",
+  available() {
+    return Boolean(process.env.YANDEX_ROUTING_API_KEY);
+  },
+  async getRouteGeometry(points) {
+    const key = process.env.YANDEX_ROUTING_API_KEY;
+    if (!key) throw new Error("Ключ Яндекс Роутинга не настроен (YANDEX_ROUTING_API_KEY).");
+    if (!Array.isArray(points) || points.length < 2) throw new Error("Нужно минимум две точки.");
+    const waypoints = points.slice(0, 50).map(([lng, lat]) => `${lat},${lng}`).join("|");
+    const url = `https://api.routing.yandex.net/v2/route?apikey=${encodeURIComponent(key)}&waypoints=${encodeURIComponent(waypoints)}&mode=driving`;
+    const data = await fetchJsonWithTimeout(url);
+    // Формат ответа: route.legs[].steps[].polyline.points = [[lat,lng], ...]
+    const legs = data?.route?.legs || [];
+    const coords = [];
+    for (const leg of legs) {
+      for (const step of leg.steps || []) {
+        for (const point of step.polyline?.points || []) {
+          const [lat, lng] = point;
+          if (Number.isFinite(lat) && Number.isFinite(lng)) coords.push([Math.round(lng * 1e6) / 1e6, Math.round(lat * 1e6) / 1e6]);
+        }
+      }
+    }
+    if (coords.length < 2) throw new Error("Яндекс Роутинг вернул неожиданный формат ответа.");
+    return coords;
   },
 };
 
@@ -826,52 +1048,106 @@ const OSM_ATTRIBUTION = "© Участники OpenStreetMap";
 const ESRI_ATTRIBUTION = "© Esri, Maxar, Earthstar Geographics";
 const CARTO_ATTRIBUTION = "© OpenStreetMap, © CARTO";
 
+const ESRI_DEFAULT_TILES = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
+
 function getMapConfig() {
+  if (!MAP_ENV.mapFeaturesEnabled) {
+    return { ok: true, enabled: false, message: "Карта временно отключена администратором." };
+  }
   const tilesOn = externalTilesEnabled();
+
+  // «Схема»: приоритет — внешний стиль (MAP_SCHEME_STYLE_URL/MAP_STYLE_URL),
+  // затем растровые тайлы (MAP_TILE_URL), затем встроенная векторная подложка.
+  const schemeStyleUrl = MAP_ENV.schemeStyleUrl || MAP_ENV.styleUrl;
+  const scheme = schemeStyleUrl
+    ? { title: "Схема", type: "style", styleUrl: schemeStyleUrl }
+    : MAP_ENV.tileUrl
+      ? { title: "Схема", type: "raster", enabled: true, tiles: [MAP_ENV.tileUrl], attribution: OSM_ATTRIBUTION }
+      : { title: "Схема", type: "builtin" };
+
+  const satelliteTiles = MAP_ENV.satelliteTileUrl || ESRI_DEFAULT_TILES;
+  const hybrid = MAP_ENV.hybridStyleUrl
+    ? { title: "Гибрид", type: "style", enabled: tilesOn, styleUrl: MAP_ENV.hybridStyleUrl }
+    : {
+        title: "Гибрид",
+        type: "raster",
+        enabled: tilesOn,
+        tiles: [satelliteTiles],
+        labels: ["https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png", "https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png"],
+        attribution: `${ESRI_ATTRIBUTION}; ${CARTO_ATTRIBUTION}`,
+      };
+
+  const gpsProvider = resolveGpsProvider();
   return {
     ok: true,
-    center: { lat: CITY_CENTER.lat, lng: CITY_CENTER.lng },
-    // «Схема» — встроенная векторная подложка (работает без внешних сервисов);
-    // «Спутник»/«Гибрид» — внешние растровые тайлы с обязательной атрибуцией.
+    enabled: true,
+    engine: MAP_ENV.provider, // MAP_PROVIDER (сейчас поддерживается maplibre)
+    center: { lat: CITY_CENTER.lat, lng: CITY_CENTER.lng, zoom: MAP_ENV.defaultZoom },
     modes: {
-      scheme: { title: "Схема", type: "builtin" },
+      scheme,
       satellite: {
         title: "Спутник",
         type: "raster",
         enabled: tilesOn,
-        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
-        attribution: ESRI_ATTRIBUTION,
+        tiles: [satelliteTiles],
+        attribution: MAP_ENV.satelliteTileUrl ? "" : ESRI_ATTRIBUTION,
       },
-      hybrid: {
-        title: "Гибрид",
-        type: "raster",
-        enabled: tilesOn,
-        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
-        labels: ["https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png", "https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png"],
-        attribution: `${ESRI_ATTRIBUTION}; ${CARTO_ATTRIBUTION}`,
-      },
+      hybrid,
     },
     basemap: geoNetwork.schemeBasemap(),
+    gps: {
+      pollSeconds: MAP_ENV.gpsPollSeconds,
+      staleSeconds: MAP_ENV.gpsStaleSeconds,
+      source: gpsProvider ? gpsProvider.name : null,
+      demo: Boolean(gpsProvider?.isDemo),
+      // ENABLE_MOCK_GPS задан явно → тумблер демо-транспорта в админке блокируется
+      mockLocked: MAP_ENV.mockGpsEnv !== "",
+    },
+    demoDataEnabled: MAP_ENV.demoMapDataEnabled,
     providers: {
       yandexGeocoder: yandexProvider.available(),
-      roadSnap: osrmProvider.available(),
-      gps: Boolean(resolveGpsProvider()),
+      roadSnap: osrmProvider.available() || yandexRoutingProvider.available(),
+      roadSnapSource: osrmProvider.available() ? "osrm" : yandexRoutingProvider.available() ? "yandex-routing" : null,
+      gps: Boolean(gpsProvider),
     },
   };
 }
 
+// Origins внешних URL из env — для динамической сборки CSP в server.js
+function getExternalOrigins() {
+  const origins = new Set();
+  const candidates = [
+    MAP_ENV.tileUrl, MAP_ENV.styleUrl, MAP_ENV.schemeStyleUrl,
+    MAP_ENV.satelliteTileUrl, MAP_ENV.hybridStyleUrl,
+  ];
+  for (const raw of candidates) {
+    if (!raw) continue;
+    try {
+      origins.add(new URL(raw.replace(/\{[a-z@]+\}/gi, "0")).origin);
+    } catch { /* некорректный URL не попадает в CSP */ }
+  }
+  return [...origins];
+}
+
+function isMapEnabled() {
+  return MAP_ENV.mapFeaturesEnabled;
+}
+
 // ── Health ───────────────────────────────────────────────────────────────────
 
-function getMapHealth() {
-  const data = getMapData();
+async function getMapHealth() {
+  const data = await getMapData();
   const provider = resolveGpsProvider();
   return {
     ok: true,
+    enabled: MAP_ENV.mapFeaturesEnabled,
     coverage: data.coverage,
     demoGeo: data.demoGeo,
+    cache: { redis: Boolean(redis), ttlSeconds: MAP_ENV.mapCacheTtlMs / 1000 },
     vehicles: {
       provider: provider ? provider.name : null,
-      status: provider ? (provider.isDemo ? "demo" : "live") : "offline"
+      status: provider ? (provider.isDemo ? "demo" : "live") : "offline",
+      pollSeconds: MAP_ENV.gpsPollSeconds
     },
     alerts: listAlerts().length
   };
@@ -888,8 +1164,14 @@ async function handlePublicApi(req, res, url) {
     return sendJson(res, 200, getMapConfig()), true;
   }
 
+  // ENABLE_MAP_FEATURES=false: карта отключена целиком (кроме config,
+  // из которого клиент узнаёт причину)
+  if (!MAP_ENV.mapFeaturesEnabled && pathname.startsWith("/api/map/")) {
+    return sendJson(res, 503, { ok: false, error: "Карта временно отключена." }), true;
+  }
+
   if (req.method === "GET" && pathname === "/api/map/data") {
-    return sendJson(res, 200, getMapData()), true;
+    return sendJson(res, 200, await getMapData()), true;
   }
 
   if (req.method === "GET" && pathname === "/api/map/vehicles") {
@@ -903,7 +1185,7 @@ async function handlePublicApi(req, res, url) {
   }
 
   if (req.method === "GET" && pathname === "/api/map/health") {
-    return sendJson(res, 200, getMapHealth()), true;
+    return sendJson(res, 200, await getMapHealth()), true;
   }
 
   if (pathname === "/api/map/subscriptions") {
@@ -949,7 +1231,7 @@ async function handleAdminApi(req, res, url) {
   requireAdmin(req, url, "schedule");
 
   if (req.method === "GET" && pathname === "/api/admin/map/overview") {
-    const data = getMapData();
+    const data = await getMapData();
     return sendJson(res, 200, {
       ok: true,
       coverage: data.coverage,
@@ -1069,10 +1351,12 @@ async function handleAdminApi(req, res, url) {
     return sendJson(res, 200, { ok: true, applied: body.apply === true, results }), true;
   }
 
-  // Привязка линии направления к дорогам через OSRM (нужен OSRM_URL).
+  // Привязка линии направления к дорогам: OSRM (OSRM_URL) или
+  // Яндекс Роутинг (YANDEX_ROUTING_API_KEY); OSRM в приоритете.
   if (req.method === "POST" && pathname === "/api/admin/map/snap-route") {
-    if (!osrmProvider.available()) {
-      throw deps.httpError("Сервис привязки к дорогам не настроен. Укажите OSRM_URL в .env (self-hosted OSRM или демо-сервер OSRM для тестов).", 400);
+    const snapProvider = osrmProvider.available() ? osrmProvider : yandexRoutingProvider.available() ? yandexRoutingProvider : null;
+    if (!snapProvider) {
+      throw deps.httpError("Сервис привязки к дорогам не настроен. Укажите OSRM_URL или YANDEX_ROUTING_API_KEY в .env.", 400);
     }
     const body = await parseBody(req);
     const routeId = String(body.routeId || "");
@@ -1087,12 +1371,15 @@ async function handleAdminApi(req, res, url) {
       if (geo) points.push([geo.lng, geo.lat]);
     }
     if (points.length < 2) throw deps.httpError("У направления меньше двух остановок с координатами — сначала задайте координаты остановок.", 400);
-    const geometry = await osrmProvider.getRouteGeometry(points);
-    if (body.apply === true) setRouteGeometry(routeId, directionCode, geometry, "osrm");
+    const geometry = await snapProvider.getRouteGeometry(points);
+    if (body.apply === true) setRouteGeometry(routeId, directionCode, geometry, snapProvider.name);
     return sendJson(res, 200, { ok: true, applied: body.apply === true, points: geometry.length, geometry }), true;
   }
 
   if (req.method === "POST" && pathname === "/api/admin/map/demo-seed") {
+    if (!MAP_ENV.demoMapDataEnabled) {
+      throw deps.httpError("Демо-геоданные отключены (ENABLE_DEMO_MAP_DATA=false).", 400);
+    }
     const body = await parseBody(req);
     if (body.clear) {
       return sendJson(res, 200, { ok: true, cleared: clearDemoGeo() }), true;
@@ -1114,6 +1401,8 @@ module.exports = {
   getMapData,
   getMapConfig,
   getMapHealth,
+  getExternalOrigins,
+  isMapEnabled,
   listAlerts,
   saveAlert,
   notifySubscribersAboutAlert,

@@ -349,8 +349,9 @@ const CONTENT_SECURITY_POLICY = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "media-src 'self' data: blob: https:",
-  // тайлы Спутник/Гибрид (Esri, CARTO) MapLibre загружает через fetch → connect-src
-  "connect-src 'self' https://api.telegram.org https://server.arcgisonline.com https://*.basemaps.cartocdn.com",
+  // тайлы Спутник/Гибрид (Esri, CARTO) + пользовательские подложки из env
+  // (MAP_TILE_URL и др.) MapLibre загружает через fetch → connect-src
+  `connect-src 'self' https://api.telegram.org https://server.arcgisonline.com https://*.basemaps.cartocdn.com${mapModule.getExternalOrigins().map((origin) => ` ${origin}`).join("")}`,
   "font-src 'self' data:",
   "object-src 'none'",
   // Telegram Web (web.telegram.org) embeds Mini Apps in an iframe — 'none' would
@@ -3015,6 +3016,13 @@ async function sendWelcome(chatId, fromId = "") {
 // Экран карты в Mini App: сообщение с web_app-кнопкой, открывающей нужный
 // раздел через hash (#map, #map_route_<id>, #map_stop_<key>).
 async function sendMapScreen(chatId, fromId = "", target = "map") {
+  if (!mapModule.isMapEnabled()) {
+    return sendTelegramMessage({
+      chat_id: chatId,
+      text: "Карта временно недоступна. Расписание по-прежнему работает в приложении.",
+      reply_markup: telegramKeyboardForUser(fromId)
+    });
+  }
   const safeTarget = /^map(_[a-z]+_[\w:%-]+)?$/i.test(target) ? target : "map";
   return sendTelegramMessage({
     chat_id: chatId,

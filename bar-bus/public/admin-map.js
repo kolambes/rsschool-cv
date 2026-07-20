@@ -182,6 +182,7 @@
     state.routes = routes.routes || [];
     state.alerts = overview.alerts || [];
     state.providers = config?.providers || {};
+    state.config = config || {};
     renderProviders();
     renderOverview(overview);
     renderStopList();
@@ -207,13 +208,25 @@
   function renderProviders() {
     if (!els.providersStatus) return;
     const p = state.providers || {};
+    const config = state.config || {};
+    const gpsLabel = !p.gps ? "не подключён" : config.gps?.demo ? "демо" : `онлайн (${config.gps?.source || "api"})`;
     els.providersStatus.innerHTML = [
       `Яндекс Геокодер: <b>${p.yandexGeocoder ? "настроен ✓" : "не настроен"}</b>`,
-      `Привязка к дорогам (OSRM): <b>${p.roadSnap ? "настроена ✓" : "не настроена"}</b>`,
-      `GPS-провайдер: <b>${p.gps ? "демо" : "не подключён"}</b>`
-    ].join(" · ");
+      `Привязка к дорогам: <b>${p.roadSnap ? `настроена ✓ (${p.roadSnapSource})` : "не настроена"}</b>`,
+      `GPS-провайдер: <b>${gpsLabel}</b>`,
+      config.demoDataEnabled === false ? "Демо-геоданные: <b>запрещены (ENABLE_DEMO_MAP_DATA=false)</b>" : "",
+      config.enabled === false ? "⚠ Карта отключена: <b>ENABLE_MAP_FEATURES=false</b>" : ""
+    ].filter(Boolean).join(" · ");
     if (els.geocode) els.geocode.disabled = !p.yandexGeocoder;
     if (els.snapRoute) els.snapRoute.disabled = !p.roadSnap;
+    // Флаги окружения блокируют демо-кнопки и тумблер mock-GPS
+    const demoAllowed = config.demoDataEnabled !== false;
+    if (els.seedDemo) els.seedDemo.disabled = !demoAllowed;
+    if (els.clearDemo) els.clearDemo.disabled = !demoAllowed;
+    if (els.demoVehicles && config.gps?.mockLocked) {
+      els.demoVehicles.disabled = true;
+      els.demoVehicles.closest("label")?.setAttribute("title", "Задано переменной ENABLE_MOCK_GPS — тумблер отключён");
+    }
   }
 
   // ── Остановки ──────────────────────────────────────────────────────────────

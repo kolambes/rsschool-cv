@@ -15,9 +15,10 @@
 (() => {
   "use strict";
 
-  const VEHICLES_POLL_MS = 6000;
   const VEHICLE_TWEEN_MS = 900;
   const ALERTS_POLL_MS = 60000;
+  // Интервал опроса транспорта приходит с сервера (GPS_POLLING_INTERVAL_SECONDS)
+  const vehiclesPollMs = () => Math.max(3000, ((state.config?.gps?.pollSeconds) || 6) * 1000);
 
   const $ = (sel) => document.querySelector(sel);
 
@@ -91,20 +92,39 @@
 
   function loadAllData(force = false) {
     if (state.dataPromise && !force) return state.dataPromise;
-    state.dataPromise = Promise.all([
-      fetch("/api/map/config").then((r) => { if (!r.ok) throw new Error("config"); return r.json(); }),
-      fetch("/api/map/data").then((r) => { if (!r.ok) throw new Error("data"); return r.json(); }),
-    ])
-      .then(([config, data]) => {
+    state.dataPromise = fetch("/api/map/config")
+      .then((r) => { if (!r.ok) throw new Error("Сервис карты недоступен."); return r.json(); })
+      .then((config) => {
         state.config = config;
-        state.data = data;
-        return { config, data };
+        if (config.enabled === false) {
+          // ENABLE_MAP_FEATURES=false: карта отключена администратором
+          state.data = { routes: [], stops: [], demoGeo: false };
+          applyMapDisabled(config.message);
+          return { config, data: state.data };
+        }
+        return fetch("/api/map/data")
+          .then((r) => { if (!r.ok) throw new Error("Не удалось загрузить данные карты."); return r.json(); })
+          .then((data) => {
+            state.data = data;
+            return { config, data };
+          });
       })
       .catch((error) => {
         state.dataPromise = null;
         throw error;
       });
     return state.dataPromise;
+  }
+
+  function applyMapDisabled(message) {
+    // display:none — атрибут hidden перебивается display:flex у кнопок навигации
+    const navButton = document.querySelector('.bottom-nav [data-nav="map"]');
+    if (navButton) navButton.style.display = "none";
+    if (els.scheduleBlock) els.scheduleBlock.hidden = true;
+    els.loading.hidden = true;
+    els.empty.hidden = false;
+    els.empty.querySelector("strong").textContent = "Карта временно отключена";
+    els.empty.querySelector("p").textContent = message || "Расписание по-прежнему доступно в приложении.";
   }
 
   let maplibrePromise = null;
@@ -184,8 +204,14 @@
   }
 
   function styleForMode(mode) {
+    const modeConfig = state.config?.modes?.[mode];
+    // Внешний стиль MapLibre по URL (MAP_STYLE_URL / MAP_*_STYLE_URL)
+    if (modeConfig?.type === "style" && modeConfig.styleUrl) return modeConfig.styleUrl;
+    if (mode === "scheme" && modeConfig?.type === "raster" && modeConfig.tiles?.length) {
+      return rasterStyle(mode);
+    }
     if (mode === "satellite" || mode === "hybrid") {
-      if (state.config?.modes?.[mode]?.enabled) return rasterStyle(mode);
+      if (modeConfig?.enabled && modeConfig.tiles?.length) return rasterStyle(mode);
       return schemeStyle();
     }
     return schemeStyle();
@@ -303,7 +329,12 @@
     state.booting = true;
     els.loading.hidden = false;
     try {
-      const [{ data }] = await Promise.all([loadAllData(), loadMapLibre()]);
+      const { config, data } = await loadAllData();
+      if (config.enabled === false) {
+        state.booting = false;
+        return;
+      }
+      await loadMapLibre();
       if (!data.routes.length) {
         els.loading.hidden = true;
         els.empty.hidden = false;
@@ -313,13 +344,13 @@
       }
 
       state.representatives = pickRepresentatives();
-      const center = state.config?.center || { lat: 53.132, lng: 26.014 };
+      const center = state.config?.center || { lat: 53.132, lng: 26.014, zoom: 12.1 };
 
       state.map = new maplibregl.Map({
         container: els.canvas,
         style: styleForMode(state.mode),
         center: [center.lng, center.lat],
-        zoom: 12.1,
+        zoom: center.zoom || 12.1,
         minZoom: 9,
         maxZoom: 17,
         attributionControl: { compact: true },
@@ -885,7 +916,7 @@
 
   function startVehicleLoop() {
     stopVehicleLoop();
-    state.vehiclesTimer = window.setInterval(refreshVehicles, VEHICLES_POLL_MS);
+    state.vehiclesTimer = window.setInterval(refreshVehicles, vehiclesPollMs());
     state.alertsTimer = window.setInterval(refreshAlerts, ALERTS_POLL_MS);
     refreshVehicles(true);
     if (!reducedMotion && !state.rafId) state.rafId = requestAnimationFrame(vehicleLoop);
@@ -1218,4 +1249,14 @@
 
   // Экран мог быть открыт до загрузки скрипта (deep-link из бота)
   if (document.body.dataset.activeView === "map") onViewChange("map");
+
+  // Ранняя проверка флага ENABLE_MAP_FEATURES: если карта отключена,
+  // пункт «Карта» скрывается сразу, без открытия экрана.
+  fetch("/api/map/config")
+    .then((response) => response.json())
+    .then((config) => {
+      if (!state.config) state.config = config;
+      if (config.enabled === false) applyMapDisabled(config.message);
+    })
+    .catch(() => { /* решится при открытии экрана */ });
 })();

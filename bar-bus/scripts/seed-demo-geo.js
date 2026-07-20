@@ -25,6 +25,7 @@ if (process.argv.includes("--clear")) {
   console.log(
     `Демо-геоданные созданы: маршрутов — ${seeded.routes}, направлений — ${seeded.directions}, новых остановок — ${seeded.stops}.`
   );
-  const health = mapModule.getMapHealth();
+  mapModule.getMapHealth().then((health) => {
   console.log(`Покрытие: ${health.coverage.directionsWithGeometry}/${health.coverage.directionsTotal} направлений, ${health.coverage.stopsWithGeo}/${health.coverage.stopsTotal} остановок.`);
+  });
 }
