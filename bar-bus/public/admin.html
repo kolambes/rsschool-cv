@@ -244,6 +244,15 @@
 
           <section class="admin-form map-admin-overview" id="mapAdminOverview" aria-label="Покрытие геоданными"></section>
 
+          <section class="admin-form map-admin-providers">
+            <h3>Внешние провайдеры геоданных</h3>
+            <p class="map-admin-hint" id="mapAdminProvidersStatus">Проверка настроек…</p>
+            <div class="status-actions">
+              <button class="ghost-button" id="mapAdminGeocode" type="button">Геокодировать остановки (Яндекс)</button>
+            </div>
+            <p class="map-admin-hint">Геокодер Яндекса подставляет реальные координаты остановок по названию (нужен <code>YANDEX_GEOCODER_API_KEY</code> в .env, использование — по условиям Яндекс API). Привязка линии к дорогам — кнопка «Привязать к дорогам» в редакторе геометрии (нужен <code>OSRM_URL</code>).</p>
+          </section>
+
           <section class="admin-form map-admin-demo">
             <h3>Демо-данные</h3>
             <p class="map-admin-hint">Схематичные геоданные для проверки карты, пока не заполнены реальные координаты. Все демо-записи помечены и удаляются одной кнопкой; на карте пользователи видят бейдж «Схема (демо-геоданные)».</p>
@@ -288,6 +297,7 @@
             </div>
             <div class="status-actions">
               <button class="ghost-button" id="mapAdminBuildFromStops" type="button">Построить по остановкам</button>
+              <button class="ghost-button" id="mapAdminSnapRoute" type="button">Привязать к дорогам</button>
               <button class="ghost-button" id="mapAdminSaveGeometry" type="button">Сохранить геометрию</button>
               <button class="ghost-button danger-button" id="mapAdminDeleteGeometry" type="button">Удалить</button>
             </div>

@@ -13,6 +13,7 @@
 
 const crypto = require("node:crypto");
 const { getDb, listRoutes } = require("./db.js");
+const geoNetwork = require("./map-geo-network.js");
 
 // Центр Барановичей — отправная точка схематичной раскладки демо-геоданных.
 const CITY_CENTER = { lat: 53.1327, lng: 26.0139 };
@@ -680,72 +681,53 @@ function saveFavoritesSync(telegramId, favorites) {
 
 // ── Демо-геоданные ───────────────────────────────────────────────────────────
 //
-// Реальных координат в расписании нет. Для демонстрации карта раскладывает
-// маршруты схематично: каждый маршрут получает свой «луч» из центра города,
-// остановки размещаются вдоль него, общие остановки переиспользуют координаты.
-// Все записи помечаются source='demo' — их видно в админке и на карте
-// (бейдж «Схема (демо-геоданные)»), и их можно удалить одной кнопкой.
+// Реальных координат в расписании нет. Демо-геометрия строится по уличной
+// сети города (map-geo-network.js): городское кольцо — по улицам центра,
+// пригородные маршруты — по общим магистральным коридорам своего направления
+// с расхождением только у конечных. Линии идут «по дорогам» схемы, а не
+// прямыми между остановками. Все записи помечаются source='demo' — их видно
+// в админке и на карте (бейдж «Демо-данные»), и их можно удалить одной кнопкой.
 
 function seedDemoGeo(options = {}) {
   const db = getDb();
   const routes = listRoutes().filter((route) => (options.type ? route.type === options.type : true));
-  if (!routes.length) return { routes: 0, stops: 0 };
+  if (!routes.length) return { routes: 0, directions: 0, stops: 0 };
 
   let stopCount = 0;
   let directionCount = 0;
 
-  const insertGeoTx = () => {
-    for (let routeIndex = 0; routeIndex < routes.length; routeIndex++) {
-      const route = routes[routeIndex];
-      // «Луч» маршрута: угол определяется номером маршрута — стабильно между запусками.
-      const angle = ((hashCode(route.number) % 360) * Math.PI) / 180;
+  for (const route of routes) {
+    const geo = geoNetwork.buildDemoRouteGeo(route, normalizeStopKey);
 
-      for (const direction of route.directions || []) {
-        const existing = db
-          .prepare("SELECT source FROM map_route_geometry WHERE route_id = ? AND direction_code = ?")
-          .get(route.id, direction.code);
-        if (existing && existing.source !== "demo" && !options.overwrite) continue;
-
-        const stops = direction.stops || [];
-        if (stops.length < 2) continue;
-
-        const points = [];
-        for (let index = 0; index < stops.length; index++) {
-          const stop = stops[index];
-          const key = normalizeStopKey(stop.name);
-          let geo = db.prepare("SELECT lat, lng FROM map_stop_geo WHERE stop_key = ?").get(key);
-          if (!geo) {
-            // Расстояние от центра растёт с позицией; лёгкая «змейка» поперёк луча,
-            // чтобы линии не были идеально прямыми.
-            const distanceKm = 0.4 + (index / Math.max(1, stops.length - 1)) * (2.2 + (hashCode(route.number) % 5) * 0.35);
-            const wobble = Math.sin(index * 1.7 + routeIndex) * 0.13;
-            const lat = CITY_CENTER.lat + (distanceKm / 111) * Math.cos(angle + wobble);
-            const lng = CITY_CENTER.lng + (distanceKm / (111 * Math.cos((CITY_CENTER.lat * Math.PI) / 180))) * Math.sin(angle + wobble);
-            db.prepare(`
-              INSERT INTO map_stop_geo (stop_key, name, lat, lng, source, updated_at)
-              VALUES (?, ?, ?, ?, 'demo', ?)
-              ON CONFLICT(stop_key) DO NOTHING
-            `).run(key, stop.name, Math.round(lat * 1e6) / 1e6, Math.round(lng * 1e6) / 1e6, nowIso());
-            geo = db.prepare("SELECT lat, lng FROM map_stop_geo WHERE stop_key = ?").get(key);
-            stopCount += 1;
-          }
-          if (geo) points.push([geo.lng, geo.lat]);
-        }
-
-        if (points.length >= 2) {
-          db.prepare(`
-            INSERT INTO map_route_geometry (route_id, direction_code, geometry, source, updated_at)
-            VALUES (?, ?, ?, 'demo', ?)
-            ON CONFLICT(route_id, direction_code) DO UPDATE SET geometry = excluded.geometry,
-              source = 'demo', updated_at = excluded.updated_at
-          `).run(route.id, direction.code, JSON.stringify(points), nowIso());
-          directionCount += 1;
-        }
-      }
+    for (const [key, coord] of geo.stops) {
+      const existing = db.prepare("SELECT source FROM map_stop_geo WHERE stop_key = ?").get(key);
+      if (existing && existing.source !== "demo" && !options.overwrite) continue;
+      const nameRow = db.prepare("SELECT name FROM stops WHERE normalized_name = ? LIMIT 1").get(key);
+      db.prepare(`
+        INSERT INTO map_stop_geo (stop_key, name, lat, lng, source, updated_at)
+        VALUES (?, ?, ?, ?, 'demo', ?)
+        ON CONFLICT(stop_key) DO UPDATE SET lat = excluded.lat, lng = excluded.lng,
+          source = 'demo', updated_at = excluded.updated_at
+        WHERE map_stop_geo.source = 'demo'
+      `).run(key, nameRow?.name || key, coord[1], coord[0], nowIso());
+      if (!existing) stopCount += 1;
     }
-  };
 
-  insertGeoTx();
+    for (const [directionCode, coords] of geo.directions) {
+      const existing = db
+        .prepare("SELECT source FROM map_route_geometry WHERE route_id = ? AND direction_code = ?")
+        .get(route.id, directionCode);
+      if (existing && existing.source !== "demo" && !options.overwrite) continue;
+      db.prepare(`
+        INSERT INTO map_route_geometry (route_id, direction_code, geometry, source, updated_at)
+        VALUES (?, ?, ?, 'demo', ?)
+        ON CONFLICT(route_id, direction_code) DO UPDATE SET geometry = excluded.geometry,
+          source = 'demo', updated_at = excluded.updated_at
+      `).run(route.id, directionCode, JSON.stringify(coords), nowIso());
+      directionCount += 1;
+    }
+  }
+
   invalidateMapCaches();
   return { routes: routes.length, directions: directionCount, stops: stopCount };
 }
@@ -756,6 +738,126 @@ function clearDemoGeo() {
   const geometry = db.prepare("DELETE FROM map_route_geometry WHERE source = 'demo'").run();
   invalidateMapCaches();
   return { stops: stops.changes, geometry: geometry.changes };
+}
+
+// ── MapDataProvider: внешние источники геоданных ────────────────────────────
+//
+// Контракт (переключение источников без переписывания интерфейса):
+//
+//   interface MapDataProvider {
+//     name: string
+//     available(): boolean
+//     geocode?(query): Promise<GeocodeResult[]>            // адрес/остановка → координаты
+//     getRouteGeometry?(points): Promise<[lng,lat][]>       // привязка линии к дорогам
+//   }
+//
+// Яндекс API используется только в разрешённых сценариях: серверный
+// HTTP-геокодер по ключу. Тайлы Яндекса в стороннем движке и iframe
+// не используются (запрещено условиями сервиса). Привязка к дорогам —
+// через OSRM (self-hosted или демо-сервер проекта OSRM для тестов).
+
+const EXTERNAL_REQUEST_TIMEOUT_MS = 12000;
+
+async function fetchJsonWithTimeout(url) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), EXTERNAL_REQUEST_TIMEOUT_MS);
+  try {
+    const response = await fetch(url, { signal: controller.signal, headers: { "user-agent": "barbus-miniapp/1.0" } });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    return await response.json();
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+const yandexProvider = {
+  name: "yandex-geocoder",
+  available() {
+    return Boolean(process.env.YANDEX_GEOCODER_API_KEY);
+  },
+  // Геокодинг остановки/адреса в агломерации Барановичей
+  async geocode(query) {
+    const key = process.env.YANDEX_GEOCODER_API_KEY;
+    if (!key) throw new Error("Ключ Яндекс Геокодера не настроен (YANDEX_GEOCODER_API_KEY).");
+    const url = `https://geocode-maps.yandex.ru/1.x/?apikey=${encodeURIComponent(key)}&format=json&results=3&ll=26.014,53.132&spn=0.6,0.4&geocode=${encodeURIComponent(`Барановичи, ${query}`)}`;
+    const data = await fetchJsonWithTimeout(url);
+    const members = data?.response?.GeoObjectCollection?.featureMember || [];
+    return members.map((member) => {
+      const object = member.GeoObject || {};
+      const [lng, lat] = String(object.Point?.pos || "").split(" ").map(Number);
+      return {
+        name: object.name || "",
+        description: object.description || "",
+        lat,
+        lng,
+        precision: object.metaDataProperty?.GeocoderMetaData?.precision || "",
+      };
+    }).filter((item) => isValidCoordinate(item.lat, item.lng));
+  },
+};
+
+const osrmProvider = {
+  name: "osrm",
+  available() {
+    return Boolean(process.env.OSRM_URL);
+  },
+  // Привязка последовательности точек (остановок) к дорожной сети
+  async getRouteGeometry(points) {
+    const base = String(process.env.OSRM_URL || "").replace(/\/$/, "");
+    if (!base) throw new Error("Сервис привязки к дорогам не настроен (OSRM_URL).");
+    if (!Array.isArray(points) || points.length < 2) throw new Error("Нужно минимум две точки.");
+    const coords = points.slice(0, 80).map(([lng, lat]) => `${lng},${lat}`).join(";");
+    const url = `${base}/route/v1/driving/${coords}?overview=full&geometries=geojson&continue_straight=true`;
+    const data = await fetchJsonWithTimeout(url);
+    if (data.code !== "Ok" || !data.routes?.[0]?.geometry?.coordinates?.length) {
+      throw new Error("Дорожная привязка не удалась: маршрут не построен.");
+    }
+    return data.routes[0].geometry.coordinates.map(([lng, lat]) => [Math.round(lng * 1e6) / 1e6, Math.round(lat * 1e6) / 1e6]);
+  },
+};
+
+// ── Конфигурация карты: режимы и подложка «Схемы» ───────────────────────────
+
+function externalTilesEnabled() {
+  return String(process.env.MAP_EXTERNAL_TILES ?? "true").toLowerCase() !== "false";
+}
+
+const OSM_ATTRIBUTION = "© Участники OpenStreetMap";
+const ESRI_ATTRIBUTION = "© Esri, Maxar, Earthstar Geographics";
+const CARTO_ATTRIBUTION = "© OpenStreetMap, © CARTO";
+
+function getMapConfig() {
+  const tilesOn = externalTilesEnabled();
+  return {
+    ok: true,
+    center: { lat: CITY_CENTER.lat, lng: CITY_CENTER.lng },
+    // «Схема» — встроенная векторная подложка (работает без внешних сервисов);
+    // «Спутник»/«Гибрид» — внешние растровые тайлы с обязательной атрибуцией.
+    modes: {
+      scheme: { title: "Схема", type: "builtin" },
+      satellite: {
+        title: "Спутник",
+        type: "raster",
+        enabled: tilesOn,
+        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+        attribution: ESRI_ATTRIBUTION,
+      },
+      hybrid: {
+        title: "Гибрид",
+        type: "raster",
+        enabled: tilesOn,
+        tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],
+        labels: ["https://a.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png", "https://b.basemaps.cartocdn.com/dark_only_labels/{z}/{x}/{y}@2x.png"],
+        attribution: `${ESRI_ATTRIBUTION}; ${CARTO_ATTRIBUTION}`,
+      },
+    },
+    basemap: geoNetwork.schemeBasemap(),
+    providers: {
+      yandexGeocoder: yandexProvider.available(),
+      roadSnap: osrmProvider.available(),
+      gps: Boolean(resolveGpsProvider()),
+    },
+  };
 }
 
 // ── Health ───────────────────────────────────────────────────────────────────
@@ -781,6 +883,10 @@ function getMapHealth() {
 async function handlePublicApi(req, res, url) {
   const { pathname } = url;
   const { sendJson, parseBody, getTelegramUser, requireVerifiedTelegramUser, enforceRateLimit, RATE_LIMITS } = deps;
+
+  if (req.method === "GET" && pathname === "/api/map/config") {
+    return sendJson(res, 200, getMapConfig()), true;
+  }
 
   if (req.method === "GET" && pathname === "/api/map/data") {
     return sendJson(res, 200, getMapData()), true;
@@ -936,6 +1042,56 @@ async function handleAdminApi(req, res, url) {
     return sendJson(res, 200, { ok: true, demoVehicles: demoVehiclesEnabled() }), true;
   }
 
+  // Геокодинг остановок через Яндекс (нужен YANDEX_GEOCODER_API_KEY).
+  // dry-run по умолчанию: показывает кандидатов, apply=true — сохраняет.
+  if (req.method === "POST" && pathname === "/api/admin/map/geocode-stops") {
+    if (!yandexProvider.available()) {
+      throw deps.httpError("Ключ Яндекс Геокодера не настроен. Добавьте YANDEX_GEOCODER_API_KEY в .env (использование — по условиям Яндекс API).", 400);
+    }
+    const body = await parseBody(req);
+    const limit = Math.min(25, Math.max(1, Number(body.limit) || 10));
+    const onlyMissing = body.onlyMissing !== false;
+    const stops = listPhysicalStops()
+      .filter((stop) => (onlyMissing ? !Number.isFinite(stop.lat) || stop.geoSource === "demo" : true))
+      .slice(0, limit);
+    const results = [];
+    for (const stop of stops) {
+      try {
+        const candidates = await yandexProvider.geocode(`остановка ${stop.name}`);
+        const best = candidates[0] || null;
+        if (best && body.apply === true) setStopGeo(stop.key, best.lat, best.lng, "yandex");
+        results.push({ key: stop.key, name: stop.name, found: Boolean(best), candidate: best, applied: Boolean(best && body.apply === true) });
+      } catch (error) {
+        results.push({ key: stop.key, name: stop.name, found: false, error: error.message });
+      }
+      await new Promise((resolve) => setTimeout(resolve, 250)); // мягкий rate limit
+    }
+    return sendJson(res, 200, { ok: true, applied: body.apply === true, results }), true;
+  }
+
+  // Привязка линии направления к дорогам через OSRM (нужен OSRM_URL).
+  if (req.method === "POST" && pathname === "/api/admin/map/snap-route") {
+    if (!osrmProvider.available()) {
+      throw deps.httpError("Сервис привязки к дорогам не настроен. Укажите OSRM_URL в .env (self-hosted OSRM или демо-сервер OSRM для тестов).", 400);
+    }
+    const body = await parseBody(req);
+    const routeId = String(body.routeId || "");
+    const directionCode = String(body.directionCode || "");
+    const route = listRoutes().find((item) => item.id === routeId);
+    const direction = route?.directions?.find((item) => item.code === directionCode);
+    if (!route || !direction) throw deps.httpError("Маршрут или направление не найдены.", 400);
+    const db = getDb();
+    const points = [];
+    for (const stop of direction.stops || []) {
+      const geo = db.prepare("SELECT lat, lng FROM map_stop_geo WHERE stop_key = ?").get(normalizeStopKey(stop.name));
+      if (geo) points.push([geo.lng, geo.lat]);
+    }
+    if (points.length < 2) throw deps.httpError("У направления меньше двух остановок с координатами — сначала задайте координаты остановок.", 400);
+    const geometry = await osrmProvider.getRouteGeometry(points);
+    if (body.apply === true) setRouteGeometry(routeId, directionCode, geometry, "osrm");
+    return sendJson(res, 200, { ok: true, applied: body.apply === true, points: geometry.length, geometry }), true;
+  }
+
   if (req.method === "POST" && pathname === "/api/admin/map/demo-seed") {
     const body = await parseBody(req);
     if (body.clear) {
@@ -956,6 +1112,7 @@ module.exports = {
   seedDemoGeo,
   clearDemoGeo,
   getMapData,
+  getMapConfig,
   getMapHealth,
   listAlerts,
   saveAlert,

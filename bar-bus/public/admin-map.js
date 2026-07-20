@@ -32,7 +32,10 @@
     alertBody: document.querySelector("#mapAdminAlertBody"),
     alertUntil: document.querySelector("#mapAdminAlertUntil"),
     alertSave: document.querySelector("#mapAdminAlertSave"),
-    alertList: document.querySelector("#mapAdminAlertList")
+    alertList: document.querySelector("#mapAdminAlertList"),
+    providersStatus: document.querySelector("#mapAdminProvidersStatus"),
+    geocode: document.querySelector("#mapAdminGeocode"),
+    snapRoute: document.querySelector("#mapAdminSnapRoute")
   };
 
   const state = {
@@ -43,7 +46,8 @@
     alerts: [],
     selectedStopKey: "",
     stopFilter: "",
-    editedGeometry: []
+    editedGeometry: [],
+    providers: {}
   };
 
   const bridge = () => window.BarBusAdmin || null;
@@ -168,14 +172,17 @@
   // ── Данные ─────────────────────────────────────────────────────────────────
 
   async function loadAll() {
-    const [overview, stops, routes] = await Promise.all([
+    const [overview, stops, routes, config] = await Promise.all([
       api("/api/admin/map/overview"),
       api("/api/admin/map/stops"),
-      api("/api/admin/map/routes")
+      api("/api/admin/map/routes"),
+      fetch("/api/map/config").then((r) => r.json()).catch(() => null)
     ]);
     state.stops = stops.stops || [];
     state.routes = routes.routes || [];
     state.alerts = overview.alerts || [];
+    state.providers = config?.providers || {};
+    renderProviders();
     renderOverview(overview);
     renderStopList();
     renderRouteSelects();
@@ -195,6 +202,18 @@
         <div><strong>${state.alerts.filter((alert) => alert.status === "active").length}</strong><span>активных изменений</span></div>
       </div>
       ${overview.demoGeo ? '<p class="map-admin-hint">⚠ Сейчас используются демо-геоданные: они схематичны и помечены на карте пользователя.</p>' : ""}`;
+  }
+
+  function renderProviders() {
+    if (!els.providersStatus) return;
+    const p = state.providers || {};
+    els.providersStatus.innerHTML = [
+      `Яндекс Геокодер: <b>${p.yandexGeocoder ? "настроен ✓" : "не настроен"}</b>`,
+      `Привязка к дорогам (OSRM): <b>${p.roadSnap ? "настроена ✓" : "не настроена"}</b>`,
+      `GPS-провайдер: <b>${p.gps ? "демо" : "не подключён"}</b>`
+    ].join(" · ");
+    if (els.geocode) els.geocode.disabled = !p.yandexGeocoder;
+    if (els.snapRoute) els.snapRoute.disabled = !p.roadSnap;
   }
 
   // ── Остановки ──────────────────────────────────────────────────────────────
@@ -402,6 +421,39 @@
     els.geometryText.value = JSON.stringify(points);
     refreshMapSources();
     setStatus(`Черновик линии построен по ${points.length} остановкам. Проверьте и сохраните.`, "success");
+  });
+
+  els.geocode?.addEventListener("click", async () => {
+    try {
+      setStatus("Геокодирование остановок через Яндекс…", "success");
+      const result = await api("/api/admin/map/geocode-stops", {
+        method: "POST",
+        body: JSON.stringify({ apply: true, limit: 10 })
+      });
+      const found = result.results.filter((item) => item.applied).length;
+      setStatus(`Геокодировано остановок: ${found} из ${result.results.length}. Запустите ещё раз для следующей порции.`, "success");
+      await loadAll();
+    } catch (error) {
+      setStatus(error.message || "Геокодирование не выполнено.", "error");
+    }
+  });
+
+  els.snapRoute?.addEventListener("click", async () => {
+    const route = currentRoute();
+    if (!route) return;
+    try {
+      setStatus("Привязка линии к дорогам…", "success");
+      const result = await api("/api/admin/map/snap-route", {
+        method: "POST",
+        body: JSON.stringify({ routeId: route.id, directionCode: els.directionSelect.value, apply: false })
+      });
+      state.editedGeometry = result.geometry || [];
+      els.geometryText.value = JSON.stringify(state.editedGeometry);
+      refreshMapSources();
+      setStatus(`Линия привязана к дорогам (${result.points} точек). Проверьте и нажмите «Сохранить геометрию».`, "success");
+    } catch (error) {
+      setStatus(error.message || "Привязка к дорогам не выполнена.", "error");
+    }
   });
 
   els.saveGeometry?.addEventListener("click", async () => {

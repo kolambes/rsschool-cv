@@ -349,7 +349,8 @@ const CONTENT_SECURITY_POLICY = [
   "style-src 'self' 'unsafe-inline'",
   "img-src 'self' data: blob: https:",
   "media-src 'self' data: blob: https:",
-  "connect-src 'self' https://api.telegram.org",
+  // тайлы Спутник/Гибрид (Esri, CARTO) MapLibre загружает через fetch → connect-src
+  "connect-src 'self' https://api.telegram.org https://server.arcgisonline.com https://*.basemaps.cartocdn.com",
   "font-src 'self' data:",
   "object-src 'none'",
   // Telegram Web (web.telegram.org) embeds Mini Apps in an iframe — 'none' would
