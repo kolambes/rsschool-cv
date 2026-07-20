@@ -343,6 +343,8 @@
       });
 
       state.booted = true;
+      // Хук для авто-тестов и отладки (данные и так публичные)
+      window.__mapx = { map: state.map, selectRoute, selectStop, selectVehicle, setMode, state };
       els.loading.hidden = true;
       fitCity(0);
       renderStatusChips();
