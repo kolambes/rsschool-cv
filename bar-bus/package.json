@@ -11,6 +11,7 @@
     "dev:bot": "node --no-warnings scripts/dev-bot.js",
     "import:routes": "node --no-warnings scripts/import-routes.js",
     "seed:map-demo": "node --no-warnings scripts/seed-demo-geo.js",
+    "import:osm-stops": "node --no-warnings scripts/import-osm-stops.js",
     "verify": "node --no-warnings scripts/verify.js",
     "test:roster": "node --no-warnings scripts/duty-roster-test.js",
     "test:schedule:virtual": "node --no-warnings scripts/virtual-schedule-test.js",
