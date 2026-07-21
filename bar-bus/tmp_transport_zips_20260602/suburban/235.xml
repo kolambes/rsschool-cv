@@ -1,0 +1,916 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="75">
+		<name>Маршрут №235 "Барановичи - Городище - Сениченята"</name>
+		<num>235</num>
+		<dateExp>2026-04-27T08:37:46.953</dateExp>
+		<dateStart>2026-02-15</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97474">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>11:30:00</departureTime>
+							<arrivalTime>11:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="53">
+			<name>пр-т Советский </name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97475">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>11:45:00</departureTime>
+							<arrivalTime>11:43:00</arrivalTime>
+							<interval>13</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="14">
+			<name>Малая Колпеница</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97476">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>11:50:00</departureTime>
+							<arrivalTime>11:50:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="384">
+			<name>Октябрьский</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97477">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>11:54:00</departureTime>
+							<arrivalTime>11:54:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="385">
+			<name>Столовичи</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97478">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>11:57:00</departureTime>
+							<arrivalTime>11:56:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="388">
+			<name>Пчелопитомник пов.</name>
+			<num>6</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97479">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:00:00</departureTime>
+							<arrivalTime>12:00:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="393">
+			<name>Арабовщина</name>
+			<num>7</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97480">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:05:00</departureTime>
+							<arrivalTime>12:04:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="394">
+			<name>Колдычево</name>
+			<num>8</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97481">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:08:00</departureTime>
+							<arrivalTime>12:08:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="399">
+			<name>Городище</name>
+			<num>9</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97482">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:18:00</departureTime>
+							<arrivalTime>12:16:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="631">
+			<name>Великое Село-2</name>
+			<num>10</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97483">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:23:00</departureTime>
+							<arrivalTime>12:22:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="628">
+			<name>Станкевичи-2</name>
+			<num>11</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97484">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:25:00</departureTime>
+							<arrivalTime>12:25:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1064">
+			<name>Крепочи</name>
+			<num>12</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97485">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:27:00</departureTime>
+							<arrivalTime>12:27:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1066">
+			<name>Гирмантовцы</name>
+			<num>13</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97486">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:31:00</departureTime>
+							<arrivalTime>12:30:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1068">
+			<name>Железница</name>
+			<num>14</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97487">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:35:00</departureTime>
+							<arrivalTime>12:34:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1071">
+			<name>Катминовцы</name>
+			<num>15</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97488">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:41:00</departureTime>
+							<arrivalTime>12:40:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1100">
+			<name>Кузевичи</name>
+			<num>16</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97489">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:44:00</departureTime>
+							<arrivalTime>12:44:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1078">
+			<name>Голынка</name>
+			<num>17</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97490">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:47:00</departureTime>
+							<arrivalTime>12:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1084">
+			<name>Крутовцы</name>
+			<num>18</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97491">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:51:00</departureTime>
+							<arrivalTime>12:50:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1086">
+			<name>Буйневичи</name>
+			<num>19</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97492">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:54:00</departureTime>
+							<arrivalTime>12:54:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="544">
+			<name>Застаринье</name>
+			<num>20</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97493">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>12:59:00</departureTime>
+							<arrivalTime>12:59:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="546">
+			<name>улица Кушлевка (Емельяновичи)</name>
+			<num>21</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97494">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:03:00</departureTime>
+							<arrivalTime>13:03:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="548">
+			<name>Сениченята</name>
+			<num>22</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97495">
+							<kodElem>8613</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:06:00</departureTime>
+							<arrivalTime>13:06:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="548">
+			<name>Сениченята</name>
+			<num>23</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97496">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:15:00</departureTime>
+							<arrivalTime>13:15:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="547">
+			<name>улица Кушлевка (Емельяновичи)</name>
+			<num>24</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97497">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:18:00</departureTime>
+							<arrivalTime>13:18:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="545">
+			<name>Застаринье</name>
+			<num>25</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97498">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:24:00</departureTime>
+							<arrivalTime>13:22:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1085">
+			<name>Буйневичи</name>
+			<num>26</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97499">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:30:00</departureTime>
+							<arrivalTime>13:29:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1083">
+			<name>Крутовцы</name>
+			<num>27</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97500">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:34:00</departureTime>
+							<arrivalTime>13:33:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1082">
+			<name>Голынка</name>
+			<num>28</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97501">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:38:00</departureTime>
+							<arrivalTime>13:37:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1101">
+			<name>Кузевичи</name>
+			<num>29</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97502">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:42:00</departureTime>
+							<arrivalTime>13:41:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1072">
+			<name>Катминовцы</name>
+			<num>30</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97503">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:46:00</departureTime>
+							<arrivalTime>13:45:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1069">
+			<name>Железница</name>
+			<num>31</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97504">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:52:00</departureTime>
+							<arrivalTime>13:51:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1067">
+			<name>Гирмантовцы</name>
+			<num>32</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97505">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>13:57:00</departureTime>
+							<arrivalTime>13:55:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1065">
+			<name>Крепочи</name>
+			<num>33</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97506">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:01:00</departureTime>
+							<arrivalTime>14:00:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="627">
+			<name>Станкевичи-2</name>
+			<num>34</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97507">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:04:00</departureTime>
+							<arrivalTime>14:03:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="632">
+			<name>Великое Село-2</name>
+			<num>35</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97508">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:07:00</departureTime>
+							<arrivalTime>14:06:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="398">
+			<name>Городище</name>
+			<num>36</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97509">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:13:00</departureTime>
+							<arrivalTime>14:11:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="395">
+			<name>Колдычево</name>
+			<num>37</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97510">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:22:00</departureTime>
+							<arrivalTime>14:21:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="392">
+			<name>Арабовщина</name>
+			<num>38</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97511">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:26:00</departureTime>
+							<arrivalTime>14:25:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="387">
+			<name>Пчелопитомник пов.</name>
+			<num>39</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97512">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:30:00</departureTime>
+							<arrivalTime>14:30:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="386">
+			<name>Столовичи</name>
+			<num>40</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97513">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:34:00</departureTime>
+							<arrivalTime>14:33:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="383">
+			<name>Октябрьский</name>
+			<num>41</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97514">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:37:00</departureTime>
+							<arrivalTime>14:36:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="15">
+			<name>Малая Колпеница</name>
+			<num>42</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97515">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>14:42:00</departureTime>
+							<arrivalTime>14:41:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>43</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="97516">
+							<kodElem>8614</kodElem>
+							<kodVariant>421</kodVariant>
+							<departureTime>15:00:00</departureTime>
+							<arrivalTime>15:00:00</arrivalTime>
+							<interval>18</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

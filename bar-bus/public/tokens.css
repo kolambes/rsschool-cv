@@ -1,0 +1,113 @@
+/* ============================================================
+   tokens.css — единый источник правды дизайн-системы.
+   Подключать ПЕРВЫМ, до styles.css и остальных.
+   Архитектура: primitive → semantic → component (bridge).
+
+   Смысл: старые слои проекта (--rs-* в responsive-system.css и
+   legacy --* в styles.css) не удаляем, а АЛИАСИМ на семантику —
+   тогда весь UI перекрашивается из одного места, без правки
+   48 000 строк и без войны с !important.
+   ============================================================ */
+
+:root {
+  /* ================= PRIMITIVES (сырые значения) ================= */
+  /* Neutral — тёплый песочный */
+  /* Вариант «Комфорт для глаз» (2026-07-13): фон светлее и менее
+     жёлтый (меньше цветового шума), поверхность не бело-слепящая,
+     чернила чуть мягче чистого чёрного — контраст остаётся AA/AAA,
+     но без резкости. Мнемо-цвета не тронуты. */
+  --sand-50: #fffdf8;
+  --sand-100: #f9f6ef;
+  --sand-200: #f3f0e8;
+  --sand-300: #e7e1d3;
+  --sand-400: #dcd5c4;
+  --sand-500: #c2b9a4;
+  --ink-900: #262d28;
+  --ink-700: #414b44;
+  --ink-500: #5b655f;
+
+  /* Brand — teal */
+  --teal-50: #e7f3f1;
+  --teal-100: #c9e4df;
+  --teal-500: #12897e;
+  --teal-600: #0f766e;
+  --teal-700: #0b5d57;
+  --teal-800: #0a4e48;
+
+  /* Status */
+  --green-600: #16a34a;
+  --amber-600: #b7791f;
+  --orange-600: #c2410c;
+
+  /* ================= SEMANTIC (назначение) ================= */
+  --color-bg: var(--sand-200);
+  --color-surface: var(--sand-50);
+  --color-surface-soft: var(--sand-100);
+  --color-text: var(--ink-900);
+  --color-text-muted: var(--ink-500);      /* ~5.3:1 на surface — AA ✓ */
+  --color-line: var(--sand-300);
+  --color-line-strong: var(--sand-400);
+  --color-accent: var(--teal-600);
+  --color-accent-hover: var(--teal-700);
+  --color-accent-soft: var(--teal-50);
+  --color-on-accent: #ffffff;
+  --color-success: var(--green-600);
+  --color-warning: var(--amber-600);
+  --color-danger: var(--orange-600);
+
+  /* Elevation — тёплые (коричневые, не чёрные) и тихие: глубина в
+     основном от рамки + тонального шага, тень лишь шепчет (Uber-модель). */
+  --elev-1: 0 1px 2px rgba(60, 50, 30, 0.05);
+  --elev-2: 0 1px 2px rgba(60, 50, 30, 0.07), 0 4px 12px rgba(60, 50, 30, 0.06);
+  --elev-3: 0 8px 24px rgba(60, 50, 30, 0.10);
+
+  /* Radius — префикс --r-*, чтобы НЕ конфликтовать с legacy
+     --radius-sm/-lg из styles.css (иначе значение утекало бы туда). */
+  --r-xs: 8px;
+  --r-sm: 10px;   /* внутренние элементы: концентрично к карточке 16px */
+  --r-md: 16px;
+  --r-lg: 20px;   /* только hero-уровень */
+  --r-pill: 999px;
+
+  /* Spacing (8px база + полушаги) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+
+  /* Type — --font-sans уникально (legacy использует --font-ui/-heading,
+     их не трогаем во избежание самоссылок).
+     «Комфорт для глаз»: базовый кегль 15→16px, межстрочные выше
+     (1.5/1.65), трекинг тела текста нейтральный — плотный минус-
+     трекинг оставлен только заголовкам. */
+  --font-sans: "Geist", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, monospace;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 19px;
+  --text-xl: 23px;
+  --text-2xl: 28px;
+  --text-3xl: 34px;
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+  --tracking-tight: -0.015em;
+  --tracking-normal: 0;
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  --dur-fast: 120ms;
+  --dur: 160ms;
+  --dur-slow: 240ms;
+}
+
+/* Мост «старые токены → семантика» намеренно живёт в redesign-theme.css
+   (последний подключаемый файл): базовые слои переопределяют --rs-*/--*
+   после tokens.css, поэтому выиграть по каскаду можно только оттуда.
+   Здесь — только примитивы и семантика (уникальные имена, порядок
+   подключения на них не влияет). */

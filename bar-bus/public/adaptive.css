@@ -1,0 +1,142 @@
+/* ============================================================
+   adaptive.css — адаптивный слой для всех размеров экранов.
+   Грузится ПОСЛЕДНИМ, поверх responsive-system.css.
+
+   Принцип: работаем ВМЕСТЕ с базовой системой, не ломаем её.
+     • Ширина масштабируется через её же токены (--rs-app-max,
+       --rs-nav-max, --rs-page-x) внутри больших брейкпоинтов.
+     • Позицию/высоту нижнего меню НЕ трогаем — оно остаётся
+       внизу штатной плашкой, лишь становится компактнее по центру.
+     • Сеточные правила повторяют специфичность базы + !important,
+       поэтому реально применяются.
+
+   Базовое поведение:
+     ≤699px  : ~560px колонка, нижнее меню-плашка
+     ≥700px  : --rs-app-max 860px, услуги 3-в-ряд, маршруты 2-в-ряд
+   Здесь добавлено:
+     ≥768px  : ещё пара 2-в-ряд сеток для планшетов
+     ≥1024px : контент до ~1080px, плотнее сетки, меню компактнее
+     ≥1440px : контент до ~1200px, больше воздуха
+   Мобильная вёрстка (≤767px) не затрагивается.
+   ============================================================ */
+
+/* ---- Защита от горизонтальной прокрутки ---- */
+html,
+body {
+  max-width: 100%;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+/* Логотип и шапка теперь целиком в redesign-theme.css — по макету
+   там плоский значок автобуса + текстовые строки, а PNG-герб скрыт. */
+
+/* ============================================================
+   ПЛАНШЕТ  (≥ 768px)
+   База уже даёт 860px + услуги 3-в-ряд + маршруты 2-в-ряд.
+   Добавляем 2-в-ряд для блока «Сервисы и информация».
+   ============================================================ */
+@media (min-width: 768px) {
+  .home-services-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+}
+
+/* ============================================================
+   ДЕСКТОП  (≥ 1024px)
+   Шире контент, плотнее сетки. Меню остаётся ВНИЗУ, но делаем
+   его компактной плашкой по центру (не растягиваем на весь экран).
+   ============================================================ */
+@media (min-width: 1024px) {
+  :root {
+    --rs-app-max: 1080px;     /* контент шире */
+    --rs-nav-max: 520px;      /* меню — аккуратная плашка по центру */
+    --rs-page-x: 40px;
+    --rs-page-y: 28px;
+    --rs-gap: 16px;
+    --rs-gap-lg: 20px;
+  }
+
+  body {
+    font-size: 15px;
+  }
+
+  /* --- Плотнее контентные сетки --- */
+  .service-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  /* маршруты 3-в-ряд (спец. 0,4,2, чтобы перебить auto-fill базы) */
+  html body[data-active-view="routes"] .view[data-view="routes"] .route-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .favorites-stop-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  .home-services-card {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  /* about-people уже auto-fit — заполняет ширину сам */
+
+  /* --- Раздел «О нас»: выверенная компоновка --- */
+  /* Ограничиваем текстовый раздел, чтобы не было пустого поля,
+     и центрируем его блоки. */
+  .view[data-view="about"].is-active {
+    max-width: 900px !important;
+    margin-inline: auto !important;
+  }
+
+  /* Карточка контактов и блок быстрых действий — рядом */
+  .view[data-view="about"] .about-official-card {
+    max-width: none !important;
+  }
+
+  .view[data-view="about"] .about-actions {
+    grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  }
+
+  .view[data-view="about"] .about-people {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  }
+
+  /* --- Заголовки разделов крупнее --- */
+  .section-heading h2 {
+    font-size: clamp(20px, 1.2vw + 15px, 26px);
+  }
+}
+
+/* Наведение — только для устройств с курсором */
+@media (min-width: 1024px) and (hover: hover) {
+  .home-actions button:hover,
+  .home-services-card button:hover,
+  .service-card:hover,
+  .about-action-card:hover,
+  .route-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.15s ease;
+  }
+
+  .bottom-nav button:hover {
+    background: color-mix(in srgb, var(--rs-accent) 10%, var(--rs-card)) !important;
+  }
+}
+
+/* ============================================================
+   ШИРОКИЙ ДЕСКТОП  (≥ 1440px)
+   ============================================================ */
+@media (min-width: 1440px) {
+  :root {
+    --rs-app-max: 1200px;
+    --rs-page-x: 56px;
+    --rs-page-y: 32px;
+  }
+}

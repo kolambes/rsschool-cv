@@ -1,0 +1,328 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="83">
+		<name>Маршрут №241м "Ляховичи - Совейки - Мыслобож - Ляховичи"</name>
+		<num>241м</num>
+		<dateExp>2026-04-27T15:43:52.739</dateExp>
+		<dateStart>2026-04-25</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="475">
+			<name>Автостанция Ляховичи</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104076">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>8:45:00</departureTime>
+							<arrivalTime>8:45:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="872">
+			<name>Веселая</name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104077">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>8:54:00</departureTime>
+							<arrivalTime>8:54:00</arrivalTime>
+							<interval>9</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="875">
+			<name>Русиновичи</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104078">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>8:59:00</departureTime>
+							<arrivalTime>8:58:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="877">
+			<name>Брест-Московское шоссе</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104079">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:04:00</departureTime>
+							<arrivalTime>9:04:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="879">
+			<name>Тальминовичи</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104080">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:08:00</departureTime>
+							<arrivalTime>9:07:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="881">
+			<name>Совейки</name>
+			<num>6</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104081">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:17:00</departureTime>
+							<arrivalTime>9:15:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="882">
+			<name>Лопатичи</name>
+			<num>7</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104082">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:25:00</departureTime>
+							<arrivalTime>9:24:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="883">
+			<name>Гайнинец</name>
+			<num>8</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104083">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:28:00</departureTime>
+							<arrivalTime>9:26:00</arrivalTime>
+							<interval>1</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="884">
+			<name>Гайнин</name>
+			<num>9</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104084">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:37:00</departureTime>
+							<arrivalTime>9:35:00</arrivalTime>
+							<interval>7</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="880">
+			<name>Тальминовичи</name>
+			<num>10</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104085">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:44:00</departureTime>
+							<arrivalTime>9:41:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>3</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="876">
+			<name>Брест-Московское шоссе</name>
+			<num>11</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104086">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:48:00</departureTime>
+							<arrivalTime>9:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="874">
+			<name>Русиновичи</name>
+			<num>12</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104087">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:54:00</departureTime>
+							<arrivalTime>9:53:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="871">
+			<name>Веселая</name>
+			<num>13</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104088">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>9:58:00</departureTime>
+							<arrivalTime>9:58:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="873">
+			<name>Мыслобож</name>
+			<num>14</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104089">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>10:04:00</departureTime>
+							<arrivalTime>10:02:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="477">
+			<name>Автостанция Ляховичи</name>
+			<num>15</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0010000">
+					<name>Ср</name>
+					<DepartureTime>
+						<Time id="104090">
+							<kodElem>9404</kodElem>
+							<kodVariant>523</kodVariant>
+							<departureTime>10:20:00</departureTime>
+							<arrivalTime>10:20:00</arrivalTime>
+							<interval>16</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

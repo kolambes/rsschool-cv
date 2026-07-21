@@ -1,0 +1,56 @@
+{
+  "name": "Автобусы Барановичи",
+  "short_name": "Автобусы Барановичи",
+  "description": "Расписание автобусов, избранные маршруты и обращения для Барановичей.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui", "browser"],
+  "background_color": "#f1ece2",
+  "theme_color": "#0f766e",
+  "orientation": "portrait-primary",
+  "lang": "ru-BY",
+  "categories": ["travel", "utilities", "navigation"],
+  "icons": [
+    {
+      "src": "/icons/app-icon-192.png?v=20260622-shortcut",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/app-icon-512.png?v=20260622-shortcut",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Расписание",
+      "short_name": "Расписание",
+      "description": "Открыть список маршрутов",
+      "url": "/#routes",
+      "icons": [
+        {
+          "src": "/icons/app-icon-192.png?v=20260622-shortcut",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "Избранное",
+      "short_name": "Избранное",
+      "description": "Открыть сохраненные остановки",
+      "url": "/#favorites",
+      "icons": [
+        {
+          "src": "/icons/app-icon-192.png?v=20260622-shortcut",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
+    }
+  ]
+}

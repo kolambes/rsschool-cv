@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="243">
+		<name>Маршрут №1701Э "Барановичи-Минск"</name>
+		<num>1701Э</num>
+		<dateExp>2026-03-13T10:03:22.318</dateExp>
+		<dateStart>2026-02-12</dateStart>
+		<vid>2</vid>
+		<nvid>междугородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="5">
+			<name>Автовокзал "Барановичи"</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94500">
+							<kodElem>8331</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>17:15:00</departureTime>
+							<arrivalTime>17:15:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1158">
+			<name>Минск-ДС "Юго-Западная"</name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94501">
+							<kodElem>8331</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>19:15:00</departureTime>
+							<arrivalTime>19:15:00</arrivalTime>
+							<interval>120</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1159">
+			<name>Минск-ДС "Дружная"</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94502">
+							<kodElem>8331</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>19:25:00</departureTime>
+							<arrivalTime>19:25:00</arrivalTime>
+							<interval>10</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1159">
+			<name>Минск-ДС "Дружная"</name>
+			<num>4</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94503">
+							<kodElem>8332</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>19:30:00</departureTime>
+							<arrivalTime>19:30:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="1160">
+			<name>Минск-ДС "Юго-Западная"</name>
+			<num>5</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94504">
+							<kodElem>8332</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>19:40:00</departureTime>
+							<arrivalTime>19:38:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="4">
+			<name>Автовокзал "Барановичи"</name>
+			<num>6</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="94505">
+							<kodElem>8332</kodElem>
+							<kodVariant>394</kodVariant>
+							<departureTime>21:40:00</departureTime>
+							<arrivalTime>21:40:00</arrivalTime>
+							<interval>120</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

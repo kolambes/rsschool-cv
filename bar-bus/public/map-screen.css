@@ -1,0 +1,865 @@
+/* ============================================================
+   map-screen.css v2 — экран «Карта» Mini App (immersive dark)
+   и блок карты в расписании.
+
+   Карта — самостоятельный тёмный модуль с glass-панелями поверх
+   полноэкранного полотна; остальное приложение остаётся светлым.
+   ============================================================ */
+
+:root {
+  --mapx-bg: #0a0f1c;
+  --mapx-glass: rgba(13, 19, 33, 0.78);
+  --mapx-glass-soft: rgba(13, 19, 33, 0.62);
+  --mapx-border: rgba(148, 163, 184, 0.18);
+  --mapx-text: #e8eef9;
+  --mapx-muted: #93a0b8;
+  --mapx-accent: #22d3ee;
+  --mapx-warn: #fbbf24;
+  --mapx-radius: 16px;
+}
+
+/* ── Полноэкранная сцена ── */
+.map-view {
+  max-width: 100% !important;
+  min-width: 0;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.map-view > * { min-width: 0; max-width: 100%; }
+
+.mapx-stage {
+  position: relative;
+  /* высота: экран минус шапка приложения (~96px) и нижняя навигация (~102px) */
+  height: calc(100dvh - 198px - env(safe-area-inset-bottom, 0px));
+  min-height: 430px;
+  background: var(--mapx-bg);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+.mapx-canvas { position: absolute !important; inset: 0; }
+.mapx-canvas .maplibregl-canvas { outline: none; }
+
+.mapx-stage .maplibregl-ctrl-attrib {
+  background: rgba(10, 15, 28, 0.72) !important;
+  color: var(--mapx-muted) !important;
+  font-size: 9.5px !important;
+  border-radius: 8px 0 0 0;
+}
+.mapx-stage .maplibregl-ctrl-attrib a { color: var(--mapx-muted) !important; }
+
+/* ── Загрузка / пустое состояние ── */
+.mapx-loading,
+.mapx-empty {
+  position: absolute;
+  inset: 0;
+  z-index: 12;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 26px;
+  text-align: center;
+  color: var(--mapx-muted);
+  font-size: 14px;
+  background: radial-gradient(ellipse at 50% 40%, #101a30 0%, var(--mapx-bg) 75%);
+}
+.mapx-empty strong { color: var(--mapx-text); font-size: 15.5px; }
+.mapx-empty p { margin: 0; max-width: 320px; }
+
+.mapx-spinner {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 3px solid rgba(34, 211, 238, 0.16);
+  border-top-color: var(--mapx-accent);
+  animation: mapx-spin 0.9s linear infinite;
+}
+@keyframes mapx-spin { to { transform: rotate(360deg); } }
+
+/* ── Стеклянные панели ── */
+.mapx-glassy {
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(16px) saturate(1.3);
+  backdrop-filter: blur(16px) saturate(1.3);
+  border: 1px solid var(--mapx-border);
+  box-shadow: 0 8px 28px rgba(3, 7, 16, 0.5);
+}
+
+/* ── Верхняя панель ── */
+.mapx-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  padding: 10px 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+}
+.mapx-top > * { pointer-events: auto; }
+
+.mapx-toprow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.mapx-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.mapx-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 11px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--mapx-text);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--mapx-border);
+}
+.mapx-chip--demo { color: #ddd6fe; border-color: rgba(167, 139, 250, 0.45); }
+.mapx-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #a78bfa;
+  box-shadow: 0 0 8px #a78bfa;
+  animation: mapx-live 2.2s infinite;
+}
+@keyframes mapx-live { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.35); opacity: 0.7; } }
+
+/* Переключатель режимов */
+.mapx-modes {
+  display: flex;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 12px;
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--mapx-border);
+}
+.mapx-modes button {
+  border: none;
+  background: none;
+  color: var(--mapx-muted);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 11px;
+  border-radius: 9px;
+  cursor: pointer;
+  transition: color 0.15s, background 0.15s;
+}
+.mapx-modes button.is-active {
+  color: #06121c;
+  background: linear-gradient(135deg, var(--mapx-accent), #0ea5e9);
+  box-shadow: 0 0 14px rgba(34, 211, 238, 0.35);
+}
+
+/* Поиск */
+.mapx-searchwrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 430px;
+}
+.mapx-searchwrap > svg {
+  position: absolute;
+  left: 12px;
+  color: var(--mapx-muted);
+  pointer-events: none;
+}
+#mapxSearch {
+  width: 100%;
+  height: 40px;
+  padding: 0 14px 0 34px;
+  border-radius: 12px;
+  border: 1px solid var(--mapx-border);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--mapx-text);
+  font: inherit;
+  font-size: 13.5px;
+}
+#mapxSearch::placeholder { color: var(--mapx-muted); }
+#mapxSearch:focus {
+  outline: none;
+  border-color: rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.14);
+}
+
+.mapx-search-results {
+  position: absolute;
+  top: 46px;
+  left: 0;
+  right: 0;
+  z-index: 30;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(18px);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--mapx-border);
+  box-shadow: 0 12px 34px rgba(3, 7, 16, 0.6);
+}
+.mapx-search-results button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 9px 12px;
+  border: none;
+  background: none;
+  color: var(--mapx-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mapx-search-results button + button { border-top: 1px solid rgba(148, 163, 184, 0.1); }
+.mapx-search-results button:active { background: rgba(148, 163, 184, 0.1); }
+.mapx-search-results span { display: flex; flex-direction: column; min-width: 0; }
+.mapx-search-results b { font-size: 13px; }
+.mapx-search-results small { color: var(--mapx-muted); font-size: 11.5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.mapx-search-ico { width: 30px; text-align: center; font-size: 15px; flex-shrink: 0; }
+
+/* Изменения движения */
+.mapx-alerts {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.mapx-alerts::-webkit-scrollbar { display: none; }
+.mapx-alerts button {
+  flex: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1px;
+  max-width: 250px;
+  padding: 7px 11px;
+  border-radius: 12px;
+  border: 1px solid rgba(251, 191, 36, 0.35);
+  background: rgba(60, 45, 13, 0.72);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--mapx-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.mapx-alerts b { font-size: 11.5px; color: var(--mapx-warn); }
+.mapx-alerts span {
+  font-size: 11px;
+  color: var(--mapx-muted);
+  max-width: 226px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ── FAB-кнопки ── */
+.mapx-fabs {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-64%);
+  z-index: 18;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.mapx-fabs button {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  border: 1px solid var(--mapx-border);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--mapx-text);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(3, 7, 16, 0.4);
+  transition: transform 0.12s;
+}
+.mapx-fabs button:active { transform: scale(0.92); }
+
+/* ── Подписи районов и ориентиров ── */
+.mapx-district {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(148, 163, 184, 0.8);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.9);
+  pointer-events: none;
+  user-select: none;
+}
+.mapx-landmark {
+  font-size: 10px;
+  font-weight: 600;
+  color: rgba(226, 232, 240, 0.85);
+  background: rgba(10, 15, 28, 0.6);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 7px;
+  padding: 1px 7px;
+  pointer-events: none;
+  user-select: none;
+  transition: opacity 0.25s;
+}
+.mapx-hide-landmarks .mapx-landmark { opacity: 0; }
+
+/* ── Пульс выбранной точки ── */
+.mapx-pulse { position: relative; width: 20px; height: 20px; pointer-events: none; }
+.mapx-pulse b {
+  position: absolute;
+  inset: 5px;
+  border-radius: 50%;
+  background: var(--mapx-accent);
+  box-shadow: 0 0 14px var(--mapx-accent);
+}
+.mapx-pulse i {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--mapx-accent);
+  animation: mapx-ring 2s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+.mapx-pulse i:nth-child(2) { animation-delay: 0.7s; }
+@keyframes mapx-ring {
+  0% { transform: scale(0.55); opacity: 1; }
+  100% { transform: scale(2.9); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mapx-pulse i { animation: none; opacity: 0.5; }
+  .mapx-dot { animation: none; }
+}
+
+/* ── Нижняя зона: лента маршрутов + карточка ── */
+.mapx-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 22;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 10px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, rgba(10, 15, 28, 0) 0%, rgba(10, 15, 28, 0.55) 40%, rgba(10, 15, 28, 0.86) 100%);
+  pointer-events: none;
+}
+.mapx-bottom > * { pointer-events: auto; }
+
+.mapx-hint {
+  align-self: center;
+  padding: 5px 13px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  color: var(--mapx-muted);
+  background: var(--mapx-glass-soft);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--mapx-border);
+}
+
+/* Лента маршрутов */
+.mapx-routes {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 2px;
+  scrollbar-width: none;
+}
+.mapx-routes::-webkit-scrollbar { display: none; }
+
+.mapx-route-pill {
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 40px;
+  padding: 0 12px 0 6px;
+  border-radius: 999px;
+  border: 1px solid var(--mapx-border);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  color: var(--mapx-text);
+  font: inherit;
+  cursor: pointer;
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  max-width: 240px;
+}
+.mapx-route-pill:active { transform: scale(0.96); }
+.mapx-route-pill b {
+  display: inline-grid;
+  place-items: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 7px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #06121c;
+  background: var(--rc, var(--mapx-accent));
+}
+.mapx-route-pill span {
+  font-size: 12px;
+  color: var(--mapx-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 168px;
+}
+.mapx-route-pill i { font-size: 12px; font-style: normal; }
+.mapx-route-pill.is-active {
+  border-color: color-mix(in srgb, var(--rc, var(--mapx-accent)) 65%, transparent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--rc, var(--mapx-accent)) 30%, transparent);
+}
+.mapx-route-pill.is-active span { color: var(--mapx-text); }
+.mapx-route-pill--all { padding: 0 16px; font-size: 12.5px; font-weight: 600; color: var(--mapx-muted); }
+.mapx-route-pill--all.is-active { color: var(--mapx-text); border-color: rgba(34, 211, 238, 0.5); box-shadow: 0 0 14px rgba(34, 211, 238, 0.2); }
+
+/* Карточка объекта */
+.mapx-card {
+  position: relative;
+  border-radius: var(--mapx-radius);
+  padding: 13px 13px 12px 16px;
+  overflow: hidden;
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(18px) saturate(1.3);
+  backdrop-filter: blur(18px) saturate(1.3);
+  border: 1px solid var(--mapx-border);
+  box-shadow: 0 10px 32px rgba(3, 7, 16, 0.55);
+  animation: mapx-card-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes mapx-card-in { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .mapx-card { animation: none; } }
+
+.mapx-card-accent {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: var(--rc, var(--mapx-accent));
+  box-shadow: 0 0 12px var(--rc, var(--mapx-accent));
+}
+
+.mapx-card-head { display: flex; align-items: flex-start; gap: 10px; }
+.mapx-card-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.mapx-card-title strong { font-size: 14px; color: var(--mapx-text); }
+.mapx-card-title small { font-size: 11.5px; color: var(--mapx-muted); }
+
+.mapx-close {
+  border: none;
+  background: none;
+  color: var(--mapx-muted);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 7px;
+  border-radius: 8px;
+}
+.mapx-close:active { background: rgba(148, 163, 184, 0.12); }
+
+.mapx-badge {
+  display: inline-grid;
+  place-items: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 8px;
+  border-radius: 11px;
+  font-size: 15px;
+  font-weight: 800;
+  color: #06121c;
+  background: var(--rc, var(--mapx-accent));
+  box-shadow: 0 0 14px color-mix(in srgb, var(--rc, var(--mapx-accent)) 40%, transparent);
+  flex-shrink: 0;
+}
+.mapx-badge.sm { min-width: 28px; height: 28px; font-size: 12px; border-radius: 8px; }
+
+.mapx-stopdot {
+  width: 15px;
+  height: 15px;
+  margin-top: 4px;
+  border-radius: 50%;
+  background: #0d1526;
+  border: 3px solid #dbe4f3;
+  flex-shrink: 0;
+}
+
+.mapx-dirs { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.mapx-dirs button {
+  padding: 6px 11px;
+  border-radius: 999px;
+  border: 1px solid var(--mapx-border);
+  background: rgba(148, 163, 184, 0.07);
+  color: var(--mapx-muted);
+  font: inherit;
+  font-size: 11.5px;
+  cursor: pointer;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.mapx-dirs button.is-active {
+  color: #06121c;
+  font-weight: 600;
+  background: var(--mapx-accent);
+  border-color: var(--mapx-accent);
+}
+
+.mapx-card-alerts { margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+.mapx-card-alerts div {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 7px 10px;
+  border-radius: 10px;
+  background: rgba(251, 191, 36, 0.09);
+  border: 1px solid rgba(251, 191, 36, 0.25);
+}
+.mapx-card-alerts b { font-size: 11px; color: var(--mapx-warn); }
+.mapx-card-alerts span { font-size: 12px; color: var(--mapx-text); }
+
+.mapx-card-actions { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 12px; }
+
+.mapx-btn-primary,
+.mapx-btn {
+  flex: 1 1 auto;
+  min-height: 40px;
+  padding: 8px 14px;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.12s;
+}
+.mapx-btn-primary:active, .mapx-btn:active { transform: scale(0.97); }
+.mapx-btn-primary {
+  border: none;
+  color: #06121c;
+  background: linear-gradient(135deg, var(--mapx-accent), #0ea5e9);
+  box-shadow: 0 0 16px rgba(34, 211, 238, 0.3);
+}
+.mapx-btn {
+  border: 1px solid var(--mapx-border);
+  background: rgba(148, 163, 184, 0.08);
+  color: var(--mapx-text);
+}
+.mapx-btn.is-on {
+  border-color: rgba(34, 211, 238, 0.55);
+  color: var(--mapx-accent);
+  background: rgba(34, 211, 238, 0.1);
+}
+
+.mapx-stop-routes { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+.mapx-stop-routes button {
+  border: none;
+  padding: 5px 11px;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 800;
+  color: #06121c;
+  background: var(--rc, var(--mapx-accent));
+  cursor: pointer;
+}
+.mapx-stop-more { font-size: 11.5px; color: var(--mapx-muted); align-self: center; }
+
+.mapx-veh-meta { display: flex; gap: 16px; margin-top: 10px; font-size: 12px; color: var(--mapx-muted); }
+.mapx-veh-meta b { color: var(--mapx-text); }
+
+/* ── Блок карты в расписании (светлая тема приложения) ── */
+.schedule-map-block {
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid var(--color-line-strong, #dcd5c4);
+  background: var(--color-surface, #fffdf8);
+  box-shadow: var(--elev-1, 0 1px 2px rgba(60, 50, 30, 0.05));
+}
+.schedule-map-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.schedule-map-head strong { display: block; font-size: 13.5px; }
+.schedule-map-preview {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background: var(--color-surface-soft, #f9f6ef);
+  border: 1px solid var(--color-line, #e7e1d3);
+}
+
+/* ── Планшет / десктоп ── */
+@media (min-width: 760px) {
+  .mapx-stage { border-radius: 20px; margin: 10px; height: calc(100dvh - 220px); }
+  .mapx-searchwrap { max-width: 380px; }
+  .mapx-card { max-width: 460px; }
+  .mapx-bottom { padding: 10px 14px 14px; }
+}
+
+/* ============================================================
+   Светлый скин по референсу: белые панели, синий акцент,
+   табы типов, чип маршрута, поповер слоёв, карточка с вкладками
+   ============================================================ */
+:root {
+  --mapx-bg: #e9edf2;
+  --mapx-glass: rgba(255, 255, 255, 0.94);
+  --mapx-glass-soft: rgba(255, 255, 255, 0.82);
+  --mapx-border: rgba(15, 23, 42, 0.09);
+  --mapx-text: #16233b;
+  --mapx-muted: #6b7a92;
+  --mapx-accent: #2563eb;
+  --mapx-warn: #b7791f;
+}
+
+.mapx-stage { box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05); }
+.mapx-glassy, .mapx-chip, .mapx-modes, #mapxSearch, .mapx-search-results, .mapx-fabs button {
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+}
+.mapx-loading, .mapx-empty { background: radial-gradient(ellipse at 50% 40%, #f6f8fb 0%, var(--mapx-bg) 75%); }
+.mapx-spinner { border-color: rgba(37, 99, 235, 0.15); border-top-color: var(--mapx-accent); }
+.mapx-dot { background: #7c5cd6; box-shadow: 0 0 6px #b39ddb; }
+.mapx-chip--demo { color: #6d3fc4; border-color: rgba(124, 92, 214, 0.35); }
+.mapx-modes button.is-active { box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35); color: #fff; }
+
+/* табы Город/Пригород/Межгород */
+.mapx-typetabs {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--mapx-border);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+  flex-shrink: 0;
+}
+.mapx-typetabs button {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mapx-muted);
+  padding: 8px 13px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.mapx-typetabs button.is-active { color: #fff; background: var(--mapx-accent); box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35); }
+
+.mapx-searchwrap { flex: 1; min-width: 0; }
+#mapxSearch { height: 42px; border-radius: 13px; }
+
+/* чип выбранного маршрута «Маршрут 17 · 3 мин» */
+.mapx-selchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--mapx-border);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 999px;
+  padding: 6px 13px 6px 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mapx-text);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+  cursor: pointer;
+}
+.mapx-selchip b { color: var(--mapx-accent); font-weight: 800; }
+.mapx-selbus {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--rc, var(--mapx-accent));
+  flex-shrink: 0;
+  position: relative;
+}
+.mapx-selbus::after {
+  content: "";
+  position: absolute;
+  inset: 6px 6px 9px;
+  border-radius: 3px;
+  background: #fff;
+}
+.mapx-selbus::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 5px;
+  height: 3px;
+  border-radius: 2px;
+  background: #fff;
+  opacity: .9;
+}
+
+/* слои-поповер */
+.mapx-layers-wrap { position: relative; }
+.mapx-layers-wrap .mapx-modes {
+  position: absolute;
+  right: 46px;
+  top: 0;
+  flex-direction: column;
+  min-width: 118px;
+}
+.mapx-layers-wrap .mapx-modes button { text-align: left; }
+
+/* белая карточка-шторка с вкладками */
+.mapx-card { border-radius: 18px 18px 14px 14px; }
+.mapx-grip {
+  width: 44px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(15, 23, 42, 0.14);
+  margin: 2px auto 10px;
+}
+.mapx-card-accent { display: none; }
+.mapx-badge { color: #fff; box-shadow: 0 3px 12px rgba(15, 23, 42, 0.22); }
+.mapx-star {
+  border: none;
+  background: none;
+  color: #c4cddc;
+  cursor: pointer;
+  padding: 4px;
+  margin-right: -2px;
+}
+.mapx-star.is-on { color: #f5b301; }
+
+.mapx-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid rgba(15, 23, 42, 0.08);
+  margin-top: 10px;
+}
+.mapx-tabs button {
+  flex: 1;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--mapx-muted);
+  padding: 10px 4px 11px;
+  cursor: pointer;
+  position: relative;
+}
+.mapx-tabs button.is-active { color: var(--mapx-accent); }
+.mapx-tabs button.is-active::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -1.5px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--mapx-accent);
+}
+.mapx-tabbody { padding-top: 10px; }
+
+.mapx-arrivals { display: flex; flex-direction: column; }
+.mapx-arr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  padding: 9px 2px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  color: var(--mapx-text);
+}
+.mapx-arr b { font-size: 19px; font-weight: 800; color: var(--mapx-accent); flex: 1; text-align: left; }
+.mapx-arr svg { color: var(--mapx-accent); opacity: .8; }
+
+.mapx-btn-wide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 12px;
+  min-height: 48px;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+.mapx-note { color: var(--mapx-muted); font-size: 12.5px; padding: 8px 2px; margin: 0; }
+
+.mapx-stoplist, .mapx-vehlist {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.mapx-stoplist button, .mapx-vehlist button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--mapx-text);
+  text-align: left;
+  padding: 8.5px 2px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+.mapx-stoplist i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid var(--rc, var(--mapx-accent));
+  flex-shrink: 0;
+}
+.mapx-stoplist i.is-term { background: var(--rc, var(--mapx-accent)); }
+.mapx-vehlist b { margin-left: auto; color: var(--mapx-muted); font-weight: 600; }
+
+/* светлые пилюли ленты, алерты, подписи */
+.mapx-route-pill { box-shadow: 0 3px 12px rgba(15, 23, 42, 0.10); }
+.mapx-alerts button { background: #fff7e8; border-color: rgba(183, 121, 31, 0.3); }
+.mapx-alerts b { color: #b7791f; }
+.mapx-alerts span { color: #7a6a4f; }
+.mapx-district { color: rgba(60, 72, 94, 0.85); text-shadow: 0 0 4px #fff, 0 0 4px #fff; }
+.mapx-landmark { color: rgba(80, 92, 112, 0.9); text-shadow: 0 0 3px #fff, 0 0 3px #fff; }
+.mapx-hint { color: var(--mapx-muted); }
+
+/* уточнения: компактные табы, читаемая кнопка */
+.mapx-typetabs button { padding: 8px 10px; font-size: 12.5px; }
+.mapx-searchwrap { min-width: 92px; }
+.mapx-btn-primary { background: var(--mapx-accent) !important; color: #fff !important; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important; }
+.mapx-btn-primary svg { color: #fff; }
+
+.mapx-searchwrap { min-width: 112px; }

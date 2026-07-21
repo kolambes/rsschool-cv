@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="34">
+		<name>Маршрут №214Э "Ляховичи - Домаши - Своятичи"</name>
+		<num>214Э</num>
+		<dateExp>2026-03-13T08:29:56.633</dateExp>
+		<dateStart>2026-02-05</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="475">
+			<name>Автостанция Ляховичи</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92838">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>16:50:00</departureTime>
+							<arrivalTime>16:50:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="593">
+			<name>Свистковщина</name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92839">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>16:58:00</departureTime>
+							<arrivalTime>16:58:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="591">
+			<name>Бол. Подлесье</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92840">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:02:00</departureTime>
+							<arrivalTime>17:02:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="589">
+			<name>Шевели</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92841">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:07:00</departureTime>
+							<arrivalTime>17:07:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="586">
+			<name>Домаши</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92842">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:13:00</departureTime>
+							<arrivalTime>17:13:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="526">
+			<name>Своятичи</name>
+			<num>6</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92837">
+							<kodElem>8228</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:21:00</departureTime>
+							<arrivalTime>17:21:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="527">
+			<name>Своятичи</name>
+			<num>7</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92843">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:25:00</departureTime>
+							<arrivalTime>17:25:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="587">
+			<name>Домаши</name>
+			<num>8</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92844">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:34:00</departureTime>
+							<arrivalTime>17:33:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="588">
+			<name>Шевели</name>
+			<num>9</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92845">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:41:00</departureTime>
+							<arrivalTime>17:40:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="590">
+			<name>Бол. Подлесье</name>
+			<num>10</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92846">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:48:00</departureTime>
+							<arrivalTime>17:46:00</arrivalTime>
+							<interval>5</interval>
+							<stopInterval>2</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="592">
+			<name>Свистковщина</name>
+			<num>11</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92847">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>17:52:00</departureTime>
+							<arrivalTime>17:52:00</arrivalTime>
+							<interval>4</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="475">
+			<name>Автостанция Ляховичи</name>
+			<num>12</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000001">
+					<name>Вс</name>
+					<DepartureTime>
+						<Time id="92848">
+							<kodElem>8229</kodElem>
+							<kodVariant>366</kodVariant>
+							<departureTime>18:00:00</departureTime>
+							<arrivalTime>18:00:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

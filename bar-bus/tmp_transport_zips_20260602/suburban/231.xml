@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="windows-1251"?>
+<Routes>
+	<Route id="70">
+		<name>Маршрут №231 "Барановичи - Светлый"</name>
+		<num>231</num>
+		<dateExp>2026-03-13T08:49:39.447</dateExp>
+		<dateStart>2026-01-21</dateStart>
+		<vid>1</vid>
+		<nvid>пригородный</nvid>
+	</Route>
+	<BusStops>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>1</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90096">
+							<kodElem>7994</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>16:10:00</departureTime>
+							<arrivalTime>16:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="118">
+			<name>Волохва</name>
+			<num>2</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90097">
+							<kodElem>7994</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>16:36:00</departureTime>
+							<arrivalTime>16:35:00</arrivalTime>
+							<interval>25</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="735">
+			<name>Малаховцы</name>
+			<num>3</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90098">
+							<kodElem>7994</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>16:44:00</departureTime>
+							<arrivalTime>16:44:00</arrivalTime>
+							<interval>8</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="740">
+			<name>Емельяновка</name>
+			<num>4</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90099">
+							<kodElem>7994</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>16:47:00</departureTime>
+							<arrivalTime>16:47:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="741">
+			<name>Светлый</name>
+			<num>5</num>
+			<direction>0</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90100">
+							<kodElem>7994</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>16:49:00</departureTime>
+							<arrivalTime>16:49:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="741">
+			<name>Светлый</name>
+			<num>6</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90101">
+							<kodElem>7995</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>17:10:00</departureTime>
+							<arrivalTime>17:10:00</arrivalTime>
+							<interval>0</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="739">
+			<name>Емельяновка</name>
+			<num>7</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90102">
+							<kodElem>7995</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>17:12:00</departureTime>
+							<arrivalTime>17:12:00</arrivalTime>
+							<interval>2</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="736">
+			<name>Малаховцы</name>
+			<num>8</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90103">
+							<kodElem>7995</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>17:18:00</departureTime>
+							<arrivalTime>17:15:00</arrivalTime>
+							<interval>3</interval>
+							<stopInterval>3</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="214">
+			<name>Волохва</name>
+			<num>9</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90104">
+							<kodElem>7995</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>17:25:00</departureTime>
+							<arrivalTime>17:24:00</arrivalTime>
+							<interval>6</interval>
+							<stopInterval>1</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+		<BusStop id="503">
+			<name>Автовокзал "Барановичи"</name>
+			<num>10</num>
+			<direction>1</direction>
+			<Days>
+				<Day id="0000011">
+					<name>Выходные</name>
+					<DepartureTime>
+						<Time id="90105">
+							<kodElem>7995</kodElem>
+							<kodVariant>333</kodVariant>
+							<departureTime>17:50:00</departureTime>
+							<arrivalTime>17:50:00</arrivalTime>
+							<interval>25</interval>
+							<stopInterval>0</stopInterval>
+							<Notes/>
+						</Time>
+					</DepartureTime>
+				</Day>
+			</Days>
+		</BusStop>
+	</BusStops>
+</Routes>

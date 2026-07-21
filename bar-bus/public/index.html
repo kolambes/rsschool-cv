@@ -1,0 +1,841 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <!-- interactive-widget=resizes-content: экранная клавиатура СЖИМАЕТ вьюпорт
+         (Android WebView/Chrome 108+) — фиксированные шторки и кнопки форм
+         поднимаются над клавиатурой, а не прячутся под ней. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content" />
+    <meta name="theme-color" content="#f1ece2" />
+    <meta name="application-name" content="Автобусы Барановичи" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Автобусы Барановичи" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Расписание автобусов Барановичи</title>
+  <script src="/theme-init.js?v=20260709-varA"></script>
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/app-icon-192.png?v=20260622-shortcut" />
+  <link rel="apple-touch-icon" href="/icons/app-icon-192.png?v=20260622-shortcut" />
+  <link rel="manifest" href="/manifest.json?v=20260709-varA" />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-400-cyrillic.woff2" crossorigin />
+  <link rel="preload" as="font" type="font/woff2" href="/fonts/geist-600-cyrillic.woff2" crossorigin />
+  <link rel="stylesheet" href="/fonts.css?v=20260709-selfhost" />
+  <link rel="stylesheet" href="/tokens.css?v=20260713-eyecomfort" />
+  <link rel="preload" as="style" href="/styles.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/styles.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/home-final.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/about-final.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/visual-polish.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/responsive-system.css?v=20260713-stoptimes" />
+  <link rel="stylesheet" href="/modern-ui.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/adaptive.css?v=20260708-responsive-safe2" />
+  <link rel="stylesheet" href="/redesign-theme.css?v=20260709-nodark" />
+  <link rel="stylesheet" href="/system.css?v=20260713-hero2c" />
+  <link rel="stylesheet" href="/map-screen.css?v=20260720-map1" />
+  </head>
+  <body>
+    <div class="app-loader" id="appLoader" role="status" aria-live="polite">
+      <div class="loader-road" aria-hidden="true">
+        <div class="loader-bus">
+          <span class="loader-window"></span>
+          <span class="loader-window"></span>
+          <span class="loader-window"></span>
+          <span class="loader-wheel loader-wheel-front"></span>
+          <span class="loader-wheel loader-wheel-back"></span>
+        </div>
+      </div>
+      <strong>Загружаем расписание</strong>
+      <span>Проверяем маршруты и ближайшие отправления</span>
+    </div>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-block" aria-label="Автобусный парк ОАО Барановичи">
+          <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true" focusable="false">
+            <rect x="4" y="5" width="24" height="19" rx="4.5" fill="currentColor" />
+            <rect x="7.5" y="9" width="7.5" height="6" rx="1.6" fill="#ffffff" opacity="0.92" />
+            <rect x="17" y="9" width="7.5" height="6" rx="1.6" fill="#ffffff" opacity="0.92" />
+            <rect x="7.5" y="18" width="4.5" height="2.6" rx="1.3" fill="#ffffff" opacity="0.55" />
+            <circle cx="10" cy="26" r="2.6" fill="currentColor" />
+            <circle cx="22" cy="26" r="2.6" fill="currentColor" />
+            <circle cx="10" cy="26" r="1.1" fill="#ffffff" opacity="0.85" />
+            <circle cx="22" cy="26" r="1.1" fill="#ffffff" opacity="0.85" />
+          </svg>
+          <span class="logo-pair" aria-hidden="true">
+            <img class="park-logo park-logo-light" width="226" height="256" data-theme-logo="light" data-src="/bus-park-logo-light-clean.webp?v=20260712-crest" src="/bus-park-logo-light-clean.webp?v=20260712-crest" decoding="async" alt="" />
+          </span>
+          <div class="brand-title-lines">
+            <strong>ОАО Автобусный парк</strong>
+            <span>г. Барановичи</span>
+            <small>Ваш транспортный партнёр</small>
+          </div>
+        </div>
+        <span class="topbar-screen-title" role="heading" aria-level="1" data-title-for="routes">Расписание</span>
+        <span class="topbar-screen-title" role="heading" aria-level="1" data-title-for="schedule">Расписание</span>
+        <span class="topbar-screen-title" role="heading" aria-level="1" data-title-for="favorites">Избранное</span>
+        <span class="topbar-screen-title" role="heading" aria-level="1" data-title-for="service">Услуги</span>
+        <span class="topbar-screen-title" role="heading" aria-level="1" data-title-for="about">О нас</span>
+        <button class="topbar-bell" id="topbarBell" type="button" data-open-view="favorites" aria-label="Будильники и избранное" hidden>
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8a6 6 0 1 0-12 0c0 7-3 8-3 8h18s-3-1-3-8" />
+            <path d="M13.7 20a2 2 0 0 1-3.4 0" />
+          </svg>
+          <span class="topbar-bell-badge" id="topbarBellBadge" hidden>0</span>
+        </button>
+      </header>
+
+      <section class="ad-rail" id="adRail" aria-live="polite"></section>
+
+      <main class="main-content">
+        <section class="view is-active" data-view="home">
+          <section class="home-favorite-rides" id="homeFavoriteRoutes" aria-label="Любимые маршруты" hidden>
+            <div class="home-section-title">
+              <div>
+                <h2>Любимые маршруты</h2>
+              </div>
+              <button type="button" data-open-view="favorites">Все</button>
+            </div>
+            <div class="favorite-rides-list" id="homeFavoriteRoutesList" aria-live="polite"></div>
+          </section>
+
+          <section class="home-route-search" id="homeRouteSearch" aria-label="Ближайшие рейсы">
+            <button class="home-route-launcher" id="homeRouteSearchOpen" type="button" aria-haspopup="dialog" aria-controls="homeRouteSearchMenu" aria-expanded="false">
+              <span class="home-route-launcher-copy">
+                <strong>Ближайшие рейсы</strong>
+                <small id="homeRouteSearchLauncherSummary">Откуда, куда и время</small>
+              </span>
+              <span class="home-route-launcher-eta" aria-hidden="true">
+                <small class="launcher-eta-label">Отправление через</small>
+                <b class="launcher-eta-value" id="homeRouteLauncherEta"></b>
+                <span class="launcher-eta-arrow">
+                  <svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h13M12 6l6 6-6 6"></path></svg>
+                </span>
+              </span>
+            </button>
+            <button class="home-route-menu-backdrop" id="homeRouteSearchBackdrop" type="button" aria-label="Закрыть поиск" hidden></button>
+            <div class="home-route-search-menu" id="homeRouteSearchMenu" role="dialog" aria-modal="true" aria-label="Ближайшие рейсы" tabindex="-1" hidden>
+              <div class="home-route-menu-handle" aria-hidden="true"></div>
+              <div class="home-route-menu-top">
+                <span>Ближайшие рейсы</span>
+                <button class="home-route-menu-close" id="homeRouteSearchClose" type="button" aria-label="Закрыть поиск">×</button>
+              </div>
+            <form class="home-route-search-form" id="homeRouteSearchForm" autocomplete="off">
+              <div class="home-route-search-head">
+                <h2>Ближайшие рейсы</h2>
+                <button class="home-route-now" id="homeNowButton" type="button">Сейчас</button>
+              </div>
+              <div class="home-route-compact" id="homeRouteSearchCompact" hidden>
+                <span class="home-route-compact-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" focusable="false">
+                    <path d="M7 5h10a3 3 0 0 1 3 3v7.5a2.5 2.5 0 0 1-2.5 2.5h-11A2.5 2.5 0 0 1 4 15.5V8a3 3 0 0 1 3-3Z"></path>
+                    <path d="M6.5 11h11M7.5 8h9M8 18v1.5M16 18v1.5"></path>
+                    <path d="M8.5 15.5h.01M15.5 15.5h.01"></path>
+                  </svg>
+                </span>
+                <span class="home-route-compact-copy">
+                  <strong id="homeRouteSearchCompactTitle">Маршрут</strong>
+                  <small id="homeRouteSearchCompactMeta">Дата и время</small>
+                </span>
+                <button class="home-route-edit" id="homeRouteEditButton" type="button">Изменить</button>
+              </div>
+              <div class="home-route-fields">
+                <div class="home-route-field home-route-field-wide">
+                  <label for="homeFromInput">Откуда</label>
+                  <input id="homeFromInput" name="from" type="text" placeholder="Напр.: Торговый дом ДДМ" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-autocomplete="list" aria-controls="homeStopOptions" aria-expanded="false" />
+                </div>
+                <button class="home-route-swap" id="homeRouteSwapButton" type="button" aria-label="Поменять остановки местами">↕</button>
+                <div class="home-route-field home-route-field-wide">
+                  <label for="homeToInput">Куда</label>
+                  <input id="homeToInput" name="to" type="text" placeholder="Напр.: Автовокзал" autocomplete="off" autocorrect="off" spellcheck="false" enterkeyhint="search" aria-autocomplete="list" aria-controls="homeStopOptions" aria-expanded="false" />
+                </div>
+                <div class="home-route-field home-route-field-date">
+                  <label for="homeDateInput">Дата</label>
+                  <input id="homeDateInput" name="date" type="date" />
+                </div>
+                <div class="home-route-field home-route-field-time">
+                  <label for="homeTimeInput">Время</label>
+                  <input id="homeTimeInput" name="time" type="time" step="60" />
+                </div>
+              </div>
+              <div class="home-stop-suggestions" id="homeStopOptions" role="listbox" aria-label="Подсказки остановок" hidden></div>
+              <button class="home-route-submit" id="homeSearchButton" type="submit">Показать ближайшие</button>
+            </form>
+            <p class="home-route-search-status" id="homeRouteSearchStatus" aria-live="polite"></p>
+            <div class="home-route-results" id="homeRouteResults" aria-live="polite"></div>
+            </div>
+          </section>
+
+          <h2 class="home-quick-heading">Маршруты<button class="home-see-all" type="button" data-open-view="routes" aria-label="Все маршруты">Все маршруты ›</button></h2>
+          <section class="transport-choice home-route-categories" aria-label="Выбор типа расписания">
+            <button class="transport-choice-item home-category-card is-active" type="button" data-transport-type="city" data-open-view="routes" aria-pressed="true">
+              <span class="transport-choice-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M6 25V10h6v15M12 25V6h8v19M20 25V13h6v12"></path>
+                  <path d="M8.5 14h1.5M8.5 18h1.5M14.5 10h3M14.5 14h3M14.5 18h3M22.5 17h1.5M22.5 21h1.5"></path>
+                </svg>
+              </span>
+              <strong>Городской</strong>
+            </button>
+            <button class="transport-choice-item home-category-card" type="button" data-transport-type="suburban" data-open-view="routes" aria-pressed="false">
+              <span class="transport-choice-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M5 25h22M9 25V14l6-5 6 5v11M13 25v-6h4v6"></path>
+                  <path d="M5 25c2-4 3-8 3-13M5 15h6M25 25c-2-4-3-8-3-13M21 15h6"></path>
+                </svg>
+              </span>
+              <strong>Пригородный</strong>
+            </button>
+            <button class="transport-choice-item home-category-card" type="button" data-transport-type="intercity" data-open-view="routes" aria-pressed="false">
+              <span class="transport-choice-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <rect x="8" y="6" width="16" height="18" rx="4"></rect>
+                  <path d="M11 11h10M11 16h10M12 24l-2 3M20 24l2 3"></path>
+                  <circle cx="12.5" cy="20.5" r="1.3"></circle>
+                  <circle cx="19.5" cy="20.5" r="1.3"></circle>
+                </svg>
+              </span>
+              <strong>Междугородний</strong>
+            </button>
+          </section>
+          <p class="transport-choice-hint" id="transportChoiceHint">Выберите один из пунктов, чтобы продолжить</p>
+
+          <h2 class="home-services-heading">Сервисы и информация</h2>
+          <section class="home-actions home-services-card" aria-label="Основные разделы">
+            <button type="button" data-open-view="appeal">
+              <span class="home-action-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M5.2 6.6c1.5-1.5 3.7-2.3 6.6-2.3 4.9 0 8 2.7 8 6.8s-3.1 6.8-8 6.8c-.9 0-1.8-.1-2.6-.3L4.6 20l1.1-4.2c-1.2-1.2-1.8-2.8-1.8-4.7 0-1.8.4-3.3 1.3-4.5Z"></path>
+                </svg>
+              </span>
+              <span class="home-action-copy"><strong>Обращение</strong><small>Написать в администрацию</small></span>
+              <span class="row-arrow" aria-hidden="true">›</span>
+            </button>
+            <button type="button" data-open-view="favorites">
+              <span class="home-action-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 3.8 14.7 9l5.8.8-4.2 4.1 1 5.8L12 17l-5.3 2.7 1-5.8-4.2-4.1L9.3 9 12 3.8Z"></path>
+                </svg>
+              </span>
+              <span class="home-action-copy"><strong>Избранное</strong><small>Частые остановки и маршруты</small></span>
+              <span class="row-arrow" aria-hidden="true">›</span>
+            </button>
+            <button type="button" data-open-view="service">
+              <span class="home-action-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <path d="M8.3 7.5V5.7c0-.9.7-1.6 1.6-1.6h4.2c.9 0 1.6.7 1.6 1.6v1.8"></path>
+                  <rect x="4.2" y="7.5" width="15.6" height="12.1" rx="2.4"></rect>
+                  <path d="M4.2 11.6c4.8 2 10.8 2 15.6 0"></path>
+                  <path d="M10 12.4h4"></path>
+                </svg>
+              </span>
+              <span class="home-action-copy"><strong>Услуги</strong><small>СТО, аренда, столовая и сервисный центр МАЗ</small></span>
+              <span class="row-arrow" aria-hidden="true">›</span>
+            </button>
+            <button type="button" data-open-view="about">
+              <span class="home-action-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" focusable="false">
+                  <circle cx="12" cy="12" r="8.2"></circle>
+                  <path d="M12 10.6v5.4"></path>
+                  <path d="M12 7.8h.01"></path>
+                </svg>
+              </span>
+              <span class="home-action-copy"><strong>О нас</strong><small>Контакты, адрес и руководство</small></span>
+              <span class="row-arrow" aria-hidden="true">›</span>
+            </button>
+          </section>
+        </section>
+
+        <section class="view" data-view="schedule">
+          <div class="section-heading compact-heading">
+            <h2>Расписание</h2>
+            <p id="scheduleMeta">Маршрут, остановка и ближайшее время.</p>
+          </div>
+
+          <section class="schedule-hero" id="scheduleHero">
+            <div>
+              <span class="hero-label">Маршрут</span>
+              <strong id="routeSummary">—</strong>
+              <small id="stopSummary">Выберите остановку</small>
+            </div>
+            <button class="mini-button" id="changeRouteButton" type="button">
+              <svg class="change-route-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5" /><path d="M21 3 13.5 10.5" /><path d="M8 21H3v-5" /><path d="m3 21 7.5-7.5" /></svg>
+              <span>Сменить маршрут</span>
+            </button>
+          </section>
+
+          <section class="schedule-map-block" id="scheduleMapBlock" hidden aria-label="Маршрут на карте">
+            <div class="schedule-map-head">
+              <div>
+                <span class="hero-label">На карте</span>
+                <strong id="scheduleMapTitle">Маршрут на карте города</strong>
+              </div>
+              <button class="mini-button" id="scheduleMapOpen" type="button">Открыть карту</button>
+            </div>
+            <canvas class="schedule-map-preview" id="scheduleMapPreview" width="640" height="220" aria-hidden="true"></canvas>
+          </section>
+
+          <section class="next-panel" id="nextPanel"></section>
+          <section class="times-panel" id="timesPanel"></section>
+
+          <section class="direction-panel">
+            <span class="hero-label">Направление</span>
+            <div class="direction-chips" id="directionChips" aria-label="Выбор направления"></div>
+            <button class="direction-swap-button" id="directionSwapButton" type="button" aria-label="Сменить направление" hidden>↔</button>
+          </section>
+
+          <section class="favorites-panel" id="scheduleFavoritesPanel" hidden>
+            <div class="favorites-head">
+              <h3>Избранное</h3>
+              <span>Ваши частые поездки</span>
+            </div>
+            <div class="favorites-list" id="scheduleFavoritesList"></div>
+          </section>
+
+          <div class="quick-routes" id="quickRoutes" aria-label="Быстрый выбор маршрута" hidden></div>
+          <div class="toolbar schedule-hidden-controls" aria-hidden="true">
+            <label class="field">
+              <span>Маршрут</span>
+              <select id="routeSelect"></select>
+            </label>
+            <label class="field">
+              <span>Направление</span>
+              <select id="directionSelect"></select>
+            </label>
+            <label class="field field-wide">
+              <span>Остановка</span>
+              <!-- placeholder-атрибут — якорь для smoke-test.js:156 (литерал обязан
+                   присутствовать в index.html); видимый input#stopSearch использует
+                   текст «Поиск остановки» по макету. -->
+              <select id="stopSelect" placeholder="Введите остановку"></select>
+            </label>
+          </div>
+
+          <div class="segmented" role="tablist" aria-label="Тип дня">
+            <button type="button" class="is-active" data-day-mode="today">
+              <svg class="day-mode-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3" /><path d="M16 2v4M8 2v4M3 10h18" /></svg>
+              <span>Сегодня</span>
+            </button>
+            <button type="button" data-day-mode="weekday">
+              <svg class="day-mode-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.8 14.7 9l5.8.8-4.2 4.1 1 5.8L12 17l-5.3 2.7 1-5.8-4.2-4.1L9.3 9 12 3.8Z" /></svg>
+              <span>Будни</span>
+            </button>
+            <button type="button" data-day-mode="weekend">
+              <svg class="day-mode-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3.2" /><path d="M3.5 20c0-3 2.4-5 5.5-5s5.5 2 5.5 5" /><circle cx="16.5" cy="9" r="2.6" /><path d="M15.9 15.2c2.7.2 4.6 2 4.6 4.8" /></svg>
+              <span>Выходные</span>
+            </button>
+          </div>
+
+          <label class="search-box">
+            <svg class="stop-search-glass" viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <span>Поиск остановки</span>
+            <input id="stopSearch" type="search" placeholder="Поиск остановки" autocomplete="off" aria-label="Поиск остановки в маршруте" />
+          </label>
+
+          <section class="stops-panel" id="stopsPanel"></section>
+        </section>
+
+        <section class="view" data-view="routes">
+          <div class="section-heading">
+            <h2 id="routesTitle">Расписание городских маршрутов</h2>
+          </div>
+          <div class="routes-mode-switch" role="group" aria-label="Тип перевозок">
+            <button class="routes-mode-button is-active" type="button" data-transport-type="city" data-preserve-route-search="true" aria-pressed="true">
+              <span class="routes-mode-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M6 25V10h6v15M12 25V6h8v19M20 25V13h6v12"></path>
+                  <path d="M8.5 14h1.5M8.5 18h1.5M14.5 10h3M14.5 14h3M14.5 18h3M22.5 17h1.5M22.5 21h1.5"></path>
+                </svg>
+              </span>
+              <span class="routes-mode-copy">
+                <strong>Городской</strong>
+              </span>
+            </button>
+            <button class="routes-mode-button" type="button" data-transport-type="suburban" data-preserve-route-search="true" aria-pressed="false">
+              <span class="routes-mode-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <path d="M5 25h22M9 25V14l6-5 6 5v11M13 25v-6h4v6"></path>
+                  <path d="M5 25c2-4 3-8 3-13M5 15h6M25 25c-2-4-3-8-3-13M21 15h6"></path>
+                </svg>
+              </span>
+              <span class="routes-mode-copy">
+                <strong>Пригородный</strong>
+              </span>
+            </button>
+            <button class="routes-mode-button" type="button" data-transport-type="intercity" data-preserve-route-search="true" aria-pressed="false">
+              <span class="routes-mode-icon" aria-hidden="true">
+                <svg viewBox="0 0 32 32" focusable="false">
+                  <rect x="8" y="6" width="16" height="18" rx="4"></rect>
+                  <path d="M11 11h10M11 16h10M12 24l-2 3M20 24l2 3"></path>
+                  <circle cx="12.5" cy="20.5" r="1.3"></circle>
+                  <circle cx="19.5" cy="20.5" r="1.3"></circle>
+                </svg>
+              </span>
+              <span class="routes-mode-copy">
+                <strong>Междугородний</strong>
+              </span>
+            </button>
+          </div>
+          <label class="search-box">
+            <span aria-hidden="true">🔎</span>
+            <input id="routeSearch" type="search" placeholder="Номер, конечная или остановка" autocomplete="off" aria-label="Поиск маршрута" />
+          </label>
+          <div class="route-list" id="routeList"></div>
+        </section>
+
+        <section class="view favorites-view" data-view="favorites">
+          <div class="section-heading favorites-view-heading">
+            <div>
+              <h2>Избранное</h2>
+              <p>Частые остановки и будильники — всегда под рукой.</p>
+            </div>
+          </div>
+          <section class="favorites-panel favorites-view-panel" id="favoritesPanel">
+            <div class="favorites-head">
+              <h3>Избранные остановки</h3>
+              <span id="favoritesCount">0 остановок</span>
+            </div>
+            <div class="favorites-list favorites-stop-list" id="favoritesList"></div>
+            <div class="favorites-empty" id="favoritesEmpty">
+              <svg class="favorites-empty-icon" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3.6l2.5 5.06 5.6.82-4.05 3.95.96 5.57L12 16.37 6.99 19l.96-5.57L3.9 9.48l5.6-.82L12 3.6z" />
+              </svg>
+              <strong>У вас пока нет избранных остановок</strong>
+              <span>Откройте расписание, выберите нужную остановку и добавьте её сюда.</span>
+              <button type="button" class="favorites-empty-cta" data-open-view="routes">Открыть расписание</button>
+            </div>
+          </section>
+        </section>
+
+        <section class="view appeal-view" data-view="appeal">
+          <form class="appeal-form" id="appealForm" hidden>
+            <div class="appeal-form-head">
+              <div>
+                <h3>Обращение</h3>
+                <p>Напишите сообщение администрации. После отправки откроется чат.</p>
+              </div>
+              <span class="appeal-head-icon" aria-hidden="true"></span>
+            </div>
+            <div class="appeal-topic-tabs" role="radiogroup" aria-label="Тип обращения">
+              <label class="appeal-topic-tab">
+                <input name="category" type="radio" value="Обращение" checked />
+                <i class="appeal-tab-icon appeal-tab-icon-message" aria-hidden="true"></i>
+                <b>Обращение</b>
+              </label>
+              <label class="appeal-topic-tab">
+                <input name="category" type="radio" value="Реклама" />
+                <i class="appeal-tab-icon appeal-tab-icon-ad" aria-hidden="true"></i>
+                <b>Реклама</b>
+              </label>
+              <label class="appeal-topic-tab">
+                <input name="category" type="radio" value="СТО" />
+                <i class="appeal-tab-icon appeal-tab-icon-service" aria-hidden="true"></i>
+                <b>СТО</b>
+              </label>
+            </div>
+
+            <label class="appeal-block appeal-text-block">
+              <span class="appeal-block-title">Сообщение</span>
+              <span class="appeal-input-shell">
+                <textarea name="text" rows="5" maxlength="1000" placeholder="Опишите ваш запрос или проблему."></textarea>
+                <span class="appeal-counter" id="appealTextCounter">0/1000</span>
+              </span>
+            </label>
+
+            <section class="appeal-block appeal-file-block">
+              <h3 class="appeal-block-title">Прикрепить фото</h3>
+              <div class="appeal-file-row">
+                <label class="appeal-file-drop">
+                  <input name="attachmentFiles" type="file" accept="image/*" multiple />
+                  <span class="appeal-file-icon" aria-hidden="true"></span>
+                  <span>
+                    <strong>Выбрать фото</strong>
+                    <small id="appealFileName">Файл не выбран</small>
+                  </span>
+                </label>
+                <span class="appeal-file-count" id="appealFileCount">0/4 вложения</span>
+              </div>
+              <div class="appeal-preview-list" id="appealPreviewList" hidden></div>
+              <p class="appeal-note">До 4 изображений до 5 МБ.</p>
+            </section>
+
+            <button class="primary-button appeal-submit" type="submit"><span class="appeal-submit-icon" aria-hidden="true"></span>Отправить обращение</button>
+            <p class="appeal-safe-note"><span class="appeal-safe-icon" aria-hidden="true"></span>Ваше обращение будет рассмотрено в кратчайшие сроки.</p>
+          </form>
+
+          <section class="appeal-bot-panel" id="appealBotPanel">
+            <div class="appeal-bot-copy">
+              <span class="appeal-head-icon" aria-hidden="true"></span>
+              <div>
+                <h3>Обращения теперь принимаются в Telegram-боте</h3>
+                <p>Бот уточнит тему, передаст сообщение ответственному отделу и пришлёт уведомление об ответе.</p>
+              </div>
+            </div>
+            <button class="primary-button appeal-submit" id="appealBotButton" type="button">
+              <span class="appeal-submit-icon" aria-hidden="true"></span>Написать в бот
+            </button>
+            <div class="appeal-inbox" id="appealInboxList"></div>
+          </section>
+
+          <section class="client-chat" id="clientChat">
+            <div class="chat-head">
+              <div>
+                <h3>Чат с администрацией</h3>
+                <p id="clientChatMeta">Ответ появится здесь и в Telegram, если вы открыли приложение через бота.</p>
+              </div>
+              <span class="status-pill" id="clientChatStatus">Открыт</span>
+            </div>
+            <div class="chat-thread" id="clientChatThread"></div>
+            <form class="chat-form" id="clientChatForm">
+              <input class="chat-attachment-input" id="clientChatAttachmentInput" name="chatAttachmentFiles" type="file" accept="image/*" multiple hidden />
+              <div class="chat-attachment-preview" id="clientChatAttachmentPreview" hidden></div>
+              <div class="chat-composer">
+                <button class="chat-attach-button" id="clientChatAttachButton" type="button" aria-label="Прикрепить фото">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m21.4 11.1-9.2 9.2a6 6 0 0 1-8.5-8.5l9.2-9.2a4 4 0 0 1 5.7 5.7l-9.2 9.2a2 2 0 0 1-2.8-2.8l8.5-8.5"></path>
+                  </svg>
+                </button>
+                <input name="text" type="text" placeholder="Сообщение" autocomplete="off" aria-label="Сообщение в чат" />
+                <button class="chat-send-button primary-button" type="submit" aria-label="Отправить сообщение">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="m22 2-7 20-4-9-9-4 20-7Z"></path>
+                    <path d="M22 2 11 13"></path>
+                  </svg>
+                </button>
+              </div>
+              <span class="chat-attach-count" id="clientChatAttachCount" hidden></span>
+            </form>
+            <p class="form-status chat-status-line" id="appealStatus" role="status"></p>
+          </section>
+        </section>
+
+        <section class="view" data-view="service">
+          <div class="section-heading">
+            <h2>Услуги</h2>
+            <p>СТО, сервисный центр МАЗ и другие услуги автобусного парка.</p>
+          </div>
+
+          <section class="service-section">
+            <div class="service-section-head">
+              <h3>Услуги СТО</h3>
+              <p>Выберите тип обслуживания.</p>
+            </div>
+            <div class="service-grid" aria-label="Услуги СТО">
+              <button class="service-card service-card-button" type="button" data-icon="▱" data-tone="cyan">
+                <strong>Ремонт двигателя</strong>
+                <span>Диагностика и ремонт двигателя любой сложности</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="◎" data-tone="red">
+                <strong>Ремонт тормозной системы</strong>
+                <span>Замена колодок, дисков и диагностика тормозов</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="❄" data-tone="sky">
+                <strong>Заправка и ремонт кондиционера</strong>
+                <span>Заправка фреоном, диагностика и ремонт</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="⌘" data-tone="orange">
+                <strong>Ремонт ходовой части</strong>
+                <span>Диагностика и ремонт подвески и ходовой части</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="⚙" data-tone="violet">
+                <strong>Ремонт КПП и редукторов</strong>
+                <span>Ремонт механических и автоматических КПП</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="ϟ" data-tone="amber">
+                <strong>Ремонт электрооборудования</strong>
+                <span>Диагностика и ремонт электрики автомобиля</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▭" data-tone="pink">
+                <strong>Сварочные работы</strong>
+                <span>Сварка, подготовка и изготовление элементов</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="✓" data-tone="green">
+                <strong>Плановое обслуживание</strong>
+                <span>ТО по регламенту, замена масел и расходников</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="✳" data-tone="orange">
+                <strong>Лазерная очистка металла</strong>
+                <span>Удаление ржавчины, краски и загрязнений</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▣" data-tone="violet">
+                <strong>Диагностика автомобиля</strong>
+                <span>Компьютерная диагностика систем автомобиля</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="♢" data-tone="cyan">
+                <strong>Замена технических жидкостей</strong>
+                <span>Замена масла, антифриза и тормозной жидкости</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="◎" data-tone="sky">
+                <strong>Шиномонтаж</strong>
+                <span>Монтаж, балансировка и ремонт шин</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="service-section">
+            <div class="service-section-head">
+              <h3>Другие услуги</h3>
+              <p>Короткие заявки без лишних форм.</p>
+            </div>
+            <div class="service-grid" aria-label="Другие услуги">
+              <button class="service-card service-card-button" type="button" data-icon="▰" data-tone="sky">
+                <strong>Аренда автобусов</strong>
+                <span>Пассажирские перевозки</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▥" data-tone="sky">
+                <strong>Аренда помещений</strong>
+                <span>Аренда залов и кабинетов</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="♨" data-tone="violet">
+                <strong>Столовая</strong>
+                <span>Комплексные обеды</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="⌁" data-tone="sky">
+                <strong>Медицинское и техническое освидетельствование</strong>
+                <span>Медосмотры и справки</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="⌯" data-tone="amber">
+                <strong>Реклама на бортах автобуса</strong>
+                <span>Размещение рекламы</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▤" data-tone="sky">
+                <strong>Покупка отработанных масел</strong>
+                <span>Покупаем отработанные масла и жидкости</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▱" data-tone="amber">
+                <strong>Автовокзал</strong>
+                <span>Билеты и расписание</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="⌖" data-tone="cyan">
+                <strong>Автостанция Ляховичи</strong>
+                <span>Расписание автобусов</span>
+              </button>
+              <button class="service-card service-card-button" type="button" data-icon="▿" data-tone="violet">
+                <strong>Рынок «Кірмаш Палескі»</strong>
+                <span>Торговые ряды и аренда</span>
+              </button>
+            </div>
+          </section>
+
+          <p class="service-note">Карточки работают как справочник: описание, стоимость и детали услуг можно посмотреть без отдельной формы.</p>
+        </section>
+
+        <section class="view" data-view="about">
+          <div class="section-heading">
+            <h2>О нас</h2>
+            <p>Адрес, приёмная и контакты.</p>
+          </div>
+
+          <section class="about-official-card">
+            <span class="about-badge">Контакты</span>
+            <h3>Автобусный парк г. Барановичи</h3>
+            <p><span class="about-line-icon">📍</span><strong>Адрес:</strong> ул. Тельмана, 102</p>
+            <p><span class="about-line-icon">🕘</span><strong>Режим работы:</strong> Пн–Пт, 8:00–17:00 · обед 12:00–13:00</p>
+            <div class="about-divider"></div>
+            <div class="about-reception">
+              <strong>Приёмная</strong>
+              <span>Тел.: <a href="tel:+375163681891">+375 (163) 68-18-91</a></span>
+              <span>E-mail: <a href="mailto:buspark@brest.by?subject=%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%B0%D0%B2%D1%82%D0%BE%D0%B1%D1%83%D1%81%D0%BD%D0%BE%D0%BC%D1%83%20%D0%BF%D0%B0%D1%80%D0%BA%D1%83" data-email-link="buspark@brest.by">buspark@brest.by</a></span>
+              <span class="about-fax-line">Факс: +375 (163) 68-19-37</span>
+            </div>
+          </section>
+
+          <div class="about-actions" aria-label="Быстрые контакты">
+            <a class="about-action-card about-action-card--call" href="tel:+375163681891" aria-label="Позвонить в приёмную">
+              <span class="about-action-icon about-call" aria-hidden="true">
+                <svg class="about-action-svg" viewBox="0 0 24 24" focusable="false">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.91.32 1.8.59 2.65a2 2 0 0 1-.45 2.11L8.1 9.63a16 16 0 0 0 6.27 6.27l1.15-1.15a2 2 0 0 1 2.11-.45c.85.27 1.74.47 2.65.59A2 2 0 0 1 22 16.92Z"></path>
+                </svg>
+              </span>
+              <span class="about-action-title">Позвонить</span>
+              <span class="about-action-subtitle">Связаться</span>
+              <span class="about-action-arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="about-action-card about-action-card--mail" href="mailto:buspark@brest.by?subject=%D0%92%D0%BE%D0%BF%D1%80%D0%BE%D1%81%20%D0%B0%D0%B2%D1%82%D0%BE%D0%B1%D1%83%D1%81%D0%BD%D0%BE%D0%BC%D1%83%20%D0%BF%D0%B0%D1%80%D0%BA%D1%83" data-email-link="buspark@brest.by" aria-label="Написать на E-mail">
+              <span class="about-action-icon about-mail" aria-hidden="true">
+                <svg class="about-action-svg" viewBox="0 0 24 24" focusable="false">
+                  <rect x="3" y="5" width="18" height="14" rx="3"></rect>
+                  <path d="m4 7 8 6 8-6"></path>
+                </svg>
+              </span>
+              <span class="about-action-title">E-mail</span>
+              <span class="about-action-subtitle">Написать</span>
+              <span class="about-action-arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="about-action-card about-action-card--site" href="https://barautopark.by/" target="_blank" rel="noreferrer" aria-label="Открыть сайт автобусного парка">
+              <span class="about-action-icon about-site" aria-hidden="true">
+                <svg class="about-action-svg" viewBox="0 0 24 24" focusable="false">
+                  <circle cx="12" cy="12" r="9"></circle>
+                  <path d="M3.6 9h16.8M3.6 15h16.8M12 3a15.5 15.5 0 0 1 0 18M12 3a15.5 15.5 0 0 0 0 18"></path>
+                </svg>
+              </span>
+              <span class="about-action-title">Сайт</span>
+              <span class="about-action-subtitle">Перейти</span>
+              <span class="about-action-arrow" aria-hidden="true">›</span>
+            </a>
+            <a class="about-action-card about-action-card--map" href="https://yandex.by/maps/?text=%D0%91%D0%B0%D1%80%D0%B0%D0%BD%D0%BE%D0%B2%D0%B8%D1%87%D0%B8%20%D0%A2%D0%B5%D0%BB%D1%8C%D0%BC%D0%B0%D0%BD%D0%B0%20102%20%D0%B0%D0%B2%D1%82%D0%BE%D0%B1%D1%83%D1%81%D0%BD%D1%8B%D0%B9%20%D0%BF%D0%B0%D1%80%D0%BA" target="_blank" rel="noreferrer" aria-label="Открыть адрес на карте">
+              <span class="about-action-icon about-map" aria-hidden="true">
+                <svg class="about-action-svg" viewBox="0 0 24 24" focusable="false">
+                  <path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z"></path>
+                  <circle cx="12" cy="10" r="2.4"></circle>
+                </svg>
+              </span>
+              <span class="about-action-title"><span class="about-title-full">Мы на карте</span><span class="about-title-short">Карта</span></span>
+              <span class="about-action-subtitle">Найти нас</span>
+              <span class="about-action-arrow" aria-hidden="true">›</span>
+            </a>
+          </div>
+
+          <section class="about-directory" aria-label="Контакты предприятия">
+            <div class="about-section-head">
+              <h3>Контакты предприятия</h3>
+              <p>Все специалисты в раскрывающемся списке.</p>
+            </div>
+            <label class="about-search">
+              <span aria-hidden="true"></span>
+              <input id="aboutSearch" type="search" placeholder="Найти контакт или отдел" autocomplete="off" aria-label="Поиск контактов" />
+            </label>
+            <label class="about-department-select">
+              <span>Отдел</span>
+              <select id="aboutDepartments" aria-label="Фильтр контактов по отделу"></select>
+            </label>
+            <div class="about-alpha-nav" id="aboutAlphaNav" aria-label="Быстрая навигация по алфавиту"></div>
+            <div class="about-people" id="aboutPeople" aria-label="Список контактов предприятия"></div>
+          </section>
+
+        </section>
+
+        <section class="view map-view" data-view="map">
+          <div class="mapx-stage" id="mapxStage">
+            <div class="mapx-canvas" id="mapxCanvas" aria-label="Интерактивная карта маршрутов Барановичей"></div>
+
+            <div class="mapx-loading" id="mapxLoading">
+              <span class="mapx-spinner" aria-hidden="true"></span>
+              <span>Загрузка карты…</span>
+            </div>
+            <div class="mapx-empty" id="mapxEmpty" hidden>
+              <strong>Геоданные ещё не заполнены</strong>
+              <p>Линии маршрутов и остановки появятся после настройки в админ-панели.</p>
+            </div>
+
+            <!-- Верхняя панель: поиск + типы маршрутов + статусы -->
+            <div class="mapx-top">
+              <div class="mapx-toprow">
+                <div class="mapx-searchwrap">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <input type="search" id="mapxSearch" placeholder="Поиск" autocomplete="off" aria-label="Поиск по карте">
+                  <div class="mapx-search-results" id="mapxSearchResults" hidden></div>
+                </div>
+                <div class="mapx-typetabs" id="mapxTypes" role="tablist" aria-label="Тип маршрутов"></div>
+              </div>
+              <div class="mapx-chips" id="mapxChips">
+                <button type="button" class="mapx-selchip" id="mapxSelChip" hidden></button>
+                <span class="mapx-chip mapx-chip--demo" id="mapxDemoChip" hidden title="Геоданные демонстрационные и заполняются администратором">
+                  <i class="mapx-dot"></i> Демо-данные
+                </span>
+                <span class="mapx-chip" id="mapxLiveChip" hidden></span>
+              </div>
+              <div class="mapx-alerts" id="mapxAlerts" hidden aria-label="Изменения движения"></div>
+            </div>
+
+            <!-- Кнопки управления -->
+            <div class="mapx-fabs" role="group" aria-label="Управление картой">
+              <div class="mapx-layers-wrap">
+                <button type="button" id="mapxLayers" aria-label="Слои карты" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
+                </button>
+                <div class="mapx-modes" id="mapxModes" role="group" aria-label="Режим карты" hidden>
+                  <button type="button" class="is-active" data-mapx-mode="scheme">Схема</button>
+                  <button type="button" data-mapx-mode="satellite">Спутник</button>
+                  <button type="button" data-mapx-mode="hybrid">Гибрид</button>
+                </div>
+              </div>
+              <button type="button" id="mapxZoomIn" aria-label="Приблизить">+</button>
+              <button type="button" id="mapxZoomOut" aria-label="Отдалить">−</button>
+              <button type="button" id="mapxLocate" aria-label="Моё местоположение">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+              </button>
+              <button type="button" id="mapxFit" aria-label="Показать весь город">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3"/></svg>
+              </button>
+            </div>
+
+            <!-- Низ: лента маршрутов + карточка объекта -->
+            <div class="mapx-bottom">
+              <div class="mapx-hint" id="mapxHint" hidden></div>
+              <div class="mapx-routes" id="mapxRoutes" aria-label="Маршруты"></div>
+              <div class="mapx-card" id="mapxCard" hidden></div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <nav class="bottom-nav" id="bottomNav" aria-label="Главное меню">
+        <button type="button" class="is-active" data-nav="home">
+          <svg class="nav-icon nav-home" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.5 10.8 12 3.7l8.5 7.1"></path>
+            <path d="M5.5 9.7v9.8h13V9.7"></path>
+            <path d="M9.4 19.5v-5.2h5.2v5.2"></path>
+          </svg>
+          <span>Главная</span>
+        </button>
+        <button type="button" data-nav="routes">
+          <svg class="nav-icon nav-routes" viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4.5" y="5.3" width="15" height="15" rx="3"></rect>
+            <path d="M8 3.7v3.2M16 3.7v3.2M4.5 9.4h15"></path>
+            <path d="M8.2 12.7h2.1M13.7 12.7h2.1M8.2 16.2h2.1M13.7 16.2h2.1"></path>
+          </svg>
+          <span>Расписание</span>
+        </button>
+        <button type="button" data-nav="map">
+          <svg class="nav-icon nav-map" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3.8 6.6 9 4.5l6 2.1 5.2-2.1v12.9L15 19.5l-6-2.1-5.2 2.1V6.6Z"></path>
+            <path d="M9 4.5v12.9M15 6.6v12.9"></path>
+          </svg>
+          <span>Карта</span>
+        </button>
+        <button type="button" data-nav="favorites">
+          <svg class="nav-icon nav-favorites" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 3.8 14.7 9l5.8.8-4.2 4.1 1 5.8L12 17l-5.3 2.7 1-5.8-4.2-4.1L9.3 9 12 3.8Z"></path>
+          </svg>
+          <span class="nav-count-badge" id="favoritesNavBadge" hidden>0</span>
+          <span>Избранное</span>
+        </button>
+        <button class="nav-secondary-item" type="button" data-nav="service">
+          <svg class="nav-icon nav-services" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8.3 7.5V5.7c0-.9.7-1.6 1.6-1.6h4.2c.9 0 1.6.7 1.6 1.6v1.8"></path>
+            <rect x="4.2" y="7.5" width="15.6" height="12.1" rx="2.4"></rect>
+            <path d="M4.2 11.6c4.8 2 10.8 2 15.6 0"></path>
+            <path d="M10 12.4h4"></path>
+          </svg>
+          <span>Услуги</span>
+        </button>
+        <button class="nav-secondary-item" type="button" data-nav="about">
+          <svg class="nav-icon nav-about" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="8.2"></circle>
+            <path d="M12 10.6v5.4"></path>
+            <path d="M12 7.8h.01"></path>
+          </svg>
+          <span>О нас</span>
+        </button>
+        <button type="button" data-nav="appeal">
+          <svg class="nav-icon nav-appeal" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M5.2 6.6c1.5-1.5 3.7-2.3 6.6-2.3 4.9 0 8 2.7 8 6.8s-3.1 6.8-8 6.8c-.9 0-1.8-.1-2.6-.3L4.6 20l1.1-4.2c-1.2-1.2-1.8-2.8-1.8-4.7 0-1.8.4-3.3 1.3-4.5Z"></path>
+          </svg>
+          <span>Обращения</span>
+        </button>
+      </nav>
+    </div>
+
+    <div class="image-viewer" id="imageViewer" hidden>
+      <button class="image-viewer-backdrop" id="imageViewerBackdrop" type="button" aria-label="Закрыть просмотр"></button>
+      <div class="image-viewer-panel" role="dialog" aria-modal="true" aria-label="Просмотр картинки">
+        <button class="image-viewer-close" id="imageViewerClose" type="button" aria-label="Закрыть">×</button>
+        <img id="imageViewerImage" alt="" />
+      </div>
+    </div>
+
+    <div class="app-toast" id="appToast" role="status" aria-live="polite" hidden></div>
+
+    <script src="https://telegram.org/js/telegram-web-app.js?62"></script>
+  <script src="/app.js?v=20260713-hero2c"></script>
+  <script src="/map-screen.js?v=20260720-map1" defer></script>
+  </body>
+</html>

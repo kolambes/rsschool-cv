@@ -1,0 +1,1474 @@
+
+
+/* dvh only where supported: on older iOS (<15.4) an unsupported unit inside a
+   custom property makes every var() consumer invalid-at-computed-value (unset),
+   so the base sheet's svh fallback must stay authoritative there. */
+@supports (height: 100dvh) {
+  :root {
+    --app-viewport-height: 100dvh;
+  }
+}
+
+/* ---- Base rendering ------------------------------------------------------ */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Keyboard focus ring (focus-visible only — no rings on touch taps). */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible,
+[role="button"]:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
+  border-radius: var(--radius-sm);
+}
+
+/* Comfortable tap targets on touch devices. */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  a[role="button"],
+  [data-nav],
+  [data-open-view],
+  .icon-button,
+  .chip,
+  .pill {
+    min-height: 44px;
+  }
+}
+
+/* No grey tap flash on Android/iOS. */
+button,
+a,
+[role="button"],
+[data-nav],
+[data-open-view] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Thin, unobtrusive scrollbars. */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(27, 42, 38, 0.2) transparent;
+}
+*::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(27, 42, 38, 0.2);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- Canvas: flat warm background (zero paint cost) ---------------------- */
+body.is-comfort,
+body.is-comfort[data-active-view],
+html body.is-comfort[data-active-view] {
+  background: var(--bg) !important;
+}
+
+/* ---- Top bar: flat, blends into the canvas ------------------------------- */
+.topbar {
+  padding-top: max(env(safe-area-inset-top, 0px), 10px);
+  padding-left: max(env(safe-area-inset-left, 0px), 14px);
+  padding-right: max(env(safe-area-inset-right, 0px), 14px);
+  background: var(--bg) !important;
+  border-bottom: 1px solid var(--hairline);
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+/* ---- Contextual top bar ----------------------------------------------------
+   Home: flat monochrome brand mark + single-line name (the multicolor crest
+   PNG stays in the DOM for tooling but is never painted). Inner views: the
+   brand yields to the screen title — vertical space is spent once, not twice. */
+/* Company crest visible at EVERY breakpoint (base media queries hide/re-show
+   .logo-pair / .park-logo at some widths with (0,3,1)!important — outweigh them). */
+html body .topbar .logo-pair,
+html body[data-active-view] .topbar .logo-pair{
+  display: inline-flex !important;
+  align-items: center !important;
+  flex: 0 0 auto;
+}
+html body .topbar .park-logo,
+html body[data-active-view] .topbar .park-logo{
+  display: block !important;
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: 44px !important;
+  height: 38px !important;
+  min-height: 0 !important;
+  max-height: 38px !important;
+  object-fit: contain;
+}
+/* The generic bus glyph yields to the real crest. */
+html body .topbar .brand-mark {
+  display: none !important;
+}
+.topbar .brand-mark {
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  color: var(--accent);
+}
+.topbar .brand-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+/* Two-line brand (mockup): «ОАО Автобусный парк» over a muted «г. Барановичи»
+   (base pins display:grid at (0,3,1)!important — outweigh it) */
+html body .topbar .brand-title-lines,
+html body[data-active-view] .topbar .brand-title-lines {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start;
+  gap: 1px;
+  white-space: nowrap;
+}
+html body .topbar .brand-title-lines strong {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.015em;
+  line-height: 1.15 !important;
+}
+html body .topbar .brand-title-lines > span {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+  line-height: 1.2 !important;
+}
+/* Green presence dot on the brand mark (mockup detail). */
+.topbar .brand-block {
+  position: relative;
+}
+.topbar .brand-mark {
+  filter: drop-shadow(0 1px 2px rgba(11, 106, 94, 0.2));
+}
+
+/* Bell anchors to the top-right corner regardless of the base grid layout. */
+.topbar {
+  position: relative;
+}
+
+/* Notification bell: alarm count badge, opens Favorites. */
+.topbar-bell {
+  position: absolute;
+  top: 50%;
+  right: max(env(safe-area-inset-right, 0px), 14px);
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--surface);
+  box-shadow: var(--shadow-rest);
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 80ms ease;
+}
+.topbar-bell:active {
+  transform: translateY(-50%) scale(0.94);
+}
+.topbar-bell svg {
+  width: 20px;
+  height: 20px;
+}
+.topbar-bell-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 17px;
+  height: 17px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 17px;
+  text-align: center;
+  box-shadow: 0 0 0 2px var(--bg);
+}
+
+/* Screen titles: exactly one visible, driven by body[data-active-view]. */
+.topbar-screen-title {
+  display: none;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  color: var(--text);
+}
+body[data-active-view="routes"] .topbar-screen-title[data-title-for="routes"],
+body[data-active-view="schedule"] .topbar-screen-title[data-title-for="schedule"],
+body[data-active-view="favorites"] .topbar-screen-title[data-title-for="favorites"],
+body[data-active-view="service"] .topbar-screen-title[data-title-for="service"],
+body[data-active-view="about"] .topbar-screen-title[data-title-for="about"] {
+  display: block;
+}
+
+/* In-page headings that now duplicate the top bar title. */
+body.is-comfort .view[data-view="favorites"] > .section-heading,
+body.is-comfort .view[data-view="about"] > .section-heading {
+  display: none !important;
+}
+
+/* ---- Cards: pure white, hairline, one resting shadow --------------------- */
+.home-services-card,
+.schedule-hero,
+.next-panel,
+.direction-panel,
+.stops-panel,
+.favorites-panel,
+.route-card.route-tile,
+.home-category-card {
+  background-color: transparent !important;
+  background-image: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: var(--radius) !important;
+}
+
+/* ---- Type scale: 400/600/700 body + 800 display only ---------------------- */
+.section-heading h1,
+.section-heading h2 {
+  font-size: 23px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.028em !important;
+  line-height: 1.2 !important;
+}
+/* Every time value renders in tabular figures — columns of times align and
+   countdowns don't jitter as digits change. */
+.next-trip-time,
+.stop-time-pill,
+.home-route-result-meta b,
+.stop-times-panel,
+.departures-summary-preview,
+time {
+  font-variant-numeric: tabular-nums;
+}
+.home-quick-heading,
+.home-services-heading,
+.favorites-head h3 {
+  font-size: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* ---- Home hero: the single brand-colored element -------------------------- */
+.home-route-search {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+.home-route-launcher {
+  /* Mockup hero: deep emerald surface with a flat bus illustration on the right. */
+  position: relative;
+  overflow: hidden;
+  background:
+    radial-gradient(380px 170px at 90% -25%, rgba(255, 255, 255, 0.12), transparent 65%),
+    linear-gradient(135deg, #0d7d70 0%, #07463f 100%) !important;
+  border: none !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 18px 18px 16px !important;
+  gap: 14px;
+  min-height: 132px;
+  box-shadow: 0 10px 24px rgba(7, 70, 63, 0.32) !important;
+  transition: transform 80ms ease;
+}
+.home-route-launcher::before {
+  content: "";
+  display: none;
+  position: absolute;
+  /* Clear of the chevron circle on the right edge — they must never overlap. */
+  right: 58px;
+  bottom: -12px;
+  width: 34%;
+  max-width: 150px;
+  height: 68px;
+  background:
+    url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 120"><rect x="10" y="30" width="200" height="62" rx="14" fill="%23ffffff" opacity="0.95"/><rect x="22" y="40" width="34" height="24" rx="5" fill="%23124f47"/><rect x="64" y="40" width="34" height="24" rx="5" fill="%23124f47"/><rect x="106" y="40" width="34" height="24" rx="5" fill="%23124f47"/><rect x="148" y="40" width="30" height="24" rx="5" fill="%230e8577"/><rect x="184" y="42" width="18" height="34" rx="6" fill="%23124f47" opacity="0.85"/><rect x="22" y="70" width="156" height="5" rx="2.5" fill="%230b6a5e" opacity="0.4"/><circle cx="56" cy="94" r="12" fill="%231b2a26"/><circle cx="160" cy="94" r="12" fill="%231b2a26"/><circle cx="56" cy="94" r="4.5" fill="%23ffffff" opacity="0.9"/><circle cx="160" cy="94" r="4.5" fill="%23ffffff" opacity="0.9"/></svg>') right bottom / contain no-repeat;
+  opacity: 0.9;
+  pointer-events: none;
+}
+/* The bus appears only in the tall state (live summary present) — in the
+   compact two-line state it collided with the title. Graceful degradation:
+   browsers without :has() simply never show the illustration. */
+.home-route-launcher:has(.launcher-numbers)::before {
+  display: block;
+}
+.home-route-launcher > * {
+  position: relative;
+  z-index: 1;
+}
+.home-route-launcher:active {
+  transform: scale(0.97);
+  background: var(--accent-strong) !important;
+}
+.home-route-launcher-copy strong {
+  color: #ffffff !important;
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em;
+}
+.home-route-launcher-copy small {
+  color: rgba(255, 255, 255, 0.75) !important;
+  font-size: 13px !important;
+  /* Structured summary (route / big numbers / time) or plain-text fallback. */
+  white-space: pre-line !important;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+.home-route-launcher-copy .launcher-route {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12.5px;
+}
+.home-route-launcher-copy .launcher-numbers {
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+.home-route-launcher-copy .launcher-time {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.home-route-launcher-copy .launcher-wait {
+  font-style: normal;
+  color: #fbbf24;
+  font-weight: 700;
+}
+
+/* «Маршруты  →  Все маршруты» section head (mockup). */
+.home-quick-heading {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.home-see-all {
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: none;
+  cursor: pointer;
+  padding: 4px 0;
+  min-height: 0 !important;
+}
+.home-see-all:active {
+  transform: scale(0.96);
+}
+
+/* Transport tiles (mockup): soft tinted card, colored glyph — inverse of the
+   filled squares. The base paints the icon with monster-specificity gradients,
+   so mirror its heaviest selector with body.is-comfort prepended. */
+/* Base forces `background: transparent` at (0,5,2)!important — mirror its frame
+   with the transport attribute appended for (0,6,2). */
+body.is-comfort .home-category-card[data-transport-type="city"],
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="city"],
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="city"] {
+  background: transparent !important;
+}
+body.is-comfort .home-category-card[data-transport-type="suburban"],
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="suburban"],
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="suburban"] {
+  background: transparent !important;
+}
+body.is-comfort .home-category-card[data-transport-type="intercity"],
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="intercity"],
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card[data-transport-type="intercity"] {
+  background: transparent !important;
+}
+/* Selected tile keeps its tint but earns an accent ring. */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card.is-active {
+  box-shadow: none !important;
+}
+/* Selection now lives on the icon chip, not on a card fill. */
+html body .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card.is-active .transport-choice-icon {
+  box-shadow: 0 0 0 2px var(--accent), 0 2px 8px rgba(24, 40, 37, 0.1) !important;
+}
+/* No backdrop strip behind the tiles: the tinted cards ARE the surface. */
+html body .view[data-view="home"] .transport-choice.home-route-categories,
+html body[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories,
+body.is-comfort .transport-choice.home-route-categories {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+/* Tile labels never squeeze or clip («Междугородний» is the widest). */
+html body .view[data-view="home"] .transport-choice.home-route-categories .home-category-card strong,
+body.is-comfort .home-category-card strong {
+  font-size: 12.5px !important;
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+  letter-spacing: -0.01em;
+}
+body.is-comfort .transport-choice.home-route-categories {
+  gap: 10px;
+}
+body.is-comfort .transport-choice.home-route-categories .home-category-card {
+  min-width: 0;
+}
+html body.is-comfort .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card .transport-choice-icon,
+html body.is-comfort[data-active-view="home"] .view[data-view="home"].is-active .transport-choice.home-route-categories .transport-choice-item.home-category-card .transport-choice-icon,
+body.is-comfort .transport-choice.home-route-categories .home-category-card .transport-choice-icon {
+  background: #ffffff !important;
+  box-shadow: 0 2px 8px rgba(24, 40, 37, 0.1) !important;
+}
+html body.is-comfort .view[data-view="home"] .transport-choice.home-route-categories .transport-choice-item.home-category-card .transport-choice-icon svg,
+body.is-comfort .transport-choice.home-route-categories .home-category-card .transport-choice-icon svg {
+  stroke: var(--transport-stable-accent, var(--accent)) !important;
+  color: var(--transport-stable-accent, var(--accent)) !important;
+  fill: none !important;
+}
+.home-route-launcher > svg {
+  background: rgba(255, 255, 255, 0.14) !important;
+  color: #ffffff !important;
+  stroke: #ffffff;
+  border-radius: 12px;
+}
+.home-route-launcher-action {
+  background: #ffffff !important;
+  color: var(--accent) !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  border: none !important;
+  border-radius: 999px !important;
+  padding: 8px 14px !important;
+  box-shadow: none !important;
+}
+
+/* ---- Category tiles: color identity via tinted icon, calm card ----------- */
+.home-category-card {
+  padding: 16px 12px;
+  transition: transform 80ms ease;
+}
+.home-category-card:active {
+  transform: scale(0.97);
+}
+.home-category-card.is-active {
+  border-color: transparent !important;
+  background: transparent !important;
+}
+.home-category-card [class*="icon"] {
+  background-image: none !important;
+  box-shadow: none !important;
+  border-radius: 12px;
+}
+
+/* ---- Route tiles: color lives in the number chip fill only ---------------- */
+.route-card.route-tile {
+  transition: transform 80ms ease;
+  padding: 14px 16px;
+}
+.route-card.route-tile:active {
+  transform: scale(0.97);
+}
+.route-card.route-tile .route-number,
+.route-card.route-tile [class*="number"] {
+  box-shadow: none !important;
+  border-radius: 12px;
+}
+
+/* ---- Service action rows: one calm list with hairline dividers ------------ */
+.home-services-card {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.home-services-card > button + button,
+.home-services-card > [data-open-view] + [data-open-view] {
+  border-top: 1px solid var(--hairline);
+}
+.home-services-card button,
+.home-services-card [data-open-view] {
+  min-height: 56px;
+  transition: transform 80ms ease;
+}
+.home-services-card button:active,
+.home-services-card [data-open-view]:active {
+  transform: scale(0.98);
+}
+
+/* ---- Segmented day control ------------------------------------------------ */
+.segmented {
+  background: var(--surface-sunken) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  padding: 3px !important;
+  box-shadow: none !important;
+}
+.segmented button {
+  border-radius: 9px !important;
+  color: var(--muted);
+  transition: transform 80ms ease;
+}
+.segmented button.is-active {
+  background: #ffffff !important;
+  color: var(--text) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 3px rgba(24, 40, 37, 0.1) !important;
+}
+.segmented button:active {
+  transform: scale(0.97);
+}
+
+/* ---- Inputs / search ------------------------------------------------------- */
+.search-box {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 12px;
+}
+.search-box:focus-within {
+  border-color: var(--accent);
+  box-shadow: var(--ring) !important;
+}
+
+/* ---- Bottom dock: light glass, tint-pill active state --------------------- */
+body.is-comfort[data-active-view] .bottom-nav,
+body.is-comfort .bottom-nav {
+  background: rgba(255, 255, 255, 0.88) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.4) !important;
+  backdrop-filter: blur(14px) saturate(1.4) !important;
+  border-color: var(--hairline) !important;
+  box-shadow: 0 -2px 12px rgba(24, 40, 37, 0.06) !important;
+  padding-bottom: max(env(safe-area-inset-bottom, 0px), 6px);
+}
+body.is-comfort .bottom-nav button {
+  color: var(--muted);
+  transition: transform 80ms ease;
+}
+body.is-comfort .bottom-nav button:active {
+  transform: scale(0.94);
+}
+body.is-comfort .bottom-nav button.is-active {
+  background: linear-gradient(180deg, rgba(14, 133, 119, 0.16), rgba(11, 106, 94, 0.1)) !important;
+  border-radius: 12px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+  color: var(--accent) !important;
+  font-weight: 600;
+}
+body.is-comfort .bottom-nav button.is-active .nav-icon {
+  transform: none;
+  color: var(--accent);
+  stroke: var(--accent);
+}
+
+/* ---- Empty states ---------------------------------------------------------- */
+.favorites-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  text-align: center;
+}
+.favorites-empty strong {
+  font-size: 15px;
+  font-weight: 600;
+}
+.favorites-empty span {
+  font-size: 13px;
+  color: var(--muted);
+}
+.favorites-empty-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--muted);
+  opacity: 0.7;
+}
+.favorites-empty-cta {
+  margin-top: 6px;
+  min-height: 44px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #ffffff;
+  font: 600 15px/1 var(--font-ui, inherit);
+  cursor: pointer;
+  box-shadow: none;
+  transition: transform 80ms ease, background-color 120ms ease;
+}
+.favorites-empty-cta:hover {
+  background: var(--accent-strong);
+}
+.favorites-empty-cta:active {
+  transform: scale(0.97);
+}
+
+/* ========================================================================
+   UX CLARITY (from UX-agent audit): hierarchy, de-noising, scannability.
+   ======================================================================== */
+
+/* Schedule: the NEXT DEPARTURE is the screen's answer — make the time
+   unmissable. (Block order is already managed by the base grid's own `order`
+   system: hero -> direction -> day tabs -> next panel -> search -> stops.) */
+.next-trip-time {
+  font-size: 38px !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.next-trip-kicker {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+/* The compact heading duplicates what .schedule-hero already says. */
+.view[data-view="schedule"] > .section-heading.compact-heading {
+  display: none !important;
+}
+
+/* Home: hero dominates; its "Открыть" pill is a redundant affordance on an
+   already-tappable card — show a chevron instead. */
+.home-route-launcher-action {
+  font-size: 0 !important;
+  padding: 0 !important;
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.home-route-launcher-action::after {
+  content: "›";
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--accent);
+}
+
+/* Instructional noise & marketing copy off (all widths — base media queries
+   re-show the tagline on wide screens with higher-specificity selectors). */
+.transport-choice-hint {
+  display: none !important;
+}
+.brand-title-lines small,
+html body .topbar .brand-title-lines small,
+html body[data-active-view] .topbar .brand-title-lines small {
+  display: none !important;
+}
+
+/* Section headings become quiet eyebrow labels — content leads, not labels. */
+.home-quick-heading,
+.home-services-heading {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.07em !important;
+  text-transform: uppercase;
+  color: var(--muted) !important;
+}
+
+/* Routes: compact transport switch (user already chose on Home), calm title. */
+.routes-mode-switch .home-category-card {
+  padding: 8px 10px;
+}
+.routes-mode-switch [class*="icon"] {
+  width: 30px !important;
+  height: 30px !important;
+}
+.route-card.route-tile .route-number,
+.route-card.route-tile [class*="number"] {
+  font-size: 20px !important;
+  font-weight: 700 !important;
+}
+.route-tile-label,
+.route-card.route-tile small {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
+}
+
+/* Dock labels: never wrap or shrink into mush. */
+.bottom-nav button {
+  white-space: nowrap;
+}
+.bottom-nav button span,
+.bottom-nav button small {
+  font-size: 10.5px;
+}
+
+/* Schedule detail de-noising. */
+.direction-panel .hero-label {
+  display: none !important;
+}
+.direction-chip,
+.direction-chip span {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.schedule-inline-help {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+}
+.stop-item {
+  min-height: 44px;
+}
+.stop-name strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.full-stops-button {
+  min-height: 44px;
+}
+
+/* Favorites: no double "it's empty" signal. */
+#favoritesPanel:has(#favoritesEmpty:not([hidden])) .favorites-head {
+  display: none;
+}
+
+/* ========================================================================
+   ABOUT 2.0 — modern place card in the app's own emerald language.
+   The org card becomes this screen's hero (same gradient family as Home),
+   actions sit as a glass row inside the story, the directory reads as a
+   clean modern list. Widths are capped so desktop doesn't stretch. ======= */
+
+/* Org card: compact, quiet modern surface — the green hero was oversized.
+   The card is a grid (base), so one 12px gap sets the rhythm for every row. */
+body.is-comfort .view[data-view="about"] .about-official-card {
+  background: var(--surface, #ffffff) !important;
+  border: 1px solid var(--hairline) !important;
+  border-radius: var(--radius-lg) !important;
+  box-shadow: 0 6px 18px rgba(11, 42, 38, 0.06) !important;
+  color: var(--text) !important;
+  gap: 12px !important;
+}
+body.is-comfort .view[data-view="about"] .about-official-card h3 {
+  color: var(--text) !important;
+  font-weight: 800 !important;
+  font-size: 17px !important;
+  letter-spacing: -0.02em;
+  line-height: 1.25 !important;
+  margin: -5px 0 0 !important; /* pull the title to 7px under the badge */
+}
+body.is-comfort .view[data-view="about"] .about-official-card p {
+  color: var(--text) !important;
+  font-size: 14.5px !important;
+  font-weight: 600;
+  line-height: 1.35 !important;
+}
+/* Micro-labels («АДРЕС:», «РЕЖИМ РАБОТЫ:») sit on their own line above the
+   value: small, uppercase, quiet. (!important: responsive-system forces the
+   label inline + nowrap, which glues it to the value.) */
+body.is-comfort .view[data-view="about"] .about-official-card p strong {
+  color: var(--muted) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  display: block !important;
+  white-space: normal !important;
+  margin: 0 !important;
+  line-height: 1.2;
+}
+body.is-comfort .view[data-view="about"] .about-badge {
+  display: inline-flex !important; /* base hides it on mobile — restore */
+  align-items: center;
+  width: max-content;
+  padding: 4px 10px !important;
+  background: rgba(11, 106, 94, 0.1) !important;
+  color: var(--accent) !important;
+  border: none !important;
+  border-radius: 999px;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+/* The divider is dead weight between rows that share one rhythm. */
+body.is-comfort .view[data-view="about"] .about-divider {
+  display: none !important;
+}
+/* Reception: plain text rows again — base/mobile turns the spans into chips
+   and hides e-mail + fax; visual-polish adds a boxed sub-card. Undo both so
+   the org card reads as one calm list. */
+body.is-comfort .view[data-view="about"] .about-reception {
+  padding: 0 !important;
+  border-radius: 0 !important;
+}
+body.is-comfort .view[data-view="about"] .about-reception,
+body.is-comfort .view[data-view="about"] .about-reception strong,
+body.is-comfort .view[data-view="about"] .about-reception span {
+  color: var(--text) !important;
+  background: transparent !important;
+  border: none !important;
+}
+body.is-comfort .view[data-view="about"] .about-reception > strong,
+body.is-comfort .view[data-view="about"] .about-reception > span {
+  display: block !important;
+  grid-column: 2;
+  padding: 0 !important;
+}
+body.is-comfort .view[data-view="about"] .about-reception > span {
+  font-size: 14px !important;
+  font-weight: 600;
+  line-height: 1.4 !important;
+}
+/* «Приёмная» becomes the same micro-label as address / opening hours. */
+body.is-comfort .view[data-view="about"] .about-reception > strong {
+  color: var(--muted) !important;
+  font-weight: 600 !important;
+  font-size: 11px !important;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  line-height: 1.2;
+}
+body.is-comfort .view[data-view="about"] .about-reception a {
+  color: var(--accent) !important;
+  font-weight: 700 !important;
+  text-decoration: none !important;
+}
+body.is-comfort .view[data-view="about"] .about-reception .about-fax-line {
+  color: var(--muted) !important;
+  font-size: 12px !important;
+  font-weight: 500;
+  margin-top: 2px;
+}
+
+/* Compact layout: no illustration, no reserved hero zone. */
+body.is-comfort .view[data-view="about"] .about-official-card {
+  position: relative;
+  overflow: hidden;
+  padding: 18px 18px 16px !important;
+  min-height: 0;
+}
+body.is-comfort .view[data-view="about"] .about-official-card h3 {
+  max-width: none;
+}
+body.is-comfort .view[data-view="about"] .about-official-card::after,
+body.is-comfort .view[data-view="about"] .about-official-card::before {
+  content: none !important;
+}
+/* Info rows (pin / clock / phone): squircle icon well in column one, stacked
+   label + value in column two. The well spans the two text lines and centers
+   against them, so nothing drifts out of alignment. */
+body.is-comfort .view[data-view="about"] .about-official-card > p,
+body.is-comfort .view[data-view="about"] .about-reception {
+  display: grid !important;
+  grid-template-columns: 36px minmax(0, 1fr) !important;
+  column-gap: 12px !important;
+  row-gap: 2px !important;
+  align-items: center;
+  margin: 0 !important; /* rhythm comes from the card's 12px grid gap */
+}
+body.is-comfort .view[data-view="about"] .about-official-card > p strong {
+  grid-column: 2; /* the value (anonymous text) then auto-flows below it */
+}
+body.is-comfort .view[data-view="about"] .about-official-card > p::before,
+body.is-comfort .view[data-view="about"] .about-reception::before {
+  content: "";
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  align-self: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  background-color: rgba(11, 106, 94, 0.09);
+  background-image: var(--about-row-icon);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px;
+}
+body.is-comfort .view[data-view="about"] .about-official-card > p:nth-of-type(1) {
+  --about-row-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%230b6a5e" d="M12 2a7 7 0 0 0-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-official-card > p:nth-of-type(2) {
+  --about-row-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%230b6a5e" d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm4.2 14.2-5.2-3V7h2v5l4.2 2.5-1 1.7Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-reception {
+  --about-row-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%230b6a5e" d="M6.6 10.8a15.6 15.6 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1L6.6 10.8Z"/></svg>');
+}
+
+/* ---- Action row: colored circular buttons (mockup) ------------------------- */
+body.is-comfort .view[data-view="about"] .about-actions .about-action-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-icon {
+  width: 52px !important;
+  height: 52px !important;
+  border-radius: 50% !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-svg {
+  stroke: #ffffff !important;
+  color: #ffffff !important;
+}
+body.is-comfort .view[data-view="about"] .about-action-card--call .about-action-icon {
+  background: linear-gradient(135deg, #14a396, #0b6a5e) !important;
+  box-shadow: 0 8px 18px rgba(11, 106, 94, 0.35) !important;
+}
+body.is-comfort .view[data-view="about"] .about-action-card--mail .about-action-icon {
+  background: linear-gradient(135deg, #60a5fa, #2563eb) !important;
+  box-shadow: 0 8px 18px rgba(37, 99, 235, 0.32) !important;
+}
+body.is-comfort .view[data-view="about"] .about-action-card--site .about-action-icon {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed) !important;
+  box-shadow: 0 8px 18px rgba(124, 58, 237, 0.32) !important;
+}
+body.is-comfort .view[data-view="about"] .about-action-card--map .about-action-icon {
+  background: linear-gradient(135deg, #fb923c, #ea580c) !important;
+  box-shadow: 0 8px 18px rgba(234, 88, 12, 0.32) !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-title {
+  color: var(--text) !important;
+}
+
+/* ---- Department rows: tinted square icon + chevron ------------------------- */
+body.is-comfort .view[data-view="about"] .about-dept-summary {
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  min-height: 52px;
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary::before {
+  content: "";
+  flex: 0 0 36px;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background-color: var(--accent);
+  -webkit-mask: var(--dept-icon) center / 20px 20px no-repeat;
+  mask: var(--dept-icon) center / 20px 20px no-repeat;
+  background-clip: border-box;
+}
+/* Icon well behind the glyph. */
+body.is-comfort .view[data-view="about"] .about-dept-summary {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M16 11a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm-8 0a3 3 0 1 0-3-3 3 3 0 0 0 3 3Zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5C15 14.2 10.3 13 8 13Zm8 0c-.3 0-.6 0-1 .05A4.2 4.2 0 0 1 17 16.5V19h6v-2.5c0-2.3-4.7-3.5-7-3.5Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-lead {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M10 4h4a2 2 0 0 1 2 2v1h4a1 1 0 0 1 1 1v4H3V8a1 1 0 0 1 1-1h4V6a2 2 0 0 1 2-2Zm0 3h4V6h-4v1ZM3 14h8v1.5h2V14h8v5a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-5Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-tech {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M21.7 18.3 14.9 11.5a6 6 0 0 0-7.8-7.6l3.5 3.5-2.8 2.8L4.3 6.7a6 6 0 0 0 7.6 7.8l6.8 6.8a1 1 0 0 0 1.4 0l1.6-1.6a1 1 0 0 0 0-1.4Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-bus {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M5 3h14a2 2 0 0 1 2 2v11a2 2 0 0 1-1 1.73V19a1.5 1.5 0 0 1-3 0v-1H7v1a1.5 1.5 0 0 1-3 0v-1.27A2 2 0 0 1 3 16V5a2 2 0 0 1 2-2Zm0 3v5h14V6H5Zm1.5 9.5a1.5 1.5 0 1 0 0-.01Zm11 0a1.5 1.5 0 1 0 0-.01Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-station {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M3 21V9l9-6 9 6v12h-6v-6h-6v6H3Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-docs {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M6 2h9l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 1.5V8h4.5L14 3.5ZM8 12h8v1.6H8V12Zm0 4h8v1.6H8V16Z"/></svg>');
+}
+body.is-comfort .view[data-view="about"] .about-dept-summary.dept-icon-food {
+  --dept-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M7 2v7a2 2 0 0 0 2 2v11h2V11a2 2 0 0 0 2-2V2h-1.5v6h-1V2h-1v6h-1V2H7Zm10 0c-1.7 0-3 1.8-3 4v6h2v9h2V2h-1Z"/></svg>');
+}
+/* Chevron on the right of each department row. */
+body.is-comfort .view[data-view="about"] .about-dept-summary::after {
+  content: "›";
+  margin-left: auto;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+/* Search: filter glyph on the right (decorative, matches the mockup). */
+body.is-comfort .view[data-view="about"] .about-search {
+  position: relative;
+}
+body.is-comfort .view[data-view="about"] .about-search::after {
+  content: "";
+  position: absolute;
+  right: 14px;
+  top: 50%;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  background-color: var(--accent);
+  -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M4 6h16v2H4V6Zm3 5h10v2H7v-2Zm3 5h4v2h-4v-2Z"/></svg>') center / contain no-repeat;
+  mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M4 6h16v2H4V6Zm3 5h10v2H7v-2Zm3 5h4v2h-4v-2Z"/></svg>') center / contain no-repeat;
+  pointer-events: none;
+}
+
+/* Directory: quiet modern list. */
+body.is-comfort .view[data-view="about"] .about-section-head p {
+  display: none !important;
+}
+body.is-comfort .view[data-view="about"] .about-section-head h3 {
+  font-size: 19px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+body.is-comfort .view[data-view="about"] .about-directory {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Desktop scalability: cap and center the about content so wide screens don't
+   stretch cards into ribbons. */
+@media (min-width: 700px) {
+  body.is-comfort .view[data-view="about"] > * {
+    max-width: 640px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* About: place-card layout — one compact row of four actions instead of the
+   2x2 tile grid that duplicated the contact card above it. */
+body.is-comfort .view[data-view="about"] .about-actions,
+body.is-comfort .about-actions {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important;
+  gap: 8px !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-card,
+body.is-comfort .about-actions .about-action-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  min-height: 76px !important;
+  padding: 10px 4px !important;
+  border-radius: var(--radius) !important;
+  text-align: center;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-icon,
+body.is-comfort .about-actions .about-action-icon {
+  width: 34px !important;
+  height: 34px !important;
+  margin: 0 !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-svg,
+body.is-comfort .about-actions .about-action-svg {
+  width: 18px !important;
+  height: 18px !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-title,
+body.is-comfort .about-actions .about-action-title {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  line-height: 1.2;
+}
+/* Compact columns fit only the short label («Карта», not «Мы на карте»). */
+body.is-comfort .view[data-view="about"] .about-actions .about-title-full,
+body.is-comfort .about-actions .about-title-full {
+  display: none !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-title-short,
+body.is-comfort .about-actions .about-title-short {
+  display: inline !important;
+}
+body.is-comfort .view[data-view="about"] .about-actions .about-action-arrow,
+body.is-comfort .about-actions .about-action-arrow {
+  display: none !important;
+}
+/* Fax: kept for completeness, demoted to a quiet footnote. */
+body.is-comfort .about-reception .about-fax-line {
+  font-size: 12px !important;
+  color: var(--muted) !important;
+}
+
+/* Services / About: hide inconsistent dingbat/emoji glyphs, keep tinted wells.
+   (base uses higher-weight selectors here — match with body prefix) */
+body.is-comfort .about-action-subtitle,
+body.is-comfort[data-active-view] .about-action-card .about-action-subtitle {
+  display: none !important;
+}
+body.is-comfort .about-line-icon,
+body.is-comfort[data-active-view] .about-line-icon {
+  display: none !important;
+}
+.service-card span:not([class]) {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* App-like touch behavior: no text selection on controls, no scrollbars on
+   horizontal chip rows, quiet tel/mailto links. */
+button,
+.route-card,
+.stop-item,
+[data-nav],
+[data-open-view],
+.direction-chip,
+.segmented {
+  user-select: none;
+  -webkit-user-select: none;
+}
+.quick-routes,
+.routes-mode-switch,
+.transport-choice {
+  scrollbar-width: none;
+}
+.quick-routes::-webkit-scrollbar,
+.routes-mode-switch::-webkit-scrollbar,
+.transport-choice::-webkit-scrollbar {
+  display: none;
+}
+a[href^="tel:"],
+a[href^="mailto:"] {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+/* ---- Transfer itinerary: timeline with a time column and plain-verb steps -- */
+.home-route-result-transfer {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 8px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(11, 106, 94, 0.05);
+}
+.home-route-result-transfer .transfer-step {
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  align-items: baseline;
+  gap: 10px;
+  position: relative;
+  padding-left: 14px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--text);
+}
+/* Rail: a dot per step, connected by a hairline. */
+.home-route-result-transfer .transfer-step::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.home-route-result-transfer .transfer-step::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 14px;
+  bottom: -9px;
+  width: 1px;
+  background: rgba(11, 106, 94, 0.25);
+}
+.home-route-result-transfer .transfer-step:last-child::after {
+  display: none;
+}
+.home-route-result-transfer .transfer-step-time {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  font-size: 12.5px;
+  white-space: nowrap;
+}
+.home-route-result-transfer .transfer-step-text {
+  color: var(--text);
+}
+.home-route-result-transfer .transfer-wait::before {
+  background: #d97706;
+}
+.home-route-result-transfer .transfer-wait .transfer-step-time,
+.home-route-result-transfer .transfer-wait .transfer-step-text {
+  color: #92600c;
+  font-weight: 600;
+}
+.home-route-result-transfer .transfer-arrive::before {
+  background: var(--accent);
+  box-shadow: 0 0 0 3px rgba(11, 106, 94, 0.18);
+}
+.home-route-result-transfer .transfer-arrive .transfer-step-text {
+  font-weight: 600;
+}
+
+/* ---- Schedule typography: Inter (loaded in <head>) + modern numerals ------ */
+html body .view[data-view="schedule"],
+html body .view[data-view="routes"] {
+  font-family: var(--font-ui) !important;
+}
+html body .view[data-view="schedule"] :is(h1, h2, h3) {
+  font-family: var(--font-heading) !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.02em !important;
+}
+/* Times align in columns: fixed-width lining figures everywhere on the screen. */
+html body .view[data-view="schedule"] :is(.time-chip, .favorite-time-chip, time, b, strong, [class*="time"], [class*="Time"]) {
+  font-variant-numeric: tabular-nums lining-nums;
+}
+html body .view[data-view="schedule"] .hero-label {
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--muted) !important;
+}
+
+/* ---- Route-search result card 2.0: modern, airy, softer chrome ------------ */
+/* Geometry guard. The base layer (responsive-system.css ~15033) draws the card
+   as grid 46px/1fr/auto with min-height:72px and align-items:center, and its
+   ~14662 block clamps the desktop dropdown to max-height:min(76vh,620px) while
+   .is-results-mode swaps overflow-y:auto for overflow:hidden — so on ~900-1000px
+   a long list was hard-clipped mid-card and tall transfer cards looked like they
+   spilled onto the next one. Also, `.home-route-result-main small` (nowrap
+   !important) hits the nested .transfer-step rows, letting their min-content
+   width push past the middle column. Everything below pins the grid explicitly
+   so the card grows with its content at any width. */
+@media (min-width: 701px) {
+  /* Restore user scrolling of the results dropdown on desktop widths. */
+  html body .home-route-search-menu.is-results-mode {
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+  }
+}
+@media (max-width: 700px) {
+  /* Root cause of the "last transfer step is cut off" bug on narrow widths:
+     the base sheet keeps overflow:hidden in results mode (responsive-system
+     ~14721, applies at every width) and pins the results block into the
+     leftover minmax(0,1fr) row (~15203), while .home-route-results itself is
+     overflow:visible (~15216) — nothing scrolls, so a tall transfer card was
+     hard-clipped at the sheet edge. Let the list itself scroll inside its row. */
+  html body .home-route-search-menu.is-results-mode .home-route-results {
+    min-height: 0 !important;
+    max-height: none !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+html body .home-route-results {
+  display: grid !important;
+  grid-auto-rows: auto !important; /* rows always track card content height */
+  align-items: stretch !important;
+  max-height: none !important;
+  min-width: 0 !important;
+}
+html body .home-route-results .home-route-result {
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) auto !important;
+  grid-auto-rows: auto !important;
+  grid-row: auto !important;
+  column-gap: 10px !important;
+  row-gap: 3px !important; /* title/path/meta sit as tight as the old inner grid */
+  height: auto !important; /* never a fixed height — the card grows with content */
+  max-height: none !important;
+  min-height: 72px !important;
+  min-width: 0 !important;
+  position: relative !important;
+  overflow: hidden !important; /* belt & braces: nothing crosses the 18px radius */
+  border: 1px solid var(--hairline) !important;
+  border-radius: 18px !important;
+  background: var(--surface, #ffffff) !important;
+  box-shadow: 0 6px 16px rgba(11, 42, 38, 0.05) !important;
+  padding: 14px !important;
+  align-items: start !important;
+  transition: transform 80ms ease, box-shadow 120ms ease;
+}
+/* Flattened layout: .home-route-result-main becomes display:contents so its
+   children live on the card grid directly. The transfer timeline then spans
+   the FULL card width (grid-column 1/-1) instead of being squeezed between
+   the number chip and the reserved "Открыть" column — steps stop wrapping.
+   Safe: the span carries no role/attributes, and the skeleton card's
+   unclassed strong/small auto-place into column 2 rows 1-2. */
+html body .home-route-results .home-route-result > .home-route-result-number {
+  grid-column: 1 !important;
+  grid-row: 1 / span 3 !important; /* beside title+path+meta, above the timeline */
+  align-self: center !important;
+}
+html body .home-route-results .home-route-result > .home-route-result-main {
+  display: contents !important;
+}
+html body .home-route-results .home-route-result .home-route-result-main > small {
+  grid-column: 2 !important;
+  grid-row: 2 !important;
+  min-width: 0 !important;
+}
+html body .home-route-results .home-route-result .home-route-result-meta {
+  grid-column: 2 !important;
+  grid-row: 3 !important;
+  min-width: 0 !important;
+}
+html body .home-route-results .home-route-result > .home-route-result-go {
+  grid-column: 3 !important;
+  grid-row: 1 / span 3 !important;
+  position: static !important; /* the pill must never float over the text */
+  align-self: center !important;
+  justify-self: end !important;
+  flex: none !important;
+  white-space: nowrap !important;
+  max-width: none !important;
+}
+html body .home-route-results .home-route-result:active {
+  transform: scale(0.99);
+}
+html body .home-route-results .home-route-result.is-nearest {
+  border-color: rgba(11, 106, 94, 0.35) !important;
+  background:
+    linear-gradient(180deg, rgba(11, 106, 94, 0.045), transparent 46%),
+    var(--surface, #ffffff) !important;
+  box-shadow: 0 10px 24px rgba(11, 106, 94, 0.12) !important;
+}
+/* Route number chip: gradient of the route's own color, softer corners. */
+html body .home-route-results .home-route-result-number {
+  border-radius: 14px !important;
+  background: linear-gradient(160deg, var(--route-color, #0f766e), color-mix(in srgb, var(--route-color, #0f766e) 72%, #06251f)) !important;
+  color: #ffffff !important;
+  font-weight: 800 !important;
+  box-shadow: 0 5px 12px color-mix(in srgb, var(--route-color, #0f766e) 32%, transparent) !important;
+}
+/* «Ближайший» badge: pill, brand tint, uppercase micro-label. The row never
+   wraps: the title text ellipsizes, the badge keeps its single line. */
+html body .home-route-results .home-route-result-title {
+  grid-column: 2 !important;
+  grid-row: 1 !important;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 7px !important;
+  min-width: 0 !important;
+}
+html body .home-route-results .home-route-result-title > span {
+  min-width: 0 !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+html body .home-route-results .home-route-result-title em {
+  flex: 0 0 auto !important;
+  white-space: nowrap !important;
+  font-style: normal !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 8px !important;
+  border-radius: 999px !important;
+  background: rgba(11, 106, 94, 0.1) !important;
+  color: var(--accent) !important;
+}
+/* Transfer timeline: quiet inset panel with a hairline, not a green wash.
+   Spans the whole card (under the number chip and the pill column too), so
+   step texts get the full width and stop wrapping mid-word. */
+html body .home-route-results .home-route-result-transfer {
+  grid-column: 1 / -1 !important;
+  grid-row: 4 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 7px !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  margin-top: 10px !important;
+  background: color-mix(in srgb, var(--bg, #f5f7f8) 65%, #ffffff) !important;
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 12px 14px;
+}
+/* Undo the base layer's nowrap/hidden (it targets every `small` inside
+   .home-route-result-main): steps wrap instead of forcing a min-content
+   width, and stay visible so the rail (::after) can connect the dots. */
+html body .home-route-results .home-route-result-transfer .transfer-step {
+  display: grid !important;
+  grid-template-columns: 46px minmax(0, 1fr) !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+html body .home-route-results .home-route-result-transfer .transfer-step-time {
+  white-space: nowrap !important;
+}
+html body .home-route-results .home-route-result-transfer .transfer-step-text {
+  display: block !important;
+  min-width: 0 !important;
+  white-space: normal !important;
+  overflow-wrap: anywhere !important;
+}
+/* «Открыть»: reads as the card's action, not a stray chip. The box is pinned
+   for every width — the base layer's ≤520px rule shrinks it to an 18px chevron
+   («›» via ::before), which half-applied under this pill and clipped the text. */
+html body .home-route-results .home-route-result-go {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: auto !important;
+  min-height: 36px !important;
+  border-radius: 999px !important;
+  padding: 8px 14px !important;
+  background: rgba(11, 106, 94, 0.1) !important;
+  color: var(--accent) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  line-height: 1 !important;
+  box-shadow: none !important;
+}
+html body .home-route-results .home-route-result-go::before {
+  content: none !important; /* legacy mobile chevron off — the pill is the action */
+}
+/* One pill style for every card: the filled is-nearest variant read as a
+   different control ("different icons"), so it is intentionally gone. */
+/* Loading skeleton keeps its quiet grey placeholders under the 2.0 chrome. */
+html body .home-route-results .home-route-result-loading .home-route-result-number,
+html body .home-route-results .home-route-result-loading .home-route-result-go {
+  background: rgba(100, 116, 139, 0.16) !important;
+  color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* ---- Motion: exactly two -------------------------------------------------- */
+@media (prefers-reduced-motion: no-preference) {
+  .view.is-active {
+    animation: view-enter 0.16s ease-out both;
+  }
+  @keyframes view-enter {
+    from {
+      opacity: 0;
+      transform: translateY(4px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+}
