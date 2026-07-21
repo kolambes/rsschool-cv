@@ -1050,6 +1050,12 @@ const CARTO_ATTRIBUTION = "© OpenStreetMap, © CARTO";
 
 const ESRI_DEFAULT_TILES = "https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}";
 
+// Подложка «Схемы» по умолчанию: OpenFreeMap (данные OpenStreetMap) —
+// реальные улицы, дома и подписи, бесплатно и без API-ключей.
+// Клиент автоматически откатывается на встроенную схему, если стиль недоступен.
+const OPENFREEMAP_ATTRIBUTION = "© Участники OpenStreetMap, OpenFreeMap";
+const DEFAULT_SCHEME_STYLE_URL = "https://tiles.openfreemap.org/styles/liberty";
+
 function getMapConfig() {
   if (!MAP_ENV.mapFeaturesEnabled) {
     return { ok: true, enabled: false, message: "Карта временно отключена администратором." };
@@ -1057,10 +1063,11 @@ function getMapConfig() {
   const tilesOn = externalTilesEnabled();
 
   // «Схема»: приоритет — внешний стиль (MAP_SCHEME_STYLE_URL/MAP_STYLE_URL),
-  // затем растровые тайлы (MAP_TILE_URL), затем встроенная векторная подложка.
-  const schemeStyleUrl = MAP_ENV.schemeStyleUrl || MAP_ENV.styleUrl;
+  // затем растровые тайлы (MAP_TILE_URL), затем OpenFreeMap по умолчанию
+  // (реальные улицы и дома; при MAP_EXTERNAL_TILES=false — встроенная подложка).
+  const schemeStyleUrl = MAP_ENV.schemeStyleUrl || MAP_ENV.styleUrl || (tilesOn && !MAP_ENV.tileUrl ? DEFAULT_SCHEME_STYLE_URL : "");
   const scheme = schemeStyleUrl
-    ? { title: "Схема", type: "style", styleUrl: schemeStyleUrl }
+    ? { title: "Схема", type: "style", styleUrl: schemeStyleUrl, attribution: OPENFREEMAP_ATTRIBUTION }
     : MAP_ENV.tileUrl
       ? { title: "Схема", type: "raster", enabled: true, tiles: [MAP_ENV.tileUrl], attribution: OSM_ATTRIBUTION }
       : { title: "Схема", type: "builtin" };

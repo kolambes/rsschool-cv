@@ -351,7 +351,7 @@ const CONTENT_SECURITY_POLICY = [
   "media-src 'self' data: blob: https:",
   // тайлы Спутник/Гибрид (Esri, CARTO) + пользовательские подложки из env
   // (MAP_TILE_URL и др.) MapLibre загружает через fetch → connect-src
-  `connect-src 'self' https://api.telegram.org https://server.arcgisonline.com https://*.basemaps.cartocdn.com${mapModule.getExternalOrigins().map((origin) => ` ${origin}`).join("")}`,
+  `connect-src 'self' https://api.telegram.org https://server.arcgisonline.com https://*.basemaps.cartocdn.com https://tiles.openfreemap.org${mapModule.getExternalOrigins().map((origin) => ` ${origin}`).join("")}`,
   "font-src 'self' data:",
   "object-src 'none'",
   // Telegram Web (web.telegram.org) embeds Mini Apps in an iframe — 'none' would

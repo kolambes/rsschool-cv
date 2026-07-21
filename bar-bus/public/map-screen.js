@@ -357,19 +357,45 @@
         fadeDuration: reducedMotion ? 0 : 200,
       });
 
-      await new Promise((resolve) => state.map.once("load", resolve));
+      // Внешний стиль «Схемы» может не загрузиться вовсе (офлайн/закрытая
+      // сеть) — тогда once("load") не наступит. Ждём с таймаутом и падаем
+      // на встроенную подложку.
+      const loaded = await Promise.race([
+        new Promise((resolve) => state.map.once("load", () => resolve(true))),
+        new Promise((resolve) => window.setTimeout(() => resolve(false), 12000)),
+      ]);
+      if (!loaded) {
+        // оверлей соберёт общий код ниже — здесь только меняем подложку
+        state.schemeFellBack = true;
+        if (state.config?.modes?.scheme) {
+          state.config.modes.scheme = { title: "Схема", type: "builtin" };
+        }
+        toast("Карта улиц недоступна — включена упрощённая схема.");
+        state.map.setStyle(schemeStyle(), { diff: false });
+        await new Promise((resolve) => state.map.once("style.load", resolve));
+      }
       state.map.resize();
       new ResizeObserver(() => state.map?.resize()).observe(els.canvas);
       buildOverlayLayers();
       bindMapEvents();
 
-      // Ошибка загрузки тайлов Спутника/Гибрида → откат на «Схему»
+      // Ошибки подложек: Спутник/Гибрид → откат на «Схему»;
+      // внешний стиль «Схемы» → откат на встроенную подложку.
       state.map.on("error", (event) => {
-        const sourceId = event?.sourceId || event?.source?.id;
+        const sourceId = event?.sourceId || event?.source?.id || "";
         if ((sourceId === "base" || sourceId === "labels") && state.mode !== "scheme" && !state.tileFailNotified) {
           state.tileFailNotified = true;
           toast("Спутниковая подложка недоступна — показана «Схема».");
           setMode("scheme");
+          return;
+        }
+        // источники нашего оверлея и встроенной схемы игнорируем
+        const isOwn = sourceId.startsWith("x-") || sourceId.startsWith("bm-");
+        if (state.mode === "scheme" && state.config?.modes?.scheme?.type === "style" && !isOwn && !state.schemeFellBack) {
+          state.schemeStyleErrors = (state.schemeStyleErrors || 0) + 1;
+          if (state.schemeStyleErrors >= 3) {
+            forceBuiltinScheme("Карта улиц недоступна — включена упрощённая схема.");
+          }
         }
       });
 
@@ -396,10 +422,49 @@
     }
   }
 
+  // Принудительный переход «Схемы» на встроенную подложку (когда внешний
+  // векторный стиль недоступен). state.mode остаётся "scheme", поэтому
+  // обычный setMode() не подходит — пересобираем стиль напрямую.
+  function forceBuiltinScheme(message) {
+    if (state.schemeFellBack || !state.map) return;
+    state.schemeFellBack = true;
+    if (state.config?.modes?.scheme) {
+      state.config.modes.scheme = { title: "Схема", type: "builtin" };
+    }
+    if (message) toast(message);
+    state.map.setStyle(schemeStyle(), { diff: false });
+    state.map.once("style.load", () => {
+      buildOverlayLayers();
+      renderDistrictLabels(true);
+    });
+  }
+
+  // 3D-дома: если подложка — внешний векторный стиль OpenMapTiles-схемы
+  // (например OpenFreeMap), добавляем экструзию зданий на крупных зумах.
+  function addBuildings3d(map) {
+    try {
+      if (!map.getSource("openmaptiles") || map.getLayer("bm-3d-buildings")) return;
+      map.addLayer({
+        id: "bm-3d-buildings",
+        type: "fill-extrusion",
+        source: "openmaptiles",
+        "source-layer": "building",
+        minzoom: 14.5,
+        paint: {
+          "fill-extrusion-color": "#c9cdd8",
+          "fill-extrusion-height": ["coalesce", ["get", "render_height"], 8],
+          "fill-extrusion-base": ["coalesce", ["get", "render_min_height"], 0],
+          "fill-extrusion-opacity": 0.72,
+        },
+      });
+    } catch { /* подложка без слоя зданий — не критично */ }
+  }
+
   function buildOverlayLayers() {
     const map = state.map;
     const shown = state.selection?.kind === "route" ? [state.selection.id] : state.representatives;
 
+    addBuildings3d(map);
     map.addSource("x-routes", { type: "geojson", data: { type: "FeatureCollection", features: routeFeatures(shown) } });
     map.addSource("x-stops", { type: "geojson", data: { type: "FeatureCollection", features: stopFeatures() } });
     map.addSource("x-vehicles", { type: "geojson", data: { type: "FeatureCollection", features: [] } });
@@ -479,6 +544,9 @@
     for (const marker of state.districtMarkers) marker.remove();
     state.districtMarkers = [];
     if (state.mode !== "scheme") return; // на снимке районы подписаны самой подложкой
+    // у внешнего векторного стиля (OpenFreeMap и т.п.) свои подписи улиц и
+    // районов — наши синтетические лейблы дублировали бы их
+    if (state.config?.modes?.scheme?.type === "style") return;
     const basemap = state.config?.basemap;
     for (const district of basemap?.districts || []) {
       const el = document.createElement("div");
