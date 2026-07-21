@@ -715,31 +715,38 @@
               <p>Линии маршрутов и остановки появятся после настройки в админ-панели.</p>
             </div>
 
-            <!-- Верхняя панель: статусы + поиск + режимы -->
+            <!-- Верхняя панель: поиск + типы маршрутов + статусы -->
             <div class="mapx-top">
               <div class="mapx-toprow">
-                <div class="mapx-chips" id="mapxChips">
-                  <span class="mapx-chip mapx-chip--demo" id="mapxDemoChip" hidden title="Геоданные демонстрационные и заполняются администратором">
-                    <i class="mapx-dot"></i> Демо-данные
-                  </span>
-                  <span class="mapx-chip" id="mapxLiveChip" hidden></span>
+                <div class="mapx-searchwrap">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+                  <input type="search" id="mapxSearch" placeholder="Поиск" autocomplete="off" aria-label="Поиск по карте">
+                  <div class="mapx-search-results" id="mapxSearchResults" hidden></div>
                 </div>
-                <div class="mapx-modes" id="mapxModes" role="group" aria-label="Режим карты">
-                  <button type="button" class="is-active" data-mapx-mode="scheme">Схема</button>
-                  <button type="button" data-mapx-mode="satellite">Спутник</button>
-                  <button type="button" data-mapx-mode="hybrid">Гибрид</button>
-                </div>
+                <div class="mapx-typetabs" id="mapxTypes" role="tablist" aria-label="Тип маршрутов"></div>
               </div>
-              <div class="mapx-searchwrap">
-                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
-                <input type="search" id="mapxSearch" placeholder="Маршрут, остановка, район…" autocomplete="off" aria-label="Поиск по карте">
-                <div class="mapx-search-results" id="mapxSearchResults" hidden></div>
+              <div class="mapx-chips" id="mapxChips">
+                <button type="button" class="mapx-selchip" id="mapxSelChip" hidden></button>
+                <span class="mapx-chip mapx-chip--demo" id="mapxDemoChip" hidden title="Геоданные демонстрационные и заполняются администратором">
+                  <i class="mapx-dot"></i> Демо-данные
+                </span>
+                <span class="mapx-chip" id="mapxLiveChip" hidden></span>
               </div>
               <div class="mapx-alerts" id="mapxAlerts" hidden aria-label="Изменения движения"></div>
             </div>
 
             <!-- Кнопки управления -->
             <div class="mapx-fabs" role="group" aria-label="Управление картой">
+              <div class="mapx-layers-wrap">
+                <button type="button" id="mapxLayers" aria-label="Слои карты" aria-expanded="false">
+                  <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 13 9 5 9-5"/></svg>
+                </button>
+                <div class="mapx-modes" id="mapxModes" role="group" aria-label="Режим карты" hidden>
+                  <button type="button" class="is-active" data-mapx-mode="scheme">Схема</button>
+                  <button type="button" data-mapx-mode="satellite">Спутник</button>
+                  <button type="button" data-mapx-mode="hybrid">Гибрид</button>
+                </div>
+              </div>
               <button type="button" id="mapxZoomIn" aria-label="Приблизить">+</button>
               <button type="button" id="mapxZoomOut" aria-label="Отдалить">−</button>
               <button type="button" id="mapxLocate" aria-label="Моё местоположение">

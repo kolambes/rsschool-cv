@@ -620,3 +620,246 @@
   .mapx-card { max-width: 460px; }
   .mapx-bottom { padding: 10px 14px 14px; }
 }
+
+/* ============================================================
+   Светлый скин по референсу: белые панели, синий акцент,
+   табы типов, чип маршрута, поповер слоёв, карточка с вкладками
+   ============================================================ */
+:root {
+  --mapx-bg: #e9edf2;
+  --mapx-glass: rgba(255, 255, 255, 0.94);
+  --mapx-glass-soft: rgba(255, 255, 255, 0.82);
+  --mapx-border: rgba(15, 23, 42, 0.09);
+  --mapx-text: #16233b;
+  --mapx-muted: #6b7a92;
+  --mapx-accent: #2563eb;
+  --mapx-warn: #b7791f;
+}
+
+.mapx-stage { box-shadow: inset 0 0 0 1px rgba(15, 23, 42, 0.05); }
+.mapx-glassy, .mapx-chip, .mapx-modes, #mapxSearch, .mapx-search-results, .mapx-fabs button {
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+}
+.mapx-loading, .mapx-empty { background: radial-gradient(ellipse at 50% 40%, #f6f8fb 0%, var(--mapx-bg) 75%); }
+.mapx-spinner { border-color: rgba(37, 99, 235, 0.15); border-top-color: var(--mapx-accent); }
+.mapx-dot { background: #7c5cd6; box-shadow: 0 0 6px #b39ddb; }
+.mapx-chip--demo { color: #6d3fc4; border-color: rgba(124, 92, 214, 0.35); }
+.mapx-modes button.is-active { box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35); color: #fff; }
+
+/* табы Город/Пригород/Межгород */
+.mapx-typetabs {
+  display: flex;
+  gap: 2px;
+  padding: 4px;
+  border-radius: 14px;
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border: 1px solid var(--mapx-border);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+  flex-shrink: 0;
+}
+.mapx-typetabs button {
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mapx-muted);
+  padding: 8px 13px;
+  border-radius: 11px;
+  cursor: pointer;
+}
+.mapx-typetabs button.is-active { color: #fff; background: var(--mapx-accent); box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35); }
+
+.mapx-searchwrap { flex: 1; min-width: 0; }
+#mapxSearch { height: 42px; border-radius: 13px; }
+
+/* чип выбранного маршрута «Маршрут 17 · 3 мин» */
+.mapx-selchip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--mapx-border);
+  background: var(--mapx-glass);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  border-radius: 999px;
+  padding: 6px 13px 6px 7px;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--mapx-text);
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.10);
+  cursor: pointer;
+}
+.mapx-selchip b { color: var(--mapx-accent); font-weight: 800; }
+.mapx-selbus {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--rc, var(--mapx-accent));
+  flex-shrink: 0;
+  position: relative;
+}
+.mapx-selbus::after {
+  content: "";
+  position: absolute;
+  inset: 6px 6px 9px;
+  border-radius: 3px;
+  background: #fff;
+}
+.mapx-selbus::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 5px;
+  height: 3px;
+  border-radius: 2px;
+  background: #fff;
+  opacity: .9;
+}
+
+/* слои-поповер */
+.mapx-layers-wrap { position: relative; }
+.mapx-layers-wrap .mapx-modes {
+  position: absolute;
+  right: 46px;
+  top: 0;
+  flex-direction: column;
+  min-width: 118px;
+}
+.mapx-layers-wrap .mapx-modes button { text-align: left; }
+
+/* белая карточка-шторка с вкладками */
+.mapx-card { border-radius: 18px 18px 14px 14px; }
+.mapx-grip {
+  width: 44px;
+  height: 4px;
+  border-radius: 3px;
+  background: rgba(15, 23, 42, 0.14);
+  margin: 2px auto 10px;
+}
+.mapx-card-accent { display: none; }
+.mapx-badge { color: #fff; box-shadow: 0 3px 12px rgba(15, 23, 42, 0.22); }
+.mapx-star {
+  border: none;
+  background: none;
+  color: #c4cddc;
+  cursor: pointer;
+  padding: 4px;
+  margin-right: -2px;
+}
+.mapx-star.is-on { color: #f5b301; }
+
+.mapx-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1.5px solid rgba(15, 23, 42, 0.08);
+  margin-top: 10px;
+}
+.mapx-tabs button {
+  flex: 1;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--mapx-muted);
+  padding: 10px 4px 11px;
+  cursor: pointer;
+  position: relative;
+}
+.mapx-tabs button.is-active { color: var(--mapx-accent); }
+.mapx-tabs button.is-active::after {
+  content: "";
+  position: absolute;
+  left: 14%;
+  right: 14%;
+  bottom: -1.5px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: var(--mapx-accent);
+}
+.mapx-tabbody { padding-top: 10px; }
+
+.mapx-arrivals { display: flex; flex-direction: column; }
+.mapx-arr {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  padding: 9px 2px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  color: var(--mapx-text);
+}
+.mapx-arr b { font-size: 19px; font-weight: 800; color: var(--mapx-accent); flex: 1; text-align: left; }
+.mapx-arr svg { color: var(--mapx-accent); opacity: .8; }
+
+.mapx-btn-wide {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 100%;
+  margin-top: 12px;
+  min-height: 48px;
+  font-size: 15px;
+  border-radius: 14px;
+}
+
+.mapx-note { color: var(--mapx-muted); font-size: 12.5px; padding: 8px 2px; margin: 0; }
+
+.mapx-stoplist, .mapx-vehlist {
+  max-height: 200px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.mapx-stoplist button, .mapx-vehlist button {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  width: 100%;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: 13.5px;
+  color: var(--mapx-text);
+  text-align: left;
+  padding: 8.5px 2px;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+}
+.mapx-stoplist i {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2.5px solid var(--rc, var(--mapx-accent));
+  flex-shrink: 0;
+}
+.mapx-stoplist i.is-term { background: var(--rc, var(--mapx-accent)); }
+.mapx-vehlist b { margin-left: auto; color: var(--mapx-muted); font-weight: 600; }
+
+/* светлые пилюли ленты, алерты, подписи */
+.mapx-route-pill { box-shadow: 0 3px 12px rgba(15, 23, 42, 0.10); }
+.mapx-alerts button { background: #fff7e8; border-color: rgba(183, 121, 31, 0.3); }
+.mapx-alerts b { color: #b7791f; }
+.mapx-alerts span { color: #7a6a4f; }
+.mapx-district { color: rgba(60, 72, 94, 0.85); text-shadow: 0 0 4px #fff, 0 0 4px #fff; }
+.mapx-landmark { color: rgba(80, 92, 112, 0.9); text-shadow: 0 0 3px #fff, 0 0 3px #fff; }
+.mapx-hint { color: var(--mapx-muted); }
+
+/* уточнения: компактные табы, читаемая кнопка */
+.mapx-typetabs button { padding: 8px 10px; font-size: 12.5px; }
+.mapx-searchwrap { min-width: 92px; }
+.mapx-btn-primary { background: var(--mapx-accent) !important; color: #fff !important; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35) !important; }
+.mapx-btn-primary svg { color: #fff; }
+
+.mapx-searchwrap { min-width: 112px; }

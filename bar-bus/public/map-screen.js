@@ -31,6 +31,9 @@
     demoChip: $("#mapxDemoChip"),
     liveChip: $("#mapxLiveChip"),
     modes: $("#mapxModes"),
+    types: $("#mapxTypes"),
+    selChip: $("#mapxSelChip"),
+    layersBtn: $("#mapxLayers"),
     search: $("#mapxSearch"),
     searchResults: $("#mapxSearchResults"),
     alerts: $("#mapxAlerts"),
@@ -57,6 +60,8 @@
     data: null,
     dataPromise: null,
     mode: "scheme",
+    activeType: "городской",
+    cardTab: "schedule",
     alerts: [],
     subscriptions: new Set(),
     selection: null, // { kind: 'route'|'stop'|'vehicle', id, directionCode? }
@@ -158,12 +163,12 @@
         "bm-rail": { type: "geojson", data: basemap?.railways || { type: "FeatureCollection", features: [] } },
       },
       layers: [
-        { id: "bg", type: "background", paint: { "background-color": "#0a0f1c" } },
+        { id: "bg", type: "background", paint: { "background-color": "#eef1f0" } },
         {
           id: "bm-roads-casing", type: "line", source: "bm-roads",
           layout: { "line-cap": "round", "line-join": "round" },
           paint: {
-            "line-color": "#050a14",
+            "line-color": ["match", ["get", "class"], "highway", "#e5b64f", "major", "#e0d8ca", "#d9d3c9"],
             "line-width": ["interpolate", ["linear"], ["zoom"], 10, ["match", ["get", "class"], "highway", 5, "major", 4, 2.5], 15, ["match", ["get", "class"], "highway", 13, "major", 11, 7]],
           },
         },
@@ -171,14 +176,14 @@
           id: "bm-roads", type: "line", source: "bm-roads",
           layout: { "line-cap": "round", "line-join": "round" },
           paint: {
-            "line-color": ["match", ["get", "class"], "highway", "#26334d", "major", "#222f47", "#1b2639"],
+            "line-color": ["match", ["get", "class"], "highway", "#ffd76e", "major", "#ffffff", "#ffffff"],
             "line-width": ["interpolate", ["linear"], ["zoom"], 10, ["match", ["get", "class"], "highway", 3, "major", 2.4, 1.4], 15, ["match", ["get", "class"], "highway", 9, "major", 7.5, 4.5]],
           },
         },
         {
           id: "bm-rail", type: "line", source: "bm-rail",
           paint: {
-            "line-color": "#33415e",
+            "line-color": "#9aa0ab",
             "line-width": ["interpolate", ["linear"], ["zoom"], 10, 1.4, 15, 3],
             "line-dasharray": [3, 2.4],
           },
@@ -193,7 +198,7 @@
       base: { type: "raster", tiles: modeConfig.tiles, tileSize: 256, attribution: modeConfig.attribution || "" },
     };
     const layers = [
-      { id: "bg", type: "background", paint: { "background-color": "#0a0f1c" } },
+      { id: "bg", type: "background", paint: { "background-color": "#e8ebee" } },
       { id: "base-raster", type: "raster", source: "base", paint: { "raster-fade-duration": 150 } },
     ];
     if (mode === "hybrid" && modeConfig.labels) {
@@ -220,41 +225,68 @@
   // ── Иконки транспорта ────────────────────────────────────────────────────
 
   function busIconImage(color) {
-    const size = 48;
+    const size = 46;
     const canvas = document.createElement("canvas");
     canvas.width = size;
     canvas.height = size;
     const ctx = canvas.getContext("2d");
-    // свечение
-    const glow = ctx.createRadialGradient(size / 2, size / 2, 4, size / 2, size / 2, size / 2);
-    glow.addColorStop(0, color + "88");
-    glow.addColorStop(1, color + "00");
-    ctx.fillStyle = glow;
-    ctx.fillRect(0, 0, size, size);
-    // стрелка-корпус
-    ctx.translate(size / 2, size / 2);
+    // скруглённый квадрат в цвете маршрута (как в референсе)
+    const r = 11, p = 5;
+    ctx.beginPath();
+    ctx.roundRect(p, p, size - p * 2, size - p * 2, r);
     ctx.fillStyle = color;
-    ctx.strokeStyle = "rgba(6,10,18,0.95)";
-    ctx.lineWidth = 2.6;
-    ctx.beginPath();
-    ctx.moveTo(0, -11.5);
-    ctx.lineTo(8.5, 7.5);
-    ctx.quadraticCurveTo(0, 2.6, -8.5, 7.5);
-    ctx.closePath();
+    ctx.shadowColor = "rgba(15,23,42,0.35)";
+    ctx.shadowBlur = 6;
+    ctx.shadowOffsetY = 2;
     ctx.fill();
+    ctx.shadowColor = "transparent";
+    ctx.strokeStyle = "rgba(255,255,255,0.95)";
+    ctx.lineWidth = 2.4;
     ctx.stroke();
-    ctx.fillStyle = "rgba(255,255,255,0.92)";
+    // белый автобус: корпус, окна, колёса
+    ctx.fillStyle = "#ffffff";
     ctx.beginPath();
-    ctx.arc(0, -2.5, 2.1, 0, Math.PI * 2);
+    ctx.roundRect(13, 14, 20, 14, 3.5);
+    ctx.fill();
+    ctx.fillStyle = color;
+    ctx.fillRect(15.4, 16.6, 6.4, 4.6);
+    ctx.fillRect(24.2, 16.6, 6.4, 4.6);
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(17.5, 30.4, 2.5, 0, Math.PI * 2);
+    ctx.arc(28.5, 30.4, 2.5, 0, Math.PI * 2);
     ctx.fill();
     return ctx.getImageData(0, 0, size, size);
   }
 
+  // Белый шеврон направления, ориентируется вдоль линии маршрута
+  function arrowIconImage() {
+    const size = 26;
+    const canvas = document.createElement("canvas");
+    canvas.width = size;
+    canvas.height = size;
+    const ctx = canvas.getContext("2d");
+    ctx.translate(size / 2, size / 2);
+    ctx.strokeStyle = "rgba(255,255,255,0.95)";
+    ctx.lineWidth = 4.6;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(-4.5, -6.5);
+    ctx.lineTo(3.5, 0);
+    ctx.lineTo(-4.5, 6.5);
+    ctx.stroke();
+    return ctx.getImageData(0, 0, size, size);
+  }
+
   function ensureBusIcons() {
+    if (!state.map.hasImage("x-arrow")) {
+      state.map.addImage("x-arrow", arrowIconImage(), { pixelRatio: 2 });
+    }
     for (const route of state.data?.routes || []) {
       const name = `busx-${route.id}`;
       if (!state.map.hasImage(name)) {
-        state.map.addImage(name, busIconImage(route.color || "#22d3ee"), { pixelRatio: 2 });
+        state.map.addImage(name, busIconImage(route.color || "#2563eb"), { pixelRatio: 2 });
       }
     }
   }
@@ -406,6 +438,7 @@
       fitCity(0);
       renderStatusChips();
       renderModeButtons();
+      renderTypeTabs();
       renderRouteScroller();
       renderDistrictLabels(true);
       applyDeepTarget();
@@ -484,9 +517,9 @@
       id: "x-route-casing", type: "line", source: "x-routes",
       layout: { "line-cap": "round", "line-join": "round" },
       paint: {
-        "line-color": "#060b16",
-        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 4.6, 15, 10],
-        "line-opacity": 0.85,
+        "line-color": "#ffffff",
+        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 5.4, 15, 11.5],
+        "line-opacity": 0.9,
       },
     });
     map.addLayer({
@@ -494,8 +527,23 @@
       layout: { "line-cap": "round", "line-join": "round" },
       paint: {
         "line-color": ["get", "color"],
-        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 2.6, 15, 6.5],
+        "line-width": ["interpolate", ["linear"], ["zoom"], 10, 3.4, 15, 8],
         "line-opacity": 0.96,
+      },
+    });
+
+    // Шевроны направления вдоль линии (как в референсе)
+    map.addLayer({
+      id: "x-route-arrows", type: "symbol", source: "x-routes",
+      minzoom: 11.4,
+      layout: {
+        "symbol-placement": "line",
+        "symbol-spacing": 110,
+        "icon-image": "x-arrow",
+        "icon-size": ["interpolate", ["linear"], ["zoom"], 11.4, 0.62, 15, 0.95],
+        "icon-rotation-alignment": "map",
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
       },
     });
 
@@ -505,10 +553,10 @@
       minzoom: 12.6,
       filter: ["==", ["get", "major"], 0],
       paint: {
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 12.6, 2.4, 16, 6],
-        "circle-color": "#0d1526",
-        "circle-stroke-color": "#dbe4f3",
-        "circle-stroke-width": 1.6,
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 12.6, 2.6, 16, 6.5],
+        "circle-color": "#ffffff",
+        "circle-stroke-color": "#2563eb",
+        "circle-stroke-width": 1.8,
       },
     });
     map.addLayer({
@@ -516,10 +564,10 @@
       minzoom: 11,
       filter: ["==", ["get", "major"], 1],
       paint: {
-        "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 3.2, 16, 7.5],
-        "circle-color": "#0d1526",
-        "circle-stroke-color": "#f3f7ff",
-        "circle-stroke-width": 2,
+        "circle-radius": ["interpolate", ["linear"], ["zoom"], 11, 3.6, 16, 8],
+        "circle-color": "#ffffff",
+        "circle-stroke-color": "#2563eb",
+        "circle-stroke-width": 2.4,
       },
     });
 
@@ -528,9 +576,8 @@
       id: "x-vehicles", type: "symbol", source: "x-vehicles",
       layout: {
         "icon-image": ["concat", "busx-", ["get", "routeId"]],
-        "icon-size": ["interpolate", ["linear"], ["zoom"], 10, 0.62, 15, 1.05],
-        "icon-rotate": ["get", "bearing"],
-        "icon-rotation-alignment": "map",
+        "icon-size": ["interpolate", ["linear"], ["zoom"], 10, 0.66, 15, 1.05],
+        "icon-rotation-alignment": "viewport",
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
       },
@@ -714,12 +761,18 @@
     const route = routeById(routeId);
     if (!route) return;
     state.selection = { kind: "route", id: routeId, directionCode: options.directionCode || route.directions[0]?.code || "" };
+    state.cardTab = "schedule";
+    if (route.type && route.type !== state.activeType) {
+      state.activeType = route.type;
+      renderTypeTabs();
+    }
     setPulse(null);
     setRoutesSource([routeId]);
     applySelectionPaint();
     if (options.fit !== false) fitRoute(route);
     renderRouteScroller();
     renderCard();
+    renderSelChip();
     refreshVehicles(true);
   }
 
@@ -752,6 +805,7 @@
     if (!state.selection) return;
     state.selection = null;
     setPulse(null);
+    renderSelChip();
     setRoutesSource(state.representatives);
     applySelectionPaint();
     renderRouteScroller();
@@ -762,6 +816,67 @@
   // ════════════════════════════════════════════════════════════════════════
   // Панели: статусы, режимы, лента маршрутов, карточка
   // ════════════════════════════════════════════════════════════════════════
+
+  function haversineKm(a, b) {
+    const R = 6371;
+    const dLat = ((b[1] - a[1]) * Math.PI) / 180;
+    const dLng = ((b[0] - a[0]) * Math.PI) / 180;
+    const la1 = (a[1] * Math.PI) / 180;
+    const la2 = (b[1] * Math.PI) / 180;
+    const h = Math.sin(dLat / 2) ** 2 + Math.cos(la1) * Math.cos(la2) * Math.sin(dLng / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(h));
+  }
+
+  function vehiclesOfRoute(routeId) {
+    return [...state.vehicles.values()].filter((vehicle) => vehicle.props.routeId === routeId);
+  }
+
+  // Грубая оценка прибытия: расстояние по прямой / скорость (демо-логика,
+  // точный расчёт по геометрии появится вместе с реальными координатами)
+  function etaMinutes(vehicle, coord) {
+    const from = vehicle.to || vehicle.props;
+    if (!Number.isFinite(from?.lng) || !coord) return null;
+    const km = haversineKm([from.lng, from.lat], coord);
+    const speed = Math.max(12, vehicle.props.speedKmh || 20);
+    return Math.max(1, Math.round((km / speed) * 60));
+  }
+
+  function routeEtaList(route, directionCode) {
+    const direction = route.directions.find((item) => item.code === directionCode) || route.directions[0];
+    const firstKey = direction?.stopKeys?.[0];
+    const stop = firstKey ? stopByKey(firstKey) : null;
+    const coord = stop ? [stop.lng, stop.lat] : null;
+    return vehiclesOfRoute(route.id)
+      .map((vehicle) => ({ vehicle, minutes: coord ? etaMinutes(vehicle, coord) : null }))
+      .filter((item) => item.minutes !== null)
+      .sort((a, b) => a.minutes - b.minutes)
+      .slice(0, 3);
+  }
+
+  function renderTypeTabs() {
+    if (!els.types) return;
+    const counts = {};
+    for (const route of state.data?.routes || []) counts[route.type] = (counts[route.type] || 0) + 1;
+    const tabs = [
+      ["городской", "Город"],
+      ["пригородный", "Пригород"],
+      ["междугородный", "Межгород"],
+    ].filter(([key]) => counts[key]);
+    els.types.innerHTML = tabs.map(([key, label]) => `
+      <button type="button" role="tab" data-mapx-type="${key}" aria-selected="${key === state.activeType}"
+        class="${key === state.activeType ? "is-active" : ""}">${label}</button>`).join("");
+  }
+
+  function renderSelChip() {
+    if (!els.selChip) return;
+    if (state.selection?.kind !== "route") { els.selChip.hidden = true; return; }
+    const route = routeById(state.selection.id);
+    if (!route) { els.selChip.hidden = true; return; }
+    const eta = routeEtaList(route, state.selection.directionCode)[0];
+    els.selChip.innerHTML = `<i class="mapx-selbus" style="--rc:${escapeHtml(route.color || "#2563eb")}" aria-hidden="true"></i>
+      Маршрут ${escapeHtml(route.number)}${eta ? ` · <b>${eta.minutes} мин</b>` : ""}`;
+    els.selChip.hidden = false;
+  }
 
   function renderStatusChips() {
     const demo = Boolean(state.data?.demoGeo);
@@ -778,11 +893,9 @@
     if (!routes.length) return;
     const selectedId = state.selection?.kind === "route" ? state.selection.id : "";
     const alertIds = new Set(state.alerts.map((alert) => alert.routeId));
-    const ordered = [...routes].sort((a, b) => {
-      const cityFirst = Number(b.type === "городской") - Number(a.type === "городской");
-      if (cityFirst) return cityFirst;
-      return String(a.number).localeCompare(String(b.number), "ru", { numeric: true });
-    });
+    const filtered = routes.filter((route) => route.type === state.activeType);
+    const pool = filtered.length ? filtered : routes;
+    const ordered = [...pool].sort((a, b) => String(a.number).localeCompare(String(b.number), "ru", { numeric: true }));
     els.routes.innerHTML = [
       `<button type="button" class="mapx-route-pill mapx-route-pill--all ${selectedId ? "" : "is-active"}" data-mapx-all>Обзор</button>`,
       ...ordered.map((route) => `
@@ -823,14 +936,69 @@
       const direction = route.directions.find((item) => item.code === selection.directionCode) || route.directions[0];
       const routeAlerts = state.alerts.filter((alert) => alert.routeId === route.id);
       const subscribed = state.subscriptions.has(route.id);
-      els.card.innerHTML = `
-        <div class="mapx-card-accent" style="--rc:${escapeHtml(route.color || "#22d3ee")}"></div>
-        <div class="mapx-card-head">
-          <span class="mapx-badge" style="--rc:${escapeHtml(route.color || "#22d3ee")}">${escapeHtml(route.number)}</span>
-          <div class="mapx-card-title">
-            <strong>${escapeHtml(route.name)}</strong>
-            <small>${escapeHtml(route.type === "городской" ? "Городской маршрут" : route.type === "пригородный" ? "Пригородный маршрут" : "Междугородний маршрут")}${direction ? ` · ${escapeHtml(direction.name)}` : ""}</small>
+      const tab = state.cardTab || "schedule";
+      const accent = route.color || "#2563eb";
+
+      let body = "";
+      if (tab === "schedule") {
+        const etas = routeEtaList(route, direction?.code);
+        body = `
+          <div class="mapx-arrivals">
+            ${etas.length ? etas.map((item) => `
+              <button type="button" class="mapx-arr" data-mapx-vehgo="${escapeHtml(item.vehicle.props.id)}">
+                <i class="mapx-selbus" style="--rc:${escapeHtml(accent)}" aria-hidden="true"></i>
+                <b>${item.minutes} мин</b>
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M5 19a2 2 0 0 1 0.01 0M5 13a6 6 0 0 1 6 6M5 7a12 12 0 0 1 12 12"/></svg>
+              </button>`).join("") : `<p class="mapx-note">${state.vehiclesStatus === "offline" ? "Автобусы появятся после подключения GPS автопарка." : "Сейчас на линии нет автобусов этого маршрута."}</p>`}
+            ${etas.length && state.vehiclesStatus === "demo" ? '<p class="mapx-note">Оценка демонстрационная — точный расчёт появится с реальными координатами.</p>' : ""}
           </div>
+          <button type="button" class="mapx-btn-primary mapx-btn-wide" data-mapx-action="schedule">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="2.5"/><path d="M8 3.5v3M16 3.5v3M4 10h16"/></svg>
+            Расписание
+          </button>`;
+      } else if (tab === "stops") {
+        const keys = direction?.stopKeys || [];
+        const seenKeys = new Set();
+        const rows = [];
+        for (const key of keys) {
+          if (seenKeys.has(key)) continue;
+          seenKeys.add(key);
+          const stop = stopByKey(key);
+          if (stop) rows.push(stop);
+        }
+        body = `
+          <div class="mapx-stoplist">
+            ${rows.length ? rows.map((stop, index) => `
+              <button type="button" data-mapx-stopgo="${escapeHtml(stop.key)}">
+                <i class="${index === 0 || index === rows.length - 1 ? "is-term" : ""}" style="--rc:${escapeHtml(accent)}"></i>
+                <span>${escapeHtml(stop.name)}</span>
+              </button>`).join("") : '<p class="mapx-note">Остановки направления появятся после заполнения координат.</p>'}
+          </div>`;
+      } else {
+        const vehicles = vehiclesOfRoute(route.id);
+        body = `
+          <div class="mapx-vehlist">
+            ${vehicles.length ? vehicles.map((vehicle) => `
+              <button type="button" data-mapx-vehgo="${escapeHtml(vehicle.props.id)}">
+                <i class="mapx-selbus" style="--rc:${escapeHtml(accent)}" aria-hidden="true"></i>
+                <span>${escapeHtml(vehicle.props.board || "Автобус")}</span>
+                <b>${Math.round(vehicle.props.speedKmh || 0)} км/ч</b>
+              </button>`).join("") : `<p class="mapx-note">${state.vehiclesStatus === "offline" ? "Автобусы появятся после подключения GPS автопарка." : "Сейчас на линии нет автобусов этого маршрута."}</p>`}
+          </div>`;
+      }
+
+      els.card.innerHTML = `
+        <div class="mapx-grip" aria-hidden="true"></div>
+        <div class="mapx-card-head">
+          <span class="mapx-badge" style="--rc:${escapeHtml(accent)}">${escapeHtml(route.number)}</span>
+          <div class="mapx-card-title">
+            <strong>Маршрут ${escapeHtml(route.number)}</strong>
+            <small>${escapeHtml(direction?.name || route.name)}</small>
+          </div>
+          <button type="button" class="mapx-star ${subscribed ? "is-on" : ""}" data-mapx-action="subscribe"
+            title="${subscribed ? "Вы подписаны на изменения маршрута" : "Подписаться на изменения маршрута"}" aria-label="Подписка на изменения">
+            <svg viewBox="0 0 24 24" width="21" height="21" fill="${subscribed ? "currentColor" : "none"}" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="m12 3.6 2.6 5.3 5.8.8-4.2 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.2-4.1 5.8-.8L12 3.6Z"/></svg>
+          </button>
           <button type="button" class="mapx-close" data-mapx-action="close" aria-label="Закрыть">✕</button>
         </div>
         ${route.directions.length > 1 ? `
@@ -841,11 +1009,12 @@
           <div class="mapx-card-alerts">
             ${routeAlerts.map((alert) => `<div><b>⚠ ${escapeHtml(alert.typeLabel)}</b><span>${escapeHtml(alert.title)}${alert.until ? ` · ${escapeHtml(alert.until)}` : ""}</span></div>`).join("")}
           </div>` : ""}
-        <div class="mapx-card-actions">
-          <button type="button" class="mapx-btn-primary" data-mapx-action="schedule">Расписание</button>
-          ${hasTelegram() ? `<button type="button" class="mapx-btn ${subscribed ? "is-on" : ""}" data-mapx-action="subscribe">${subscribed ? "🔔 Вы подписаны" : "Подписаться"}</button>` : ""}
-          <button type="button" class="mapx-btn" data-mapx-action="report">Сообщить</button>
-        </div>`;
+        <div class="mapx-tabs" role="tablist">
+          <button type="button" role="tab" data-mapx-tab="schedule" aria-selected="${tab === "schedule"}" class="${tab === "schedule" ? "is-active" : ""}">Расписание</button>
+          <button type="button" role="tab" data-mapx-tab="stops" aria-selected="${tab === "stops"}" class="${tab === "stops" ? "is-active" : ""}">Остановки</button>
+          <button type="button" role="tab" data-mapx-tab="vehicles" aria-selected="${tab === "vehicles"}" class="${tab === "vehicles" ? "is-active" : ""}">Автобусы</button>
+        </div>
+        <div class="mapx-tabbody">${body}</div>`;
       els.card.hidden = false;
       return;
     }
@@ -941,7 +1110,9 @@
       }
       if (immediate) drawVehicles(1);
       renderStatusChips();
+      renderSelChip();
       if (state.selection?.kind === "vehicle") renderCard();
+      else if (state.selection?.kind === "route" && (state.cardTab === "schedule" || state.cardTab === "vehicles")) renderCard();
     } catch {
       // сеть вернётся — следующий опрос подхватит
     }
@@ -1225,10 +1396,28 @@
     if (document.body.dataset.activeView === "schedule") updateScheduleBlock();
   }, 2000);
 
-  // Режимы
+  // Режимы (поповер за кнопкой «Слои»)
   els.modes?.addEventListener("click", (event) => {
     const button = event.target.closest("[data-mapx-mode]");
-    if (button) setMode(button.dataset.mapxMode);
+    if (button) {
+      setMode(button.dataset.mapxMode);
+      els.modes.hidden = true;
+      els.layersBtn?.setAttribute("aria-expanded", "false");
+    }
+  });
+  els.layersBtn?.addEventListener("click", (event) => {
+    event.stopPropagation();
+    const open = els.modes.hidden;
+    els.modes.hidden = !open;
+    els.layersBtn.setAttribute("aria-expanded", String(open));
+  });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest(".mapx-layers-wrap")) {
+      if (els.modes && !els.modes.hidden) {
+        els.modes.hidden = true;
+        els.layersBtn?.setAttribute("aria-expanded", "false");
+      }
+    }
   });
 
   // FAB
@@ -1251,6 +1440,41 @@
   els.view.addEventListener("click", (event) => {
     const allButton = event.target.closest("[data-mapx-all]");
     if (allButton) { clearSelection(); fitCity(); return; }
+
+    const typeButton = event.target.closest("[data-mapx-type]");
+    if (typeButton) {
+      state.activeType = typeButton.dataset.mapxType;
+      renderTypeTabs();
+      renderRouteScroller();
+      return;
+    }
+
+    const tabButton = event.target.closest("[data-mapx-tab]");
+    if (tabButton) {
+      state.cardTab = tabButton.dataset.mapxTab;
+      renderCard();
+      return;
+    }
+
+    const stopGo = event.target.closest("[data-mapx-stopgo]");
+    if (stopGo) {
+      const stop = stopByKey(stopGo.dataset.mapxStopgo);
+      if (stop) {
+        setPulse([stop.lng, stop.lat]);
+        state.map?.flyTo({ center: [stop.lng, stop.lat], zoom: Math.max(14, state.map.getZoom()), duration: reducedMotion ? 0 : 550, offset: [0, -80] });
+      }
+      return;
+    }
+
+    const vehGo = event.target.closest("[data-mapx-vehgo]");
+    if (vehGo) {
+      const vehicle = state.vehicles.get(vehGo.dataset.mapxVehgo);
+      const position = vehicle?.current || vehicle?.to;
+      if (position) {
+        state.map?.flyTo({ center: [position.lng, position.lat], zoom: Math.max(14, state.map.getZoom()), duration: reducedMotion ? 0 : 550, offset: [0, -80] });
+      }
+      return;
+    }
 
     const routeButton = event.target.closest("[data-mapx-route]");
     if (routeButton) {
@@ -1295,6 +1519,13 @@
       if (action === "subscribe" && state.selection?.kind === "route") toggleSubscription(state.selection.id);
       if (action === "report") app()?.setView?.("appeal");
       if (action === "focus-route") selectRoute(actionButton.dataset.route);
+    }
+  });
+
+  els.selChip?.addEventListener("click", () => {
+    if (state.selection?.kind === "route") {
+      const route = routeById(state.selection.id);
+      if (route) fitRoute(route);
     }
   });
 
